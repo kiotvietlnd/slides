@@ -1,0 +1,364 @@
+<!DOCTYPE html><html lang="vi"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đào tạo sản phẩm KiotViet Retail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* [Dán toàn bộ phần CSS của bạn vào đây, không thay đổi] */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+        body{font-family:'Montserrat',sans-serif;overflow:hidden;margin:0;padding:0}.slide{display:none;height:100vh;width:100vw;padding:2rem;animation:fadeIn .5s ease-in-out;position:absolute;top:0;left:0}.slide.active{display:flex;flex-direction:column}@keyframes fadeIn{from{opacity:0}to{opacity:1}}.progress-bar{height:5px;background-color:#e2e8f0;position:fixed;bottom:0;left:0;width:100%;z-index:100}.progress{height:100%;background-color:#1e40af;transition:width .3s ease}.nav-button{position:fixed;top:50%;transform:translateY(-50%);background-color:rgba(30,64,175,.9);color:#fff;border:none;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s ease;z-index:100;box-shadow:0 4px 6px rgba(0,0,0,.1)}.nav-button:hover{background-color:rgba(30,64,175,1);transform:translateY(-50%) scale(1.1)}.prev{left:20px}.next{right:20px}.fullscreen-button{position:fixed;top:20px;right:20px;background-color:rgba(30,64,175,.9);color:#fff;border:none;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s ease;z-index:101;box-shadow:0 2px 4px rgba(0,0,0,.1)}.fullscreen-button:hover{background-color:rgba(30,64,175,1);transform:scale(1.1)}#icon-exit-fullscreen{display:none}.slide-number{position:fixed;bottom:20px;right:20px;font-size:16px;color:#64748b;z-index:100;background-color:rgba(255,255,255,.8);padding:5px 10px;border-radius:15px}.kiotviet-gradient{background:linear-gradient(135deg,#1e40af,#3b82f6)}.slide-dots{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:100;background-color:rgba(255,255,255,.8);padding:8px 16px;border-radius:20px}.slide-dot{width:12px;height:12px;border-radius:50%;background-color:#cbd5e1;cursor:pointer;transition:all .3s ease;border:none}.slide-dot.active{background-color:#1e40af;transform:scale(1.2)}.navigation-help{position:fixed;top:20px;left:50%;transform:translateX(-50%);background-color:rgba(255,255,255,.9);color:#1e40af;padding:8px 16px;border-radius:20px;font-size:14px;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,.1);display:flex;align-items:center;gap:8px}
+
+        /* CUSTOM CSS TO HIDE NAVIGATION UI */
+        .nav-button, .fullscreen-button, .slide-number, .slide-dots, .navigation-help, .progress-bar {
+            display: none !important;
+        }
+    </style></head><body class="bg-gray-50 text-gray-800">
+
+    <!-- Navigation UI is now hidden by CSS, but the divs are kept for potential JS compatibility -->
+    <div class="navigation-help"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Sử dụng nút mũi tên, chấm tròn hoặc phím trái/phải để chuyển trang</span></div>
+    <button class="fullscreen-button" id="fullscreenBtn" title="Toàn màn hình">
+        <svg id="icon-enter-fullscreen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75v4.5m0-4.5h-4.5m4.5 0L15 9m5.25 11.25v-4.5m0 4.5h-4.5m4.5 0L15 15" /></svg>
+        <svg id="icon-exit-fullscreen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9V4.5M15 9h4.5M15 9l5.25-5.25M15 15v4.5M15 15h4.5M15 15l5.25 5.25" /></svg>
+    </button>
+    <button class="nav-button prev" id="prevBtn"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button>
+    <button class="nav-button next" id="nextBtn"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button>
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="slide-dots" id="slideDots"></div>
+    <div class="slide-number" id="slideNumber"></div>
+
+    <!-- Slides will be generated here from the outline -->
+    <div class="slide items-center justify-center text-center kiotviet-gradient text-white">
+        <div class="max-w-4xl">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4">Đào tạo sản phẩm KiotViet Retail</h1>
+            <p class="text-xl md:text-2xl opacity-80">Tổng quan sản phẩm, quy trình tư vấn cho mọi mô hình cửa hàng bán lẻ.</p>
+        </div>
+    </div>
+
+    <div class="slide items-center justify-center">
+        <div class="text-center w-full max-w-6xl">
+            <h2 class="text-4xl font-bold text-blue-900 mb-16">Mục tiêu khóa học</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 mb-4"><i class="fas fa-book-open text-3xl text-blue-600"></i></div>
+                    <h3 class="text-lg font-semibold text-blue-800 mb-2">Làm quen với KiotViet Retail</h3><p class="text-gray-600 text-sm">Tìm hiểu kiến thức tổng quan về các giải pháp.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4"><i class="fas fa-chalkboard-teacher text-3xl text-green-600"></i></div>
+                    <h3 class="text-lg font-semibold text-blue-800 mb-2">Học kỹ năng demo & hỏi đáp</h3><p class="text-gray-600 text-sm">Nắm vững kỹ năng demo sản phẩm và trả lời câu hỏi thường gặp.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-yellow-100 mb-4"><i class="fas fa-tasks text-3xl text-yellow-600"></i></div>
+                    <h3 class="text-lg font-semibold text-blue-800 mb-2">Hoàn thành Bài test đánh giá</h3><p class="text-gray-600 text-sm">Tham gia bài test để đánh giá kiến thức.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-purple-100 mb-4"><i class="fas fa-tools text-3xl text-purple-600"></i></div>
+                    <h3 class="text-lg font-semibold text-blue-800 mb-2">Làm quen phương pháp học</h3><p class="text-gray-600 text-sm">Sử dụng các tài nguyên đào tạo để liên tục cập nhật.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide items-center justify-center">
+        <div class="text-center w-full max-w-3xl">
+            <h2 class="text-4xl font-bold text-blue-900 mb-8 flex items-center justify-center gap-4"><i class="fas fa-info-circle"></i>Giới thiệu chung về KiotViet Retail</h2>
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-8 rounded-lg shadow-md">
+                <h3 class="text-2xl font-semibold text-blue-800 mb-4">Giải pháp toàn diện cho ngành Retail</h3>
+                <ul class="text-lg text-gray-700 space-y-3 list-disc list-inside text-left">
+                    <li>Tối ưu vận hành</li>
+                    <li>Tối ưu quản lý</li>
+                    <li>Thúc đẩy doanh thu</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slide items-center justify-center">
+        <div class="text-center w-full max-w-5xl">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 flex items-center justify-center gap-4"><i class="fas fa-cogs"></i>Hệ thống tính năng - Vận hành cửa hàng</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 text-left text-base">
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-search text-blue-500 w-6 text-center"></i><span>Tra cứu sản phẩm</span></div>
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-file-invoice text-blue-500 w-6 text-center"></i><span>Tạo hóa đơn bán hàng</span></div>
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-credit-card text-blue-500 w-6 text-center"></i><span>Thanh toán</span></div>
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-exchange-alt text-blue-500 w-6 text-center"></i><span>Xử lý đổi trả</span></div>
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-box text-blue-500 w-6 text-center"></i><span>Đặt hàng</span></div>
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-shipping-fast text-blue-500 w-6 text-center"></i><span>Kết nối giao vận</span></div>
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-receipt text-blue-500 w-6 text-center"></i><span>Hóa đơn điện tử</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slide items-center justify-center">
+        <div class="text-center w-full max-w-5xl">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 flex items-center justify-center gap-4"><i class="fas fa-chart-pie"></i>Hệ thống tính năng - Quản lý toàn diện</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 text-left text-base">
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-boxes text-green-500 w-6 text-center"></i><span>Quản lý Hàng hóa</span></div>
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-handshake text-green-500 w-6 text-center"></i><span>Quản lý Giao dịch</span></div>
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-users text-green-500 w-6 text-center"></i><span>Quản lý Khách hàng</span></div>
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-truck text-green-500 w-6 text-center"></i><span>Quản lý Nhà cung cấp</span></div>
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-user-tie text-green-500 w-6 text-center"></i><span>Quản lý Nhân viên</span></div>
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-book-open text-green-500 w-6 text-center"></i><span>Quản lý Sổ quỹ</span></div>
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 col-span-2 md:col-span-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-chart-bar text-green-500 w-6 text-center"></i><span>Hệ thống Báo cáo chi tiết</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide items-center justify-center">
+        <div class="text-center w-full max-w-5xl">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 flex items-center justify-center gap-4"><i class="fas fa-rocket"></i>Hệ thống tính năng - Tăng doanh thu</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 text-left text-base">
+                 <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-store text-orange-500 w-6 text-center"></i><span>Liên kết Sàn TMĐT</span></div>
+                 <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-share-alt text-orange-500 w-6 text-center"></i><span>Liên kết Mạng xã hội</span></div>
+                 <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-globe-americas text-orange-500 w-6 text-center"></i><span>Tạo Website bán hàng</span></div>
+                 <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-brain text-orange-500 w-6 text-center"></i><span>Phân tích thông minh</span></div>
+                 <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-tags text-orange-500 w-6 text-center"></i><span>Khuyến mại, Vouchers</span></div>
+                 <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fas fa-star text-orange-500 w-6 text-center"></i><span>Tích điểm hội viên</span></div>
+                 <div class="bg-white p-4 rounded-lg shadow-md flex items-center gap-3 transform hover:-translate-y-1 transition-transform"><i class="fab fa-rocketchat text-orange-500 w-6 text-center"></i><span>Liên kết Zalo ZNS</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide items-center justify-center">
+        <div class="text-center w-full max-w-5xl">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10">Hoạt động trên đa nền tảng</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-lg flex flex-col items-center gap-4 transform hover:scale-105 transition-transform"><i class="fas fa-desktop text-4xl text-blue-600"></i><h3 class="text-2xl font-semibold text-blue-800">Máy tính</h3><p class="text-gray-600">Windows / Mac OS</p></div>
+                <div class="bg-white p-8 rounded-lg shadow-lg flex flex-col items-center gap-4 transform hover:scale-105 transition-transform"><i class="fas fa-mobile-alt text-4xl text-blue-600"></i><h3 class="text-2xl font-semibold text-blue-800">Điện thoại</h3><p class="text-gray-600">Android / iOS</p></div>
+                <div class="bg-white p-8 rounded-lg shadow-lg flex flex-col items-center gap-4 transform hover:scale-105 transition-transform"><i class="fas fa-cash-register text-4xl text-blue-600"></i><h3 class="text-2xl font-semibold text-blue-800">Máy POS cảm ứng</h3><p class="text-gray-600">Android</p></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slide items-center justify-center">
+        <div class="text-center w-full max-w-4xl">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10">Hệ sinh thái phần cứng KiotViet</h2>
+             <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="bg-white p-5 rounded-lg shadow-md flex items-center gap-4 transform hover:-translate-y-1 transition-transform"><i class="fas fa-receipt text-2xl text-blue-500 w-8 text-center"></i><span class="font-medium">Máy in hóa đơn</span></div>
+                <div class="bg-white p-5 rounded-lg shadow-md flex items-center gap-4 transform hover:-translate-y-1 transition-transform"><i class="fas fa-tag text-2xl text-blue-500 w-8 text-center"></i><span class="font-medium">Máy in tem nhãn</span></div>
+                <div class="bg-white p-5 rounded-lg shadow-md flex items-center gap-4 transform hover:-translate-y-1 transition-transform"><i class="fas fa-barcode text-2xl text-blue-500 w-8 text-center"></i><span class="font-medium">Máy quét mã vạch</span></div>
+                <div class="bg-white p-5 rounded-lg shadow-md flex items-center gap-4 transform hover:-translate-y-1 transition-transform"><i class="fas fa-inbox text-2xl text-blue-500 w-8 text-center"></i><span class="font-medium">Ngăn kéo đựng tiền</span></div>
+                <div class="bg-white p-5 rounded-lg shadow-md flex items-center gap-4 col-span-2 md:col-span-1 transform hover:-translate-y-1 transition-transform"><i class="fas fa-qrcode text-2xl text-blue-500 w-8 text-center"></i><span class="font-medium">Màn hiển thị QR</span></div>
+             </div>
+        </div>
+    </div>
+
+    <div class="slide items-center justify-center">
+        <div class="w-full max-w-5xl text-center">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10">Mạng lưới đối tác liên kết</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 text-left">
+                <div class="bg-white p-4 rounded-lg shadow-md transform hover:scale-105 transition-transform">
+                    <h3 class="font-bold text-blue-800 mb-2 flex items-center gap-2"><i class="fas fa-credit-card w-5 text-center"></i>Thanh toán</h3>
+                    <p class="text-sm text-gray-600 pl-7">Vietinbank, Vietcombank, MB Bank...</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md transform hover:scale-105 transition-transform">
+                    <h3 class="font-bold text-blue-800 mb-2 flex items-center gap-2"><i class="fas fa-store w-5 text-center"></i>Sàn TMĐT</h3>
+                    <p class="text-sm text-gray-600 pl-7">Shopee, Tiktok Shop, Lazada...</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md transform hover:scale-105 transition-transform">
+                    <h3 class="font-bold text-blue-800 mb-2 flex items-center gap-2"><i class="fas fa-shipping-fast w-5 text-center"></i>Giao vận</h3>
+                    <p class="text-sm text-gray-600 pl-7">SPX, GHN, GHTK...</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md transform hover:scale-105 transition-transform">
+                    <h3 class="font-bold text-blue-800 mb-2 flex items-center gap-2"><i class="fas fa-headset w-5 text-center"></i>CSKH</h3>
+                    <p class="text-sm text-gray-600 pl-7">Zalo ZNS</p>
+                </div>
+                 <div class="bg-white p-4 rounded-lg shadow-md transform hover:scale-105 transition-transform">
+                    <h3 class="font-bold text-blue-800 mb-2 flex items-center gap-2"><i class="fas fa-share-alt w-5 text-center"></i>Mạng xã hội</h3>
+                    <p class="text-sm text-gray-600 pl-7">Fanpage Facebook, Instagram</p>
+                </div>
+                 <div class="bg-white p-4 rounded-lg shadow-md transform hover:scale-105 transition-transform">
+                    <h3 class="font-bold text-blue-800 mb-2 flex items-center gap-2"><i class="fas fa-file-invoice-dollar w-5 text-center"></i>Hóa đơn điện tử</h3>
+                    <p class="text-sm text-gray-600 pl-7">Misa, VNPT, Viettel, FPT</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide items-center justify-center">
+        <div class="w-full max-w-6xl text-center">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 flex items-center justify-center gap-4"><i class="fas fa-th-large"></i>Các ngành hàng KiotViet Retail phục vụ</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 text-sm">
+                <p class="bg-blue-100 text-blue-800 p-3 rounded-lg shadow transform hover:bg-blue-200 transition">Thời trang</p>
+                <p class="bg-blue-100 text-blue-800 p-3 rounded-lg shadow transform hover:bg-blue-200 transition">Tạp hóa & Siêu thị</p>
+                <p class="bg-blue-100 text-blue-800 p-3 rounded-lg shadow transform hover:bg-blue-200 transition">Điện thoại & Điện máy</p>
+                <p class="bg-blue-100 text-blue-800 p-3 rounded-lg shadow transform hover:bg-blue-200 transition">Mỹ phẩm</p>
+                <p class="bg-blue-100 text-blue-800 p-3 rounded-lg shadow transform hover:bg-blue-200 transition">Vật liệu xây dựng</p>
+                <p class="bg-blue-100 text-blue-800 p-3 rounded-lg shadow transform hover:bg-blue-200 transition">Nông sản & Thực phẩm</p>
+                <p class="bg-blue-100 text-blue-800 p-3 rounded-lg shadow transform hover:bg-blue-200 transition">Nhà thuốc</p>
+                <p class="bg-blue-100 text-blue-800 p-3 rounded-lg shadow transform hover:bg-blue-200 transition">Mẹ & Bé</p>
+                <p class="bg-blue-100 text-blue-800 p-3 rounded-lg shadow transform hover:bg-blue-200 transition">Sách & Văn phòng phẩm</p>
+                <p class="bg-gray-200 text-gray-800 p-3 rounded-lg shadow transform hover:bg-gray-300 transition">Và nhiều ngành hàng khác...</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slide items-center justify-center bg-blue-900 text-white">
+        <h1 class="text-6xl font-bold text-center">Nội dung đào tạo sản phẩm cơ bản</h1>
+    </div>
+
+    <div class="slide items-center justify-center">
+        <div class="w-full max-w-6xl text-center">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10">Kế hoạch đào tạo sản phẩm cơ bản</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-blue-500">
+                    <h3 class="font-bold text-2xl text-blue-800 mb-4 flex items-center gap-3"><i class="fas fa-calendar-day"></i>Buổi 1</h3>
+                    <ul class="space-y-2 text-gray-600 list-disc list-inside">
+                        <li><strong>Sáng:</strong> Tổng quan & Tự học Demo cơ bản</li>
+                        <li><strong>Chiều:</strong> Làm bài tập & Tự ôn tập</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-green-500">
+                    <h3 class="font-bold text-2xl text-green-800 mb-4 flex items-center gap-3"><i class="fas fa-calendar-week"></i>Buổi 2</h3>
+                    <ul class="space-y-2 text-gray-600 list-disc list-inside">
+                        <li><strong>Sáng:</strong> Thực hành demo & Tự học Hỏi đáp</li>
+                        <li><strong>Chiều:</strong> Làm bài tập & Tự ôn tập</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-orange-500">
+                    <h3 class="font-bold text-2xl text-orange-800 mb-4 flex items-center gap-3"><i class="fas fa-calendar-check"></i>Buổi 3</h3>
+                    <ul class="space-y-2 text-gray-600 list-disc list-inside">
+                        <li><strong>Sáng:</strong> Thực hành demo</li>
+                        <li><strong>Chiều:</strong> Làm bài tập & Tự ôn tập</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide items-center justify-center">
+        <div class="w-full max-w-6xl">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center">Tình huống giả định: Tạp hóa "An Nhiên"</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                <div class="bg-purple-50 p-6 rounded-lg shadow-md"><h3 class="font-bold text-lg text-purple-800 mb-3 flex items-center gap-2"><i class="fas fa-store-alt"></i>Thông tin</h3><p class="text-sm text-gray-600">> 1.000 mặt hàng, chủ tự quản lý, khách hàng là dân cư xung quanh.</p></div>
+                <div class="bg-red-50 p-6 rounded-lg shadow-md"><h3 class="font-bold text-lg text-red-800 mb-3 flex items-center gap-2"><i class="fas fa-exclamation-triangle"></i>Vấn đề</h3><p class="text-sm text-gray-600">Không nhớ giá, thất thoát, không nắm được tồn kho, quản lý công nợ thủ công.</p></div>
+                <div class="bg-green-50 p-6 rounded-lg shadow-md"><h3 class="font-bold text-lg text-green-800 mb-3 flex items-center gap-2"><i class="fas fa-lightbulb"></i>Nhu cầu</h3><p class="text-sm text-gray-600">Phần mềm dễ dùng, tính tiền nhanh, quản lý tồn kho chính xác, báo cáo đơn giản, quản lý công nợ chặt chẽ.</p></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slide items-center justify-center">
+        <div class="w-full max-w-5xl text-center">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10">Demo trên Máy tính - 06 bước cơ bản</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 text-lg font-semibold">
+                <div class="bg-white p-6 rounded-lg shadow-md text-blue-800 flex flex-col items-center justify-center gap-3"><i class="fas fa-desktop text-3xl"></i><span>1. Thêm Sản Phẩm</span></div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-blue-800 flex flex-col items-center justify-center gap-3"><i class="fas fa-desktop text-3xl"></i><span>2. Nhập Hàng</span></div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-blue-800 flex flex-col items-center justify-center gap-3"><i class="fas fa-desktop text-3xl"></i><span>3. Bán Hàng</span></div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-blue-800 flex flex-col items-center justify-center gap-3"><i class="fas fa-desktop text-3xl"></i><span>4. Trả Hàng</span></div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-blue-800 flex flex-col items-center justify-center gap-3"><i class="fas fa-desktop text-3xl"></i><span>5. Công Nợ</span></div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-blue-800 flex flex-col items-center justify-center gap-3"><i class="fas fa-desktop text-3xl"></i><span>6. Báo Cáo</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide items-center justify-center">
+        <div class="w-full max-w-6xl text-center">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10">Các câu hỏi thường gặp cơ bản</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-md font-medium">
+                <div class="bg-green-100 text-green-800 p-4 rounded-lg shadow flex flex-col items-center justify-center gap-2"><i class="fas fa-users-cog text-2xl"></i><span>Phân quyền</span></div>
+                <div class="bg-green-100 text-green-800 p-4 rounded-lg shadow flex flex-col items-center justify-center gap-2"><i class="fas fa-box-open text-2xl"></i><span>Hàng hóa</span></div>
+                <div class="bg-green-100 text-green-800 p-4 rounded-lg shadow flex flex-col items-center justify-center gap-2"><i class="fas fa-dolly text-2xl"></i><span>Nhập hàng</span></div>
+                <div class="bg-green-100 text-green-800 p-4 rounded-lg shadow flex flex-col items-center justify-center gap-2"><i class="fas fa-cash-register text-2xl"></i><span>Bán hàng</span></div>
+                <div class="bg-green-100 text-green-800 p-4 rounded-lg shadow flex flex-col items-center justify-center gap-2"><i class="fas fa-undo-alt text-2xl"></i><span>Trả hàng</span></div>
+                <div class="bg-green-100 text-green-800 p-4 rounded-lg shadow flex flex-col items-center justify-center gap-2"><i class="fas fa-users text-2xl"></i><span>Khách hàng</span></div>
+                <div class="bg-green-100 text-green-800 p-4 rounded-lg shadow flex flex-col items-center justify-center gap-2"><i class="fas fa-clipboard-check text-2xl"></i><span>Kiểm kho</span></div>
+                <div class="bg-green-100 text-green-800 p-4 rounded-lg shadow flex flex-col items-center justify-center gap-2"><i class="fas fa-book text-2xl"></i><span>Sổ quỹ</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide items-center justify-center">
+        <div class="w-full max-w-5xl text-center">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10">Demo trên Điện thoại - 06 bước cơ bản</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 text-lg font-semibold">
+                <div class="bg-white p-6 rounded-lg shadow-md text-blue-800 flex flex-col items-center justify-center gap-3"><i class="fas fa-mobile-alt text-3xl"></i><span>1. Thêm Sản Phẩm</span></div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-blue-800 flex flex-col items-center justify-center gap-3"><i class="fas fa-mobile-alt text-3xl"></i><span>2. Nhập Hàng</span></div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-blue-800 flex flex-col items-center justify-center gap-3"><i class="fas fa-mobile-alt text-3xl"></i><span>3. Bán Hàng</span></div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-blue-800 flex flex-col items-center justify-center gap-3"><i class="fas fa-mobile-alt text-3xl"></i><span>4. Trả Hàng</span></div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-blue-800 flex flex-col items-center justify-center gap-3"><i class="fas fa-mobile-alt text-3xl"></i><span>5. Công Nợ</span></div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-blue-800 flex flex-col items-center justify-center gap-3"><i class="fas fa-mobile-alt text-3xl"></i><span>6. Báo Cáo</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slide items-center justify-center">
+        <div class="w-full max-w-5xl text-center">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10">Các công cụ đào tạo trong khóa học</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="bg-white p-4 rounded-lg shadow-lg flex items-center gap-4"><i class="fas fa-video text-2xl text-blue-600 w-8 text-center"></i><div><h3 class="font-bold text-blue-800">Zoom / Google Meets</h3><p class="text-sm text-gray-600">Tương tác trực tuyến</p></div></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg flex items-center gap-4"><i class="fas fa-gamepad text-2xl text-blue-600 w-8 text-center"></i><div><h3 class="font-bold text-blue-800">Nearpod</h3><p class="text-sm text-gray-600">Tự học E-Learning</p></div></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg flex items-center gap-4"><i class="fas fa-globe text-2xl text-blue-600 w-8 text-center"></i><div><h3 class="font-bold text-blue-800">Google Sites</h3><p class="text-sm text-gray-600">Tra cứu tài liệu</p></div></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg flex items-center gap-4"><i class="fab fa-youtube text-2xl text-red-600 w-8 text-center"></i><div><h3 class="font-bold text-blue-800">YouTube</h3><p class="text-sm text-gray-600">Video hướng dẫn</p></div></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg flex items-center gap-4"><i class="fas fa-file-word text-2xl text-blue-700 w-8 text-center"></i><div><h3 class="font-bold text-blue-800">Microsoft Word</h3><p class="text-sm text-gray-600">Làm bài tập</p></div></div>
+                <div class="bg-white p-4 rounded-lg shadow-lg flex items-center gap-4"><i class="fas fa-check-double text-2xl text-green-600 w-8 text-center"></i><div><h3 class="font-bold text-blue-800">Classmarker</h3><p class="text-sm text-gray-600">Bài test cuối khóa</p></div></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slide items-center justify-center">
+        <div class="w-full max-w-3xl text-center bg-yellow-100 border-l-8 border-yellow-400 p-10 rounded-lg shadow-xl">
+            <h2 class="text-4xl font-bold text-yellow-800 mb-6 flex items-center justify-center gap-4"><i class="fas fa-exclamation-triangle"></i>Lưu ý quan trọng</h2>
+            <p class="text-lg text-gray-700 mb-4">Tài khoản dùng thử cần được tạo từ link:</p>
+            <p class="font-mono text-blue-700 bg-white p-3 rounded-md break-all">https://www.kiotviet.vn/?refcode=3670</p>
+            <p class="mt-4 text-md text-gray-600">Sử dụng 1 tài khoản Bán lẻ duy nhất cho tất cả bài tập.</p>
+        </div>
+    </div>
+
+    <div class="slide items-center justify-center text-center kiotviet-gradient text-white">
+        <div class="max-w-4xl">
+            <h2 class="text-5xl font-bold mb-8">Hỗ trợ & Hỏi đáp</h2>
+            <div class="flex justify-center gap-8 text-2xl">
+                <div class="flex flex-col items-center gap-3"><i class="fas fa-phone-alt text-4xl"></i><span>Gọi Trợ lý AI Riri</span></div>
+                <div class="flex flex-col items-center gap-3"><i class="fas fa-comments text-4xl"></i><span>Chat với Trợ lý AI Riri</span></div>
+            </div>
+             <p class="mt-12 text-4xl font-bold opacity-90">(Q&A)</p>
+        </div>
+    </div>
+
+    <script>
+        /* [Dán toàn bộ phần JavaScript của bạn vào đây, không thay đổi] */
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+            let currentSlide = 0;
+
+            function goToSlide(slideIndex) {
+                if (slideIndex >= totalSlides) {
+                    slideIndex = 0;
+                } else if (slideIndex < 0) {
+                    slideIndex = totalSlides - 1;
+                }
+                currentSlide = slideIndex;
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+                slides[currentSlide].classList.add('active');
+            }
+
+            function toggleFullScreen() {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen().catch(err => {
+                        alert(`Lỗi khi bật chế độ toàn màn hình: ${err.message} (${err.name})`);
+                    });
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    }
+                }
+            }
+
+            document.addEventListener('keydown', e => {
+                if (e.key === 'ArrowRight') {
+                    goToSlide(currentSlide + 1);
+                } else if (e.key === 'ArrowLeft') {
+                    goToSlide(currentSlide - 1);
+                } else if (e.key.toLowerCase() === 'f') {
+                    toggleFullScreen();
+                }
+            });
+
+            if (totalSlides > 0) {
+                goToSlide(0);
+            }
+        });
+    </script></body></html>
+
