@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trình bày: Đào tạo KiotViet FNB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+        .slide {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+            display: flex;
+        }
+        .slide-content {
+            width: 100%;
+            max-width: 1200px; /* Increased max-width */
+        }
+        /* Hide all UI navigation elements */
+        .controls, .progress, .slide-number, .slide-navigation {
+            display: none !important;
+        }
+        .special-slide {
+            background: linear-gradient(135deg, #166def 0%, #14b8a6 100%);
+            color: white;
+        }
+        .logo-container {
+            position: absolute;
+            top: 2rem;
+            right: 2.5rem;
+            width: 150px;
+        }
+    </style>
+</head>
+<body class="bg-slate-100">
+
+    <div id="presentation">
+        <!-- Slide 1: Bìa -->
+        <section class="slide active special-slide text-center">
+            <div class="slide-content border-4 border-white p-12 rounded-2xl">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg" alt="KiotViet Logo" class="h-12 mx-auto mb-8">
+                <h1 class="text-6xl font-extrabold tracking-tight">Đào tạo sản phẩm KiotViet FNB</h1>
+                <p class="mt-4 text-2xl opacity-80">Giải pháp toàn diện cho ngành Cafe & Nhà hàng.</p>
+            </div>
+        </section>
+
+        <!-- Slide 2: Mục tiêu khóa học -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-12">Mục tiêu khóa học</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-xl shadow-lg flex items-start space-x-6">
+                        <i class="fas fa-book-open text-4xl text-blue-600"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-800">Làm quen với KiotViet FNB</h3>
+                            <p class="text-slate-600 mt-2">Tìm hiểu kiến thức tổng quan về các giải pháp.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg flex items-start space-x-6">
+                        <i class="fas fa-chalkboard-teacher text-4xl text-green-500"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-800">Học kỹ năng demo & hỏi đáp</h3>
+                            <p class="text-slate-600 mt-2">Nắm vững kỹ năng demo và trả lời câu hỏi thường gặp.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg flex items-start space-x-6">
+                        <i class="fas fa-tasks text-4xl text-yellow-500"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-800">Hoàn thành Bài test đánh giá</h3>
+                            <p class="text-slate-600 mt-2">Tham gia bài test để đánh giá kiến thức đã học.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg flex items-start space-x-6">
+                        <i class="fas fa-tools text-4xl text-purple-500"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-800">Làm quen phương pháp học</h3>
+                            <p class="text-slate-600 mt-2">Sử dụng các tài nguyên đào tạo để cập nhật kiến thức.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Tổng quan KiotViet FNB -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-12">Tổng quan về KiotViet FNB</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-semibold text-slate-800 mb-4"><i class="fas fa-info-circle text-blue-600 mr-3"></i>Giới thiệu chung</h3>
+                        <ul class="space-y-3 list-disc list-inside text-slate-600">
+                            <li><strong>Giải pháp toàn diện:</strong> Tối ưu vận hành, quản lý & thúc đẩy doanh thu.</li>
+                            <li><strong>Hoạt động đa nền tảng:</strong> Windows/Mac OS, Android/iOS, Máy POS.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-semibold text-slate-800 mb-4"><i class="fas fa-cogs text-green-500 mr-3"></i>Kết nối phần cứng</h3>
+                        <ul class="space-y-3 list-disc list-inside text-slate-600">
+                            <li>Máy in hóa đơn, chế biến, tem</li>
+                            <li>Máy quét mã vạch</li>
+                            <li>Ngăn kéo đựng tiền</li>
+                            <li>Màn hiển thị QR</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-semibold text-slate-800 mb-4"><i class="fas fa-handshake text-purple-500 mr-3"></i>Đối tác liên kết</h3>
+                        <ul class="space-y-3 list-disc list-inside text-slate-600">
+                            <li><strong>Thanh toán:</strong> Vietinbank, Vietcombank...</li>
+                            <li><strong>App giao hàng:</strong> ShopeeFood, Grabfood...</li>
+                            <li><strong>CSKH:</strong> Zalo ZNS</li>
+                            <li><strong>Hóa đơn điện tử:</strong> Misa, VNPT...</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 4: Các mô hình FNB phổ biến -->
+        <section class="slide">
+             <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-12">Các mô hình FNB phổ biến</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-white p-6 rounded-xl shadow-lg"><i class="fas fa-concierge-bell text-4xl text-blue-600 mb-3"></i><h3 class="text-lg font-semibold text-slate-800">Nhà hàng</h3></div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg"><i class="fas fa-utensils text-4xl text-blue-600 mb-3"></i><h3 class="text-lg font-semibold text-slate-800">Quán ăn</h3></div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg"><i class="fas fa-coffee text-4xl text-blue-600 mb-3"></i><h3 class="text-lg font-semibold text-slate-800">Cafe - Trà sữa</h3></div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg"><i class="fas fa-microphone-alt text-4xl text-blue-600 mb-3"></i><h3 class="text-lg font-semibold text-slate-800">Karaoke - Bida</h3></div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg"><i class="fas fa-glass-martini-alt text-4xl text-blue-600 mb-3"></i><h3 class="text-lg font-semibold text-slate-800">Bar - Pub - Club</h3></div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg"><i class="fas fa-store text-4xl text-blue-600 mb-3"></i><h3 class="text-lg font-semibold text-slate-800">Canteen - Trạm dừng nghỉ</h3></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Tình huống giả định -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-12">Tình huống giả định: Quán cafe "Đồi Gió"</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-blue-800 mb-3"><i class="fas fa-store mr-2"></i>Thông tin quán</h3>
+                        <ul class="space-y-2 list-disc list-inside text-slate-700">
+                            <li>Menu: > 50 món đồ uống và bánh ngọt.</li>
+                            <li>Chủ quán: Kiêm nhiều vai trò.</li>
+                            <li>Khách hàng: Đa dạng.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-red-800 mb-3"><i class="fas fa-exclamation-triangle mr-2"></i>Vấn đề gặp phải</h3>
+                        <ul class="space-y-2 list-disc list-inside text-slate-700">
+                           <li>Khó quản lý menu, topping.</li>
+                           <li>Không rõ lãi/lỗ.</li>
+                           <li>Khó tạo ưu đãi, thiếu dữ liệu khách quen.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-green-800 mb-3"><i class="fas fa-lightbulb mr-2"></i>Nhu cầu giải pháp</h3>
+                        <ul class="space-y-2 list-disc list-inside text-slate-700">
+                            <li>Phần mềm đơn giản, nhanh trên điện thoại.</li>
+                            <li>Quản lý chặt chẽ menu và chi phí.</li>
+                            <li>Chăm sóc khách hàng tốt hơn.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Phân tích nhu cầu: Hàng hóa -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-8"><i class="fas fa-box mr-3"></i>Phân tích nhu cầu: Hàng hóa</h2>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <table class="w-full text-left text-lg">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="p-4 w-1/3">Vấn đề</th>
+                                <th class="p-4 w-1/3">Tính năng KiotViet</th>
+                                <th class="p-4 w-1/3">Lợi ích</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="align-top">
+                                <td class="p-4">Khó phân loại đồ ăn/uống, quản lý topping.</td>
+                                <td class="p-4">Phân loại menu, quản lý món kèm/topping.</td>
+                                <td class="p-4 text-green-600 font-semibold">Dễ tìm kiếm, tăng giá trị hóa đơn.</td>
+                            </tr>
+                            <tr class="align-top">
+                                <td class="p-4">Không biết món nào bán chạy/chậm.</td>
+                                <td class="p-4">Báo cáo món bán chạy, món có lãi cao.</td>
+                                <td class="p-4 text-green-600 font-semibold">Tối ưu menu, tăng lợi nhuận.</td>
+                            </tr>
+                             <tr class="align-top">
+                                <td class="p-4">Khó tùy chỉnh món theo yêu cầu khách.</td>
+                                <td class="p-4">Tính năng ghi chú món, thêm topping.</td>
+                                <td class="p-4 text-green-600 font-semibold">Tăng sự hài lòng của khách hàng.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Phân tích nhu cầu: Vận hành -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-8"><i class="fas fa-gears mr-3"></i>Phân tích nhu cầu: Vận hành</h2>
+                 <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <table class="w-full text-left text-lg">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="p-4 w-1/3">Vấn đề</th>
+                                <th class="p-4 w-1/3">Tính năng KiotViet</th>
+                                <th class="p-4 w-1/3">Lợi ích</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="align-top">
+                                <td class="p-4">Nhận gọi món thủ công, dễ sai sót.</td>
+                                <td class="p-4">Giao diện gọi món trực quan, quét mã QR.</td>
+                                <td class="p-4 text-green-600 font-semibold">Order nhanh chóng, chính xác.</td>
+                            </tr>
+                            <tr class="align-top">
+                                <td class="p-4">Thông tin gọi món đến bếp chậm, không chính xác.</td>
+                                <td class="p-4">Tự động gửi thông báo đến bếp/bar.</td>
+                                <td class="p-4 text-green-600 font-semibold">Quy trình liền mạch, giảm thời gian chờ.</td>
+                            </tr>
+                             <tr class="align-top">
+                                <td class="p-4">Bếp không nhận thông báo rõ ràng.</td>
+                                <td class="p-4">Máy in chế biến tự động in phiếu order.</td>
+                                <td class="p-4 text-green-600 font-semibold">Bếp/bar chủ động, tối ưu thời gian.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Phân tích nhu cầu: Dòng tiền -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-8"><i class="fas fa-money-bill-wave mr-3"></i>Phân tích nhu cầu: Dòng tiền</h2>
+                 <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <table class="w-full text-left text-lg">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="p-4 w-1/3">Vấn đề</th>
+                                <th class="p-4 w-1/3">Tính năng KiotViet</th>
+                                <th class="p-4 w-1/3">Lợi ích</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="align-top">
+                                <td class="p-4">Không biết lãi/lỗ thực tế từng ngày.</td>
+                                <td class="p-4">Báo cáo doanh thu, lợi nhuận thời gian thực.</td>
+                                <td class="p-4 text-green-600 font-semibold">Đánh giá hiệu quả, điều chỉnh kịp thời.</td>
+                            </tr>
+                            <tr class="align-top">
+                                <td class="p-4">Khó kiểm soát chi phí.</td>
+                                <td class="p-4">Báo cáo chi phí chi tiết, phân tích doanh thu.</td>
+                                <td class="p-4 text-green-600 font-semibold">Kiểm soát chi phí, tăng lợi nhuận.</td>
+                            </tr>
+                             <tr class="align-top">
+                                <td class="p-4">Chỉ bán được tiền mặt.</td>
+                                <td class="p-4">Thanh toán đa phương thức: QR, chuyển khoản...</td>
+                                <td class="p-4 text-green-600 font-semibold">Không bỏ lỡ giao dịch.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Phân tích nhu cầu: Khách hàng -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-8"><i class="fas fa-users mr-3"></i>Phân tích nhu cầu: Khách hàng</h2>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <table class="w-full text-left text-lg">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="p-4 w-1/3">Vấn đề</th>
+                                <th class="p-4 w-1/3">Tính năng KiotViet</th>
+                                <th class="p-4 w-1/3">Lợi ích</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="align-top">
+                                <td class="p-4">Không phân loại được khách hàng thân thiết.</td>
+                                <td class="p-4">Phân hạng khách hàng, tích điểm tự động.</td>
+                                <td class="p-4 text-green-600 font-semibold">Chăm sóc tốt hơn, tăng tỷ lệ quay lại.</td>
+                            </tr>
+                            <tr class="align-top">
+                                <td class="p-4">Không có dữ liệu về sở thích, tần suất ghé quán.</td>
+                                <td class="p-4">Lịch sử đặt món, món yêu thích.</td>
+                                <td class="p-4 text-green-600 font-semibold">Đề xuất món phù hợp, tăng giá trị hóa đơn.</td>
+                            </tr>
+                             <tr class="align-top">
+                                <td class="p-4">Khó triển khai khuyến mãi.</td>
+                                <td class="p-4">Tạo khuyến mãi theo món, giờ vàng, khách hàng.</td>
+                                <td class="p-4 text-green-600 font-semibold">Kích cầu mua sắm.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10: Phân tích nhu cầu: Phần cứng -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-8"><i class="fas fa-print mr-3"></i>Phân tích nhu cầu: Phần cứng</h2>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <table class="w-full text-left text-lg">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="p-4 w-1/3">Vấn đề</th>
+                                <th class="p-4 w-1/3">Thiết bị KiotViet</th>
+                                <th class="p-4 w-1/3">Lợi ích</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="align-top">
+                                <td class="p-4">Viết tay hóa đơn, tính tiền thủ công.</td>
+                                <td class="p-4">Máy in hóa đơn.</td>
+                                <td class="p-4 text-green-600 font-semibold">In hóa đơn nhanh, chính xác, chuyên nghiệp.</td>
+                            </tr>
+                            <tr class="align-top">
+                                <td class="p-4">Phiếu order bếp viết tay không rõ ràng.</td>
+                                <td class="p-4">Máy in chế biến.</td>
+                                <td class="p-4 text-green-600 font-semibold">Order bếp rõ ràng, tránh nhầm lẫn.</td>
+                            </tr>
+                             <tr class="align-top">
+                                <td class="p-4">Khó dán tem nhãn sản phẩm mang đi.</td>
+                                <td class="p-4">Máy in tem nhãn.</td>
+                                <td class="p-4 text-green-600 font-semibold">Nâng cao hình ảnh quán.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 11: Phân tích nhu cầu: Pháp lý -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-8"><i class="fas fa-gavel mr-3"></i>Phân tích nhu cầu: Pháp lý</h2>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <table class="w-full text-left text-lg">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="p-4 w-1/3">Vấn đề</th>
+                                <th class="p-4 w-1/3">Giải pháp KiotViet</th>
+                                <th class="p-4 w-1/3">Lợi ích</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="align-top">
+                                <td class="p-4">Lo lắng thủ tục Hóa đơn điện tử phức tạp.</td>
+                                <td class="p-4">Hóa đơn điện tử KiotViet (Miễn phí khởi tạo).</td>
+                                <td class="p-4 text-green-600 font-semibold">Đáp ứng 100% quy định, kinh doanh an tâm.</td>
+                            </tr>
+                            <tr class="align-top">
+                                <td class="p-4">Bắt buộc phải có Chữ ký số, tốn chi phí.</td>
+                                <td class="p-4">Chữ ký số từ xa (RMS) tặng kèm.</td>
+                                <td class="p-4 text-green-600 font-semibold">Hoàn tất thủ tục pháp lý không tốn thêm chi phí.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 12: Quy trình Demo 6 bước -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-12">Quy trình Demo 6 bước cơ bản</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div class="text-center bg-white p-6 rounded-lg shadow-lg">
+                        <div class="text-3xl font-bold text-blue-600 mb-3 border-4 border-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto">1</div>
+                        <i class="fas fa-door-open text-4xl text-slate-700 mb-2"></i><h3 class="font-semibold text-xl">Khởi tạo Phòng bàn</h3>
+                    </div>
+                     <div class="text-center bg-white p-6 rounded-lg shadow-lg">
+                        <div class="text-3xl font-bold text-blue-600 mb-3 border-4 border-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto">2</div>
+                        <i class="fas fa-book text-4xl text-slate-700 mb-2"></i><h3 class="font-semibold text-xl">Khởi tạo Menu</h3>
+                    </div>
+                     <div class="text-center bg-white p-6 rounded-lg shadow-lg">
+                        <div class="text-3xl font-bold text-blue-600 mb-3 border-4 border-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto">3</div>
+                        <i class="fas fa-qrcode text-4xl text-slate-700 mb-2"></i><h3 class="font-semibold text-xl">Thiết lập STK</h3>
+                    </div>
+                     <div class="text-center bg-white p-6 rounded-lg shadow-lg">
+                        <div class="text-3xl font-bold text-blue-600 mb-3 border-4 border-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto">4</div>
+                        <i class="fas fa-mobile-alt text-4xl text-slate-700 mb-2"></i><h3 class="font-semibold text-xl">Gọi món</h3>
+                    </div>
+                     <div class="text-center bg-white p-6 rounded-lg shadow-lg">
+                        <div class="text-3xl font-bold text-blue-600 mb-3 border-4 border-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto">5</div>
+                        <i class="fas fa-credit-card text-4xl text-slate-700 mb-2"></i><h3 class="font-semibold text-xl">Thanh toán</h3>
+                    </div>
+                     <div class="text-center bg-white p-6 rounded-lg shadow-lg">
+                        <div class="text-3xl font-bold text-blue-600 mb-3 border-4 border-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto">6</div>
+                        <i class="fas fa-chart-line text-4xl text-slate-700 mb-2"></i><h3 class="font-semibold text-xl">Báo cáo</h3>
+                    </div>
+                </div>
+                <p class="text-center mt-8 text-slate-500 text-lg">Mỗi bước sẽ có video hướng dẫn chi tiết ở các slide tiếp theo.</p>
+            </div>
+        </section>
+
+        <!-- Slide 13: Video: Khởi tạo Phòng bàn -->
+        <section class="slide">
+            <h2 class="text-4xl font-bold text-slate-800 text-center mb-8">Video: Khởi tạo Phòng bàn</h2>
+            <div class="w-full max-w-4xl bg-white p-4 rounded-xl shadow-2xl">
+                 <div class="aspect-video">
+                    <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/yBeXWch3Nv0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 14: Video: Khởi tạo Menu -->
+        <section class="slide">
+            <h2 class="text-4xl font-bold text-slate-800 text-center mb-8">Video: Khởi tạo Menu</h2>
+            <div class="w-full max-w-4xl bg-white p-4 rounded-xl shadow-2xl">
+                 <div class="aspect-video">
+                    <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/Txv8eOC6J24" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 15: Video: Thiết lập STK -->
+        <section class="slide">
+            <h2 class="text-4xl font-bold text-slate-800 text-center mb-8">Video: Thiết lập Số tài khoản (VietQR)</h2>
+            <div class="w-full max-w-4xl bg-white p-4 rounded-xl shadow-2xl">
+                 <div class="aspect-video">
+                    <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/YbeE89TEUTA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 16: Video: Gọi món -->
+        <section class="slide">
+            <h2 class="text-4xl font-bold text-slate-800 text-center mb-8">Video: Hướng dẫn Gọi món</h2>
+            <div class="w-full max-w-4xl bg-white p-4 rounded-xl shadow-2xl">
+                 <div class="aspect-video">
+                    <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/ZiDzv-BOmlc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 17: Video: Thanh toán -->
+        <section class="slide">
+            <h2 class="text-4xl font-bold text-slate-800 text-center mb-8">Video: Hướng dẫn Thanh toán</h2>
+            <div class="w-full max-w-4xl bg-white p-4 rounded-xl shadow-2xl">
+                 <div class="aspect-video">
+                    <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/p7-UkaHHV7k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 18: Video: Báo cáo -->
+        <section class="slide">
+            <h2 class="text-4xl font-bold text-slate-800 text-center mb-8">Video: Hướng dẫn xem Báo cáo</h2>
+            <div class="w-full max-w-4xl bg-white p-4 rounded-xl shadow-2xl">
+                 <div class="aspect-video">
+                    <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/-8iMsNwiqFs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 19: Tính năng nâng cao -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-12">Tư vấn những tính năng nâng cao</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                    <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-blue-500">
+                        <h3 class="text-2xl font-semibold text-slate-800 mb-4"><i class="fas fa-tasks text-blue-500 mr-3"></i>Vận hành</h3>
+                        <ul class="space-y-2 list-disc list-inside text-slate-600">
+                            <li>Nhận đặt bàn</li><li>Cập nhật đơn</li><li>Chế biến</li><li>Thanh toán</li><li>Phát hành hóa đơn</li><li>Kết ca</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-green-500">
+                        <h3 class="text-2xl font-semibold text-slate-800 mb-4"><i class="fas fa-chart-bar text-green-500 mr-3"></i>Quản lý</h3>
+                        <ul class="space-y-2 list-disc list-inside text-slate-600">
+                           <li>Danh mục hàng hóa</li><li>Quản lý Giao dịch</li><li>Khách hàng & NCC</li><li>Sổ quỹ</li><li>Báo cáo</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-orange-500">
+                        <h3 class="text-2xl font-semibold text-slate-800 mb-4"><i class="fas fa-hand-holding-usd text-orange-500 mr-3"></i>Tăng doanh thu</h3>
+                        <ul class="space-y-2 list-disc list-inside text-slate-600">
+                           <li>Thực đơn điện tử</li><li>Website cửa hàng</li><li>Liên kết Shopeefood, GrabFood</li><li>Gửi tin nhắn Zalo ZNS</li><li>Voucher & Tích điểm</li><li>Khuyến mại</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 20: Slide Tương Tác -->
+        <section class="slide">
+            <div class="slide-content text-center">
+                <h2 class="text-5xl font-bold text-slate-800">Theo bạn, tính năng nào là "ăn tiền" nhất đối với quán cafe "Đồi Gió"?</h2>
+                <p class="mt-6 text-2xl text-slate-600">Vui lòng gõ câu trả lời của bạn vào ô chat!</p>
+                <i class="fas fa-comments text-8xl text-blue-300 mt-12 animate-bounce"></i>
+            </div>
+        </section>
+        
+        <!-- Slide 21: Tài liệu & Hỗ trợ -->
+        <section class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-12">Tài liệu & Hỗ trợ</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-green-500 text-white p-8 rounded-xl shadow-lg text-center"><i class="fas fa-list-check text-5xl mb-3"></i><h3 class="text-xl font-bold">Checklist ôn tập</h3></div>
+                    <div class="bg-red-500 text-white p-8 rounded-xl shadow-lg text-center"><i class="fab fa-youtube text-5xl mb-3"></i><h3 class="text-xl font-bold">Playlist Đào tạo</h3></div>
+                    <div class="bg-blue-600 text-white p-8 rounded-xl shadow-lg text-center"><i class="fas fa-question-circle text-5xl mb-3"></i><h3 class="text-xl font-bold">Trang Hỏi đáp</h3></div>
+                    <div class="bg-purple-600 text-white p-8 rounded-xl shadow-lg text-center"><i class="fas fa-robot text-5xl mb-3"></i><h3 class="text-xl font-bold">Hỏi Trợ lý AI Bibi</h3></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 22: Hỏi đáp & Cảm ơn -->
+        <section class="slide special-slide text-center">
+            <div class="slide-content border-4 border-white p-12 rounded-2xl">
+                 <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg" alt="KiotViet Logo" class="h-12 mx-auto mb-8">
+                <h2 class="text-7xl font-bold mb-6">Q & A</h2>
+                <p class="text-3xl opacity-90">Cảm ơn bạn đã tham gia!</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.remove('active');
+                });
+                slides[index].classList.add('active');
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
+            }
+            
+            function toggleFullScreen() {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    }
+                }
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    e.preventDefault();
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    prevSlide();
+                } else if (e.key.toLowerCase() === 'f') {
+                    e.preventDefault();
+                    toggleFullScreen();
+                }
+            });
+
+            showSlide(currentSlide);
+        });
+    </script>
+
+</body>
+</html>
