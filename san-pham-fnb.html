@@ -53,6 +53,15 @@
             right: 2.5rem;
             width: 150px;
         }
+        .table-item {
+            padding: 20px; border: 2px solid #e2e8f0; border-radius: 10px;
+            background-color: #fff; text-align: center;
+            width: 110px; height: 90px; box-shadow: 0 4px 8px rgba(0,0,0,0.07);
+            display: flex; justify-content: center; align-items: center;
+            font-size: 1.5rem; font-weight: bold; color: #1e293b;
+        }
+        .menu-card { background: #fff; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .menu-card-header { text-align: center; margin-bottom: 1rem; font-semibold; background-color: #166def; color: white; padding: 0.5rem; border-radius: 6px; }
     </style>
 </head>
 <body class="bg-slate-100">
@@ -198,7 +207,53 @@
             </div>
         </section>
 
-        <!-- Slide 6: Phân tích nhu cầu: Hàng hóa -->
+        <!-- NEW Slide 6: Sơ đồ bàn -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                <h2 class="text-4xl font-bold text-slate-800 text-center mb-8">Minh họa Sơ đồ bàn "Đồi Gió"</h2>
+                <div class="bg-slate-100/60 p-6 rounded-xl space-y-6">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-center text-slate-700">Tầng 1</h3>
+                        <div class="flex justify-center gap-5 flex-wrap">
+                            <div class="table-item">01</div><div class="table-item">02</div><div class="table-item">03</div><div class="table-item">04</div><div class="table-item">05</div><div class="table-item">06</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-center text-slate-700">Tầng 2</h3>
+                        <div class="flex justify-center gap-5 flex-wrap">
+                            <div class="table-item">07</div><div class="table-item">08</div><div class="table-item">09</div><div class="table-item">10</div><div class="table-item">11</div><div class="table-item">12</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-center text-slate-700">Ngoài trời</h3>
+                        <div class="flex justify-center gap-5 flex-wrap">
+                            <div class="table-item">13</div><div class="table-item">14</div><div class="table-item">15</div><div class="table-item">16</div><div class="table-item">17</div><div class="table-item">18</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW Slide 7: Menu Quán -->
+        <section class="slide">
+            <div class="logo-container">
+                <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+            </div>
+            <div class="slide-content">
+                 <h2 class="text-4xl font-bold text-slate-800 text-center mb-8">Minh họa Menu Quán "Đồi Gió"</h2>
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="menu-card"><h3 class="menu-card-header">Cafe</h3><table class="w-full text-sm"><tbody><tr class="border-b"><td class="py-2">Espresso</td><td class="py-2 text-right font-semibold">30K</td></tr><tr class="border-b"><td class="py-2">Americano</td><td class="py-2 text-right font-semibold">35K</td></tr><tr class="border-b"><td class="py-2">Latte</td><td class="py-2 text-right font-semibold">40K</td></tr><tr><td class="py-2">Cappuccino</td><td class="py-2 text-right font-semibold">40K</td></tr></tbody></table></div>
+                    <div class="menu-card"><h3 class="menu-card-header">Fastfood</h3><table class="w-full text-sm"><tbody><tr class="border-b"><td class="py-2">Hamburger</td><td class="py-2 text-right font-semibold">50K</td></tr><tr class="border-b"><td class="py-2">Sandwich</td><td class="py-2 text-right font-semibold">45K</td></tr><tr class="border-b"><td class="py-2">Hotdog</td><td class="py-2 text-right font-semibold">35K</td></tr><tr><td class="py-2">Khoai tây chiên</td><td class="py-2 text-right font-semibold">25K</td></tr></tbody></table></div>
+                    <div class="menu-card"><h3 class="menu-card-header">Trà sữa</h3><table class="w-full text-sm"><tbody><tr class="border-b"><td class="py-2">Trà sữa truyền thống</td><td class="py-2 text-right font-semibold">35K</td></tr><tr class="border-b"><td class="py-2">Trà sữa matcha</td><td class="py-2 text-right font-semibold">40K</td></tr><tr><td class="py-2">Trà sữa socola</td><td class="py-2 text-right font-semibold">40K</td></tr></tbody></table></div>
+                    <div class="menu-card"><h3 class="menu-card-header">Toppings</h3><table class="w-full text-sm"><tbody><tr class="border-b"><td class="py-2">Trân châu đen</td><td class="py-2 text-right font-semibold">+5K</td></tr><tr class="border-b"><td class="py-2">Trân châu trắng</td><td class="py-2 text-right font-semibold">+5K</td></tr><tr><td class="py-2">Thạch dừa</td><td class="py-2 text-right font-semibold">+5K</td></tr></tbody></table></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Phân tích nhu cầu: Hàng hóa -->
         <section class="slide">
             <div class="logo-container">
                 <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
@@ -236,7 +291,7 @@
             </div>
         </section>
 
-        <!-- Slide 7: Phân tích nhu cầu: Vận hành -->
+        <!-- Slide 9: Phân tích nhu cầu: Vận hành -->
         <section class="slide">
             <div class="logo-container">
                 <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
@@ -274,7 +329,7 @@
             </div>
         </section>
 
-        <!-- Slide 8: Phân tích nhu cầu: Dòng tiền -->
+        <!-- Slide 10: Phân tích nhu cầu: Dòng tiền -->
         <section class="slide">
             <div class="logo-container">
                 <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
@@ -312,7 +367,7 @@
             </div>
         </section>
 
-        <!-- Slide 9: Phân tích nhu cầu: Khách hàng -->
+        <!-- Slide 11: Phân tích nhu cầu: Khách hàng -->
         <section class="slide">
             <div class="logo-container">
                 <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
@@ -350,7 +405,7 @@
             </div>
         </section>
 
-        <!-- Slide 10: Phân tích nhu cầu: Phần cứng -->
+        <!-- Slide 12: Phân tích nhu cầu: Phần cứng -->
         <section class="slide">
             <div class="logo-container">
                 <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
@@ -388,7 +443,7 @@
             </div>
         </section>
 
-        <!-- Slide 11: Phân tích nhu cầu: Pháp lý -->
+        <!-- Slide 13: Phân tích nhu cầu: Pháp lý -->
         <section class="slide">
             <div class="logo-container">
                 <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
@@ -421,79 +476,67 @@
             </div>
         </section>
         
-        <!-- Slide 12: Quy trình Demo 6 bước -->
+        <!-- MODIFIED Slide 14: Quy trình Demo 6 bước -->
         <section class="slide">
             <div class="logo-container">
                 <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
             </div>
             <div class="slide-content">
                 <h2 class="text-4xl font-bold text-slate-800 text-center mb-12">Quy trình Demo 6 bước cơ bản</h2>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
-                    <div class="text-center bg-white p-6 rounded-lg shadow-lg flex flex-col items-center justify-between">
-                        <div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                    <div class="text-center bg-white p-6 rounded-lg shadow-lg flex flex-col h-full">
+                        <div class="flex-grow">
                             <div class="text-3xl font-bold text-blue-600 mb-3 border-4 border-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto">1</div>
-                            <i class="fas fa-door-open text-4xl text-slate-700 mb-2"></i>
-                            <h3 class="font-semibold text-xl mb-4">Khởi tạo Phòng bàn</h3>
+                            <h3 class="font-semibold text-xl mb-3">Khởi tạo Phòng bàn</h3>
+                            <ul class="text-sm text-slate-600 list-disc list-inside text-left space-y-1"><li>Thêm mới danh sách bàn qua Excel.</li></ul>
                         </div>
-                        <a href="https://www.youtube.com/watch?v=yBeXWch3Nv0" target="_blank" class="mt-auto bg-red-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-red-600 transition-colors flex items-center gap-2">
-                            <i class="fab fa-youtube"></i> Xem Video
-                        </a>
+                        <a href="https://www.youtube.com/watch?v=yBeXWch3Nv0" target="_blank" class="mt-4 bg-red-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-red-600 transition-colors flex items-center justify-center gap-2 w-full"><i class="fab fa-youtube"></i> Xem Video</a>
                     </div>
-                     <div class="text-center bg-white p-6 rounded-lg shadow-lg flex flex-col items-center justify-between">
-                        <div>
+                     <div class="text-center bg-white p-6 rounded-lg shadow-lg flex flex-col h-full">
+                        <div class="flex-grow">
                             <div class="text-3xl font-bold text-blue-600 mb-3 border-4 border-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto">2</div>
-                            <i class="fas fa-book text-4xl text-slate-700 mb-2"></i>
-                            <h3 class="font-semibold text-xl mb-4">Khởi tạo Menu</h3>
+                            <h3 class="font-semibold text-xl mb-3">Khởi tạo Menu</h3>
+                            <ul class="text-sm text-slate-600 list-disc list-inside text-left space-y-1"><li>Thêm mới menu trên file Excel.</li><li>Thiết lập topping cho món.</li><li>Thiết lập ghi chú món.</li></ul>
                         </div>
-                        <a href="https://www.youtube.com/watch?v=Txv8eOC6J24" target="_blank" class="mt-auto bg-red-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-red-600 transition-colors flex items-center gap-2">
-                            <i class="fab fa-youtube"></i> Xem Video
-                        </a>
+                        <a href="https://www.youtube.com/watch?v=Txv8eOC6J24" target="_blank" class="mt-4 bg-red-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-red-600 transition-colors flex items-center justify-center gap-2 w-full"><i class="fab fa-youtube"></i> Xem Video</a>
                     </div>
-                     <div class="text-center bg-white p-6 rounded-lg shadow-lg flex flex-col items-center justify-between">
-                        <div>
+                     <div class="text-center bg-white p-6 rounded-lg shadow-lg flex flex-col h-full">
+                        <div class="flex-grow">
                             <div class="text-3xl font-bold text-blue-600 mb-3 border-4 border-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto">3</div>
-                            <i class="fas fa-qrcode text-4xl text-slate-700 mb-2"></i>
-                            <h3 class="font-semibold text-xl mb-4">Thiết lập STK</h3>
+                            <h3 class="font-semibold text-xl mb-3">Thiết lập STK</h3>
+                            <ul class="text-sm text-slate-600 list-disc list-inside text-left space-y-1"><li>Thêm số tài khoản ngân hàng để thanh toán VietQR.</li></ul>
                         </div>
-                        <a href="https://www.youtube.com/watch?v=YbeE89TEUTA" target="_blank" class="mt-auto bg-red-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-red-600 transition-colors flex items-center gap-2">
-                            <i class="fab fa-youtube"></i> Xem Video
-                        </a>
+                        <a href="https://www.youtube.com/watch?v=YbeE89TEUTA" target="_blank" class="mt-4 bg-red-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-red-600 transition-colors flex items-center justify-center gap-2 w-full"><i class="fab fa-youtube"></i> Xem Video</a>
                     </div>
-                     <div class="text-center bg-white p-6 rounded-lg shadow-lg flex flex-col items-center justify-between">
-                        <div>
+                     <div class="text-center bg-white p-6 rounded-lg shadow-lg flex flex-col h-full">
+                        <div class="flex-grow">
                             <div class="text-3xl font-bold text-blue-600 mb-3 border-4 border-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto">4</div>
-                            <i class="fas fa-mobile-alt text-4xl text-slate-700 mb-2"></i>
-                            <h3 class="font-semibold text-xl mb-4">Gọi món</h3>
+                            <h3 class="font-semibold text-xl mb-3">Gọi món</h3>
+                            <ul class="text-sm text-slate-600 list-disc list-inside text-left space-y-1"><li>Nhận order từ khách hàng.</li><li>Thêm món vào đơn hàng.</li><li>Ghi chú món theo yêu cầu.</li></ul>
                         </div>
-                        <a href="https://www.youtube.com/watch?v=ZiDzv-BOmlc" target="_blank" class="mt-auto bg-red-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-red-600 transition-colors flex items-center gap-2">
-                            <i class="fab fa-youtube"></i> Xem Video
-                        </a>
+                        <a href="https://www.youtube.com/watch?v=ZiDzv-BOmlc" target="_blank" class="mt-4 bg-red-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-red-600 transition-colors flex items-center justify-center gap-2 w-full"><i class="fab fa-youtube"></i> Xem Video</a>
                     </div>
-                     <div class="text-center bg-white p-6 rounded-lg shadow-lg flex flex-col items-center justify-between">
-                        <div>
+                     <div class="text-center bg-white p-6 rounded-lg shadow-lg flex flex-col h-full">
+                        <div class="flex-grow">
                             <div class="text-3xl font-bold text-blue-600 mb-3 border-4 border-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto">5</div>
-                            <i class="fas fa-credit-card text-4xl text-slate-700 mb-2"></i>
-                            <h3 class="font-semibold text-xl mb-4">Thanh toán</h3>
+                            <h3 class="font-semibold text-xl mb-3">Thanh toán</h3>
+                            <ul class="text-sm text-slate-600 list-disc list-inside text-left space-y-1"><li>Tính tiền, áp dụng giảm giá.</li><li>In hóa đơn cho khách.</li></ul>
                         </div>
-                        <a href="https://www.youtube.com/watch?v=p7-UkaHHV7k" target="_blank" class="mt-auto bg-red-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-red-600 transition-colors flex items-center gap-2">
-                            <i class="fab fa-youtube"></i> Xem Video
-                        </a>
+                        <a href="https://www.youtube.com/watch?v=p7-UkaHHV7k" target="_blank" class="mt-4 bg-red-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-red-600 transition-colors flex items-center justify-center gap-2 w-full"><i class="fab fa-youtube"></i> Xem Video</a>
                     </div>
-                     <div class="text-center bg-white p-6 rounded-lg shadow-lg flex flex-col items-center justify-between">
-                        <div>
+                     <div class="text-center bg-white p-6 rounded-lg shadow-lg flex flex-col h-full">
+                        <div class="flex-grow">
                             <div class="text-3xl font-bold text-blue-600 mb-3 border-4 border-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto">6</div>
-                            <i class="fas fa-chart-line text-4xl text-slate-700 mb-2"></i>
-                            <h3 class="font-semibold text-xl mb-4">Báo cáo</h3>
+                            <h3 class="font-semibold text-xl mb-3">Báo cáo</h3>
+                            <ul class="text-sm text-slate-600 list-disc list-inside text-left space-y-1"><li>Xem báo cáo cuối ngày.</li><li>Xem báo cáo bán hàng chi tiết.</li></ul>
                         </div>
-                        <a href="https://www.youtube.com/watch?v=-8iMsNwiqFs" target="_blank" class="mt-auto bg-red-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-red-600 transition-colors flex items-center gap-2">
-                            <i class="fab fa-youtube"></i> Xem Video
-                        </a>
+                        <a href="https://www.youtube.com/watch?v=-8iMsNwiqFs" target="_blank" class="mt-4 bg-red-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-red-600 transition-colors flex items-center justify-center gap-2 w-full"><i class="fab fa-youtube"></i> Xem Video</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Slide 19: Tính năng nâng cao -->
+        <!-- Slide 15: Tính năng nâng cao -->
         <section class="slide">
             <div class="logo-container">
                 <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
@@ -523,7 +566,7 @@
             </div>
         </section>
 
-        <!-- Slide 21: Tài liệu & Hỗ trợ -->
+        <!-- Slide 16: Tài liệu & Hỗ trợ -->
         <section class="slide">
             <div class="slide-content">
                 <h2 class="text-4xl font-bold text-slate-800 text-center mb-12">Tài liệu & Hỗ trợ</h2>
@@ -544,7 +587,7 @@
             </div>
         </section>
 
-        <!-- Slide 22: Hỏi đáp & Cảm ơn -->
+        <!-- Slide 17: Hỏi đáp & Cảm ơn -->
         <section class="slide special-slide text-center">
             <div class="slide-content border-4 border-white p-12 rounded-2xl">
                  <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg" alt="KiotViet Logo" class="h-12 mx-auto mb-8">
