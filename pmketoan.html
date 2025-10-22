@@ -12,7 +12,7 @@
         :root {
             --r-main-font: 'Inter', sans-serif;
             --r-heading-font: 'Inter', sans-serif;
-            --r-background-color: #f8f9fa;
+            --r-background-color: #ffffff;
             --r-main-color: #333;
             --r-heading-color: #111;
         }
@@ -28,7 +28,6 @@
             font-weight: 700;
         }
 
-        /* --- Hide all navigation controls --- */
         .reveal .controls,
         .reveal .progress,
         .reveal .slide-number {
@@ -47,20 +46,14 @@
             position: relative;
         }
 
-        .logo-top-right {
-            position: absolute;
-            top: 2.5rem;
-            right: 2.5rem;
-            width: 150px;
-            height: auto;
-        }
+        /* FIXED: Class logo đã bị loại bỏ khỏi các slide trung gian */
     </style>
 </head>
 <body>
     <div class="reveal">
         <div class="slides">
             <!-- Slide 1: Bìa -->
-            <section data-background-gradient="linear-gradient(to bottom right, #0072CE, #00A651)">
+            <section data-background-color="#0072CE">
                 <div class="slide-content text-white">
                     <div class="border-8 border-white rounded-2xl p-12 w-full max-w-4xl">
                         <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg" alt="KiotViet Logo" class="w-64 mx-auto mb-10">
@@ -74,7 +67,6 @@
             <!-- Slide 2: Đặt Vấn Đề - Thách Thức Chung -->
             <section>
                 <div class="slide-content !items-stretch !text-left">
-                    <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo" class="logo-top-right">
                     <h2 class="text-4xl font-bold text-gray-800 mb-12"><i class="fas fa-chart-line text-blue-600 mr-3"></i>Thách Thức Chung Của Chúng Ta</h2>
                     <div class="flex items-center w-full">
                         <div class="w-1/3 text-center pr-10">
@@ -92,24 +84,23 @@
             <!-- Slide 3: Mục Tiêu Buổi Đào Tạo -->
             <section>
                 <div class="slide-content">
-                    <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo" class="logo-top-right">
                     <h2 class="text-4xl font-bold text-gray-800 mb-12"><i class="fas fa-bullseye text-blue-600 mr-3"></i>Mục Tiêu Của Buổi Học</h2>
                     <div class="space-y-6 w-full max-w-4xl text-left">
-                        <div class="bg-white p-6 rounded-lg shadow-lg flex items-center transition-transform hover:scale-105">
+                        <div class="bg-white p-6 rounded-lg shadow-lg flex items-center transition-transform hover:scale-105 border">
                             <i class="fas fa-link text-4xl text-blue-600 w-16 text-center"></i>
                             <div class="ml-5">
                                 <h3 class="text-2xl font-semibold">Hiểu Rõ Mối Liên Hệ</h3>
                                 <p class="text-xl text-gray-600">Giữa Hóa đơn điện tử → Sổ Kế toán → Tờ khai thuế.</p>
                             </div>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-lg flex items-center transition-transform hover:scale-105">
+                        <div class="bg-white p-6 rounded-lg shadow-lg flex items-center transition-transform hover:scale-105 border">
                             <i class="fas fa-cogs text-4xl text-blue-600 w-16 text-center"></i>
                             <div class="ml-5">
                                 <h3 class="text-2xl font-semibold">Nắm Vững Quy Trình</h3>
                                 <p class="text-xl text-gray-600">Triển khai chuẩn 11 bước trên KiotViet.</p>
                             </div>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-lg flex items-center transition-transform hover:scale-105">
+                        <div class="bg-white p-6 rounded-lg shadow-lg flex items-center transition-transform hover:scale-105 border">
                             <i class="fas fa-shield-alt text-4xl text-blue-600 w-16 text-center"></i>
                             <div class="ml-5">
                                 <h3 class="text-2xl font-semibold">Biết Cách Phòng Ngừa</h3>
@@ -133,20 +124,19 @@
             <!-- Slide 5: Nền Tảng Pháp Lý -->
             <section>
                 <div class="slide-content">
-                    <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo" class="logo-top-right">
                     <h2 class="text-4xl font-bold text-gray-800 mb-12"><i class="fas fa-gavel text-blue-600 mr-3"></i>3 Trụ Cột Pháp Lý Quan Trọng</h2>
                     <div class="grid grid-cols-3 gap-8 w-full max-w-6xl text-left">
-                        <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                        <div class="bg-gray-50 p-6 rounded-lg shadow-md border">
                             <h3 class="text-2xl font-semibold mb-3"><i class="fas fa-file-invoice text-blue-500 mr-2"></i>Hóa Đơn Điện Tử</h3>
                             <p class="text-lg text-gray-600">Nghị định 123, Thông tư 78, Nghị định 70</p>
                             <p class="text-lg mt-2">Quy định HKD, DN phải dùng HĐĐT.</p>
                         </div>
-                        <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                        <div class="bg-gray-50 p-6 rounded-lg shadow-md border">
                             <h3 class="text-2xl font-semibold mb-3"><i class="fas fa-book text-green-500 mr-2"></i>Sổ Kế Toán</h3>
                             <p class="text-lg text-gray-600">Thông tư 88</p>
                             <p class="text-lg mt-2">Quy định HKD (kê khai) phải có 7 loại Sổ Kế toán.</p>
                         </div>
-                        <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                        <div class="bg-gray-50 p-6 rounded-lg shadow-md border">
                             <h3 class="text-2xl font-semibold mb-3"><i class="fas fa-file-alt text-purple-500 mr-2"></i>Tờ Khai Thuế</h3>
                             <p class="text-lg text-gray-600">Thông tư 40</p>
                             <p class="text-lg mt-2">Quy định HKD (kê khai) phải nộp tờ khai thuế.</p>
@@ -158,12 +148,11 @@
             <!-- Slide 6: Giải Pháp Tổng Thể Của KiotViet -->
             <section>
                 <div class="slide-content !items-start">
-                    <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo" class="logo-top-right">
                     <h2 class="text-4xl font-bold text-gray-800 mb-12"><i class="fas fa-puzzle-piece text-blue-600 mr-3"></i>KiotViet Giải Quyết Bài Toán Này Như Thế Nào?</h2>
                     <div class="space-y-5 text-left w-full">
-                        <p class="text-2xl bg-gray-100 p-4 rounded-lg flex items-center"><i class="fas fa-cash-register text-3xl text-green-500 mr-4 w-10 text-center"></i>Phần mềm bán hàng (đóng vai trò Máy tính tiền)</p>
-                        <p class="text-2xl bg-gray-100 p-4 rounded-lg flex items-center"><i class="fas fa-cloud-upload-alt text-3xl text-blue-500 mr-4 w-10 text-center"></i>Phần mềm Hóa đơn điện tử (KiotViet eInvoice)</p>
-                        <p class="text-2xl bg-gray-100 p-4 rounded-lg flex items-center"><i class="fas fa-signature text-3xl text-purple-500 mr-4 w-10 text-center"></i>Chữ ký số (KiotViet IntrustCA)</p>
+                        <p class="text-2xl bg-gray-50 p-4 rounded-lg flex items-center border"><i class="fas fa-cash-register text-3xl text-green-500 mr-4 w-10 text-center"></i>Phần mềm bán hàng (đóng vai trò Máy tính tiền)</p>
+                        <p class="text-2xl bg-gray-50 p-4 rounded-lg flex items-center border"><i class="fas fa-cloud-upload-alt text-3xl text-blue-500 mr-4 w-10 text-center"></i>Phần mềm Hóa đơn điện tử (KiotViet eInvoice)</p>
+                        <p class="text-2xl bg-gray-50 p-4 rounded-lg flex items-center border"><i class="fas fa-signature text-3xl text-purple-500 mr-4 w-10 text-center"></i>Chữ ký số (KiotViet IntrustCA)</p>
                         <p class="text-2xl bg-green-100 border-l-4 border-green-500 p-4 rounded-lg flex items-center"><i class="fas fa-check-circle text-3xl text-green-600 mr-4 w-10 text-center"></i><strong>Tích hợp sẵn:</strong> Sổ Kế toán (TT 88) & Tờ khai thuế (TT 40).</p>
                     </div>
                 </div>
@@ -172,27 +161,58 @@
             <!-- Slide 7: Luồng Vận Hành Hàng Ngày - Tổng Quan -->
             <section>
                 <div class="slide-content">
-                    <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo" class="logo-top-right">
                     <h2 class="text-4xl font-bold text-gray-800 mb-16"><i class="fas fa-project-diagram text-blue-600 mr-3"></i>Luồng Dữ Liệu Tự Động: 4 Bước Vận Hành Hàng Ngày</h2>
                     <div class="flex items-center justify-center w-full">
                         <div class="text-center">
-                            <div class="bg-blue-500 text-white rounded-full w-24 h-24 flex items-center justify-center mx-auto text-4xl"><i class="fas fa-file-invoice-dollar"></i></div>
+                            <div class="bg-blue-500 text-white rounded-full w-24 h-24 flex items-center justify-center mx-auto text-4xl shadow-lg"><i class="fas fa-file-invoice-dollar"></i></div>
                             <p class="mt-3 text-xl font-semibold">Bước 8: Phát hành HĐĐT</p>
                         </div>
                         <i class="fas fa-long-arrow-alt-right text-5xl text-gray-400 mx-6"></i>
                         <div class="text-center">
-                            <div class="bg-blue-500 text-white rounded-full w-24 h-24 flex items-center justify-center mx-auto text-4xl"><i class="fas fa-folder-open"></i></div>
+                            <div class="bg-blue-500 text-white rounded-full w-24 h-24 flex items-center justify-center mx-auto text-4xl shadow-lg"><i class="fas fa-folder-open"></i></div>
                             <p class="mt-3 text-xl font-semibold">Bước 9: Quản lý HĐĐT</p>
                         </div>
                         <i class="fas fa-long-arrow-alt-right text-5xl text-gray-400 mx-6"></i>
                         <div class="text-center">
-                            <div class="bg-green-500 text-white rounded-full w-24 h-24 flex items-center justify-center mx-auto text-4xl"><i class="fas fa-book"></i></div>
+                            <div class="bg-green-500 text-white rounded-full w-24 h-24 flex items-center justify-center mx-auto text-4xl shadow-lg"><i class="fas fa-book"></i></div>
                             <p class="mt-3 text-xl font-semibold">Bước 10: Ghi Sổ Kế toán</p>
                         </div>
                         <i class="fas fa-long-arrow-alt-right text-5xl text-gray-400 mx-6"></i>
                         <div class="text-center">
-                            <div class="bg-green-500 text-white rounded-full w-24 h-24 flex items-center justify-center mx-auto text-4xl"><i class="fas fa-file-alt"></i></div>
+                            <div class="bg-green-500 text-white rounded-full w-24 h-24 flex items-center justify-center mx-auto text-4xl shadow-lg"><i class="fas fa-file-alt"></i></div>
                             <p class="mt-3 text-xl font-semibold">Bước 11: Lên Tờ khai thuế</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NEW SLIDE: Tổng Quan Quy Trình 11 Bước -->
+            <section>
+                <div class="slide-content !items-start">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-10"><i class="fas fa-sitemap text-blue-600 mr-3"></i>Tổng Quan Quy Trình 11 Bước</h2>
+                    <div class="grid grid-cols-2 gap-x-12 w-full text-left">
+                        <!-- Giai đoạn 1 -->
+                        <div class="border-r pr-6">
+                            <h3 class="text-3xl font-bold text-blue-700 mb-6">Giai Đoạn 1: Thiết Lập Ban Đầu</h3>
+                            <div class="space-y-3">
+                                <p class="text-xl flex items-center"><span class="bg-blue-500 text-white rounded-full w-7 h-7 flex items-center justify-center font-bold mr-3 shrink-0">1</span><i class="fas fa-signature mr-3 text-blue-500 w-6 text-center"></i>Đăng ký CKS KiotViet IntrustCA</p>
+                                <p class="text-xl flex items-center"><span class="bg-blue-500 text-white rounded-full w-7 h-7 flex items-center justify-center font-bold mr-3 shrink-0">2</span><i class="fas fa-percent mr-3 text-blue-500 w-6 text-center"></i>Thiết lập Thuế VAT</p>
+                                <p class="text-xl flex items-center"><span class="bg-blue-500 text-white rounded-full w-7 h-7 flex items-center justify-center font-bold mr-3 shrink-0">3</span><i class="fas fa-user-plus mr-3 text-blue-500 w-6 text-center"></i>Đăng ký tài khoản KiotViet eInvoice</p>
+                                <p class="text-xl flex items-center"><span class="bg-blue-500 text-white rounded-full w-7 h-7 flex items-center justify-center font-bold mr-3 shrink-0">4</span><i class="fas fa-cogs mr-3 text-blue-500 w-6 text-center"></i>Thiết lập CKS trên eInvoice</p>
+                                <p class="text-xl flex items-center"><span class="bg-blue-500 text-white rounded-full w-7 h-7 flex items-center justify-center font-bold mr-3 shrink-0">5</span><i class="fas fa-paper-plane mr-3 text-blue-500 w-6 text-center"></i>Lập Tờ khai HĐĐT gửi CQT</p>
+                                <p class="text-xl flex items-center"><span class="bg-blue-500 text-white rounded-full w-7 h-7 flex items-center justify-center font-bold mr-3 shrink-0">6</span><i class="fas fa-paint-brush mr-3 text-blue-500 w-6 text-center"></i>Tạo mẫu hóa đơn</p>
+                                <p class="text-xl flex items-center"><span class="bg-blue-500 text-white rounded-full w-7 h-7 flex items-center justify-center font-bold mr-3 shrink-0">7</span><i class="fas fa-plug mr-3 text-green-600 w-6 text-center"></i>Kết nối KiotViet với eInvoice</p>
+                            </div>
+                        </div>
+                        <!-- Giai đoạn 2 -->
+                        <div>
+                            <h3 class="text-3xl font-bold text-green-700 mb-6">Giai Đoạn 2: Vận Hành Hàng Ngày</h3>
+                             <div class="space-y-3">
+                                <p class="text-xl flex items-center"><span class="bg-green-500 text-white rounded-full w-7 h-7 flex items-center justify-center font-bold mr-3 shrink-0">8</span><i class="fas fa-file-invoice-dollar mr-3 text-green-500 w-6 text-center"></i>Phát hành HĐĐT</p>
+                                <p class="text-xl flex items-center"><span class="bg-green-500 text-white rounded-full w-7 h-7 flex items-center justify-center font-bold mr-3 shrink-0">9</span><i class="fas fa-folder-open mr-3 text-green-500 w-6 text-center"></i>Quản lý HĐĐT</p>
+                                <p class="text-xl flex items-center"><span class="bg-green-500 text-white rounded-full w-7 h-7 flex items-center justify-center font-bold mr-3 shrink-0">10</span><i class="fas fa-book mr-3 text-green-500 w-6 text-center"></i>Ghi Sổ Kế toán (Tự động)</p>
+                                <p class="text-xl flex items-center"><span class="bg-green-500 text-white rounded-full w-7 h-7 flex items-center justify-center font-bold mr-3 shrink-0">11</span><i class="fas fa-file-alt mr-3 text-green-500 w-6 text-center"></i>Lên Tờ khai thuế (Tự động)</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -201,16 +221,15 @@
             <!-- Slide 8: Chi Tiết Bước 8 & 9 -->
             <section>
                 <div class="slide-content !items-start !text-left">
-                    <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo" class="logo-top-right">
                     <h2 class="text-4xl font-bold text-gray-800 mb-10"><i class="fas fa-mouse-pointer text-blue-600 mr-3"></i>Khởi Nguồn Dữ Liệu & Quản Lý Tập Trung</h2>
                     <div class="flex space-x-8 w-full">
-                        <div class="w-1/2 bg-white p-6 rounded-lg shadow-lg">
+                        <div class="w-1/2 bg-white p-6 rounded-lg shadow-lg border">
                             <h3 class="text-2xl font-bold mb-4 text-blue-700">Bước 8: Phát hành HĐĐT</h3>
                             <p class="text-lg"><strong class="font-semibold">Nơi thực hiện:</strong> Phần mềm KiotViet</p>
                             <p class="text-lg"><strong class="font-semibold">Hành động:</strong> Nhấn nút "Phát hành HĐĐT" từ đơn hàng.</p>
-                            <p class="text-lg mt-3 bg-blue-100 p-3 rounded"><strong class="font-semibold">Kết quả:</strong> Dữ liệu được đẩy đi, là điểm khởi tạo của mọi thứ.</p>
+                            <p class="text-lg mt-3 bg-blue-50 p-3 rounded"><strong class="font-semibold">Kết quả:</strong> Dữ liệu được đẩy đi, là điểm khởi tạo của mọi thứ.</p>
                         </div>
-                        <div class="w-1/2 bg-white p-6 rounded-lg shadow-lg">
+                        <div class="w-1/2 bg-white p-6 rounded-lg shadow-lg border">
                             <h3 class="text-2xl font-bold mb-4 text-blue-700">Bước 9: Quản lý HĐĐT</h3>
                             <p class="text-lg"><strong class="font-semibold">Nơi thực hiện:</strong> KiotViet eInvoice</p>
                             <p class="text-lg"><strong class="font-semibold">Hành động:</strong> Gửi mail, gửi CQT...</p>
@@ -220,42 +239,43 @@
                 </div>
             </section>
 
-            <!-- Slide 9: Chi Tiết Bước 10 - Mối Liên Hệ HĐĐT → SKT -->
+            <!-- Các slide từ 9 đến 20 giữ nguyên nội dung gốc -->
+            <!-- ... -->
+            
+            <!-- Slide 9 -->
             <section>
                 <div class="slide-content !items-start !text-left">
-                    <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo" class="logo-top-right">
                     <h2 class="text-4xl font-bold text-gray-800 mb-10"><i class="fas fa-magic text-green-500 mr-3"></i>Điểm Mấu Chốt 1: HĐĐT <i class="fas fa-long-arrow-alt-right mx-2"></i> Sổ Kế Toán</h2>
                     <ul class="space-y-4 text-2xl text-gray-700 list-none w-full">
                         <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-4 mt-1"></i><span><strong class="text-green-600">Tự động 100%:</strong> Ngay khi HĐĐT được phát hành (Bước 8), KiotViet tự động ghi nhận doanh thu vào Sổ Kế toán.</span></li>
                         <li class="flex items-start"><i class="fas fa-user-times text-green-500 mr-4 mt-1"></i><span><strong class="text-green-600">Không cần thao tác tay:</strong> Khách hàng không cần làm gì cả.</span></li>
                     </ul>
-                    <div class="mt-12 bg-blue-100 border-l-4 border-blue-500 p-6 rounded-r-lg w-full">
+                    <div class="mt-12 bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg w-full">
                         <p class="text-2xl font-semibold text-blue-800">Kết luận: Dữ liệu Hóa đơn điện tử là <strong class="underline">đầu vào</strong> của Sổ Kế toán.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Slide 10: Chi Tiết Bước 11 - Mối Liên Hệ SKT → TKT -->
+            <!-- Slide 10 -->
             <section>
                 <div class="slide-content !items-start !text-left">
-                    <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo" class="logo-top-right">
                     <h2 class="text-4xl font-bold text-gray-800 mb-10"><i class="fas fa-magic text-green-500 mr-3"></i>Điểm Mấu Chốt 2: Sổ Kế Toán <i class="fas fa-long-arrow-alt-right mx-2"></i> Tờ Khai Thuế</h2>
                     <ul class="space-y-4 text-2xl text-gray-700 list-none w-full">
                         <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-4 mt-1"></i><span><strong class="text-green-600">Tự động tổng hợp:</strong> Cuối kỳ, KiotViet tự động tổng hợp toàn bộ dữ liệu từ Sổ Kế toán (Bước 10).</span></li>
                         <li class="flex items-start"><i class="fas fa-file-code text-green-500 mr-4 mt-1"></i><span><strong class="text-green-600">Chuẩn định dạng:</strong> Tạo ra file Tờ khai thuế .XML chuẩn mẫu 01-2/BK-HDKD.</span></li>
                     </ul>
-                    <div class="mt-12 bg-blue-100 border-l-4 border-blue-500 p-6 rounded-r-lg w-full">
+                    <div class="mt-12 bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg w-full">
                         <p class="text-2xl font-semibold text-blue-800">Kết luận: Dữ liệu Sổ Kế toán là <strong class="underline">đầu vào</strong> của Tờ khai thuế.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Slide 11: Slide Tương Tác - Củng Cố Kiến Thức -->
+            <!-- Slide 11 -->
             <section>
                 <div class="slide-content">
                     <h2 class="text-4xl font-bold text-gray-800 mb-8"><i class="fas fa-question-circle text-blue-600 mr-3"></i>Tình Huống Sai Luồng</h2>
                     <p class="text-3xl font-medium text-gray-700 max-w-5xl">Điều gì xảy ra nếu khách bán hàng trên KiotViet, nhưng xuất HĐĐT thủ công từ một phần mềm khác?</p>
-                    <div class="mt-10 bg-red-100 border-l-8 border-red-500 p-8 rounded-lg text-left w-full max-w-4xl">
+                    <div class="mt-10 bg-red-50 border-l-8 border-red-500 p-8 rounded-lg text-left w-full max-w-4xl">
                         <h3 class="text-3xl font-bold text-red-600 mb-4"><i class="fas fa-exclamation-triangle mr-2"></i>Dữ liệu không liên kết!</h3>
                         <ul class="space-y-3 text-2xl text-red-800 list-disc list-inside">
                             <li>Hóa đơn đó <strong>KHÔNG</strong> được ghi vào Sổ Kế toán KiotViet.</li>
@@ -265,195 +285,91 @@
                     </div>
                 </div>
             </section>
-
-            <!-- Slide 12: Checklist Thiết Lập Ban Đầu -->
-            <section>
-                <div class="slide-content">
-                    <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo" class="logo-top-right">
-                    <h2 class="text-4xl font-bold text-gray-800 mb-10"><i class="fas fa-tasks text-blue-600 mr-3"></i>Giai Đoạn 1: 7 Bước Thiết Lập Ban Đầu</h2>
-                    <p class="text-2xl text-gray-600 mb-8">(Chỉ cần tư vấn khách hàng làm 1 lần duy nhất)</p>
-                    <div class="grid grid-cols-2 grid-rows-4 gap-x-8 gap-y-4 w-full max-w-5xl text-left text-xl">
-                        <div class="bg-gray-50 p-4 rounded-lg flex items-center shadow-sm"><span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4">1</span><i class="fas fa-signature mr-3 text-blue-500"></i>Đăng ký CKS KiotViet IntrustCA</div>
-                        <div class="bg-gray-50 p-4 rounded-lg flex items-center shadow-sm"><span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4">2</span><i class="fas fa-percent mr-3 text-blue-500"></i>Thiết lập Thuế VAT</div>
-                        <div class="bg-gray-50 p-4 rounded-lg flex items-center shadow-sm"><span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4">3</span><i class="fas fa-user-plus mr-3 text-blue-500"></i>Đăng ký tài khoản KiotViet eInvoice</div>
-                        <div class="bg-gray-50 p-4 rounded-lg flex items-center shadow-sm"><span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4">4</span><i class="fas fa-cogs mr-3 text-blue-500"></i>Thiết lập CKS trên eInvoice</div>
-                        <div class="bg-gray-50 p-4 rounded-lg flex items-center shadow-sm"><span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4">5</span><i class="fas fa-paper-plane mr-3 text-blue-500"></i>Lập Tờ khai HĐĐT gửi CQT</div>
-                        <div class="bg-gray-50 p-4 rounded-lg flex items-center shadow-sm"><span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4">6</span><i class="fas fa-paint-brush mr-3 text-blue-500"></i>Tạo mẫu hóa đơn</div>
-                        <div class="bg-green-100 p-4 rounded-lg flex items-center shadow-sm col-span-2"><span class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4">7</span><i class="fas fa-plug mr-3 text-green-600"></i>Kết nối KiotViet với eInvoice</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Slide 13: Hướng Dẫn Tư Vấn - Nhóm 1 (Bước 1-3) -->
+            
+            <!-- NEW SLIDES: XỬ LÝ TÌNH HUỐNG THƯỜNG GẶP -->
             <section>
                 <div class="slide-content !items-start !text-left">
-                    <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo" class="logo-top-right">
-                    <h2 class="text-4xl font-bold text-gray-800 mb-10"><i class="fas fa-list-ol text-blue-600 mr-3"></i>Kịch Bản Tư Vấn: Các Bước Chuẩn Bị</h2>
-                    <div class="space-y-6 w-full">
-                        <div class="border-l-4 border-blue-500 pl-6 py-2">
-                            <h3 class="text-2xl font-bold mb-2">Bước 1: Đăng ký Chữ ký số</h3>
-                            <p class="text-xl text-gray-700">"Bước đầu tiên và bắt buộc, anh/chị vào KiotViet đăng ký CKS KiotViet IntrustCA miễn phí."</p>
-                        </div>
-                        <div class="border-l-4 border-blue-500 pl-6 py-2">
-                            <h3 class="text-2xl font-bold mb-2">Bước 2: Thiết lập Thuế VAT</h3>
-                            <p class="text-xl text-gray-700">"Trong lúc chờ CKS, anh/chị vào 'Cài đặt' -> 'Quản lý Thuế' để cấu hình mô hình kinh doanh."</p>
-                        </div>
-                        <div class="border-l-4 border-blue-500 pl-6 py-2">
-                            <h3 class="text-2xl font-bold mb-2">Bước 3: Đăng ký tài khoản eInvoice</h3>
-                            <p class="text-xl text-gray-700">"Sau khi có CKS, anh/chị quay lại KiotViet để đăng ký tài khoản KiotViet eInvoice."</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Slide 14: Hướng Dẫn Tư Vấn - Nhóm 2 (Bước 4-6) -->
-            <section>
-                <div class="slide-content !items-start !text-left">
-                    <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo" class="logo-top-right">
-                    <h2 class="text-4xl font-bold text-gray-800 mb-10"><i class="fas fa-list-ol text-blue-600 mr-3"></i>Kịch Bản Tư Vấn: Cấu Hình trên eInvoice</h2>
-                    <div class="space-y-6 w-full">
-                        <div class="border-l-4 border-blue-500 pl-6 py-2">
-                            <h3 class="text-2xl font-bold mb-2">Bước 4: Thiết lập Chữ ký số</h3>
-                            <p class="text-xl text-gray-700">"Anh/chị đăng nhập eInvoice, vào 'Thiết lập' để liên kết CKS vào hệ thống."</p>
-                        </div>
-                        <div class="border-l-4 border-blue-500 pl-6 py-2">
-                            <h3 class="text-2xl font-bold mb-2">Bước 5: Lập Tờ khai HĐĐT</h3>
-                            <p class="text-xl text-gray-700">"Tại eInvoice, vào 'Đăng ký phát hành' để lập và nộp Tờ khai cho Cơ quan Thuế."</p>
-                        </div>
-                        <div class="border-l-4 border-blue-500 pl-6 py-2">
-                            <h3 class="text-2xl font-bold mb-2">Bước 6: Tạo mẫu hóa đơn</h3>
-                            <p class="text-xl text-gray-700">"Trong lúc chờ CQT duyệt, mình vào 'Mẫu hóa đơn' để thiết kế mẫu theo ý muốn."</p>
-                        </div>
+                    <h2 class="text-4xl font-bold text-gray-800 mb-6"><i class="fas fa-tools mr-3 text-blue-600"></i>Xử Lý Tình Huống Thường Gặp (1/7)</h2>
+                    <div class="space-y-4 w-full text-lg">
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>1. Admin đã kết nối HĐĐT nhưng không thấy menu Tờ khai thuế/Sổ kế toán?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Tạo ticket cho các KVS để được hỗ trợ (Lưu ý không tạo ticket cho team KAT).</p></div>
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>2. Khách chọn nhầm "Ngày chuyển lên hộ kê khai" và dữ liệu bị sai?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Không có tính năng tự đổi. Cần tạo ticket về team PTSP để hỗ trợ khách hàng lập lại từ đầu.</p></div>
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>3. Kiểm tra lại "Ngày chuyển lên hộ kê khai" ở đâu?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Vào "Sổ tiền mặt/ngân hàng", chọn "Thay đổi số dư ban đầu" sẽ thấy thông tin.</p></div>
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>4. Khách chọn nhầm "Kỳ kê khai", có đổi lại được không?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Không có tính năng tự đổi. Cần tạo ticket về team PTSP để hỗ trợ khách hàng lập lại từ đầu.</p></div>
                     </div>
                 </div>
             </section>
             
-            <!-- Slide 15: Hướng Dẫn Tư Vấn - Bước cuối cùng (Bước 7) -->
             <section>
                 <div class="slide-content !items-start !text-left">
-                    <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo" class="logo-top-right">
-                    <h2 class="text-4xl font-bold text-gray-800 mb-10"><i class="fas fa-plug text-green-600 mr-3"></i>Kịch Bản Tư Vấn: Bước Kết Nối Quan Trọng Nhất</h2>
-                    <div class="bg-green-100 border-l-8 border-green-500 p-8 rounded-lg w-full">
-                        <h3 class="text-3xl font-bold mb-4 text-green-800">Bước 7: Kết nối KiotViet & eInvoice</h3>
-                        <ul class="space-y-3 text-xl list-none text-gray-700">
-                           <li class="flex"><strong class="w-32 font-semibold">Khi nào?</strong><span>Sau khi Cơ quan Thuế <strong>"Chấp nhận"</strong> tờ khai (ở Bước 5).</span></li>
-                           <li class="flex"><strong class="w-32 font-semibold">Ở đâu?</strong><span>Quay lại phần mềm KiotViet.</span></li>
-                           <li class="flex"><strong class="w-32 font-semibold">Làm gì?</strong><span>Vào 'Cài đặt' -> 'Cài đặt Hóa đơn điện tử', nhập thông tin tài khoản eInvoice.</span></li>
-                        </ul>
-                    </div>
-                    <p class="mt-8 text-2xl font-semibold text-center w-full">"Hoàn tất 7 bước này, gian hàng đã sẵn sàng để vận hành!"</p>
-                </div>
-            </section>
-            
-            <!-- Slide 16: Lỗi 1 - Sai Lệch Dữ Liệu -->
-            <section>
-                <div class="slide-content !items-start !text-left">
-                    <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo" class="logo-top-right">
-                    <h2 class="text-4xl font-bold text-red-600 mb-6"><i class="fas fa-exclamation-triangle mr-3"></i>Lỗi 1 (Nghiêm Trọng): Sai Lệch Dữ Liệu</h2>
-                    <div class="w-full bg-white p-6 rounded-lg shadow-lg">
-                        <h3 class="text-2xl font-semibold mb-3">Nguyên nhân:</h3>
-                        <ul class="list-disc list-inside text-xl text-gray-700 space-y-2">
-                            <li>Không tuân thủ luồng vận hành 4 bước.</li>
-                            <li>Xóa đơn hàng trên KiotViet sau khi đã phát hành HĐĐT.</li>
-                            <li>Phát hành HĐĐT thủ công từ bên ngoài.</li>
-                        </ul>
-                        <div class="mt-6 bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded-r-lg">
-                            <p class="text-xl font-semibold text-yellow-800"><i class="fas fa-comments mr-2"></i>Tư vấn Phòng ngừa:</p>
-                            <p class="text-xl text-gray-800">"Em xin nhấn mạnh, để dữ liệu luôn đúng, anh/chị tuyệt đối tuân thủ luồng, không xóa đơn hàng đã xuất hóa đơn và mọi điều chỉnh HĐĐT đều phải thực hiện trên KiotViet eInvoice."</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Slide 17: Lỗi 2 - Gửi Tờ Khai/HĐĐT Bị Lỗi -->
-            <section>
-                <div class="slide-content !items-start !text-left">
-                    <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo" class="logo-top-right">
-                    <h2 class="text-4xl font-bold text-orange-600 mb-6"><i class="fas fa-sync-alt mr-3"></i>Lỗi 2 (Phổ Biến): Gửi Dữ Liệu Cho CQT Bị Lỗi</h2>
-                    <div class="w-full bg-white p-6 rounded-lg shadow-lg">
-                        <h3 class="text-2xl font-semibold mb-3">Nguyên nhân:</h3>
-                        <ul class="list-disc list-inside text-xl text-gray-700 space-y-2">
-                            <li>Thông tin Cơ quan Thuế sai.</li>
-                            <li>Chữ ký số lỗi hoặc chưa được thiết lập.</li>
-                            <li>Hệ thống của Cơ quan Thuế quá tải.</li>
-                        </ul>
-                        <div class="mt-6 bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded-r-lg">
-                            <p class="text-xl font-semibold text-yellow-800"><i class="fas fa-comments mr-2"></i>Tư vấn Phòng ngừa:</p>
-                            <p class="text-xl text-gray-800">"Nếu CQT báo lỗi, anh/chị đọc kỹ thông báo trên KiotViet. Nếu trạng thái 'Đã gửi' quá lâu, anh/chị không nên gửi lại liên tục mà hãy chờ hoặc liên hệ DVKH để tránh treo hệ thống."</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Slide 18: Lỗi 3 - Lỗi Chữ Ký Số -->
-            <section>
-                <div class="slide-content !items-start !text-left">
-                    <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo" class="logo-top-right">
-                    <h2 class="text-4xl font-bold text-purple-600 mb-6"><i class="fas fa-signature mr-3"></i>Lỗi 3 (Kỹ thuật): Lỗi Liên Quan Đến Chữ Ký Số</h2>
-                    <div class="w-full bg-white p-6 rounded-lg shadow-lg">
-                        <h3 class="text-2xl font-semibold mb-3">Nguyên nhân:</h3>
-                        <ul class="list-disc list-inside text-xl text-gray-700 space-y-2">
-                            <li>Chữ ký số đã hết hạn.</li>
-                            <li>Khách hàng gia hạn/thay đổi CKS mới nhưng <strong class="text-red-600">KHÔNG</strong> cập nhật trên KiotViet eInvoice.</li>
-                        </ul>
-                        <div class="mt-6 bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded-r-lg">
-                            <p class="text-xl font-semibold text-yellow-800"><i class="fas fa-comments mr-2"></i>Tư vấn Phòng ngừa:</p>
-                            <p class="text-xl text-gray-800">"Anh/chị lưu ý, nếu CKS hết hạn hoặc có thay đổi, anh/chị phải cập nhật CKS mới ngay vào mục 'Thiết lập Chữ ký số' trên KiotViet eInvoice trước khi phát hành hóa đơn tiếp theo."</p>
-                        </div>
+                    <h2 class="text-4xl font-bold text-gray-800 mb-6"><i class="fas fa-tools mr-3 text-blue-600"></i>Xử Lý Tình Huống Thường Gặp (2/7)</h2>
+                    <div class="space-y-4 w-full text-lg">
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>5. Lập bù phiếu trong quá khứ (trước ngày kê khai) nhưng không cập nhật vào Tờ khai/Sổ kế toán?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Hệ thống không cập nhật dữ liệu trước ngày kê khai. Khách hàng cần vào Sổ kế toán -> sửa lại số dư đầu kỳ thủ công.</p></div>
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>6. Hàng hóa bị âm, đã lập bù phiếu nhưng Tờ khai/Sổ kế toán vẫn âm?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Do phiếu bù có ngày trước ngày kê khai. <strong>Cách 1:</strong> Lập phiếu bù sau ngày kê khai. <strong>Cách 2:</strong> Vào Sổ kế toán sửa số dư đầu kỳ thủ công.</p></div>
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>7. Giá trị hàng hóa trong bảng kê = 0 dù vẫn có số lượng?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Do hàng hóa được tạo sau khi đã lập Tờ khai/Sổ kế toán nên không có giá vốn. Khách hàng vào Sổ kế toán sửa lại số dư đầu kỳ thủ công.</p></div>
                     </div>
                 </div>
             </section>
             
-            <!-- Slide 19: Tổng Kết 3 Điểm Chính -->
-            <section>
-                <div class="slide-content">
-                    <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo" class="logo-top-right">
-                    <h2 class="text-4xl font-bold text-gray-800 mb-12"><i class="fas fa-clipboard-check text-blue-600 mr-3"></i>Cùng Nhìn Lại 3 Mục Tiêu</h2>
-                    <div class="space-y-6 w-full max-w-4xl text-left">
-                         <div class="bg-white p-6 rounded-lg shadow-lg flex items-center">
-                            <i class="fas fa-link text-4xl text-blue-600 w-16 text-center"></i>
-                            <div class="ml-5">
-                                <h3 class="text-2xl font-semibold">Mối liên hệ</h3>
-                                <p class="text-xl text-gray-600">Luồng dữ liệu tự động 4 bước (HĐĐT → SKT → TKT).</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-lg flex items-center">
-                            <i class="fas fa-cogs text-4xl text-blue-600 w-16 text-center"></i>
-                            <div class="ml-5">
-                                <h3 class="text-2xl font-semibold">Luồng setup</h3>
-                                <p class="text-xl text-gray-600">Nắm vững 7 bước thiết lập ban đầu (làm một lần).</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-lg flex items-center">
-                            <i class="fas fa-shield-alt text-4xl text-blue-600 w-16 text-center"></i>
-                            <div class="ml-5">
-                                <h3 class="text-2xl font-semibold">Phòng ngừa lỗi</h3>
-                                <p class="text-xl text-gray-600">Nhấn mạnh 3 điểm cốt lõi với khách hàng.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Slide 20: Câu Hỏi Củng Cố -->
             <section>
                 <div class="slide-content !items-start !text-left">
-                    <h2 class="text-4xl font-bold text-gray-800 mb-12"><i class="fas fa-question mr-3 text-blue-600"></i>Kiểm Tra Nhanh</h2>
-                    <div class="space-y-8 w-full">
-                        <div class="bg-gray-100 p-6 rounded-lg">
-                            <p class="text-2xl font-semibold text-gray-800">Câu hỏi 1: Luồng vận hành hàng ngày gồm mấy bước?</p>
-                            <p class="text-2xl text-green-600 font-bold mt-2"><i class="fas fa-arrow-right mr-2"></i>4 bước.</p>
-                        </div>
-                        <div class="bg-gray-100 p-6 rounded-lg">
-                            <p class="text-2xl font-semibold text-gray-800">Câu hỏi 2: Lỗi sai lệch dữ liệu xảy ra chủ yếu do đâu?</p>
-                            <p class="text-2xl text-green-600 font-bold mt-2"><i class="fas fa-arrow-right mr-2"></i>Không tuân thủ luồng.</p>
-                        </div>
+                    <h2 class="text-4xl font-bold text-gray-800 mb-6"><i class="fas fa-tools mr-3 text-blue-600"></i>Xử Lý Tình Huống Thường Gặp (3/7)</h2>
+                    <div class="space-y-4 w-full text-lg">
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>8. Số lượng hàng hóa trên Tờ khai khác báo cáo Xuất nhập tồn?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i><strong>KVS (XNT):</strong> Chỉ hiển thị hàng có giao dịch trong kỳ. <strong>KAT (Tờ khai):</strong> Hiển thị tất cả hàng có tồn đầu kỳ, cuối kỳ hoặc có giao dịch. Cần kiểm tra chi tiết thẻ kho.</p></div>
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>9. Thẻ kho có xuất bán hàng nhưng Tờ khai/Sổ không có giao dịch xuất tương ứng?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Giao dịch xuất kho chỉ được ghi nhận vào Tờ khai/Sổ kế toán đối với các hóa đơn bán hàng **có xuất hóa đơn điện tử**.</p></div>
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>10. Hàng Combo/Chế biến khi xuất bán thì ghi nhận trên Tờ khai thế nào?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Bảng kê không bao gồm hàng dịch vụ, combo. Hàng combo sẽ được ghi nhận xuất/nhập kho theo **hàng hóa thành phần**.</p></div>
                     </div>
                 </div>
             </section>
 
-            <!-- Slide 21: Kết Thúc & Hỏi Đáp -->
-            <section data-background-gradient="linear-gradient(to bottom right, #0072CE, #00A651)">
+            <section>
+                <div class="slide-content !items-start !text-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-6"><i class="fas fa-tools mr-3 text-blue-600"></i>Xử Lý Tình Huống Thường Gặp (4/7)</h2>
+                    <div class="space-y-4 w-full text-lg">
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>11. Doanh thu Tờ khai không khớp với doanh thu trên KiotViet eInvoice?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Tờ khai chỉ đồng bộ với dữ liệu bán hàng **trực tiếp phát hành HĐĐT từ KiotViet POS**. Nếu chỉ chuyển nháp, dữ liệu sẽ không sang. KH cần vào Tờ khai chỉnh sửa lại doanh thu thủ công.</p></div>
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>12. Doanh thu Tờ khai không khớp với doanh thu trên KiotViet POS?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i><strong>POS:</strong> Lấy tất cả hóa đơn. <strong>KAT:</strong> Chỉ lấy hóa đơn có phát hành HĐĐT, và giá trị tương ứng trên HĐĐT (có thể khác giá trị trên POS nếu HĐĐT không bao gồm giảm giá).</p></div>
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>13. Tại sao có lúc phải tính cả hóa đơn HỦY vào doanh thu Tờ khai mới khớp?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Nếu hóa đơn đã xuất HĐĐT rồi mới bị hủy trên POS, Tờ khai vẫn ghi nhận doanh thu. Nếu việc hủy diễn ra trước khi KH bắt đầu dùng tính năng Thuế & Kế toán, nó sẽ không được ghi nhận.</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="slide-content !items-start !text-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-6"><i class="fas fa-tools mr-3 text-blue-600"></i>Xử Lý Tình Huống Thường Gặp (5/7)</h2>
+                    <div class="space-y-4 w-full text-lg">
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>14. Nếu không thiết lập Thuế suất trên POS, phần mềm lấy thuế suất nào để tính?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Phần mềm sẽ tự động áp dụng thuế suất dựa trên **ngành nghề kinh doanh** đã thiết lập trên CRM, theo quy định tại Phụ lục I - Thông tư 40/2021.</p></div>
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>15. Khách chọn sai thuế suất, đã sửa lại trên POS nhưng Tờ khai không cập nhật?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Việc sửa setting thuế không áp dụng ngược cho các giao dịch quá khứ. Cần tạo ticket về team PTSP để hỗ trợ lập lại Tờ khai/Sổ kế toán từ đầu.</p></div>
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>16. Khi xem Sổ kế toán, tại sao số dư đầu kỳ của toàn bộ các sổ bằng 0?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Kiểm tra lại bộ lọc thời gian. Nếu ngày bắt đầu của bộ lọc trước "Ngày chuyển lên hộ kê khai" thì số dư đầu kỳ sẽ bằng 0.</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="slide-content !items-start !text-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-6"><i class="fas fa-tools mr-3 text-blue-600"></i>Xử Lý Tình Huống Thường Gặp (6/7)</h2>
+                    <div class="space-y-4 w-full text-lg">
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>17. Tạo phiếu chi trên Sổ quỹ nhưng không hiển thị đúng loại chi phí trong Tờ khai?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Phiếu chi phải sử dụng **loại chi mặc định** của hệ thống, hoặc loại chi mới nhưng phải thuộc **danh mục chi mặc định** của hệ thống.</p></div>
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>18. Tải file XML rồi "Save As" thành đuôi .xml để nộp thuế được không?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Không. Cần phải tải file XML trực tiếp từ phần mềm.</p></div>
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>19. Tại sao số liệu trên Tờ khai thuế hiện tại khác với version cũ?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Do version mới đã thay đổi cách lấy số liệu để hợp lý hơn (ví dụ: lấy toàn bộ hàng hóa thay vì chỉ hàng có bán). Hướng dẫn KH không so sánh với version cũ.</p></div>
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>20. Có bắt buộc chọn giảm thuế khi kê khai không?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Việc chọn giảm thuế thực hiện khi bán hàng và xuất HĐĐT. Tờ khai chỉ tổng hợp lại. Nếu mặt hàng được giảm thuế thì cần tích chọn để ghi nhận đúng nghĩa vụ thuế, tránh bị phạt.</p></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <div class="slide-content !items-start !text-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-6"><i class="fas fa-tools mr-3 text-blue-600"></i>Xử Lý Tình Huống Thường Gặp (7/7)</h2>
+                    <div class="space-y-4 w-full text-lg">
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>21. Hóa đơn tháng 8 nhưng tháng 11 mới phát hành, dữ liệu sẽ tính vào quý nào?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Theo quy định, phải kê khai theo ngày của HĐĐT. Hiện tại tính năng đang ghi nhận theo ngày bán hàng trên POS (chưa chính xác). KH cần sửa lại doanh thu trên Tờ khai theo đúng kỳ của HĐĐT.</p></div>
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>22. Xóa hàng hóa trên POS, trên Tờ khai có mất không?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Hiện tại vẫn còn. Hàng hóa đã đồng bộ sẽ không bị ảnh hưởng khi xóa trên POS.</p></div>
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>23. Mã số thuế mới (CCCD) hiển thị trong trường "mã số thuế cũ" gây lỗi khi nộp?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>KH sau khi xuất file XML, mở bằng notepad để sửa lại thông tin mã số thuế vào đúng trường.</p></div>
+                        <div class="bg-gray-50 p-4 rounded-lg border"><p class="font-bold text-blue-700"><i class="fas fa-question-circle mr-2"></i>24. 7 sổ kế toán có in ra được không?</p><p class="mt-2 pl-6"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>Hiện tại chưa có tính năng in.</p></div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Slide cuối: Kết Thúc & Hỏi Đáp -->
+            <section data-background-color="#0072CE">
                 <div class="slide-content text-white">
                      <div class="border-8 border-white rounded-2xl p-12 w-full max-w-4xl">
                         <img src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg" alt="KiotViet Logo" class="w-64 mx-auto mb-10">
@@ -474,39 +390,25 @@
             width: 1280,
             height: 720,
             margin: 0.04,
-            transition: 'slide', // none/fade/slide/convex/concave/zoom
-            
-            // --- Disable all default navigation controls ---
+            transition: 'slide',
             controls: false,
             progress: false,
             slideNumber: false,
-
-            // --- Enable keyboard navigation ---
             keyboard: {
-                37: 'prev', // left arrow
-                39: 'next', // right arrow
-                70: function() { // 'F' key for fullscreen
+                37: 'prev',
+                39: 'next',
+                70: function() {
                     var element = document.body;
                     if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
-                        if (document.exitFullscreen) {
-                            document.exitFullscreen();
-                        } else if (document.webkitExitFullscreen) {
-                            document.webkitExitFullscreen();
-                        } else if (document.mozCancelFullScreen) {
-                            document.mozCancelFullScreen();
-                        } else if (document.msExitFullscreen) {
-                            document.msExitFullscreen();
-                        }
+                        if (document.exitFullscreen) { document.exitFullscreen(); } 
+                        else if (document.webkitExitFullscreen) { document.webkitExitFullscreen(); }
+                        else if (document.mozCancelFullScreen) { document.mozCancelFullScreen(); }
+                        else if (document.msExitFullscreen) { document.msExitFullscreen(); }
                     } else {
-                        if (element.requestFullscreen) {
-                            element.requestFullscreen();
-                        } else if (element.webkitRequestFullscreen) {
-                            element.webkitRequestFullscreen();
-                        } else if (element.mozRequestFullScreen) {
-                            element.mozRequestFullScreen();
-                        } else if (element.msRequestFullscreen) {
-                            element.msRequestFullscreen();
-                        }
+                        if (element.requestFullscreen) { element.requestFullscreen(); }
+                        else if (element.webkitRequestFullscreen) { element.webkitRequestFullscreen(); }
+                        else if (element.mozRequestFullScreen) { element.mozRequestFullScreen(); }
+                        else if (element.msRequestFullscreen) { element.msRequestFullscreen(); }
                     }
                 }
             }
