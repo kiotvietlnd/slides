@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài thuyết trình</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; }
+        .slide { display: none; width: 100%; height: 100%; padding: 0; box-sizing: border-box; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: absolute; top: 0; left: 0; transition: opacity 0.5s ease-in-out; }
+        .slide-content-wrapper { width: 100%; height: 100%; padding: 60px 80px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .slide.active { display: flex; }
+        .slide-container { width: 100%; height: 100%; position: relative; }
+        h1, h2, h3, h4, p, li, span { word-wrap: break-word; overflow-wrap: break-word; -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+    </style>
+</head>
+<body>
+    <div id="slide-container" class="slide-container">
+        <!-- SLIDES GO HERE -->
+        <!-- Slide Bìa/Kết thúc -->
+        <section class="slide relative bg-gradient-to-br from-blue-700 to-blue-900 flex justify-center items-center">
+            <!-- LỚP LOGO (OVERLAY) -->
+            <img class="absolute top-[150px] left-1/2 -translate-x-1/2 h-12 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg">
+            
+            <!-- LỚP NỘI DUNG (KHUNG VIỀN) -->
+            <div class="w-[calc(100%-100px)] h-[calc(100%-100px)] border-4 border-white rounded-xl flex flex-col justify-center items-center p-8">
+                <!-- TOÀN BỘ NỘI DUNG VĂN BẢN (TIÊU ĐỀ, TÊN...) ĐẶT Ở ĐÂY -->
+                <h1 class="text-6xl font-bold text-white">Thiết lập Thuế VAT</h1>
+                <p class="mt-4 text-2xl text-blue-200">(Ngành Bán buôn, Bán lẻ)</p>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper text-left w-full max-w-5xl">
+                <h2 class="text-4xl font-bold text-blue-800 mb-8">I. Giới thiệu chung</h2>
+                <ul class="list-disc list-inside text-2xl text-gray-700 space-y-4">
+                    <li>Thuế VAT là thuế tính trên giá trị tăng thêm của hàng hóa, dịch vụ.</li>
+                    <li>KiotViet ra mắt tính năng Thuế VAT để thiết lập, quản lý và áp dụng các mức thuế suất một cách tự động và chính xác.</li>
+                    <li>Hỗ trợ cả hai phương pháp: <strong>Khấu trừ</strong> và <strong>Trực tiếp</strong>.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <h2 class="text-4xl font-bold text-blue-800 mb-12">Lợi ích nổi bật của tính năng Thuế VAT</h2>
+                <div class="grid grid-cols-3 gap-8 w-full max-w-6xl">
+                    <div class="bg-blue-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
+                        <i class="fa-solid fa-scale-balanced text-5xl text-blue-600 mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-blue-900 mb-2">Tuân thủ pháp luật</h3>
+                        <p class="text-lg text-gray-700">Giúp áp dụng thuế chính xác, tránh rủi ro pháp lý và luôn được cập nhật theo quy định mới.</p>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
+                        <i class="fa-solid fa-calculator text-5xl text-green-600 mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-green-900 mb-2">Chính xác & hiệu quả</h3>
+                        <p class="text-lg text-gray-700">Tự động tính thuế cho cả bán hàng và nhập hàng, hỗ trợ nhiều mức thuế trên một hóa đơn.</p>
+                    </div>
+                    <div class="bg-purple-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
+                        <i class="fa-solid fa-gears text-5xl text-purple-600 mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-purple-900 mb-2">Tiết kiệm thời gian</h3>
+                        <p class="text-lg text-gray-700">Dữ liệu tính thuế được tích hợp trực tiếp với hệ thống Hóa đơn điện tử và Tờ khai thuế.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <h2 class="text-4xl font-bold text-blue-800 mb-10">Nội dung chính</h2>
+                <div class="w-full max-w-6xl grid grid-cols-2 gap-8 text-left">
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-4">1. Giới thiệu & Phân biệt</h3>
+                        <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
+                            <li>Tổng quan tính năng</li>
+                            <li>Phương pháp Trực tiếp</li>
+                            <li>Phương pháp Khấu trừ</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-4">2. Hướng dẫn Phương pháp Trực tiếp</h3>
+                        <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
+                            <li>Thiết lập quản lý thuế</li>
+                            <li>Quản lý thuế suất trên hàng hóa</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg col-span-2">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-4">3. Hướng dẫn Phương pháp Khấu trừ</h3>
+                        <ul class="list-disc list-inside text-lg text-gray-700 space-y-2 grid grid-cols-2">
+                            <li>Thiết lập quản lý thuế</li>
+                            <li>Quản lý thuế suất trên hàng hóa</li>
+                            <li>Áp dụng thuế khi nhập hàng</li>
+                            <li>Quản lý giá bán sau thuế</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper w-full max-w-6xl">
+                <h2 class="text-4xl font-bold text-blue-800 mb-10">II. Phân biệt các Phương pháp tính thuế</h2>
+                <div class="grid grid-cols-2 gap-8 w-full text-left">
+                    <div class="bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
+                        <h3 class="text-2xl font-bold text-blue-900 mb-4">Phương pháp Trực tiếp</h3>
+                        <p class="mb-2"><strong>Đối tượng:</strong> Hộ kinh doanh, cá nhân kinh doanh.</p>
+                        <p class="mb-2"><strong>Cách tính:</strong> Thuế VAT = Tỷ lệ % x Doanh thu.</p>
+                        <p><strong>Đặc điểm:</strong> Đơn giản, không cần quản lý VAT đầu vào.</p>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg border-2 border-green-200">
+                        <h3 class="text-2xl font-bold text-green-900 mb-4">Phương pháp Khấu trừ</h3>
+                        <p class="mb-2"><strong>Đối tượng:</strong> Doanh nghiệp (TNHH, cổ phần...).</p>
+                        <p class="mb-2"><strong>Cách tính:</strong> Thuế VAT = VAT đầu ra - VAT đầu vào.</p>
+                        <p><strong>Đặc điểm:</strong> Yêu cầu quản lý chi tiết cả VAT đầu vào và đầu ra.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <h2 class="text-5xl font-bold text-blue-800">III. Phương pháp Trực tiếp</h2>
+                <br><p class="mt-4 text-2xl text-gray-600">Hướng dẫn chi tiết quy trình thiết lập và sử dụng thuế VAT cho các đơn vị áp dụng phương pháp tính thuế trực tiếp trên doanh thu.</p>
+            </div>
+        </section>
+        
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper text-left w-full max-w-5xl">
+                <h2 class="text-4xl font-bold text-blue-800 mb-6">1. Thiết lập quản lý thuế (Phương pháp Trực tiếp)</h2>
+                <br><p class="text-xl text-gray-700 mb-6"><strong>Tình huống:</strong> Hộ kinh doanh cần cài đặt KiotViet để tính thuế VAT theo phương pháp trực tiếp với tỷ lệ 1% trên doanh thu.</p>
+                <ol class="text-xl text-gray-700 space-y-3">
+                    <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">1</span><span>Vào <strong>Thiết lập &rarr; Thuế</strong>.</span></li>
+                    <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">2</span><span>Bật <strong>Thuế VAT &rarr;</strong> chọn phương pháp "<strong>Thuế trực tiếp</strong>".</span></li>
+                    <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">3</span><span>Tại "Tỷ lệ thuế mặc định", chọn mức <strong>1%</strong>.</span></li>
+                    <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">4</span><span>Tích chọn "Áp dụng giảm thuế" (nếu muốn).</span></li>
+                    <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">5</span><span>Nhấn "<strong>Lưu</strong>".</span></li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23104059/TLVAT_231025-1.png" class="h-[850px] w-auto object-contain" alt="Truy cập mục Thiết lập Thuế từ menu chính.">
+                <p class="mt-4 text-lg text-gray-600 italic">Truy cập mục Thiết lập Thuế từ menu chính.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23104111/TLVAT_231025-2.png" class="h-[850px] w-auto object-contain" alt="Màn hình cấu hình chi tiết cho phương pháp Thuế trực tiếp.">
+                <p class="mt-4 text-lg text-gray-600 italic">Màn hình cấu hình chi tiết cho phương pháp Thuế trực tiếp.</p>
+            </div>
+        </section>
+        
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper text-left w-full max-w-5xl">
+                <h2 class="text-4xl font-bold text-blue-800 mb-6">2. Quản lý thuế suất trên hàng hóa</h2>
+                <br><p class="text-xl text-gray-700 mb-6"><strong>Tình huống:</strong> Đảm bảo tất cả hàng hóa đều được áp dụng đúng tỷ lệ tính thuế là 1%.</p>
+                <ul class="list-disc list-inside text-xl text-gray-700 space-y-4">
+                    <li>Khi tạo mới/chỉnh sửa hàng hóa, hệ thống tự động gán tỷ lệ thuế đã thiết lập.</li>
+                    <li>Để thay đổi hàng loạt: Chọn các hàng hóa <strong>&rarr;</strong> nhấn 3 chấm <strong>&rarr;</strong> chọn <strong>"Đổi tỷ lệ tính thuế"</strong>.</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23104123/TLVAT_231025-3.png" class="h-[850px] w-auto object-contain" alt="Chọn chức năng 'Đổi tỷ lệ tính thuế' cho các hàng hóa đã chọn.">
+                <p class="mt-4 text-lg text-gray-600 italic">Chọn chức năng 'Đổi tỷ lệ tính thuế' cho các hàng hóa đã chọn.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23104136/TLVAT_231025-4.png" class="h-[850px] w-auto object-contain" alt="Cửa sổ chọn tỷ lệ tính thuế mới và xác nhận thay đổi.">
+                <p class="mt-4 text-lg text-gray-600 italic">Cửa sổ chọn tỷ lệ tính thuế mới và xác nhận thay đổi.</p>
+            </div>
+        </section>
+        
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper text-left w-full max-w-5xl">
+                <h2 class="text-4xl font-bold text-blue-800 mb-6">3. Ghi nhận dữ liệu bán hàng</h2>
+                <p class="text-2xl text-gray-700">Sau khi thiết lập, dữ liệu bán hàng đã sẵn sàng cho việc ghi nhận <strong>Hóa đơn điện tử</strong> và cập nhật <strong>Tờ khai thuế</strong>.</p>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <h2 class="text-5xl font-bold text-blue-800">IV. Phương pháp Khấu trừ</h2>
+                <br><p class="mt-4 text-2xl text-gray-600">Hướng dẫn chi tiết quy trình thiết lập và sử dụng thuế VAT cho các đơn vị áp dụng phương pháp tính thuế khấu trừ.</p>
+            </div>
+        </section>
+        
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper text-left w-full max-w-5xl">
+                <h2 class="text-4xl font-bold text-blue-800 mb-6">1. Thiết lập quản lý thuế (Phương pháp Khấu trừ)</h2>
+                <br><p class="text-xl text-gray-700 mb-6"><strong>Tình huống:</strong> Doanh nghiệp cần cài đặt KiotViet để tính thuế VAT theo phương pháp khấu trừ, với mức thuế suất phổ biến là 8%.</p>
+                <ul class="list-disc list-inside text-xl text-gray-700 space-y-3">
+                    <li>Vào <strong>Thiết lập &rarr; Thuế</strong>, bật <strong>Thuế VAT &rarr;</strong> chọn phương pháp "<strong>Thuế khấu trừ</strong>".</li>
+                    <li>Cấu hình "Áp dụng thuế khi bán hàng" (thuế suất mặc định 8%, loại giá bán...).</li>
+                    <li>Cấu hình "Áp dụng VAT cho nhập hàng".</li>
+                    <li>Nhấn "<strong>Lưu</strong>".</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23104149/TLVAT_231025-5.png" class="h-[850px] w-auto object-contain" alt="Truy cập mục Thiết lập Thuế.">
+                <p class="mt-4 text-lg text-gray-600 italic">Truy cập mục Thiết lập Thuế.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23104205/TLVAT_231025-6.png" class="h-[850px] w-auto object-contain" alt="Màn hình cấu hình chi tiết cho phương pháp Thuế khấu trừ.">
+                <p class="mt-4 text-lg text-gray-600 italic">Màn hình cấu hình chi tiết cho phương pháp Thuế khấu trừ.</p>
+            </div>
+        </section>
+        
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper text-left w-full max-w-5xl">
+                <h2 class="text-4xl font-bold text-blue-800 mb-6">2. Quản lý thuế suất trên hàng hóa</h2>
+                <br><p class="text-xl text-gray-700 mb-6"><strong>Tình huống:</strong> Gán đúng mức thuế cho từng sản phẩm (ví dụ: 8%, 10%, 5%).</p>
+                <ul class="list-disc list-inside text-xl text-gray-700 space-y-4">
+                    <li><strong>Cập nhật từng hàng hóa:</strong> Trong chi tiết sản phẩm, chọn lại mức "VAT hàng bán (%)".</li>
+                    <li><strong>Thay đổi hàng loạt:</strong> Chọn các hàng hóa <strong>&rarr;</strong> nhấn 3 chấm <strong>&rarr;</strong> chọn <strong>"Thay đổi mức thuế VAT"</strong>.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23104218/TLVAT_231025-7.png" class="h-[850px] w-auto object-contain" alt="Chỉnh sửa mức thuế VAT trong chi tiết một hàng hóa.">
+                <p class="mt-4 text-lg text-gray-600 italic">Chỉnh sửa mức thuế VAT trong chi tiết một hàng hóa.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23104230/TLVAT_231025-8.png" class="h-[850px] w-auto object-contain" alt="Chọn chức năng 'Thay đổi mức thuế VAT' hàng loạt.">
+                <p class="mt-4 text-lg text-gray-600 italic">Chọn chức năng 'Thay đổi mức thuế VAT' hàng loạt.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23104247/TLVAT_231025-9.png" class="h-[850px] w-auto object-contain" alt="Cửa sổ chọn mức thuế VAT hàng bán và hàng nhập mới.">
+                <p class="mt-4 text-lg text-gray-600 italic">Cửa sổ chọn mức thuế VAT hàng bán và hàng nhập mới.</p>
+            </div>
+        </section>
+        
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper text-left w-full max-w-5xl">
+                <h2 class="text-4xl font-bold text-blue-800 mb-6">3. Áp dụng thuế khi nhập hàng (VAT đầu vào)</h2>
+                <br><p class="text-xl text-gray-700 mb-6"><strong>Tình huống:</strong> Ghi nhận thuế VAT đầu vào khi nhập hàng từ nhà cung cấp.</p>
+                <ul class="list-disc list-inside text-xl text-gray-700 space-y-4">
+                    <li>Khi tạo phiếu <strong>Nhập hàng</strong>: Bật "<strong>VAT nhập hàng</strong>".</li>
+                    <li>Khi tạo phiếu <strong>Trả hàng nhập</strong>: Sử dụng nút "<strong>VAT hoàn lại</strong>".</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23104300/TLVAT_231025-10.png" class="h-[850px] w-auto object-contain" alt="Bật tùy chọn 'VAT nhập hàng' trên phiếu nhập hàng.">
+                <p class="mt-4 text-lg text-gray-600 italic">Bật tùy chọn 'VAT nhập hàng' trên phiếu nhập hàng.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23104318/TLVAT_231025-11.png" class="h-[850px] w-auto object-contain" alt="Tùy chọn 'VAT hoàn lại' trên phiếu trả hàng nhập.">
+                <p class="mt-4 text-lg text-gray-600 italic">Tùy chọn 'VAT hoàn lại' trên phiếu trả hàng nhập.</p>
+            </div>
+        </section>
+        
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper text-left w-full max-w-5xl">
+                <h2 class="text-4xl font-bold text-blue-800 mb-6">4. Quản lý giá bán sau thuế</h2>
+                <br><p class="text-xl text-gray-700 mb-6"><strong>Tình huống:</strong> Doanh nghiệp muốn niêm yết và giao dịch bằng giá cuối cùng đã bao gồm VAT.</p>
+                <ul class="list-disc list-inside text-xl text-gray-700 space-y-4">
+                    <li>Trong thiết lập Thuế, chọn "<strong>Giá bán là Giá sau thuế</strong>".</li>
+                    <li>Hệ thống sẽ tự động tính ngược giá trị trước thuế để đảm bảo báo cáo chính xác.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23104330/TLVAT_231025-12.png" class="h-[850px] w-auto object-contain" alt="Tùy chọn thiết lập 'Giá bán là Giá sau thuế'.">
+                <p class="mt-4 text-lg text-gray-600 italic">Tùy chọn thiết lập 'Giá bán là Giá sau thuế'.</p>
+            </div>
+        </section>
+        
+        <!-- Slide Bìa/Kết thúc -->
+        <section class="slide relative bg-gradient-to-br from-blue-700 to-blue-900 flex justify-center items-center">
+            <!-- LỚP LOGO (OVERLAY) -->
+            <img class="absolute top-[150px] left-1/2 -translate-x-1/2 h-12 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg">
+            
+            <!-- LỚP NỘI DUNG (KHUNG VIỀN) -->
+            <div class="w-[calc(100%-100px)] h-[calc(100%-100px)] border-4 border-white rounded-xl flex flex-col justify-center items-center p-8">
+                <!-- TOÀN BỘ NỘI DUNG VĂN BẢN (TIÊU ĐỀ, TÊN...) ĐẶT Ở ĐÂY -->
+                <h1 class="text-6xl font-bold text-white">Cảm ơn bạn đã theo dõi!</h1>
+                <p class="mt-4 text-2xl text-blue-200">Chúc bạn kinh doanh hiệu quả cùng KiotViet</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        function showSlide(index) {
+            slides.forEach((slide, i) => { slide.classList.toggle('active', i === index); });
+        }
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+            } else if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { nextSlide(); } 
+            else if (e.key === 'ArrowLeft') { prevSlide(); } 
+            else if (e.key.toLowerCase() === 'f') { toggleFullScreen(); }
+        });
+        if (totalSlides > 0) { showSlide(currentSlide); }
+    </script>
+</body>
+</html>
