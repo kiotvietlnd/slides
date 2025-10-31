@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài thuyết trình</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; }
+        .slide { display: none; width: 100%; height: 100%; padding: 0; box-sizing: border-box; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: absolute; top: 0; left: 0; transition: opacity 0.5s ease-in-out; }
+        .slide-content-wrapper { width: 100%; height: 100%; padding: 60px 80px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .slide.active { display: flex; }
+        .slide-container { width: 100%; height: 100%; position: relative; }
+        h1, h2, h3, h4, p, li, span { word-wrap: break-word; overflow-wrap: break-word; -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+    </style>
+</head>
+<body>
+    <div id="slide-container" class="slide-container">
+        <!-- SLIDES GO HERE -->
+        <!-- Slide Bìa/Kết thúc -->
+        <section class="slide relative bg-gradient-to-br from-blue-700 to-blue-900 flex justify-center items-center">
+            <!-- LỚP LOGO (OVERLAY) -->
+            <img class="absolute top-[150px] left-1/2 -translate-x-1/2 h-12 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg">
+            
+            <!-- LỚP NỘI DUNG (KHUNG VIỀN) -->
+            <div class="w-[calc(100%-100px)] h-[calc(100%-100px)] border-4 border-white rounded-xl flex flex-col justify-center items-center p-8">
+                <!-- TOÀN BỘ NỘI DUNG VĂN BẢN (TIÊU ĐỀ, TÊN...) ĐẶT Ở ĐÂY -->
+                <h1 class="text-6xl font-bold text-white text-center leading-tight">Quản lý Hóa đơn điện tử<br>trên KiotViet eInvoice</h1>
+                <p class="mt-4 text-2xl text-blue-200 text-center">(Ngành Bán buôn, Bán lẻ)</p>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">I. Giới thiệu chung</h2>
+                    <p class="mt-8 text-2xl text-gray-700 leading-relaxed">Sau khi phát hành HĐĐT từ KiotViet, toàn bộ nghiệp vụ quản lý, tra cứu, gửi và xử lý sai sót sẽ được thực hiện trên nền tảng chuyên biệt: KiotViet Hóa đơn điện tử (KV-EINVOICE).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-6xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800 mb-12">Lợi ích nổi bật</h2>
+                    <div class="grid grid-cols-3 gap-8">
+                        <div class="bg-blue-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
+                            <i class="fa-solid fa-folder-tree text-5xl text-blue-600 mb-4"></i>
+                            <h3 class="text-2xl font-semibold text-blue-900 mb-2">Quản lý tập trung</h3>
+                            <p class="text-lg text-gray-700">Một giao diện duy nhất để xem, tìm kiếm, tải và gửi hàng loạt hóa đơn.</p>
+                        </div>
+                        <div class="bg-green-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
+                            <i class="fa-solid fa-screwdriver-wrench text-5xl text-green-600 mb-4"></i>
+                            <h3 class="text-2xl font-semibold text-green-900 mb-2">Đầy đủ nghiệp vụ</h3>
+                            <p class="text-lg text-gray-700">Tích hợp đầy đủ nghiệp vụ điều chỉnh, thay thế hóa đơn theo đúng quy định.</p>
+                        </div>
+                        <div class="bg-purple-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
+                            <i class="fa-solid fa-robot text-5xl text-purple-600 mb-4"></i>
+                            <h3 class="text-2xl font-semibold text-purple-900 mb-2">Tiết kiệm thời gian</h3>
+                            <p class="text-lg text-gray-700">Cho phép thiết lập gửi email và gửi dữ liệu lên Cơ quan Thuế tự động.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800 mb-10">Nội dung chính</h2>
+                    <div class="grid grid-cols-2 gap-8">
+                        <div class="bg-gray-100 p-6 rounded-lg">
+                            <h3 class="text-2xl font-bold text-blue-700 mb-3">1. Quản lý & Lập Hóa đơn</h3>
+                            <ul class="list-disc list-inside text-lg text-gray-700">
+                                <li>Xem danh sách</li>
+                                <li>Chỉnh sửa & Phát hành HĐ nháp</li>
+                                <li>Xóa HĐ nháp</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-100 p-6 rounded-lg">
+                            <h3 class="text-2xl font-bold text-blue-700 mb-3">2. Gửi Hóa đơn</h3>
+                            <ul class="list-disc list-inside text-lg text-gray-700">
+                                <li>Gửi email cho khách hàng</li>
+                                <li>Gửi dữ liệu lên Cơ quan Thuế</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-100 p-6 rounded-lg col-span-2">
+                            <h3 class="text-2xl font-bold text-blue-700 mb-3">3. Xử lý Hóa đơn sai sót</h3>
+                            <ul class="list-disc list-inside text-lg text-gray-700 grid grid-cols-2">
+                                <li>Gửi thông báo sai sót</li>
+                                <li>Lập hóa đơn thay thế</li>
+                                <li>Lập hóa đơn điều chỉnh</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-5xl font-bold text-blue-800">II. Quản lý và Lập Hóa đơn</h2>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">II. Quản lý và Lập Hóa đơn</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>1.1. Xem danh sách hóa đơn đã phát hành</p>
+                    <ol class="mt-8 text-2xl text-gray-700 space-y-6">
+                        <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-10 w-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">1</span><span>Đăng nhập vào trang quản trị KV-EINVOICE.</span></li>
+                        <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-10 w-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</span><span>Chọn <strong>Lập h&oacute;a đơn</strong> và chọn loại h&oacute;a đơn cần xem.</span></li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020248/QLHDDT-1.png" class="h-[850px] w-auto object-contain" alt="Truy cập danh sách hóa đơn từ menu 'Lập hóa đơn'.">
+                <p class="mt-4 text-lg text-gray-600 italic">Truy cập danh sách hóa đơn từ menu "Lập hóa đơn".</p>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">II. Quản lý và Lập Hóa đơn</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>Các thao tác trên danh sách</p>
+                    <p class="mt-8 text-2xl text-gray-700"><strong>Tìm kiếm và lọc:</strong> Sử dụng các bộ lọc để tìm kiếm hóa đơn.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020312/QLHDDT-2.png" class="h-[850px] w-auto object-contain" alt="Sử dụng bộ lọc để tìm kiếm hóa đơn theo nhiều tiêu chí.">
+                <p class="mt-4 text-lg text-gray-600 italic">Sử dụng bộ lọc để tìm kiếm hóa đơn theo nhiều tiêu chí.</p>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">II. Quản lý và Lập Hóa đơn</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>Xem trạng thái hóa đơn</p>
+                    <ul class="mt-8 text-xl text-gray-700 space-y-4">
+                        <li><span class="font-semibold text-orange-600">Màu cam:</span> Hóa đơn nháp, có thể sửa hoặc xóa.</li>
+                        <li><span class="font-semibold text-black">Màu đen:</span> Hóa đơn đã ký số hợp lệ, không thể sửa/xóa trực tiếp.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020324/QLHDDT-3.png" class="h-[850px] w-auto object-contain" alt="Phân biệt trạng thái hóa đơn qua màu sắc.">
+                <p class="mt-4 text-lg text-gray-600 italic">Phân biệt trạng thái hóa đơn qua màu sắc.</p>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">II. Quản lý và Lập Hóa đơn</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>Xem và tải hàng loạt</p>
+                    <ul class="mt-8 text-xl text-gray-700 space-y-4">
+                        <li><strong>Xem nhiều h&oacute;a đơn:</strong> Tích chọn &rarr; <strong>Mở rộng</strong> &rarr; <strong>Xem h&oacute;a đơn</strong>.</li>
+                        <li><strong>Tải h&oacute;a đơn:</strong> Tích chọn &rarr; <strong>Mở rộng</strong> &rarr; <strong>Tải h&oacute;a đơn</strong> (PDF/XML).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24022243/QLHDDT-c-1.png" class="h-[850px] w-auto object-contain" alt="Xem nhiều hóa đơn cùng lúc.">
+                <p class="mt-4 text-lg text-gray-600 italic">Xem nhiều hóa đơn cùng lúc.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020413/QLHDDT-5.png" class="h-[850px] w-auto object-contain" alt="Tải hàng loạt hóa đơn về máy.">
+                <p class="mt-4 text-lg text-gray-600 italic">Tải hàng loạt hóa đơn về máy.</p>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">II. Quản lý và Lập Hóa đơn</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>1.2. Chỉnh sửa và phát hành hóa đơn nháp</p>
+                     <ul class="mt-8 text-xl text-gray-700 space-y-4">
+                        <li><strong>Chỉnh sửa:</strong> Nhấn biểu tượng cây bút tại hóa đơn "Ghi tạm".</li>
+                        <li><strong>Phát hành:</strong> Từ chi tiết hóa đơn nháp, nhấn "Xuất hóa đơn".</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020426/QLHDDT-6.png" class="h-[850px] w-auto object-contain" alt="Nhấn biểu tượng cây bút để sửa hóa đơn nháp.">
+                <p class="mt-4 text-lg text-gray-600 italic">Nhấn biểu tượng cây bút để sửa hóa đơn nháp.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020440/QLHDDT-7.png" class="h-[850px] w-auto object-contain" alt="Chỉnh sửa thông tin và ghi tạm lại.">
+                <p class="mt-4 text-lg text-gray-600 italic">Chỉnh sửa thông tin và ghi tạm lại.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020454/QLHDDT-8.png" class="h-[850px] w-auto object-contain" alt="Nhấn 'Xuất hóa đơn' để bắt đầu phát hành.">
+                <p class="mt-4 text-lg text-gray-600 italic">Nhấn "Xuất hóa đơn" để bắt đầu phát hành.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020508/QLHDDT-9.png" class="h-[850px] w-auto object-contain" alt="Xem trước và đồng ý phát hành hóa đơn.">
+                <p class="mt-4 text-lg text-gray-600 italic">Xem trước và đồng ý phát hành hóa đơn.</p>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                 <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">II. Quản lý và Lập Hóa đơn</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>1.3. Xóa hóa đơn nháp</p>
+                    <p class="mt-8 text-2xl text-gray-700">Chỉ có thể xóa hóa đơn "Ghi tạm" bằng cách nhấn biểu tượng thùng rác hoặc xóa hàng loạt.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020526/QLHDDT-10.png" class="h-[850px] w-auto object-contain" alt="Thao tác xóa hàng loạt hóa đơn nháp.">
+                <p class="mt-4 text-lg text-gray-600 italic">Thao tác xóa hàng loạt hóa đơn nháp.</p>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                 <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">III. Gửi hóa đơn</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>2.1. Gửi email cho khách hàng (Thủ công)</p>
+                    <p class="mt-8 text-2xl text-gray-700"><strong>Thao tác:</strong> Tích chọn hóa đơn &rarr; <strong>Mở rộng</strong> &rarr; <strong>Gửi h&oacute;a đơn</strong>.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020540/QLHDDT-11.png" class="h-[850px] w-auto object-contain" alt="Chọn chức năng Gửi hóa đơn.">
+                <p class="mt-4 text-lg text-gray-600 italic">Chọn chức năng Gửi hóa đơn.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020601/QLHDDT-12.png" class="h-[850px] w-auto object-contain" alt="Nhập địa chỉ email và nhấn Gửi.">
+                <p class="mt-4 text-lg text-gray-600 italic">Nhập địa chỉ email và nhấn Gửi.</p>
+            </div>
+        </section>
+        
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">III. Gửi hóa đơn</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>Thiết lập gửi email tự động (kèm file XML)</p>
+                     <ol class="mt-8 text-xl text-gray-700 space-y-4">
+                        <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">1</span><span>Vào <strong>Quản trị - Hệ thống &rarr; Tham số hệ thống &rarr; Cấu h&igrave;nh Email</strong>.</span></li>
+                        <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">2</span><span><strong>TẮT</strong> "Cấu hình Email".</span></li>
+                        <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">3</span><span><strong>BẬT</strong> "Cấu hình tự động gửi email cho bên mua hàng".</span></li>
+                         <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">4</span><span><strong>BẬT</strong> "Email gửi hóa đơn có file đính kèm không phải file nén".</span></li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020618/QLHDDT-13.png" class="h-[850px] w-auto object-contain" alt="Truy cập Cấu hình Email.">
+                <p class="mt-4 text-lg text-gray-600 italic">Truy cập Cấu hình Email.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020638/QLHDDT-14.png" class="h-[850px] w-auto object-contain" alt="Tắt cấu hình email mặc định.">
+                <p class="mt-4 text-lg text-gray-600 italic">Tắt cấu hình email mặc định.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020652/QLHDDT-15.png" class="h-[850px] w-auto object-contain" alt="Bật cấu hình tự động gửi email.">
+                <p class="mt-4 text-lg text-gray-600 italic">Bật cấu hình tự động gửi email.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020705/QLHDDT-16.png" class="h-[850px] w-auto object-contain" alt="Bật tùy chọn gửi file XML riêng lẻ.">
+                <p class="mt-4 text-lg text-gray-600 italic">Bật tùy chọn gửi file XML riêng lẻ.</p>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">III. Gửi hóa đơn</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>2.2. Gửi dữ liệu sang Cơ quan Thuế</p>
+                    <p class="mt-8 text-2xl text-gray-700">Vào <strong>Tham số hệ thống &rarr; H&oacute;a đơn khởi tạo từ MTT</strong> để chọn thời điểm gửi: Tự động gửi ngay, Không tự động gửi, hoặc Gửi theo lịch.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020718/QLHDDT-17.png" class="h-[850px] w-auto object-contain" alt="Truy cập thiết lập Hóa đơn khởi tạo từ MTT.">
+                <p class="mt-4 text-lg text-gray-600 italic">Truy cập thiết lập Hóa đơn khởi tạo từ MTT.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020741/QLHDDT-18.png" class="h-[850px] w-auto object-contain" alt="Chọn tùy chọn thời điểm gửi dữ liệu lên Cơ quan Thuế.">
+                <p class="mt-4 text-lg text-gray-600 italic">Chọn tùy chọn thời điểm gửi dữ liệu lên Cơ quan Thuế.</p>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">IV. Xử lý Hóa đơn sai sót</h2>
+                    <p class="mt-8 text-2xl text-gray-700">Để xử lý, bạn vào menu <strong>Xử lý h&oacute;a đơn từ MTT</strong>.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020754/QLHDDT-19.png" class="h-[850px] w-auto object-contain" alt="Truy cập menu 'Xử lý hóa đơn từ MTT'.">
+                <p class="mt-4 text-lg text-gray-600 italic">Truy cập menu "Xử lý hóa đơn từ MTT".</p>
+            </div>
+        </section>
+        
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">IV. Xử lý Hóa đơn sai sót</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>3.1. Gửi thông báo sai sót cho CQT</p>
+                    <p class="mt-8 text-2xl text-gray-700"><strong>Thao tác:</strong> Tích chọn h&oacute;a đơn &rarr; nhấn <strong>B&aacute;o CQT HĐ sai</strong> &rarr; kiểm tra th&ocirc;ng tin v&agrave; nhấn <strong>Gửi th&ocirc;ng b&aacute;o cho CQT</strong>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020812/QLHDDT-20.png" class="h-[850px] w-auto object-contain" alt="Chọn chức năng Báo CQT HĐ sai.">
+                <p class="mt-4 text-lg text-gray-600 italic">Chọn chức năng Báo CQT HĐ sai.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020826/QLHDDT-21.png" class="h-[850px] w-auto object-contain" alt="Gửi thông báo sai sót cho CQT.">
+                <p class="mt-4 text-lg text-gray-600 italic">Gửi thông báo sai sót cho CQT.</p>
+            </div>
+        </section>
+        
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">IV. Xử lý Hóa đơn sai sót</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>3.2. Lập hóa đơn thay thế</p>
+                    <p class="mt-8 text-2xl text-gray-700"><strong>Thao tác:</strong> Tích chọn h&oacute;a đơn &rarr; nhấn <strong>Thay thế</strong>.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020842/QLHDDT-22.png" class="h-[850px] w-auto object-contain" alt="Chọn chức năng Thay thế hóa đơn.">
+                <p class="mt-4 text-lg text-gray-600 italic">Chọn chức năng Thay thế hóa đơn.</p>
+            </div>
+        </section>
+        
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">IV. Xử lý Hóa đơn sai sót</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>Quy trình thay thế</p>
+                     <ol class="mt-8 text-xl text-gray-700 space-y-4">
+                        <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">1</span><span><strong>Lập biên bản:</strong> Điền nội dung và nhấn <strong>K&yacute; v&agrave; gửi</strong>.</span></li>
+                        <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">2</span><span><strong>Lập HĐ thay thế:</strong> Điền đầy đủ nội dung đúng và nhấn <strong>Xuất h&oacute;a đơn</strong>.</span></li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24063452/hdsd-kiotviet-retail-google-docs-16-1.png" class="h-[850px] w-auto object-contain" alt="Màn hình quy trình Lập biên bản và Lập HĐ thay thế.">
+                <p class="mt-4 text-lg text-gray-600 italic">Màn hình quy trình Lập biên bản và Lập HĐ thay thế.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24063438/hdsd-kiotviet-retail-google-docs-17-1.png" class="h-[850px] w-auto object-contain" alt="Giao diện Lập biên bản thay thế.">
+                <p class="mt-4 text-lg text-gray-600 italic">Giao diện Lập biên bản thay thế.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020908/QLHDDT-24.png" class="h-[850px] w-auto object-contain" alt="Giao diện Lập hóa đơn thay thế mới.">
+                <p class="mt-4 text-lg text-gray-600 italic">Giao diện Lập hóa đơn thay thế mới.</p>
+            </div>
+        </section>
+        
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">IV. Xử lý Hóa đơn sai sót</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>3.3. Lập hóa đơn điều chỉnh</p>
+                    <p class="mt-8 text-2xl text-gray-700"><strong>Thao tác:</strong> Tích chọn h&oacute;a đơn &rarr; nhấn <strong>Điều chỉnh</strong>.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020920/QLHDDT-25.png" class="h-[850px] w-auto object-contain" alt="Chọn chức năng Điều chỉnh hóa đơn.">
+                <p class="mt-4 text-lg text-gray-600 italic">Chọn chức năng Điều chỉnh hóa đơn.</p>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">IV. Xử lý Hóa đơn sai sót</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>Quy trình điều chỉnh</p>
+                    <ol class="mt-8 text-xl text-gray-700 space-y-4">
+                        <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">1</span><span><strong>Lập biên bản:</strong> Điền nội dung và nhấn <strong>K&yacute; v&agrave; gửi</strong>.</span></li>
+                        <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">2</span><span><strong>Lập HĐ điều chỉnh:</strong> Nhập giá trị <strong>chênh lệch</strong> (tăng là số dương, giảm là số âm) và nhấn <strong>Xuất h&oacute;a đơn</strong>.</span></li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24063737/hdsd-kiotviet-retail-google-docs-18-1.png" class="h-[850px] w-auto object-contain" alt="Màn hình quy trình Lập biên bản và Lập HĐ điều chỉnh.">
+                <p class="mt-4 text-lg text-gray-600 italic">Màn hình quy trình Lập biên bản và Lập HĐ điều chỉnh.</p>
+            </div>
+        </section>
+        
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24063718/hdsd-kiotviet-retail-google-docs-19.png" class="h-[850px] w-auto object-contain" alt="Giao diện Lập biên bản điều chỉnh.">
+                <p class="mt-4 text-lg text-gray-600 italic">Giao diện Lập biên bản điều chỉnh.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020950/QLHDDT-27.png" class="h-[850px] w-auto object-contain" alt="Giao diện Lập hóa đơn điều chỉnh với giá trị chênh lệch.">
+                <p class="mt-4 text-lg text-gray-600 italic">Giao diện Lập hóa đơn điều chỉnh với giá trị chênh lệch.</p>
+            </div>
+        </section>
+
+        <!-- Slide Bìa/Kết thúc -->
+        <section class="slide relative bg-gradient-to-br from-blue-700 to-blue-900 flex justify-center items-center">
+            <!-- LỚP LOGO (OVERLAY) -->
+            <img class="absolute top-[150px] left-1/2 -translate-x-1/2 h-12 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg">
+            
+            <!-- LỚP NỘI DUNG (KHUNG VIỀN) -->
+            <div class="w-[calc(100%-100px)] h-[calc(100%-100px)] border-4 border-white rounded-xl flex flex-col justify-center items-center p-8">
+                <!-- TOÀN BỘ NỘI DUNG VĂN BẢN (TIÊU ĐỀ, TÊN...) ĐẶT Ở ĐÂY -->
+                <h1 class="text-6xl font-bold text-white text-center">Cảm ơn bạn đã theo dõi!</h1>
+                <p class="mt-4 text-2xl text-blue-200 text-center">Chúc bạn kinh doanh hiệu quả cùng KiotViet</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        function showSlide(index) {
+            slides.forEach((slide, i) => { slide.classList.toggle('active', i === index); });
+        }
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+            } else if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { nextSlide(); } 
+            else if (e.key === 'ArrowLeft') { prevSlide(); } 
+            else if (e.key.toLowerCase() === 'f') { toggleFullScreen(); }
+        });
+        if (totalSlides > 0) { showSlide(currentSlide); }
+    </script>
+</body>
+</html>
