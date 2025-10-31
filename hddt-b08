@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài thuyết trình</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; }
+        .slide { display: none; width: 100%; height: 100%; padding: 0; box-sizing: border-box; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: absolute; top: 0; left: 0; transition: opacity 0.5s ease-in-out; }
+        .slide-content-wrapper { width: 100%; height: 100%; padding: 60px 80px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .slide.active { display: flex; }
+        .slide-container { width: 100%; height: 100%; position: relative; }
+        h1, h2, h3, h4, p, li, span { word-wrap: break-word; overflow-wrap: break-word; -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+    </style>
+</head>
+<body>
+    <div id="slide-container" class="slide-container">
+        <!-- SLIDES GO HERE -->
+        <!-- Slide Bìa/Kết thúc -->
+        <section class="slide relative bg-gradient-to-br from-blue-700 to-blue-900 flex justify-center items-center">
+            <!-- LỚP LOGO (OVERLAY) -->
+            <img class="absolute top-[150px] left-1/2 -translate-x-1/2 h-12 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg">
+            
+            <!-- LỚP NỘI DUNG (KHUNG VIỀN) -->
+            <div class="w-[calc(100%-100px)] h-[calc(100%-100px)] border-4 border-white rounded-xl flex flex-col justify-center items-center p-8">
+                <!-- TOÀN BỘ NỘI DUNG VĂN BẢN (TIÊU ĐỀ, TÊN...) ĐẶT Ở ĐÂY -->
+                <h1 class="text-6xl font-bold text-white text-center leading-tight">Phát hành Hóa đơn điện tử<br>trên KiotViet</h1>
+                <p class="mt-4 text-2xl text-blue-200 text-center">(Ngành Bán buôn, Bán lẻ)</p>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">I. Giới thiệu chung</h2>
+                    <p class="mt-8 text-2xl text-gray-700 leading-relaxed">Tính năng này cho phép phát hành HĐĐT khởi tạo từ máy tính tiền, kết nối trực tiếp với các nhà cung cấp lớn (KiotViet, MISA, VIETTEL...), giúp quy trình bán hàng và xuất hóa đơn trở nên liền mạch, hiệu quả.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                 <div class="w-full max-w-6xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800 mb-12">Lợi ích nổi bật</h2>
+                    <div class="grid grid-cols-3 gap-8">
+                        <div class="bg-blue-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
+                            <i class="fa-solid fa-clock text-5xl text-blue-600 mb-4"></i>
+                            <h3 class="text-2xl font-semibold text-blue-900 mb-2">Chủ động & Linh hoạt</h3>
+                            <p class="text-lg text-gray-700">Giúp chủ cửa hàng chủ động lập hoặc xử lý hóa đơn ngay khi có giao dịch.</p>
+                        </div>
+                        <div class="bg-green-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
+                            <i class="fa-solid fa-bolt text-5xl text-green-600 mb-4"></i>
+                            <h3 class="text-2xl font-semibold text-green-900 mb-2">Xử lý triệt để độ trễ</h3>
+                            <p class="text-lg text-gray-700">Đảm bảo tính tức thời giữa lúc thanh toán và thời điểm lập hóa đơn.</p>
+                        </div>
+                        <div class="bg-purple-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
+                            <i class="fa-solid fa-computer-mouse text-5xl text-purple-600 mb-4"></i>
+                            <h3 class="text-2xl font-semibold text-purple-900 mb-2">Thao tác đơn giản</h3>
+                            <p class="text-lg text-gray-700">Nhân viên dễ dàng phát hành HĐĐT từ máy tính tiền mà không cần chữ ký số trên từng hóa đơn.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800 mb-10">Nội dung chính</h2>
+                    <div class="grid grid-cols-2 gap-8">
+                        <div class="bg-gray-100 p-6 rounded-lg">
+                            <h3 class="text-2xl font-bold text-blue-700 mb-3">1. Giới thiệu chung</h3>
+                            <p class="text-lg text-gray-700">Tổng quan & Lợi ích</p>
+                        </div>
+                        <div class="bg-gray-100 p-6 rounded-lg">
+                            <h3 class="text-2xl font-bold text-blue-700 mb-3">2. Thao tác trên Web</h3>
+                            <ul class="list-disc list-inside text-lg text-gray-700">
+                                <li>Phát hành tự động</li>
+                                <li>Phát hành hàng loạt & Nâng cao</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-100 p-6 rounded-lg">
+                            <h3 class="text-2xl font-bold text-blue-700 mb-3">3. Thao tác trên Điện thoại</h3>
+                            <p class="text-lg text-gray-700">Phát hành tự động & hàng loạt</p>
+                        </div>
+                        <div class="bg-gray-100 p-6 rounded-lg">
+                            <h3 class="text-2xl font-bold text-blue-700 mb-3">4. Thao tác trên Máy POS</h3>
+                            <p class="text-lg text-gray-700">Phát hành tự động</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">II. Thao tác trên Giao diện Web</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>1. Phát hành HĐĐT tự động tại màn hình Bán hàng</p>
+                    <p class="mt-6 text-xl text-gray-700"><strong>Tình huống:</strong> Muốn hệ thống tự động phát hành HĐĐT cho khách ngay sau khi thanh toán thành công.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">II. Thao tác trên Giao diện Web</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>Điều kiện cần thiết</p>
+                    <ol class="mt-8 text-xl text-gray-700 space-y-4">
+                        <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">1</span><span>Bật tùy chọn "Phát hành HĐĐT ngay trên Màn hình bán hàng" trong Thiết lập.</span></li>
+                        <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">2</span><span>Tài khoản được cấp quyền "Phát hành hóa đơn điện tử".</span></li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23075535/PHHDT-1.png" class="h-[850px] w-auto object-contain" alt="Bật tùy chọn 'Phát hành HĐĐT ngay trên Màn hình bán hàng'.">
+                <p class="mt-4 text-lg text-gray-600 italic">Bật tùy chọn "Phát hành HĐĐT ngay trên Màn hình bán hàng".</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23075547/PHHDT-2.png" class="h-[850px] w-auto object-contain" alt="Phân quyền 'Phát hành hóa đơn điện tử' cho người dùng.">
+                <p class="mt-4 text-lg text-gray-600 italic">Phân quyền "Phát hành hóa đơn điện tử" cho người dùng.</p>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">II. Thao tác trên Giao diện Web</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>Quy trình phát hành tự động</p>
+                    <ol class="mt-8 text-xl text-gray-700 space-y-4">
+                        <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">1</span><span>Trên màn hình Bán hàng, bật chế độ "Tự động phát hành".</span></li>
+                        <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">2</span><span>Thực hiện thanh toán. Hệ thống sẽ tự động gửi thông tin để phát hành HĐĐT.</span></li>
+                        <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">3</span><span>Theo dõi trạng thái (Đang xử lý, Đã phát hành, Lỗi) qua pop-up ở góc màn hình.</span></li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23075559/PHHDT-3.png" class="h-[850px] w-auto object-contain" alt="Bật chế độ 'Tự động phát hành' trên màn hình Bán hàng.">
+                <p class="mt-4 text-lg text-gray-600 italic">Bật chế độ "Tự động phát hành" trên màn hình Bán hàng.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23101608/PHHDDT_231025.png" class="h-[850px] w-auto object-contain" alt="Pop-up thông báo trạng thái 'Đang xử lý'.">
+                <p class="mt-4 text-lg text-gray-600 italic">Pop-up thông báo trạng thái "Đang xử lý".</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23101636/PHHDDT_23102502.png" class="h-[850px] w-auto object-contain" alt="Pop-up thông báo trạng thái 'Đã phát hành' với các tùy chọn In hoặc Xem chi tiết.">
+                <p class="mt-4 text-lg text-gray-600 italic">Pop-up thông báo trạng thái "Đã phát hành" với các tùy chọn In hoặc Xem chi tiết.</p>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">II. Thao tác trên Giao diện Web</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>2. Phát hành hoặc Chuyển HĐĐT hàng loạt</p>
+                    <ol class="mt-8 text-xl text-gray-700 space-y-4">
+                        <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">1</span><span>Truy cập <strong>Đơn hàng &rarr; Hóa đơn</strong>.</span></li>
+                        <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">2</span><span>Tích chọn các hóa đơn cần xử lý.</span></li>
+                        <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">3</span><span>Nhấn vào menu 3 chấm và chọn "Chuyển" hoặc "Phát hành HĐĐT".</span></li>
+                         <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">4</span><span>Xác nhận thao tác.</span></li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23075625/PHHDT-5.png" class="h-[850px] w-auto object-contain" alt="Truy cập danh sách hóa đơn tại trang Quản lý.">
+                <p class="mt-4 text-lg text-gray-600 italic">Truy cập danh sách hóa đơn tại trang Quản lý.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23075642/PHHDT-6.png" class="h-[850px] w-auto object-contain" alt="Tích chọn các hóa đơn và chọn thao tác hàng loạt.">
+                <p class="mt-4 text-lg text-gray-600 italic">Tích chọn các hóa đơn và chọn thao tác hàng loạt.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23075657/PHHDT-7.png" class="h-[850px] w-auto object-contain" alt="Xác nhận thao tác 'Phát hành' hàng loạt.">
+                <p class="mt-4 text-lg text-gray-600 italic">Xác nhận thao tác "Phát hành" hàng loạt.</p>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">III. Theo dõi và Tra cứu HĐĐT (Nâng cao)</h2>
+                    <ul class="mt-8 list-disc list-inside text-xl text-gray-700 space-y-4">
+                        <li><strong>Theo dõi trạng thái:</strong> Cột "Trạng thái HĐĐT" trong danh sách hóa đơn sẽ cập nhật tình trạng (Đã chuyển, Đã phát hành, Lỗi).</li>
+                        <li><strong>Xem và tra cứu:</strong> Trong chi tiết hóa đơn, bạn có thể "Xem HĐĐT" (tải PDF/in) hoặc lấy "Mã tra cứu HĐĐT".</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23075709/PHHDT-8.png" class="h-[850px] w-auto object-contain" alt="Cột 'Trạng thái HĐĐT' giúp theo dõi tình trạng hóa đơn.">
+                <p class="mt-4 text-lg text-gray-600 italic">Cột "Trạng thái HĐĐT" giúp theo dõi tình trạng hóa đơn.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23075727/PHHDT-9.png" class="h-[850px] w-auto object-contain" alt="Các tùy chọn nâng cao trong chi tiết hóa đơn.">
+                <p class="mt-4 text-lg text-gray-600 italic">Các tùy chọn nâng cao trong chi tiết hóa đơn.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23075742/PHHDT-10.png" class="h-[850px] w-auto object-contain" alt="Xem bản thể hiện của hóa đơn điện tử.">
+                <p class="mt-4 text-lg text-gray-600 italic">Xem bản thể hiện của hóa đơn điện tử.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23075757/PHHDT-11.png" class="h-[850px] w-auto object-contain" alt="Lấy mã tra cứu và đường link để gửi cho khách hàng.">
+                <p class="mt-4 text-lg text-gray-600 italic">Lấy mã tra cứu và đường link để gửi cho khách hàng.</p>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">IV. Thao tác trên Điện thoại</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>1. Phát hành HĐĐT tự động</p>
+                    <p class="mt-6 text-xl text-gray-700"><strong>Thao tác:</strong> Tại màn hình thanh toán, tích chọn "Hóa đơn điện tử". Hoặc bật tùy chọn "Tự động phát hành HĐĐT" trong Thiết lập bán hàng để mặc định.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23075811/PHHDT-12.png" class="h-[850px] w-auto object-contain" alt="Tích chọn 'Hóa đơn điện tử' tại màn hình thanh toán.">
+                <p class="mt-4 text-lg text-gray-600 italic">Tích chọn "Hóa đơn điện tử" tại màn hình thanh toán.</p>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23075823/PHHDT-13.png" class="h-[850px] w-auto object-contain" alt="Bật tùy chọn tự động phát hành trong Thiết lập bán hàng.">
+                <p class="mt-4 text-lg text-gray-600 italic">Bật tùy chọn tự động phát hành trong Thiết lập bán hàng.</p>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">IV. Thao tác trên Điện thoại</h2>
+                    <p class="mt-4 text-3xl text-gray-600"><br>2. Phát hành HĐĐT hàng loạt</p>
+                    <p class="mt-6 text-xl text-gray-700"><strong>Thao tác:</strong> Vào menu <strong>Hóa đơn &rarr; 3 chấm &rarr; Phát hành HĐĐT</strong>. Tích chọn các hóa đơn (tối đa 50) và nhấn "Phát hành".</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23075834/PHHDT-14.png" class="h-[850px] w-auto object-contain" alt="Thao tác phát hành hàng loạt trên ứng dụng di động.">
+                <p class="mt-4 text-lg text-gray-600 italic">Thao tác phát hành hàng loạt trên ứng dụng di động.</p>
+            </div>
+        </section>
+
+        <!-- Slide Nội dung -->
+        <section class="slide relative bg-white">
+            <!-- LỚP LOGO -->
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl text-left">
+                    <h2 class="text-4xl font-bold text-blue-800">V. Thao tác trên Máy POS</h2>
+                    <p class="mt-8 text-xl text-gray-700"><strong>Tình huống:</strong> Phát hành HĐĐT tự động ngay khi thanh toán trên máy POS Android.</p>
+                    <p class="mt-4 text-xl text-gray-700"><strong>Thao tác:</strong> Tại màn hình thanh toán, bạn chỉ cần tích chọn "Hóa đơn điện tử" và mẫu in hợp lệ.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <!-- LỚP NỘI DUNG -->
+            <div class="slide-content-wrapper">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23075850/PHHDT-15.png" class="h-[850px] w-auto object-contain" alt="Tích chọn 'Hóa đơn điện tử' tại màn hình thanh toán trên máy POS.">
+                <p class="mt-4 text-lg text-gray-600 italic">Tích chọn "Hóa đơn điện tử" tại màn hình thanh toán trên máy POS.</p>
+            </div>
+        </section>
+
+        <!-- Slide Bìa/Kết thúc -->
+        <section class="slide relative bg-gradient-to-br from-blue-700 to-blue-900 flex justify-center items-center">
+            <!-- LỚP LOGO (OVERLAY) -->
+            <img class="absolute top-[150px] left-1/2 -translate-x-1/2 h-12 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg">
+            
+            <!-- LỚP NỘI DUNG (KHUNG VIỀN) -->
+            <div class="w-[calc(100%-100px)] h-[calc(100%-100px)] border-4 border-white rounded-xl flex flex-col justify-center items-center p-8">
+                <!-- TOÀN BỘ NỘI DUNG VĂN BẢN (TIÊU ĐỀ, TÊN...) ĐẶT Ở ĐÂY -->
+                <h1 class="text-6xl font-bold text-white text-center">Cảm ơn bạn đã theo dõi!</h1>
+                <p class="mt-4 text-2xl text-blue-200 text-center">Chúc bạn kinh doanh hiệu quả cùng KiotViet</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        function showSlide(index) {
+            slides.forEach((slide, i) => { slide.classList.toggle('active', i === index); });
+        }
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+            } else if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { nextSlide(); } 
+            else if (e.key === 'ArrowLeft') { prevSlide(); } 
+            else if (e.key.toLowerCase() === 'f') { toggleFullScreen(); }
+        });
+        if (totalSlides > 0) { showSlide(currentSlide); }
+    </script>
+</body>
+</html>
