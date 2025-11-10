@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài thuyết trình</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; }
+        .slide { display: none; width: 100%; height: 100%; padding: 0; box-sizing: border-box; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: absolute; top: 0; left: 0; transition: opacity 0.5s ease-in-out; }
+        .slide-content-wrapper { width: 100%; height: 100%; padding: 60px 80px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .slide.active { display: flex; }
+        .slide-container { width: 100%; height: 100%; position: relative; }
+        h1, h2, h3, h4, p, li, span { word-wrap: break-word; overflow-wrap: break-word; -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+    </style>
+</head>
+<body>
+    <div id="slide-container" class="slide-container">
+        <!-- SLIDES GO HERE -->
+        <!-- Slide 1: Bìa -->
+        <section class="slide relative bg-gradient-to-br from-blue-700 to-blue-900 flex justify-center items-center">
+            <img class="absolute top-[150px] left-1/2 -translate-x-1/2 h-12 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg">
+            <div class="w-[calc(100%-100px)] h-[calc(100%-100px)] border-4 border-white rounded-xl flex flex-col justify-center items-center p-8">
+                <h1 class="text-7xl font-bold text-white leading-tight">Hướng dẫn sử dụng LMS</h1>
+                <p class="text-3xl text-blue-200 mt-6">Đào tạo KiotViet</p>
+            </div>
+        </section>
+
+        <!-- Slide 2: Tiêu đề Chương 1 -->
+        <section class="slide relative bg-gray-50">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper w-full max-w-6xl mx-auto items-start">
+                <p class="text-9xl font-bold text-blue-200 mb-4">01</p>
+                <div class="text-left pl-12 border-l-4 border-blue-200">
+                    <h2 class="text-6xl font-bold text-blue-900 leading-tight">Hướng dẫn dành cho Hội nhập</h2>
+                    <p class="mt-4 text-2xl text-gray-600">Các bước cần thiết để hoàn thành khóa học đào tạo hội nhập trên hệ thống LMS.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Infographic Tóm tắt Thao tác Hội nhập -->
+        <section class="slide relative bg-white">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper">
+                <h2 class="text-4xl font-bold text-blue-900 mb-12">5 Bước Hoàn thành Khóa học Hội nhập</h2>
+                <div class="flex items-center justify-center space-x-4 text-gray-500 w-full max-w-7xl">
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center text-3xl font-bold text-blue-700 mb-3">1</div>
+                        <h3 class="font-semibold text-lg text-gray-800">Đăng nhập</h3>
+                    </div>
+                    <i class="fas fa-arrow-right text-3xl text-blue-300"></i>
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center text-3xl font-bold text-blue-700 mb-3">2</div>
+                        <h3 class="font-semibold text-lg text-gray-800">Tham gia khóa học</h3>
+                    </div>
+                    <i class="fas fa-arrow-right text-3xl text-blue-300"></i>
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center text-3xl font-bold text-blue-700 mb-3">3</div>
+                        <h3 class="font-semibold text-lg text-gray-800">Tham gia đào tạo Online</h3>
+                    </div>
+                    <i class="fas fa-arrow-right text-3xl text-blue-300"></i>
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center text-3xl font-bold text-blue-700 mb-3">4</div>
+                        <h3 class="font-semibold text-lg text-gray-800">Làm bài kiểm tra</h3>
+                    </div>
+                    <i class="fas fa-arrow-right text-3xl text-blue-300"></i>
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center text-3xl font-bold text-blue-700 mb-3">5</div>
+                        <h3 class="font-semibold text-lg text-gray-800">Hoàn thành khóa học</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Đăng nhập hệ thống</h2>
+                    <p class="text-xl text-gray-600 mt-2">Sử dụng Mail cá nhân và mật khẩu mặc định (123456A@) để truy cập.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/jSWVMH3Q/Man-hinh-login.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Giao diện đăng nhập hệ thống">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Giao diện Khóa học bắt buộc</h2>
+                    <p class="text-xl text-gray-600 mt-2">Sau khi đăng nhập, các khóa học được giao sẽ hiển thị trong mục "Khóa học bắt buộc".</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/sXxrk9qs/2-1.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Giao diện khóa học bắt buộc">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Chọn khóa học Hội nhập</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nhấn chọn vào khóa "Đào tạo hội nhập KiotViet".</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/sXxrk9qs/2-1.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Chọn khóa học hội nhập">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Bắt đầu học</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nhấn nút "BẮT ĐẦU HỌC KHÓA HỌC NGAY" để xem nội dung.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/FHv128xp/3-1.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Nút bắt đầu học khóa học">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Thông tin đào tạo Online qua Zoom</h2>
+                    <p class="text-xl text-gray-600 mt-2">Thông tin chi tiết về link, ID và mật khẩu để tham gia lớp học trực tuyến.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/3rDRWYf8/4-1.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Thông tin đào tạo online">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Tìm và chọn "Làm bài thi"</h2>
+                    <p class="text-xl text-gray-600 mt-2">Sau khi kết thúc buổi đào tạo online, quay lại khóa học và chọn "LÀM BÀI THI".</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/3rDRWYf8/4-1.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Tìm nút làm bài thi">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Bắt đầu kiểm tra</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nhấn nút "BẮT ĐẦU KIỂM TRA" để tiến hành làm bài.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/3wD6mSsM/5-1.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Nhấn nút bắt đầu kiểm tra">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 11: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Giao diện làm bài kiểm tra</h2>
+                    <p class="text-xl text-gray-600 mt-2">Thực hiện trả lời các câu hỏi trong bài thi.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/DZTCs2QQ/7-1.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Giao diện làm bài thi">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 12: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Nộp bài</h2>
+                    <p class="text-xl text-gray-600 mt-2">Sau khi hoàn thành tất cả câu hỏi, nhấn nút "Nộp bài".</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/4y8wrVD8/7-2.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Nút nộp bài thi">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 13: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Hoàn thành bài kiểm tra</h2>
+                    <p class="text-xl text-gray-600 mt-2">Giao diện hiển thị sau khi nộp bài thành công.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/QtmqTcdt/8-1.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Giao diện hoàn thành bài kiểm tra">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 14: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Trạng thái khóa học đã hoàn thành</h2>
+                    <p class="text-xl text-gray-600 mt-2">Khóa học Hội nhập sẽ hiển thị trạng thái 100% sau khi bạn hoàn tất bài kiểm tra.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/vTjfrhFw/9-1.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Giao diện khóa học đã hoàn thành 100%">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 15: Tiêu đề Chương 2 -->
+        <section class="slide relative bg-gray-50">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper w-full max-w-6xl mx-auto items-start">
+                <p class="text-9xl font-bold text-blue-200 mb-4">02</p>
+                <div class="text-left pl-12 border-l-4 border-blue-200">
+                    <h2 class="text-6xl font-bold text-blue-900 leading-tight">Hướng dẫn dành cho SPCB</h2>
+                    <p class="mt-4 text-2xl text-gray-600">Quy trình học tập và hoàn thành các yêu cầu của khóa đào tạo Sản phẩm cơ bản.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 16: Infographic Tóm tắt Thao tác SPCB -->
+        <section class="slide relative bg-white">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper">
+                <h2 class="text-4xl font-bold text-blue-900 mb-12">5 Bước trong lộ trình học SPCB</h2>
+                <div class="flex items-center justify-center space-x-4 text-gray-500 w-full max-w-7xl">
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center text-3xl font-bold text-blue-700 mb-3">1</div>
+                        <h3 class="font-semibold text-lg text-gray-800">Đăng nhập</h3>
+                    </div>
+                    <i class="fas fa-arrow-right text-3xl text-blue-300"></i>
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center text-3xl font-bold text-blue-700 mb-3">2</div>
+                        <h3 class="font-semibold text-lg text-gray-800">Tự học (Video + Quiz)</h3>
+                    </div>
+                    <i class="fas fa-arrow-right text-3xl text-blue-300"></i>
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center text-3xl font-bold text-blue-700 mb-3">3</div>
+                        <h3 class="font-semibold text-lg text-gray-800">Làm bài tập chiều</h3>
+                    </div>
+                    <i class="fas fa-arrow-right text-3xl text-blue-300"></i>
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center text-3xl font-bold text-blue-700 mb-3">4</div>
+                        <h3 class="font-semibold text-lg text-gray-800">Ôn tập & Thi mẫu</h3>
+                    </div>
+                    <i class="fas fa-arrow-right text-3xl text-blue-300"></i>
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center text-3xl font-bold text-blue-700 mb-3">5</div>
+                        <h3 class="font-semibold text-lg text-gray-800">Xem thông tin Test</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 17: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Đăng nhập hệ thống SPCB</h2>
+                    <p class="text-xl text-gray-600 mt-2">Sử dụng thông tin tài khoản được cung cấp để đăng nhập vào hệ thống LMS.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/jSWVMH3Q/Man-hinh-login.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Giao diện đăng nhập SPCB">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 18: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Giao diện sau khi đăng nhập</h2>
+                    <p class="text-xl text-gray-600 mt-2">Các khóa học bắt buộc và kế hoạch đào tạo được hiển thị rõ ràng.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/FsLgG1gk/Giao-dien-sau-login.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Giao diện chính sau khi đăng nhập">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 19: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Xem lại lịch sử Quiz</h2>
+                    <p class="text-xl text-gray-600 mt-2">Bạn có thể xem lại lịch sử các bài kiểm tra và bài tập đã thực hiện.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/9F516GfM/Xem-lai-lich-su-cau-quiz-da-lam.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Lịch sử Quiz">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 20: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Xem lại lịch sử Khóa học</h2>
+                    <p class="text-xl text-gray-600 mt-2">Hệ thống lưu lại lịch sử các khóa học bạn đã tham gia để tiện theo dõi.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/rs6CLkqz/Xem-lai-lich-su-khoa-hoc-da-hoc.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Lịch sử khóa học">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 21: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Bắt đầu học khóa học</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nhấn "BẮT ĐẦU HỌC KHÓA HỌC NGAY" và học lần lượt theo thứ tự, không tua nhanh.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/MpGBNT1m/Noi-dung-khoa-hoc.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Nội dung khóa học và nút bắt đầu">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 22: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Hoàn thành Khóa học</h2>
+                    <p class="text-xl text-gray-600 mt-2">Khóa học được tính là hoàn thành khi tiến độ đạt 100% sau khi xem hết Video và làm Quiz.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/G2nHLhsn/Co-the-hoc-lai-va-on-quiz.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Giao diện khóa học hoàn thành 100%">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 23: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Giao diện Bài học Lý thuyết</h2>
+                    <p class="text-xl text-gray-600 mt-2">Chi tiết một bài học bao gồm video hoặc slide bài giảng.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/3NVwq8hB/7.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Giao diện chi tiết bài học lý thuyết">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 24: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Trạng thái sau khi học xong lý thuyết</h2>
+                    <p class="text-xl text-gray-600 mt-2">Bài học sẽ được đánh dấu "Hoàn thành", tăng % tiến độ và hiện nút "Làm bài tập".</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/j2mj1xTM/8.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Trạng thái bài học sau khi xem video">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 25: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Bắt đầu làm bài Quiz</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nhấn vào nút "Bắt đầu kiểm tra" để thực hiện các câu hỏi ôn tập.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/HnRLNYmP/9.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Nút bắt đầu kiểm tra Quiz">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 26: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Dạng câu hỏi trắc nghiệm</h2>
+                    <p class="text-xl text-gray-600 mt-2">Giao diện các dạng câu hỏi trắc nghiệm trong bài Quiz.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/6qgQPWKb/10.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Câu hỏi trắc nghiệm">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 27: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Dạng câu hỏi điền từ</h2>
+                    <p class="text-xl text-gray-600 mt-2">Một dạng câu hỏi khác trong bài Quiz.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/VvpNhfwG/11.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Câu hỏi điền từ">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 28: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Cảnh báo chuyển Tab</h2>
+                    <p class="text-xl text-gray-600 mt-2">Hệ thống sẽ cảnh báo nếu bạn chuyển đổi cửa sổ trong quá trình làm bài kiểm tra.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/05BrjfSq/12.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Cảnh báo chuyển tab khi làm bài">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 29: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Hoàn thành Quiz</h2>
+                    <p class="text-xl text-gray-600 mt-2">Sau khi nộp bài Quiz, nhấn "TIẾP TỤC KHÓA HỌC" để sang bài tiếp theo.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/L4bh5TPR/13.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Giao diện sau khi hoàn thành Quiz">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 30: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Rời khỏi trang web</h2>
+                    <p class="text-xl text-gray-600 mt-2">Chọn "Rời khỏi trang web" để xác nhận chuyển sang nội dung video tiếp theo.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/SR3KPS45/14.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Thông báo rời khỏi trang web">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 31: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Cập nhật tiến độ sau Quiz</h2>
+                    <p class="text-xl text-gray-600 mt-2">Tiến độ học tập được cập nhật sau khi bạn hoàn thành một bài Quiz.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/XNzXq85b/15.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Tiến độ học tập được cập nhật">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 32: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Xem lại kết quả Quiz</h2>
+                    <p class="text-xl text-gray-600 mt-2">Bạn có thể xem lại kết quả chi tiết của bài Quiz vừa làm.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/59Rjy3zJ/16.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Nút xem kết quả Quiz">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 33: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Bài tập thực hành buổi chiều</h2>
+                    <p class="text-xl text-gray-600 mt-2">Tải file bài tập, làm và nộp qua Zalo trước 16:00 cùng ngày.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/J72t0qXM/17.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Giao diện bài tập thực hành">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 34: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Ôn tập và Thi mẫu</h2>
+                    <p class="text-xl text-gray-600 mt-2">Khi khóa học đạt 100%, nút "Làm bài thi" sẽ xuất hiện để bạn làm bài kiểm tra mẫu.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/66mTq0ZW/18.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Nút làm bài thi mẫu">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 35: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Bắt đầu làm bài thi mẫu</h2>
+                    <p class="text-xl text-gray-600 mt-2">Chọn "LÀM BÀI THI" để tiến hành thi thử.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/RCDqhRtC/19.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Nút làm bài thi">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 36: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Xác nhận bắt đầu kiểm tra</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nhấn "BẮT ĐẦU KIỂM TRA" để vào giao diện làm bài.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/NGzLF4XK/20.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Giao diện xác nhận bắt đầu kiểm tra">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 37: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Nộp bài thi</h2>
+                    <p class="text-xl text-gray-600 mt-2">Sau khi hoàn thành, nhấn "Nộp bài" để kết thúc bài kiểm tra.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/MZFXHDBc/21.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Nút nộp bài thi">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 38: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Hoàn thành bài kiểm tra</h2>
+                    <p class="text-xl text-gray-600 mt-2">Giao diện xác nhận bạn đã hoàn thành bài kiểm tra.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/tRM7J56Z/22.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Giao diện hoàn thành bài kiểm tra">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 39: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Xem thông tin bài Test SPCB</h2>
+                    <p class="text-xl text-gray-600 mt-2">Chọn "BÀI TEST SẢN PHẨM CƠ BẢN" để xem thông tin và tài khoản thi chính thức.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/59Rjy3zz/23.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Chọn bài test SPCB">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 40: Hình ảnh Minh họa -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Thông tin thi chi tiết</h2>
+                    <p class="text-xl text-gray-600 mt-2">Giao diện chứa thông tin tài khoản và thời gian thi.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://i.postimg.cc/xj4q8RmM/24.jpg" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Giao diện thông tin thi">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 41: Kết thúc -->
+        <section class="slide relative bg-gradient-to-br from-blue-700 to-blue-900 flex justify-center items-center">
+            <img class="absolute top-[150px] left-1/2 -translate-x-1/2 h-12 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg">
+            <div class="w-[calc(100%-100px)] h-[calc(100%-100px)] border-4 border-white rounded-xl flex flex-col justify-center items-center p-8">
+                <h1 class="text-6xl font-bold text-white leading-tight">Cảm ơn bạn đã theo dõi!</h1>
+                <p class="text-2xl text-blue-200 mt-6">Chúc bạn học tập hiệu quả trên hệ thống LMS của KiotViet.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const slideContainer = document.getElementById('slide-container');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => { slide.classList.toggle('active', i === index); });
+        }
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                slideContainer.requestFullscreen().catch(err => {
+                    alert(`Không thể bật chế độ toàn màn hình: ${err.message} (${err.name})`);
+                });
+            } else if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { nextSlide(); } 
+            else if (e.key === 'ArrowLeft') { prevSlide(); } 
+            else if (e.key.toLowerCase() === 'f') { toggleFullScreen(); }
+        });
+        if (totalSlides > 0) { showSlide(currentSlide); }
+    </script>
+</body>
+</html>
