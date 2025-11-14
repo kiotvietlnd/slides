@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài thuyết trình</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; }
+        .slide { display: none; width: 100%; height: 100%; padding: 0; box-sizing: border-box; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: absolute; top: 0; left: 0; transition: opacity 0.5s ease-in-out; }
+        .slide-content-wrapper { width: 100%; height: 100%; padding: 60px 80px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .slide.active { display: flex; }
+        .slide-container { width: 100%; height: 100%; position: relative; }
+        h1, h2, h3, h4, p, li, span { word-wrap: break-word; overflow-wrap: break-word; -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+    </style>
+</head>
+<body>
+    <div id="slide-container" class="slide-container">
+        <!-- SLIDES GO HERE -->
+        <!-- Slide 1: Slide Bìa -->
+        <section class="slide relative bg-gradient-to-br from-pink-500 to-orange-500 flex justify-center items-center">
+            <img class="absolute top-[150px] left-1/2 -translate-x-1/2 h-12 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg">
+            <div class="w-[calc(100%-100px)] h-[calc(100%-100px)] border-4 border-white rounded-xl flex flex-col justify-center items-center p-8">
+                <h1 class="text-7xl font-bold text-white leading-tight">Giao đồ ăn <br> qua các hãng vận chuyển</h1>
+                <p class="mt-6 text-3xl text-white/90">Hướng dẫn tính năng ngành Ăn uống, Giải trí</p>
+            </div>
+        </section>
+
+        <!-- Slide 2: Giới thiệu chung -->
+        <section class="slide relative bg-white">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl">
+                    <h2 class="text-5xl font-bold text-blue-900">Giới thiệu chung</h2>
+                    <p class="mt-6 text-2xl text-gray-700 leading-relaxed">
+                        Tối ưu toàn bộ quy trình bán giao hàng nhờ việc thao tác tập trung trên một giao diện duy nhất - Màn hình Thu ngân, kết nối các hãng vận chuyển siêu tốc như <span class="font-semibold text-orange-500">Ahamove, Xanh SM,…</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Lợi ích nổi bật -->
+        <section class="slide relative bg-gray-50">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper">
+                <h2 class="text-5xl font-bold text-blue-900 mb-12">Lợi ích nổi bật</h2>
+                <div class="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-orange-400">
+                        <i class="fa-solid fa-truck-fast text-4xl text-orange-500 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-gray-800">Đa dạng hãng vận chuyển</h3>
+                        <p class="text-gray-600 mt-2">Tự động so sánh cước phí và áp mã khuyến mại tốt nhất.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-orange-400">
+                        <i class="fa-solid fa-robot text-4xl text-orange-500 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-gray-800">Tự động hóa vận hành</h3>
+                        <p class="text-gray-600 mt-2">Tự động tạo phiếu thu/chi và cập nhật trạng thái đơn hàng.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-orange-400">
+                        <i class="fa-solid fa-map-location-dot text-4xl text-orange-500 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-gray-800">Theo dõi dễ dàng</h3>
+                        <p class="text-gray-600 mt-2">Quản lý tập trung, cập nhật trạng thái giao hàng theo thời gian thực.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-orange-400">
+                        <i class="fa-solid fa-wallet text-4xl text-orange-500 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-gray-800">Đối soát tức thì</h3>
+                        <p class="text-gray-600 mt-2">Shipper tạm ứng tiền hàng ngay khi đến lấy, đảm bảo dòng tiền.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Lưu ý quan trọng -->
+        <section class="slide relative bg-white">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper">
+                <div class="w-full max-w-5xl bg-yellow-100 border-l-8 border-yellow-500 p-8 rounded-lg">
+                    <h2 class="text-4xl font-bold text-blue-900">Lưu ý quan trọng</h2>
+                    <p class="mt-4 text-2xl text-yellow-800">Tính năng không hỗ trợ khi thiết bị đang ở trạng thái ngoại tuyến (offline).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Chương 1 -->
+        <section class="slide relative bg-gray-50">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper w-full max-w-7xl mx-auto items-start">
+                <p class="text-9xl font-bold text-orange-200 mb-4">01</p>
+                <div class="text-left pl-12 border-l-4 border-orange-200">
+                    <h2 class="text-6xl font-bold text-blue-900 leading-tight">Các thao tác cơ bản<br>trên Website</h2>
+                    <p class="mt-4 text-2xl text-gray-600">Hướng dẫn chi tiết các bước thiết lập và tạo đơn hàng giao đi trên giao diện máy tính.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Tóm tắt thao tác chương 1 -->
+        <section class="slide relative bg-white">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper">
+                <h2 class="text-5xl font-bold text-blue-900 mb-12">Tóm tắt quy trình</h2>
+                <div class="w-full max-w-6xl grid grid-cols-3 gap-8 text-center">
+                    <div class="flex flex-col items-center"><div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">1</div><p class="text-xl text-gray-700">Kích hoạt Cổng vận chuyển</p></div>
+                    <div class="flex flex-col items-center"><div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">2</div><p class="text-xl text-gray-700">Tạo đơn giao hàng</p></div>
+                    <div class="flex flex-col items-center"><div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">3</div><p class="text-xl text-gray-700">Thêm thông tin</p></div>
+                    <div class="flex flex-col items-center"><div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">4</div><p class="text-xl text-gray-700">Chọn hãng vận chuyển</p></div>
+                    <div class="flex flex-col items-center"><div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">5</div><p class="text-xl text-gray-700">Thanh toán</p></div>
+                    <div class="flex flex-col items-center"><div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">6</div><p class="text-xl text-gray-700">Theo dõi vận đơn</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Kích hoạt Cổng vận chuyển KiotViet (Cách 1)</h2>
+                    <p class="text-xl text-gray-600 mt-2">Truy cập menu Thiết lập → Thiết lập cửa hàng → Giao dịch.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28101612/GDAN_-1.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Kích hoạt Cổng vận chuyển KiotViet (Cách 1)">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Bật tính năng Giao hàng</h2>
+                    <p class="text-xl text-gray-600 mt-2">Tại mục Giao hàng, bật tính năng và chọn Chi tiết → tích Quản lý thu hộ tiền → Xong.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28101628/GDAN_-2.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Bật tính năng Giao hàng">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Kích hoạt Cổng KiotViet</h2>
+                    <p class="text-xl text-gray-600 mt-2">Chọn Chi tiết trên dòng Giao hàng qua cổng KiotViet.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28101644/GDAN_-3.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Kích hoạt Cổng KiotViet">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Nhập số điện thoại liên hệ</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nhập số điện thoại của bạn và nhấn Xong để hoàn tất.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28101659/GDAN_-4.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Nhập số điện thoại liên hệ">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 11: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Kích hoạt Cổng vận chuyển KiotViet (Cách 2)</h2>
+                    <p class="text-xl text-gray-600 mt-2">Trên màn hình Thu ngân, nhập Số điện thoại và nhấn Kích hoạt miễn phí khi có thông báo.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28101723/GDAN_-5.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Kích hoạt Cổng vận chuyển KiotViet (Cách 2)">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 12: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Tạo đơn Giao đi</h2>
+                    <p class="text-xl text-gray-600 mt-2">Trên màn hình Thu ngân, chọn Giao đi trong tab Phòng bàn.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28101738/GDAN_-6.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Tạo đơn Giao đi">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 13: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Tạo đơn từ tab Giao đi</h2>
+                    <p class="text-xl text-gray-600 mt-2">Hoặc nhấn vào tab Giao đi → nhấn Mở thực đơn trên đơn hàng Mới hoặc nhấn + Tạo đơn.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28101753/GDAN_-7.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Tạo đơn từ tab Giao đi">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 14: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Thêm món vào đơn hàng</h2>
+                    <p class="text-xl text-gray-600 mt-2">Thêm các món khách đặt vào đơn. Đơn hàng cần có ít nhất 1 món để có thể giao đi.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28101810/GDAN_-8.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Thêm món vào đơn hàng">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 15: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Bắt đầu Giao hàng & Thanh toán</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nhấn Giao hàng & Thanh toán để chuyển sang màn hình điền thông tin vận đơn.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28101839/GDAN_-9.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Bắt đầu Giao hàng & Thanh toán">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 16: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Thêm thông tin lấy hàng</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nhập đầy đủ địa chỉ của quán. Hệ thống sẽ lưu lại cho các lần sau.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28101854/GDAN_-10.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Thêm thông tin lấy hàng">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 17: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Thêm thông tin giao hàng</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nhập địa chỉ chi tiết của khách. Hệ thống sẽ tự động điền nếu đã có thông tin.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28101909/GDAN_-11.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Thêm thông tin giao hàng">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 18: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Thêm Ghi chú cho tài xế</h2>
+                    <p class="text-xl text-gray-600 mt-2">Bạn có thể điền thêm ghi chú cho tài xế (ví dụ: "giao cổng sau", "gọi trước khi đến").</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28101924/GDAN_-12.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Thêm Ghi chú cho tài xế">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 19: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Chọn hãng vận chuyển</h2>
+                    <p class="text-xl text-gray-600 mt-2">Hệ thống sẽ hiển thị danh sách các hãng vận chuyển cùng phí ship ước tính.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28101947/GDAN_-13.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Chọn hãng vận chuyển">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 20: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Cấu hình thông tin vận đơn</h2>
+                    <p class="text-xl text-gray-600 mt-2">Mặc định, hệ thống bật Thu hộ tiền (COD) và chọn Người gửi trả phí. Bạn có thể thay đổi.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102003/GDAN_-14.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Cấu hình thông tin vận đơn">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 21: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Thanh toán trước, Đặt xế sau</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nhập số tiền khách đã trả vào mục Khách thanh toán rồi nhấn Thanh toán để tạo hóa đơn.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102019/GDAN_-15.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Thanh toán trước, Đặt xế sau">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 22: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Quay lại để Đặt xế</h2>
+                    <p class="text-xl text-gray-600 mt-2">Sau khi thanh toán, nhấn Xem chi tiết trên đơn hàng.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102035/GDAN_-16.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Quay lại để Đặt xế">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 23: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Hoàn tất Đặt xế</h2>
+                    <p class="text-xl text-gray-600 mt-2">Quay lại màn hình vận đơn để tiếp tục nhấn nút Đặt xế.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102100/GDAN_-17.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Hoàn tất Đặt xế">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 24: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Đặt xế trước, Thanh toán sau</h2>
+                    <p class="text-xl text-gray-600 mt-2">Bạn có thể nhấn Đặt xế trước để tìm tài xế.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102117/GDAN_-18.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Đặt xế trước, Thanh toán sau">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 25: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Hoàn tất Thanh toán</h2>
+                    <p class="text-xl text-gray-600 mt-2">Sau khi có tài xế, nhấn Thanh toán để chốt hóa đơn và các phiếu thu/chi liên quan.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102132/GDAN_-19.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Hoàn tất Thanh toán">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 26: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Theo dõi trạng thái vận đơn</h2>
+                    <p class="text-xl text-gray-600 mt-2">Trong tab Giao đi, bạn có thể thấy trạng thái của từng đơn hàng được cập nhật theo thời gian thực.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102151/GDAN_-20.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Theo dõi trạng thái vận đơn">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 27: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Xem hành trình chi tiết</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nhấn vào nút Xem hành trình để theo dõi vị trí của tài xế trên bản đồ.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102214/GDAN_-21.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Xem hành trình chi tiết">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 28: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Giao diện theo dõi của hãng vận chuyển</h2>
+                    <p class="text-xl text-gray-600 mt-2">Trang web của hãng sẽ hiển thị trạng thái vận chuyển chi tiết.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102230/GDAN_-22.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Giao diện theo dõi của hãng vận chuyển">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 29: Chương 2 -->
+        <section class="slide relative bg-gray-50">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper w-full max-w-7xl mx-auto items-start">
+                <p class="text-9xl font-bold text-orange-200 mb-4">02</p>
+                <div class="text-left pl-12 border-l-4 border-orange-200">
+                    <h2 class="text-6xl font-bold text-blue-900 leading-tight">Các tính năng nâng cao</h2>
+                    <p class="mt-4 text-2xl text-gray-600">Xử lý các tình huống đặc biệt như hủy chuyến, đơn hàng chuyển hoàn và quản lý danh sách.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 30: Tóm tắt thao tác chương 2 -->
+        <section class="slide relative bg-white">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper">
+                <h2 class="text-5xl font-bold text-blue-900 mb-16">Tính năng nâng cao</h2>
+                <div class="w-full max-w-6xl grid grid-cols-6 gap-y-12 text-center">
+                    <div class="col-start-1 col-span-2 flex flex-col items-center">
+                        <div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">1</div><p class="text-xl text-gray-700">Hủy chuyến giao hàng</p>
+                    </div>
+                    <div class="col-start-3 col-span-2 flex flex-col items-center">
+                        <div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">2</div><p class="text-xl text-gray-700">Xử lý đơn chuyển hoàn</p>
+                    </div>
+                    <div class="col-start-5 col-span-2 flex flex-col items-center">
+                        <div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">3</div><p class="text-xl text-gray-700">Quản lý danh sách đơn</p>
+                    </div>
+                    <div class="col-start-2 col-span-2 flex flex-col items-center">
+                        <div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">4</div><p class="text-xl text-gray-700">Hủy đơn hàng</p>
+                    </div>
+                    <div class="col-start-4 col-span-2 flex flex-col items-center">
+                        <div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">5</div><p class="text-xl text-gray-700">Quản lý đối tác</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 31: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Hủy chuyến giao hàng</h2>
+                    <p class="text-xl text-gray-600 mt-2">Với đơn ở trạng thái Đang tìm xế hoặc Xế đang đến, bạn có thể chọn thao tác Hủy chuyến.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102245/GDAN_-23.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Hủy chuyến giao hàng">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 32: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Xử lý đơn chuyển hoàn</h2>
+                    <p class="text-xl text-gray-600 mt-2">Khi tài xế báo hoàn hàng, đơn sẽ chuyển sang trạng thái Đang chuyển hoàn.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102300/GDAN_-24.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Xử lý đơn chuyển hoàn">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 33: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Xác nhận chuyển hoàn</h2>
+                    <p class="text-xl text-gray-600 mt-2">Khi hàng về tới quán, trạng thái là Chờ xác nhận chuyển hoàn. Bạn vào chi tiết và nhấn Xác nhận.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102323/GDAN_-25.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Xác nhận chuyển hoàn">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 34: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Chuyển hoàn (Chưa có hóa đơn)</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nếu chưa có hóa đơn, hệ thống sẽ chuyển Đơn hàng thành Đơn hủy.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102340/GDAN_-26.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Chuyển hoàn (Chưa có hóa đơn)">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 35: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Chuyển hoàn (Đã có hóa đơn)</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nếu đã có hóa đơn, hệ thống chuyển Vận đơn thành Đã chuyển hoàn.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102357/GDAN_-27.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Chuyển hoàn (Đã có hóa đơn)">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 36: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Quản lý danh sách đơn giao đi</h2>
+                    <p class="text-xl text-gray-600 mt-2">Tại tab Giao đi, bạn có thể sử dụng các bộ lọc trạng thái: Tất cả, Mới, Đang chuẩn bị, Giao hàng.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102423/GDAN_-28.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Quản lý danh sách đơn giao đi">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 37: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Tìm kiếm đơn hàng</h2>
+                    <p class="text-xl text-gray-600 mt-2">Dùng thanh tìm kiếm để nhanh chóng tìm đơn hàng theo tên, SĐT hoặc địa chỉ của khách.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102450/GDAN_-29.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Tìm kiếm đơn hàng">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 38: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Hủy đơn hàng</h2>
+                    <p class="text-xl text-gray-600 mt-2">Đối với các đơn hàng ở trạng thái cho phép và chưa thanh toán, bạn có thể thực hiện thao tác Hủy.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102508/GDAN_-30.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Hủy đơn hàng">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 39: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Quản lý đối tác giao hàng</h2>
+                    <p class="text-xl text-gray-600 mt-2">Hệ thống tự động thêm hãng vận chuyển vào danh sách Đối tác giao hàng trong menu Đối tác.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102525/GDAN_-31.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Quản lý đối tác giao hàng">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 40: Chương 3 -->
+        <section class="slide relative bg-gray-50">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper w-full max-w-7xl mx-auto items-start">
+                <p class="text-9xl font-bold text-orange-200 mb-4">03</p>
+                <div class="text-left pl-12 border-l-4 border-orange-200">
+                    <h2 class="text-6xl font-bold text-blue-900 leading-tight">Thao tác trên<br>Điện thoại</h2>
+                    <p class="mt-4 text-2xl text-gray-600">Hướng dẫn sử dụng tính năng giao hàng trên ứng dụng KiotViet Quản lý Nhà hàng và KiotViet Nhân viên nhà hàng.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 41: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Giao diện trên các ứng dụng di động</h2>
+                    <p class="text-xl text-gray-600 mt-2">Sử dụng KiotViet Quản lý Nhà hàng để kích hoạt và KiotViet Nhân viên nhà hàng cho các nghiệp vụ hằng ngày.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102542/GDAN_-32.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Giao diện trên các ứng dụng di động">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 42: Tóm tắt thao tác chương 3 -->
+        <section class="slide relative bg-white">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper">
+                <h2 class="text-5xl font-bold text-blue-900 mb-12">Quy trình trên di động</h2>
+                <div class="w-full max-w-6xl grid grid-cols-3 gap-8 text-center">
+                    <div class="flex flex-col items-center"><div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">1</div><p class="text-xl text-gray-700">Kích hoạt tính năng</p></div>
+                    <div class="flex flex-col items-center"><div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">2</div><p class="text-xl text-gray-700">Tạo đơn giao hàng</p></div>
+                    <div class="flex flex-col items-center"><div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">3</div><p class="text-xl text-gray-700">Quản lý danh sách</p></div>
+                    <div class="flex flex-col items-center"><div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">4</div><p class="text-xl text-gray-700">Hủy chuyến</p></div>
+                    <div class="flex flex-col items-center"><div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">5</div><p class="text-xl text-gray-700">Xử lý chuyển hoàn</p></div>
+                    <div class="flex flex-col items-center"><div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">6</div><p class="text-xl text-gray-700">Theo dõi vận đơn</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 43: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Kích hoạt tính năng trên di động</h2>
+                    <p class="text-xl text-gray-600 mt-2">Vào menu Nhiều hơn → Thiết lập cửa hàng → bật Giao hàng và Giao qua Cổng KiotViet, sau đó nhập SĐT và Lưu.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102606/GDAN_-33.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Kích hoạt tính năng trên di động">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 44: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Tạo đơn và thêm món trên di động</h2>
+                    <p class="text-xl text-gray-600 mt-2">Tại màn hình Phòng bàn, chọn Giao đi → nhấn +, thêm món vào đơn và chọn khách hàng.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102621/GDAN_-34.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Tạo đơn và thêm món trên di động">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 45: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Điền thông tin giao hàng</h2>
+                    <p class="text-xl text-gray-600 mt-2">Trên màn hình Thanh toán, điền địa chỉ lấy hàng và giao hàng.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102636/GDAN_-35.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Điền thông tin giao hàng">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 46: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Chọn dịch vụ vận chuyển</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nhấn Chọn dịch vụ vận chuyển để xem danh sách các hãng và phí ship ước tính.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102652/GDAN_-36.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Chọn dịch vụ vận chuyển">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 47: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Ghi chú cho tài xế</h2>
+                    <p class="text-xl text-gray-600 mt-2">Bạn có thể điền thêm Ghi chú cho xế (ví dụ: "giao cổng sau", "gọi trước khi đến").</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102715/GDAN_-37.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Ghi chú cho tài xế">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 48: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Thanh toán và Đặt xế</h2>
+                    <p class="text-xl text-gray-600 mt-2">Bạn có thể Thanh toán trước rồi Đặt xế sau, hoặc ngược lại.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102730/GDAN_-38.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Thanh toán và Đặt xế">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 49: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Quản lý danh sách đơn hàng</h2>
+                    <p class="text-xl text-gray-600 mt-2">Trên màn hình Giao đi, sử dụng bộ lọc trạng thái hoặc thanh tìm kiếm để tìm đơn hàng.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102745/GDAN_-39.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Quản lý danh sách đơn hàng">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 50: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Hủy chuyến giao hàng</h2>
+                    <p class="text-xl text-gray-600 mt-2">Chọn đơn hàng, nhấn Hủy → chọn Hủy chuyến.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102807/GDAN_-40.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Hủy chuyến giao hàng">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 51: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Xử lý đơn chuyển hoàn</h2>
+                    <p class="text-xl text-gray-600 mt-2">Với đơn ở trạng thái Chờ xác nhận chuyển hoàn, mở chi tiết và nhấn Xác nhận chuyển hoàn.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102831/GDAN_-41.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Xử lý đơn chuyển hoàn">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 52: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Chuyển hoàn (Chưa có hóa đơn)</h2>
+                    <p class="text-xl text-gray-600 mt-2">Hệ thống sẽ chuyển Đơn hàng thành Đơn hủy.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102846/GDAN_-42.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Chuyển hoàn (Chưa có hóa đơn)">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 53: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Chuyển hoàn (Đã có hóa đơn)</h2>
+                    <p class="text-xl text-gray-600 mt-2">Hệ thống chuyển Vận đơn thành Đã chuyển hoàn.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102903/GDAN_-43.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Chuyển hoàn (Đã có hóa đơn)">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 54: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Hủy đơn hàng</h2>
+                    <p class="text-xl text-gray-600 mt-2">Với các đơn hàng ở trạng thái cho phép và chưa thanh toán, bạn có thể thực hiện thao tác Hủy đơn hàng.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102919/GDAN_-44.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Hủy đơn hàng">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 55: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Theo dõi vận đơn</h2>
+                    <p class="text-xl text-gray-600 mt-2">Trong chi tiết đơn hàng, nhấn Xem hành trình để theo dõi vị trí của tài xế.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102943/GDAN_-45.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Theo dõi vận đơn">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 56: Chương 4 -->
+        <section class="slide relative bg-gray-50">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper w-full max-w-7xl mx-auto items-start">
+                <p class="text-9xl font-bold text-orange-200 mb-4">04</p>
+                <div class="text-left pl-12 border-l-4 border-orange-200">
+                    <h2 class="text-6xl font-bold text-blue-900 leading-tight">Thao tác trên<br>Máy POS Android</h2>
+                    <p class="mt-4 text-2xl text-gray-600">Hướng dẫn sử dụng tính năng giao hàng trên ứng dụng KiotViet Máy POS Nhà hàng.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 57: Tóm tắt thao tác chương 4 -->
+        <section class="slide relative bg-white">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper">
+                <h2 class="text-5xl font-bold text-blue-900 mb-12">Quy trình trên POS</h2>
+                <div class="w-full max-w-6xl grid grid-cols-3 gap-8 text-center">
+                    <div class="flex flex-col items-center"><div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">1</div><p class="text-xl text-gray-700">Kích hoạt Cổng vận chuyển</p></div>
+                    <div class="flex flex-col items-center"><div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">2</div><p class="text-xl text-gray-700">Tạo đơn giao hàng</p></div>
+                    <div class="flex flex-col items-center"><div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">3</div><p class="text-xl text-gray-700">Quản lý danh sách</p></div>
+                    <div class="flex flex-col items-center"><div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">4</div><p class="text-xl text-gray-700">Hủy chuyến</p></div>
+                    <div class="flex flex-col items-center"><div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">5</div><p class="text-xl text-gray-700">Xử lý chuyển hoàn</p></div>
+                    <div class="flex flex-col items-center"><div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-3">6</div><p class="text-xl text-gray-700">Theo dõi vận đơn</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 58: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Kích hoạt Cổng vận chuyển</h2>
+                    <p class="text-xl text-gray-600 mt-2">Khi tạo đơn giao đi lần đầu, nhập Số điện thoại và nhấn Kích hoạt miễn phí.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28102958/GDAN_-46.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Kích hoạt Cổng vận chuyển">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 59: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Tạo đơn Giao đi</h2>
+                    <p class="text-xl text-gray-600 mt-2">Trên màn hình, chọn Giao đi trong tab Phòng bàn.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103015/GDAN_-47.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Tạo đơn Giao đi">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 60: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Tạo đơn từ tab Giao đi</h2>
+                    <p class="text-xl text-gray-600 mt-2">Hoặc nhấn vào tab Giao đi → nhấn + Tạo đơn.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103030/GDAN_-48.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Tạo đơn từ tab Giao đi">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 61: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Thêm món vào đơn hàng</h2>
+                    <p class="text-xl text-gray-600 mt-2">Thêm các món khách đặt vào đơn. Đơn hàng cần có ít nhất 1 món để giao đi.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103055/GDAN_-49.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Thêm món vào đơn hàng">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 62: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Bắt đầu Giao hàng & Thanh toán</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nhấn Giao hàng & Thanh toán để chuyển sang màn hình điền thông tin vận đơn.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103111/GDAN_-50.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Bắt đầu Giao hàng & Thanh toán">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 63: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Điền thông tin lấy và giao hàng</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nhập đầy đủ thông tin của quán và khách hàng.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103128/GDAN_-51.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Điền thông tin lấy và giao hàng">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 64: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Thêm Ghi chú cho tài xế</h2>
+                    <p class="text-xl text-gray-600 mt-2">Bạn có thể điền thêm ghi chú (ví dụ: "giao cổng sau", "gọi trước khi đến").</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103144/GDAN_-52.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Thêm Ghi chú cho tài xế">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 65: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Chọn hãng vận chuyển</h2>
+                    <p class="text-xl text-gray-600 mt-2">Hệ thống hiển thị danh sách các hãng vận chuyển cùng mức phí ước tính.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103207/GDAN_-53.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Chọn hãng vận chuyển">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 66: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Cấu hình thông tin vận đơn</h2>
+                    <p class="text-xl text-gray-600 mt-2">Chọn hãng, kiểm tra tiền thu hộ COD, người trả phí và hình thức thanh toán của xế.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103225/GDAN_-54.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Cấu hình thông tin vận đơn">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 67: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Thanh toán và Đặt xế</h2>
+                    <p class="text-xl text-gray-600 mt-2">Bạn có thể nhấn Thanh toán trước rồi Đặt xế sau, hoặc ngược lại.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103241/GDAN_-55.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Thanh toán và Đặt xế">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 68: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Quản lý danh sách đơn hàng</h2>
+                    <p class="text-xl text-gray-600 mt-2">Trên tab Giao đi, sử dụng bộ lọc trạng thái để quản lý đơn hàng.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103257/GDAN_-56.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Quản lý danh sách đơn hàng">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 69: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Tìm kiếm đơn hàng</h2>
+                    <p class="text-xl text-gray-600 mt-2">Dùng thanh tìm kiếm để nhanh chóng tìm đơn hàng cần xử lý.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103321/GDAN_-57.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Tìm kiếm đơn hàng">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 70: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Hủy chuyến giao hàng</h2>
+                    <p class="text-xl text-gray-600 mt-2">Với đơn ở trạng thái Đang tìm xế hoặc Xế đang đến, bạn có thể chọn thao tác Hủy chuyến.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103336/GDAN_-58.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Hủy chuyến giao hàng">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 71: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Xử lý đơn chuyển hoàn</h2>
+                    <p class="text-xl text-gray-600 mt-2">Khi đơn hàng có trạng thái Chờ xác nhận chuyển hoàn, nhấn Xem chi tiết.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103352/GDAN_-59.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Xử lý đơn chuyển hoàn">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 72: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Xác nhận chuyển hoàn</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nhấn Xác nhận chuyển hoàn để hoàn tất quy trình.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103408/GDAN_-60.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Xác nhận chuyển hoàn">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 73: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Chuyển hoàn (Chưa có hóa đơn)</h2>
+                    <p class="text-xl text-gray-600 mt-2">Hệ thống sẽ chuyển Đơn hàng thành Đơn hủy.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103431/GDAN_-61.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Chuyển hoàn (Chưa có hóa đơn)">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 74: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Chuyển hoàn (Đã có hóa đơn)</h2>
+                    <p class="text-xl text-gray-600 mt-2">Hệ thống chuyển Vận đơn thành Đã chuyển hoàn.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103447/GDAN_-62.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Chuyển hoàn (Đã có hóa đơn)">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 75: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Hủy đơn hàng</h2>
+                    <p class="text-xl text-gray-600 mt-2">Với các đơn hàng ở trạng thái cho phép, bạn có thể thực hiện thao tác Hủy đơn hàng.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103504/GDAN_-63.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Hủy đơn hàng">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 76: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Theo dõi trạng thái vận đơn</h2>
+                    <p class="text-xl text-gray-600 mt-2">Trạng thái của từng đơn hàng được cập nhật theo thời gian thực tại tab Giao đi.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103525/GDAN_-64.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Theo dõi trạng thái vận đơn">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 77: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Xem hành trình chi tiết</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nhấn vào nút Xem hành trình để mở trang web của hãng vận chuyển.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103550/GDAN_-65.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Xem hành trình chi tiết">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 78: [Slide Hình ảnh Minh họa] -->
+        <section class="slide bg-gray-100">
+            <div class="slide-content-wrapper">
+                <div class="w-full text-center mb-6 flex-shrink-0">
+                    <h2 class="text-4xl font-bold text-blue-900">Giao diện theo dõi của hãng vận chuyển</h2>
+                    <p class="text-xl text-gray-600 mt-2">Theo dõi vị trí của tài xế trên bản đồ và trạng thái chi tiết.</p>
+                </div>
+                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/28103627/GDAN_-66.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Giao diện theo dõi của hãng vận chuyển">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 79: Chương 5 -->
+        <section class="slide relative bg-gray-50">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper w-full max-w-7xl mx-auto items-start">
+                <p class="text-9xl font-bold text-orange-200 mb-4">05</p>
+                <div class="text-left pl-12 border-l-4 border-orange-200">
+                    <h2 class="text-6xl font-bold text-blue-900 leading-tight">Phụ lục</h2>
+                    <p class="mt-4 text-2xl text-gray-600">Thông tin tham khảo về trạng thái vận đơn và logic tạo/hủy các phiếu thu/chi.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 80: Trạng thái vận đơn & Thao tác chính -->
+        <section class="slide relative bg-white">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper">
+                <h2 class="text-4xl font-bold text-blue-900 mb-8">Trạng thái vận đơn & Thao tác chính</h2>
+                <div class="w-full max-w-4xl">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-gray-100">
+                            <tr><th class="p-3 border">Trạng thái</th><th class="p-3 border">Thao tác chính</th></tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+                            <tr><td class="p-3 border font-semibold">Đang tìm xế / Xế đang đến</td><td class="p-3 border">Hủy chuyến, Chọn hình thức thanh toán, Xem hành trình.</td></tr>
+                            <tr><td class="p-3 border font-semibold">Đang giao / Giao thành công</td><td class="p-3 border">Xem hành trình của vận đơn.</td></tr>
+                            <tr><td class="p-3 border font-semibold">Chờ xác nhận chuyển hoàn</td><td class="p-3 border">Cho phép Xác nhận chuyển hoàn, Xem hành trình.</td></tr>
+                            <tr><td class="p-3 border font-semibold">Hủy giao hàng</td><td class="p-3 border">Cập nhật lại thông tin, Chọn lại dịch vụ vận chuyển.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 81: Logic tạo/hủy phiếu thu/chi -->
+        <section class="slide relative bg-white">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper">
+                <h2 class="text-4xl font-bold text-blue-900 mb-8">Logic tạo/hủy phiếu thu/chi</h2>
+                <div class="w-full max-w-5xl">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead class="bg-gray-100">
+                            <tr><th class="p-2 border">Tên phiếu</th><th class="p-2 border">Mã phiếu</th><th class="p-2 border">Giá trị</th><th class="p-2 border">Ghi chú</th></tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+                            <tr><td class="p-2 border">Phiếu thu hóa đơn</td><td class="p-2 border">TTHD...</td><td class="p-2 border">Khách thanh toán</td><td class="p-2 border">Tạo khi bấm Thanh toán.</td></tr>
+                            <tr><td class="p-2 border">Phiếu thu hộ tiền COD</td><td class="p-2 border">TTGH_HD...</td><td class="p-2 border">Thu hộ tiền COD</td><td class="p-2 border">Tạo khi có tài xế nhận đơn.</td></tr>
+                            <tr><td class="p-2 border">Phiếu chi giao hàng</td><td class="p-2 border">PCGH_HD...</td><td class="p-2 border">Phí giao hàng</td><td class="p-2 border">Tạo khi có tài xế nhận đơn.</td></tr>
+                            <tr><td class="p-2 border">Phiếu chi giao hàng chuyển hoàn</td><td class="p-2 border">PCCH_HD...</td><td class="p-2 border">Phí giao hàng chiều hoà</td><td class="p-2 border">Tạo khi xác nhận chuyển hoàn.</td></tr>
+                            <tr><td class="p-2 border">Phiếu chi trả COD khi chuyển hoàn</td><td class="p-2 border">PCCOD_HD...</td><td class="p-2 border">Thu hộ tiền COD</td><td class="p-2 border">Tạo khi xác nhận chuyển hoàn.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 82: Danh sách kịch bản tạo/hủy phiếu -->
+        <section class="slide relative bg-white">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper">
+                <h2 class="text-4xl font-bold text-blue-900 mb-8">Kịch bản: Thanh toán trước, Đặt xế sau</h2>
+                <div class="w-full max-w-6xl">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead class="bg-gray-100">
+                            <tr><th class="p-2 border">Khách trả trước</th><th class="p-2 border">Người trả phí ship</th><th class="p-2 border">Khi bấm "Thanh toán"</th><th class="p-2 border">Khi đơn "Đang giao"</th><th class="p-2 border">Nếu "Giao thành công"</th><th class="p-2 border">Nếu "Xác nhận chuyển hoàn"</th></tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+                            <tr><td class="p-2 border">0đ</td><td class="p-2 border">Người gửi</td><td class="p-2 border">(Không tạo phiếu)</td><td class="p-2 border">Tạo TTGH (200k), PCGH (-30k)</td><td class="p-2 border">(Không đổi)</td><td class="p-2 border">Tạo PCCOD (-200k), PCCH (-50k)</td></tr>
+                            <tr><td class="p-2 border">200k</td><td class="p-2 border">Người gửi</td><td class="p-2 border">Tạo TTHD (200k)</td><td class="p-2 border">Tạo PCGH (-30k)</td><td class="p-2 border">(Không đổi)</td><td class="p-2 border">Tạo PCCH (-50k), TTTH (-200k)</td></tr>
+                             <tr><td class="p-2 border">0đ</td><td class="p-2 border">Người nhận</td><td class="p-2 border">(Không tạo phiếu)</td><td class="p-2 border">Tạo TTGH (200k)</td><td class="p-2 border">(Không đổi)</td><td class="p-2 border">Tạo PCCOD (-200k), PCCH (-80k)</td></tr>
+                        </tbody>
+                    </table>
+                     <p class="text-sm mt-4 text-gray-500">Ví dụ: Tiền hàng 200k, Phí đi 30k, Phí về 50k. Tên viết tắt: TTGH (Thu tiền giao hàng), PCGH (Phí chi giao hàng), ...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 83: Danh sách kịch bản tạo/hủy phiếu -->
+        <section class="slide relative bg-white">
+            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
+            <div class="slide-content-wrapper">
+                <h2 class="text-4xl font-bold text-blue-900 mb-8">Kịch bản: Đặt xế trước, Thanh toán sau</h2>
+                <div class="w-full max-w-6xl">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead class="bg-gray-100">
+                             <tr><th class="p-2 border">Khách trả trước</th><th class="p-2 border">Người trả phí ship</th><th class="p-2 border">Khi bấm "Đặt xế"</th><th class="p-2 border">Khi bấm "Thanh toán"</th><th class="p-2 border">Nếu "Giao thành công"</th><th class="p-2 border">Nếu "Xác nhận chuyển hoàn"</th></tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+                             <tr><td class="p-2 border">0đ</td><td class="p-2 border">Người gửi</td><td class="p-2 border">(Không tạo phiếu)</td><td class="p-2 border">Tạo TTGH (200k), PCGH (-30k)</td><td class="p-2 border">(Không đổi)</td><td class="p-2 border">Tạo PCCOD (-200k), PCCH (-50k)</td></tr>
+                             <tr><td class="p-2 border">200k</td><td class="p-2 border">Người gửi</td><td class="p-2 border">(Không tạo phiếu)</td><td class="p-2 border">Tạo TTHD (200k), PCGH (-30k)</td><td class="p-2 border">(Không đổi)</td><td class="p-2 border">Tạo PCCH (-50k), TTTH (-200k)</td></tr>
+                             <tr><td class="p-2 border">0đ</td><td class="p-2 border">Người nhận</td><td class="p-2 border">(Không tạo phiếu)</td><td class="p-2 border">Tạo TTGH (200k)</td><td class="p-2 border">(Không đổi)</td><td class="p-2 border">Tạo PCCOD (-200k), PCCH (-80k)</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="text-sm mt-4 text-gray-500">Ví dụ: Tiền hàng 200k, Phí đi 30k, Phí về 50k. Logic tạo phiếu tương tự luồng trước, chỉ khác thời điểm.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 84: Slide Kết thúc -->
+        <section class="slide relative bg-gradient-to-br from-pink-500 to-orange-500 flex justify-center items-center">
+            <img class="absolute top-[150px] left-1/2 -translate-x-1/2 h-12 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg">
+            <div class="w-[calc(100%-100px)] h-[calc(100%-100px)] border-4 border-white rounded-xl flex flex-col justify-center items-center p-8">
+                <h1 class="text-6xl font-bold text-white">Cảm ơn bạn đã theo dõi!</h1>
+                <div class="mt-8 text-white text-xl text-left border-t-2 border-white/50 pt-6">
+                    <h3 class="font-bold text-2xl mb-4">Thông tin Hỗ Trợ</h3>
+                    <p><i class="fas fa-phone-alt w-6"></i> Tổng đài tư vấn bán hàng: <strong>1800 6162</strong></p>
+                    <p><i class="fas fa-headset w-6"></i> Tổng đài hỗ trợ phần mềm: <strong>1900 6522</strong></p>
+                    <p><i class="fas fa-envelope w-6"></i> Email hỗ trợ: <strong>hotro@kiotviet.com</strong></p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const slideContainer = document.getElementById('slide-container');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => { slide.classList.toggle('active', i === index); });
+        }
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                slideContainer.requestFullscreen().catch(err => {
+                    alert(`Không thể bật chế độ toàn màn hình: ${err.message} (${err.name})`);
+                });
+            } else if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { nextSlide(); } 
+            else if (e.key === 'ArrowLeft') { prevSlide(); } 
+            else if (e.key.toLowerCase() === 'f') { toggleFullScreen(); }
+        });
+        if (totalSlides > 0) { showSlide(currentSlide); }
+    </script>
+</body>
+</html>
