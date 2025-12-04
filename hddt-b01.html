@@ -3,771 +3,431 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài thuyết trình</title>
+    <title>Đăng ký Chữ ký số KiotViet IntrustCA</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                        'zoom-in': 'zoomIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards', /* Soft Ease Out */
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        zoomIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.96)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; }
-        .slide { display: none; width: 100%; height: 100%; padding: 0; box-sizing: border-box; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: absolute; top: 0; left: 0; transition: opacity 0.5s ease-in-out; }
-        .slide-content-wrapper { width: 100%; height: 100%; padding: 60px 80px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .slide.active { display: flex; }
-        .slide-container { width: 100%; height: 100%; position: relative; }
-        h1, h2, h3, h4, p, li, span { word-wrap: break-word; overflow-wrap: break-word; -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; background-color: #f8fafc; }
+        .slide { display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.5s ease-in-out; }
+        .slide.active { display: flex; opacity: 1; }
+        .glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #1e3a8a, #0284c7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Hide animations initially */
+        .animate-zoom-in { opacity: 0; } 
+        .slide.active .animate-zoom-in { animation-play-state: running; }
     </style>
 </head>
-<body>
-    <div id="slide-container" class="slide-container">
-        <!-- SLIDES GO HERE -->
-        <!-- Slide Bìa/Kết thúc -->
-        <section class="slide relative bg-gradient-to-br from-blue-700 to-blue-900 flex justify-center items-center">
-            <!-- LỚP LOGO (OVERLAY) -->
-            <img class="absolute top-[150px] left-1/2 -translate-x-1/2 h-12 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg">
-            
-            <!-- LỚP NỘI DUNG (KHUNG VIỀN) -->
-            <div class="w-[calc(100%-100px)] h-[calc(100%-100px)] border-4 border-white rounded-xl flex flex-col justify-center items-center p-8">
-                <!-- TOÀN BỘ NỘI DUNG VĂN BẢN (TIÊU ĐỀ, TÊN...) ĐẶT Ở ĐÂY -->
-                <h1 class="text-6xl font-bold text-white">Đăng ký Chữ ký số KiotViet IntrustCA</h1>
-                <p class="mt-4 text-2xl text-blue-200">(Ngành Bán buôn, Bán lẻ)</p>
-            </div>
-        </section>
+<body class="text-gray-800 relative selection:bg-blue-200">
 
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <!-- MỌI BỐ CỤC SÁNG TẠO (INFOGRAPHIC, LƯỚI, CỘT...) PHẢI ĐƯỢC TRIỂN KHAI BÊN TRONG THẺ DIV NÀY -->
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">I. Giới thiệu chung</h2>
-                <p class="text-2xl text-gray-700 leading-relaxed mb-6">Chữ ký số là điều kiện cần thiết để các chủ doanh nghiệp thực hiện các nghiệp vụ liên quan đến Hóa đơn điện tử (HĐĐT) một cách hợp lệ.</p>
-                <p class="text-2xl text-gray-700 leading-relaxed">KiotViet đã ra mắt tính năng đăng ký Chữ ký số từ xa (RMS) KiotViet IntrustCA trực tuyến, cho phép đăng ký và xác minh danh tính (eKYC) ngay trên hệ thống, giúp rút ngắn thời gian và đơn giản hóa quy trình.</p>
-            </div>
-        </section>
+    <!-- Background Blobs -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-32 left-20 w-96 h-96 bg-sky-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-4000"></div>
+    </div>
 
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <!-- MỌI BỐ CỤC SÁNG TẠO (INFOGRAPHIC, LƯỚI, CỘT...) PHẢI ĐƯỢC TRIỂN KHAI BÊN TRONG THẺ DIV NÀY -->
-                <h2 class="text-4xl font-bold text-blue-800 mb-12">Lợi ích nổi bật của Chữ ký số KiotViet IntrustCA</h2>
-                <div class="grid grid-cols-3 gap-8 w-full max-w-6xl">
-                    <div class="bg-blue-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-                        <i class="fa-solid fa-gift text-5xl text-blue-600 mb-4"></i>
-                        <h3 class="text-2xl font-semibold text-blue-900 mb-2">Hoàn toàn miễn phí</h3>
-                        <p class="text-lg text-gray-700">Tiết kiệm chi phí ban đầu vì KiotViet hỗ trợ đăng ký sử dụng miễn phí.</p>
+    <div id="slide-container" class="relative z-10 w-full h-full flex items-center justify-center">
+
+        <!-- SLIDE 1: BÌA -->
+        <div class="slide flex-col items-center justify-center text-center p-12">
+            <div class="glass p-16 rounded-3xl max-w-5xl animate-zoom-in relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-600 to-cyan-400"></div>
+                <img class="h-16 w-auto mx-auto mb-10" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+                <h1 class="text-6xl font-extrabold mb-6 leading-tight text-gradient">Đăng ký Chữ ký số<br>KiotViet IntrustCA</h1>
+                <p class="text-3xl text-gray-600 font-light mb-8">(Ngành Bán buôn, Bán lẻ)</p>
+                <div class="inline-block px-8 py-3 rounded-full bg-blue-50 text-blue-800 font-semibold text-lg border border-blue-100">
+                    Nhanh chóng - Tiện lợi - Bảo mật
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: GIỚI THIỆU CHUNG -->
+        <div class="slide flex-col items-center justify-center p-12">
+            <div class="glass p-12 rounded-3xl max-w-5xl w-full animate-zoom-in">
+                <h2 class="text-4xl font-bold mb-8 text-blue-800 border-l-8 border-blue-600 pl-6">I. Giới thiệu chung</h2>
+                <div class="space-y-6 text-2xl text-gray-700 leading-relaxed text-justify">
+                    <p>
+                        <span class="font-bold text-blue-600">Chữ ký số</span> là điều kiện cần thiết để các chủ doanh nghiệp thực hiện các nghiệp vụ liên quan đến Hóa đơn điện tử (HĐĐT) một cách hợp lệ.
+                    </p>
+                    <p>
+                        KiotViet đã ra mắt tính năng đăng ký <span class="font-bold text-blue-600">Chữ ký số từ xa (RMS) KiotViet IntrustCA</span> trực tuyến, cho phép đăng ký và xác minh danh tính (eKYC) ngay trên hệ thống.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: LỢI ÍCH -->
+        <div class="slide flex-col items-center justify-center p-12">
+            <h2 class="text-5xl font-bold mb-16 text-center text-gradient animate-zoom-in">Lợi ích nổi bật</h2>
+            <div class="grid grid-cols-3 gap-8 w-full max-w-7xl px-4">
+                <!-- Card 1 -->
+                <div class="glass p-8 rounded-2xl text-center animate-zoom-in flex flex-col items-center" style="animation-delay: 0ms;"> <!-- Reset delay for sync zoom if wanted, or keep slightly staged -->
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-6 text-blue-600">
+                        <!-- Gift Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H4.5a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                        </svg>
                     </div>
-                    <div class="bg-green-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-                        <i class="fa-solid fa-rocket text-5xl text-green-600 mb-4"></i>
-                        <h3 class="text-2xl font-semibold text-green-900 mb-2">Nhanh chóng & Tiện lợi</h3>
-                        <p class="text-lg text-gray-700">Quy trình đăng ký hoàn toàn online, tích hợp eKYC giúp đơn giản hóa thủ tục, rút ngắn thời gian chờ đợi.</p>
+                    <h3 class="text-2xl font-bold text-blue-900 mb-2">Hoàn toàn miễn phí</h3>
+                    <p class="text-lg text-gray-700">KiotViet hỗ trợ chi phí đăng ký sử dụng ban đầu cho khách hàng.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="glass p-8 rounded-2xl text-center animate-zoom-in flex flex-col items-center" style="animation-delay: 0ms;">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6 text-green-600">
+                        <!-- Rocket Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                        </svg>
                     </div>
-                    <div class="bg-purple-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-                        <i class="fa-solid fa-shield-halved text-5xl text-purple-600 mb-4"></i>
-                        <h3 class="text-2xl font-semibold text-purple-900 mb-2">Tích hợp & Bảo mật</h3>
-                        <p class="text-lg text-gray-700">Giao dịch an toàn hơn, tích hợp trực tiếp trên KiotViet với xác thực mã PIN cho mỗi lần ký.</p>
+                    <h3 class="text-2xl font-bold text-green-900 mb-2">Nhanh chóng & Tiện lợi</h3>
+                    <p class="text-lg text-gray-700">Đăng ký online 100%, tích hợp eKYC rút ngắn thời gian chờ đợi.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="glass p-8 rounded-2xl text-center animate-zoom-in flex flex-col items-center" style="animation-delay: 0ms;">
+                    <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mb-6 text-purple-600">
+                        <!-- Shield Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-purple-900 mb-2">Tích hợp & Bảo mật</h3>
+                    <p class="text-lg text-gray-700">Tích hợp trực tiếp trên KiotViet với xác thực mã PIN cho mỗi lần ký.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: SECTION BREAK -->
+        <div class="slide flex-col items-center justify-center text-center p-12">
+            <div class="glass p-20 rounded-full animate-zoom-in w-[600px] h-[600px] flex flex-col items-center justify-center border-4 border-white/40">
+                <h2 class="text-3xl text-gray-500 uppercase tracking-widest mb-4">Phần II</h2>
+                <h1 class="text-6xl font-extrabold text-blue-700">Hướng dẫn<br>đăng ký</h1>
+                <p class="mt-4 text-2xl text-blue-500 font-medium">(Giao diện Điện thoại)</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: BƯỚC 1 (STANDALONE IMAGE) -->
+        <div class="slide flex-col items-center justify-center p-4">
+            <div class="w-full max-w-6xl animate-zoom-in flex flex-col h-full justify-center">
+                <h2 class="text-4xl font-bold text-blue-800 mb-4 text-center">1. Bắt đầu Khai báo thông tin</h2>
+                <p class="text-xl text-gray-600 mb-6 text-center">Vào <b>Nhiều hơn</b> → <b>Thông tin cửa hàng</b> → <b>Quản lý chữ ký số</b></p>
+                <div class="relative flex-1 flex items-center justify-center overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085517/CKSR_221025-1.png" 
+                         class="max-h-[75vh] w-auto rounded-xl shadow-2xl border-4 border-white object-contain bg-white">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: BƯỚC 1 - KHAI BÁO -->
+        <div class="slide flex-col items-center justify-start pt-8 pb-4 px-4">
+            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
+                <div class="text-center z-20 shrink-0">
+                    <h2 class="text-3xl font-bold text-blue-800">Khai báo thông tin doanh nghiệp</h2>
+                    <p class="text-xl text-gray-600 mt-2">Điền chính xác Tên và Mã số thuế trên GPKD.</p>
+                </div>
+                <div class="mt-4 relative z-10 flex flex-col items-center flex-1 overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085528/CKSR_221025-2.png" 
+                         class="object-contain max-h-full rounded-xl shadow-2xl border border-gray-200 bg-white">
+                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-4 font-medium mb-2">
+                        Giao diện khai báo thông tin
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <h2 class="text-4xl font-bold text-blue-800 mb-10">Nội dung chính</h2>
-                <div class="w-full max-w-6xl grid grid-cols-3 gap-8 text-left">
-                    <div class="bg-gray-100 p-6 rounded-lg">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-4">Phần 1: Giới thiệu chung</h3>
-                        <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
-                            <li>Tầm quan trọng của chữ ký số</li>
-                            <li>Lợi ích nổi bật</li>
-                        </ul>
-                    </div>
-                    <div class="bg-gray-100 p-6 rounded-lg">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-4">Phần 2: Hướng dẫn<br>(Điện thoại)</h3>
-                        <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
-                            <li>Khai báo thông tin</li>
-                            <li>Cập nhật thông tin</li>
-                            <li>Xác thực sinh trắc học (eKYC)</li>
-                            <li>Kích hoạt & Tạo mã PIN</li>
-                            <li>Hoàn tất</li>
-                        </ul>
-                    </div>
-                    <div class="bg-gray-100 p-6 rounded-lg">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-4">Phần 3: Thao tác<br>(Máy tính)</h3>
-                        <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
-                            <li>Khai báo thông tin</li>
-                            <li>Cập nhật thông tin</li>
-                        </ul>
+        <!-- SLIDE 7: BƯỚC 1 - GỢI Ý THÔNG TIN -->
+        <div class="slide flex-col items-center justify-start pt-8 pb-4 px-4">
+            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
+                <div class="text-center z-20 shrink-0">
+                    <h2 class="text-3xl font-bold text-blue-800">Hỗ trợ gợi ý nhanh</h2>
+                    <p class="text-xl text-gray-600 mt-2">Hệ thống tự động gợi ý thông tin khi gõ Tên hoặc MST.</p>
+                </div>
+                <div class="mt-4 relative z-10 flex flex-col items-center flex-1 overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085539/CKSR_221025-3.png" 
+                         class="object-contain max-h-full rounded-xl shadow-2xl border border-gray-200 bg-white">
+                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-4 font-medium mb-2">
+                        Tiện ích gợi ý thông tin
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <h2 class="text-5xl font-bold text-blue-800">II. Hướng dẫn đăng ký</h2>
-                <p class="mt-4 text-3xl text-gray-600">(Luồng chính trên điện thoại)</p>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">1. Khai báo thông tin đăng ký</h2>
-                <p class="text-2xl text-gray-700 leading-relaxed">Đầu tiên, chủ gian hàng (tài khoản Admin) đăng nhập ứng dụng KiotViet, chọn <span class="font-semibold text-blue-600">Nhiều hơn → Thông tin cửa hàng → Quản lý chữ ký số</span> và chạm <span class="font-semibold text-blue-600">Bắt đầu</span>.</p>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085517/CKSR_221025-1.png" class="h-[850px] w-auto object-contain" alt="Màn hình bắt đầu quy trình đăng ký chữ ký số.">
-                <p class="mt-4 text-lg text-gray-600 italic">Màn hình bắt đầu quy trình đăng ký chữ ký số.</p>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">1. Khai báo thông tin đăng ký (tiếp)</h2>
-                <p class="text-2xl text-gray-700 leading-relaxed">Tại đây, bạn cần khai báo các thông tin chi tiết.</p>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085528/CKSR_221025-2.png" class="h-[850px] w-auto object-contain" alt="Giao diện khai báo thông tin doanh nghiệp.">
-                <p class="mt-4 text-lg text-gray-600 italic">Giao diện khai báo thông tin doanh nghiệp.</p>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">Khai báo: Thông tin doanh nghiệp/hộ kinh doanh</h2>
-                <ul class="list-disc list-inside text-2xl text-gray-700 space-y-4">
-                    <li>Điền Tên, Mã số thuế đúng theo giấy phép.</li>
-                    <li>Chọn Tỉnh thành, Địa chỉ chi tiết.</li>
-                    <li>KiotViet hỗ trợ gợi ý nhanh thông tin khi gõ tên hoặc mã số thuế.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085539/CKSR_221025-3.png" class="h-[850px] w-auto object-contain" alt="Tiện ích gợi ý nhanh thông tin doanh nghiệp.">
-                <p class="mt-4 text-lg text-gray-600 italic">Tiện ích gợi ý nhanh thông tin doanh nghiệp.</p>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">Khai báo: Người thực hiện tờ khai</h2>
-                <p class="text-2xl text-gray-700 leading-relaxed">Chọn <span class="font-semibold text-blue-600">"Người đại diện pháp luật"</span> hoặc <span class="font-semibold text-blue-600">"Người được ủy quyền"</span>, điền thông tin và tải lên các giấy tờ cần thiết (ĐKKD, CCCD, Giấy ủy quyền...) tương ứng.</p>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085556/CKSR_221025-4.png" class="h-[850px] w-auto object-contain" alt="Lựa chọn vai trò người thực hiện tờ khai.">
-                <p class="mt-4 text-lg text-gray-600 italic">Lựa chọn vai trò người thực hiện tờ khai.</p>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-6xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">Chi tiết thông tin cần cung cấp</h2>
-                <div class="grid grid-cols-2 gap-8">
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold text-blue-900 mb-4">Người đại diện pháp luật</h3>
-                        <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
-                            <li>SĐT, Email, Họ tên</li>
-                            <li>Số CCCD/Hộ chiếu, Chức vụ</li>
-                            <li>Tải lên Giấy ĐKKD</li>
-                        </ul>
-                    </div>
-                    <div class="bg-green-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold text-green-900 mb-4">Người được ủy quyền</h3>
-                        <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
-                            <li>Thông tin tương tự</li>
-                            <li>Tải lên thêm Giấy ủy quyền</li>
-                            <li>Ảnh CCCD của người đại diện pháp luật</li>
-                        </ul>
+        <!-- SLIDE 8: BƯỚC 1 - NGƯỜI THỰC HIỆN -->
+        <div class="slide flex-col items-center justify-start pt-8 pb-4 px-4">
+            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
+                <div class="text-center z-20 shrink-0">
+                    <h2 class="text-3xl font-bold text-blue-800">Thông tin người thực hiện tờ khai</h2>
+                    <p class="text-xl text-gray-600 mt-2">Chọn vai trò (Đại diện pháp luật / Được ủy quyền) và tải ảnh giấy tờ.</p>
+                </div>
+                <div class="mt-4 relative z-10 flex flex-col items-center flex-1 overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085556/CKSR_221025-4.png" 
+                         class="object-contain max-h-full rounded-xl shadow-2xl border border-gray-200 bg-white">
+                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-4 font-medium mb-2">
+                        Chọn vai trò người ký
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-red-600 mb-8">Lưu ý quan trọng</h2>
-                <ul class="list-disc list-inside text-2xl text-gray-700 space-y-4">
-                    <li>Hồ sơ tải lên phải rõ nét, đủ 2 mặt, định dạng PDF/DOCX/JPG/PNG<br>(và dưới 5MB).</li>
-                    <li>Ưu tiên sử dụng hình ảnh chứng từ bản gốc. Bản photo công chứng cần nộp bổ sung bản cứng.</li>
+        <!-- SLIDE 9: LƯU Ý QUAN TRỌNG (TEXT ONLY) -->
+        <div class="slide flex-col items-center justify-center p-12">
+            <div class="glass p-12 rounded-3xl max-w-5xl w-full animate-zoom-in border-l-8 border-red-500">
+                <h2 class="text-4xl font-bold text-red-600 mb-8">Lưu ý quan trọng về Hồ sơ</h2>
+                <ul class="list-disc list-inside text-2xl text-gray-700 space-y-6">
+                    <li>Hồ sơ tải lên phải <b>rõ nét, đủ 2 mặt</b>.</li>
+                    <li>Định dạng chấp nhận: PDF, DOCX, JPG, PNG (Dung lượng < 5MB).</li>
+                    <li>Ưu tiên sử dụng hình ảnh <b>chứng từ bản gốc</b>.</li>
+                    <li>Nếu dùng bản photo công chứng, cần nộp bổ sung bản cứng về sau.</li>
                 </ul>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">Hoàn tất khai báo</h2>
-                <ul class="list-disc list-inside text-2xl text-gray-700 space-y-4">
-                    <li>Tích chọn vào hai ô đồng ý với điều khoản sử dụng.</li>
-                    <li>Nhấn <span class="font-semibold text-blue-600">"Khai báo"</span> và <span class="font-semibold text-blue-600">"Xác nhận"</span>.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085607/CKSR_221025-5.png" class="h-[850px] w-auto object-contain" alt="Màn hình xác nhận hoàn tất khai báo.">
-                <p class="mt-4 text-lg text-gray-600 italic">Màn hình xác nhận hoàn tất khai báo.</p>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">2. Cập nhật thông tin</h2>
-                <p class="text-2xl text-gray-700 leading-relaxed">Bạn có thể chỉnh sửa hồ sơ với các trạng thái: <span class="font-semibold"><br>Lưu tạm, Chờ xác minh, eKYC Không thành công, Từ chối</span>. <br>Trong Danh sách chữ ký số, chọn chứng thư cần sửa và nhấn <span class="font-semibold text-blue-600">Cập nhật</span>.</p>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085625/CKSR_221025-6.png" class="h-[850px] w-auto object-contain" alt="Giao diện danh sách chữ ký số để cập nhật.">
-                <p class="mt-4 text-lg text-gray-600 italic">Giao diện danh sách chữ ký số để cập nhật.</p>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085636/CKSR_221025-7.png" class="h-[850px] w-auto object-contain" alt="Nhấn nút Cập nhật để chỉnh sửa thông tin.">
-                <p class="mt-4 text-lg text-gray-600 italic">Nhấn nút Cập nhật để chỉnh sửa thông tin.</p>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">2. Cập nhật thông tin (tiếp)</h2>
-                <ul class="list-disc list-inside text-2xl text-gray-700 space-y-4">
-                    <li>Nếu bị từ chối, xem lý do và chỉnh sửa theo yêu cầu, sau đó gửi lại hồ sơ để xác thực lại.</li>
-                    <li>Sau khi chỉnh sửa lại thông tin, bạn chạm <span class="font-semibold text-blue-600">Cập nhật → Xác nhận</span>.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085647/CKSR_221025-8.png" class="h-[850px] w-auto object-contain" alt="Xác nhận sau khi đã cập nhật thông tin.">
-                <p class="mt-4 text-lg text-gray-600 italic">Xác nhận sau khi đã cập nhật thông tin.</p>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">3. Xác thực sinh trắc học (eKYC)</h2>
-                <p class="text-2xl text-gray-700 leading-relaxed">Sau khi khai báo, bạn cần thực hiện xác thực định danh ngay trên ứng dụng KiotViet bằng cách nhấn <span class="font-semibold text-blue-600">"Bắt đầu xác thực"</span>.</p>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085701/CKSR_221025-9.png" class="h-[850px] w-auto object-contain" alt="Màn hình bắt đầu quá trình xác thực eKYC.">
-                <p class="mt-4 text-lg text-gray-600 italic">Màn hình bắt đầu quá trình xác thực eKYC.</p>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper w-full max-w-6xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-12">Quy trình eKYC</h2>
-                <div class="flex justify-around items-center w-full text-center">
-                    <div class="flex flex-col items-center">
-                        <div class="bg-blue-600 text-white rounded-full h-20 w-20 flex items-center justify-center text-3xl font-bold mb-4">1</div>
-                        <h3 class="text-xl font-semibold">Chụp ảnh giấy tờ</h3>
-                        <p class="text-gray-600">CCCD/Hộ chiếu</p>
-                    </div>
-                    <div class="flex-1 border-t-4 border-blue-300 border-dashed mx-4"></div>
-                    <div class="flex flex-col items-center">
-                        <div class="bg-blue-600 text-white rounded-full h-20 w-20 flex items-center justify-center text-3xl font-bold mb-4">2</div>
-                        <h3 class="text-xl font-semibold">Quét chip NFC</h3>
-                        <p class="text-gray-600">(Nếu là CCCD gắn chip)</p>
-                    </div>
-                    <div class="flex-1 border-t-4 border-blue-300 border-dashed mx-4"></div>
-                    <div class="flex flex-col items-center">
-                        <div class="bg-blue-600 text-white rounded-full h-20 w-20 flex items-center justify-center text-3xl font-bold mb-4">3</div>
-                        <h3 class="text-xl font-semibold">Xác thực khuôn mặt</h3>
-                        <p class="text-gray-600">Theo hướng dẫn</p>
-                    </div>
-                    <div class="flex-1 border-t-4 border-blue-300 border-dashed mx-4"></div>
-                    <div class="flex flex-col items-center">
-                        <div class="bg-blue-600 text-white rounded-full h-20 w-20 flex items-center justify-center text-3xl font-bold mb-4">4</div>
-                        <h3 class="text-xl font-semibold">Hoàn tất</h3>
-                        <p class="text-gray-600">Gửi hồ sơ và chờ duyệt</p>
+        <!-- SLIDE 10: HOÀN TẤT KHAI BÁO -->
+        <div class="slide flex-col items-center justify-start pt-8 pb-4 px-4">
+            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
+                <div class="text-center z-20 shrink-0">
+                    <h2 class="text-3xl font-bold text-blue-800">Hoàn tất khai báo</h2>
+                    <p class="text-xl text-gray-600 mt-2">Tích chọn đồng ý điều khoản và nhấn "Khai báo".</p>
+                </div>
+                <div class="mt-4 relative z-10 flex flex-col items-center flex-1 overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085607/CKSR_221025-5.png" 
+                         class="object-contain max-h-full rounded-xl shadow-2xl border border-gray-200 bg-white">
+                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-4 font-medium mb-2">
+                        Xác nhận hoàn tất
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085720/CKSR_221025-10.png" class="h-[850px] w-auto object-contain" alt="Hướng dẫn chụp ảnh giấy tờ tùy thân.">
-                <p class="mt-4 text-lg text-gray-600 italic">Hướng dẫn chụp ảnh giấy tờ tùy thân.</p>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085735/CKSR_221025-11.png" class="h-[850px] w-auto object-contain" alt="Hướng dẫn quét chip NFC trên CCCD.">
-                <p class="mt-4 text-lg text-gray-600 italic">Hướng dẫn quét chip NFC trên CCCD.</p>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085751/CKSR_221025-12.png" class="h-[850px] w-auto object-contain" alt="Giao diện xác thực khuôn mặt và hoàn tất eKYC.">
-                <p class="mt-4 text-lg text-gray-600 italic">Giao diện xác thực khuôn mặt và hoàn tất eKYC.</p>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">4. Kích hoạt tài khoản và tạo mã PIN</h2>
-                <p class="text-2xl text-gray-700 leading-relaxed">Khi hồ sơ được duyệt, bạn sẽ nhận được thông báo qua Email và trên ứng dụng KiotViet.</p>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085810/CKSR_221025-13.png" class="h-[850px] w-auto object-contain" alt="Mẫu email thông báo hồ sơ được duyệt.">
-                <p class="mt-4 text-lg text-gray-600 italic">Mẫu email thông báo hồ sơ được duyệt.</p>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085823/CKSR_221025-14.png" class="h-[850px] w-auto object-contain" alt="Thông báo trong mục 'Quản lý chữ ký số'.">
-                <p class="mt-4 text-lg text-gray-600 italic">Thông báo trong mục "Quản lý chữ ký số".</p>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085839/CKSR_221025-15.png" class="h-[850px] w-auto object-contain" alt="Thông báo tại hộp thư trên màn hình Tổng quan.">
-                <p class="mt-4 text-lg text-gray-600 italic">Thông báo tại hộp thư trên màn hình Tổng quan.</p>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">Các cách để kích hoạt tài khoản</h2>
-                <ul class="list-decimal list-inside text-2xl text-gray-700 space-y-4">
-                    <li>Quét mã QR trong email bằng camera điện thoại đã đăng nhập app KiotViet.</li>
-                    <li>Chạm "Kích hoạt" trong mục Quản lý chữ ký số trên app.</li>
-                    <li>Chạm "Xác nhận ngay" từ thông báo trong Hộp thư của app.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085850/CKSR_221025-16.png" class="h-[850px] w-auto object-contain" alt="Hướng dẫn kích hoạt bằng cách quét mã QR.">
-                <p class="mt-4 text-lg text-gray-600 italic">Hướng dẫn kích hoạt bằng cách quét mã QR.</p>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085902/CKSR_221025-17.png" class="h-[850px] w-auto object-contain" alt="Kích hoạt từ màn hình chi tiết chữ ký số.">
-                <p class="mt-4 text-lg text-gray-600 italic">Kích hoạt từ màn hình chi tiết chữ ký số.</p>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085913/CKSR_221025-18.png" class="h-[850px] w-auto object-contain" alt="Kích hoạt từ thông báo trong hộp thư.">
-                <p class="mt-4 text-lg text-gray-600 italic">Kích hoạt từ thông báo trong hộp thư.</p>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper w-full max-w-6xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-12">Quy trình kích hoạt</h2>
-                <div class="flex justify-around items-center w-full text-center">
-                    <div class="flex flex-col items-center">
-                        <div class="bg-blue-600 text-white rounded-full h-20 w-20 flex items-center justify-center text-3xl font-bold mb-4">1</div>
-                        <h3 class="text-xl font-semibold">Bắt đầu</h3>
-                        <p class="text-gray-600">Chạm "Bắt đầu kích hoạt"</p>
-                    </div>
-                    <div class="flex-1 border-t-4 border-blue-300 border-dashed mx-4"></div>
-                    <div class="flex flex-col items-center">
-                        <div class="bg-blue-600 text-white rounded-full h-20 w-20 flex items-center justify-center text-3xl font-bold mb-4">2</div>
-                        <h3 class="text-xl font-semibold">Nhập OTP</h3>
-                        <p class="text-gray-600">Gửi đến SĐT đã đăng ký</p>
-                    </div>
-                    <div class="flex-1 border-t-4 border-blue-300 border-dashed mx-4"></div>
-                    <div class="flex flex-col items-center">
-                        <div class="bg-blue-600 text-white rounded-full h-20 w-20 flex items-center justify-center text-3xl font-bold mb-4">3</div>
-                        <h3 class="text-xl font-semibold">Tạo mã PIN</h3>
-                        <p class="text-gray-600">Nhập mã PIN 6 chữ số</p>
-                    </div>
-                    <div class="flex-1 border-t-4 border-blue-300 border-dashed mx-4"></div>
-                    <div class="flex flex-col items-center">
-                        <div class="bg-blue-600 text-white rounded-full h-20 w-20 flex items-center justify-center text-3xl font-bold mb-4">4</div>
-                        <h3 class="text-xl font-semibold">Xác nhận</h3>
-                        <p class="text-gray-600">Chạm "Xác nhận kích hoạt"</p>
+        <!-- SLIDE 11: CẬP NHẬT THÔNG TIN -->
+        <div class="slide flex-col items-center justify-start pt-8 pb-4 px-4">
+            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
+                <div class="text-center z-20 shrink-0">
+                    <h2 class="text-3xl font-bold text-blue-800">2. Cập nhật thông tin (Nếu cần)</h2>
+                    <p class="text-xl text-gray-600 mt-2">Chỉnh sửa hồ sơ khi ở trạng thái Lưu tạm, Từ chối hoặc eKYC thất bại.</p>
+                </div>
+                <div class="mt-4 relative z-10 flex flex-col items-center flex-1 overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085625/CKSR_221025-6.png" 
+                         class="object-contain max-h-full rounded-xl shadow-2xl border border-gray-200 bg-white">
+                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-4 font-medium mb-2">
+                        Danh sách hồ sơ chữ ký số
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085924/CKSR_221025-19.png" class="h-[850px] w-auto object-contain" alt="Các bước trong quy trình kích hoạt.">
-                <p class="mt-4 text-lg text-gray-600 italic">Các bước trong quy trình kích hoạt.</p>
+        <!-- SLIDE 12: EKYC INTRO -->
+        <div class="slide flex-col items-center justify-center p-12">
+            <div class="glass p-12 rounded-3xl w-full max-w-6xl animate-zoom-in">
+                <h2 class="text-4xl font-bold text-blue-800 mb-12 text-center">3. Quy trình xác thực sinh trắc học (eKYC)</h2>
+                <div class="grid grid-cols-4 gap-4 text-center">
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4">1</div>
+                        <h3 class="font-bold text-lg">Chụp ảnh giấy tờ</h3>
+                        <p class="text-sm text-gray-600">CCCD/Hộ chiếu</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4">2</div>
+                        <h3 class="font-bold text-lg">Quét chip NFC</h3>
+                        <p class="text-sm text-gray-600">CCCD gắn chip</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4">3</div>
+                        <h3 class="font-bold text-lg">Xác thực khuôn mặt</h3>
+                        <p class="text-sm text-gray-600">Quay trái/phải/giữa</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4">4</div>
+                        <h3 class="font-bold text-lg">Hoàn tất</h3>
+                        <p class="text-sm text-gray-600">Chờ duyệt</p>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085938/CKSR_221025-20.png" class="h-[850px] w-auto object-contain" alt="Thông báo kích hoạt chữ ký số thành công.">
-                <p class="mt-4 text-lg text-gray-600 italic">Thông báo kích hoạt chữ ký số thành công.</p>
+        <!-- SLIDE 13: EKYC - CHỤP ẢNH -->
+        <div class="slide flex-col items-center justify-start pt-8 pb-4 px-4">
+            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
+                <div class="text-center z-20 shrink-0">
+                    <h2 class="text-3xl font-bold text-blue-800">Bước 1: Chụp ảnh giấy tờ</h2>
+                    <p class="text-xl text-gray-600 mt-2">Đảm bảo ảnh rõ nét, không bị mất góc.</p>
+                </div>
+                <div class="mt-4 relative z-10 flex flex-col items-center flex-1 overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085720/CKSR_221025-10.png" 
+                         class="object-contain max-h-full rounded-xl shadow-2xl border border-gray-200 bg-white">
+                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-4 font-medium mb-2">
+                        Giao diện chụp ảnh CCCD
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">5. Hoàn tất đăng ký</h2>
-                <ul class="list-disc list-inside text-2xl text-gray-700 space-y-4">
-                    <li>Quy trình đã hoàn tất.</li>
-                    <li>Hệ thống sẽ gửi email chứa Số Serial của chứng thư số.</li>
-                    <li>Trạng thái trên KiotViet cập nhật thành <span class="font-semibold text-green-600">"Hoạt động"</span>.</li>
-                    <li>Bạn đã có thể bắt đầu sử dụng chữ ký số.</li>
-                </ul>
+        <!-- SLIDE 14: EKYC - NFC -->
+        <div class="slide flex-col items-center justify-start pt-8 pb-4 px-4">
+            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
+                <div class="text-center z-20 shrink-0">
+                    <h2 class="text-3xl font-bold text-blue-800">Bước 2: Quét chip NFC</h2>
+                    <p class="text-xl text-gray-600 mt-2">Đặt mặt sau điện thoại vào chip trên thẻ CCCD.</p>
+                </div>
+                <div class="mt-4 relative z-10 flex flex-col items-center flex-1 overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085735/CKSR_221025-11.png" 
+                         class="object-contain max-h-full rounded-xl shadow-2xl border border-gray-200 bg-white">
+                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-4 font-medium mb-2">
+                        Hướng dẫn quét NFC
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085954/CKSR_221025-21.png" class="h-[850px] w-auto object-contain" alt="Email thông báo Số Serial chứng thư số.">
-                <p class="mt-4 text-lg text-gray-600 italic">Email thông báo Số Serial chứng thư số.</p>
+        <!-- SLIDE 15: EKYC - FACE -->
+        <div class="slide flex-col items-center justify-start pt-8 pb-4 px-4">
+            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
+                <div class="text-center z-20 shrink-0">
+                    <h2 class="text-3xl font-bold text-blue-800">Bước 3: Xác thực khuôn mặt</h2>
+                    <p class="text-xl text-gray-600 mt-2">Thực hiện theo hướng dẫn trên màn hình để hoàn tất.</p>
+                </div>
+                <div class="mt-4 relative z-10 flex flex-col items-center flex-1 overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085751/CKSR_221025-12.png" 
+                         class="object-contain max-h-full rounded-xl shadow-2xl border border-gray-200 bg-white">
+                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-4 font-medium mb-2">
+                        Xác thực khuôn mặt thành công
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22090006/CKSR_221025-22.png" class="h-[850px] w-auto object-contain" alt="Trạng thái chữ ký số đã chuyển sang 'Hoạt động'.">
-                <p class="mt-4 text-lg text-gray-600 italic">Trạng thái chữ ký số đã chuyển sang "Hoạt động".</p>
+        <!-- SLIDE 16: KÍCH HOẠT - CÁC CÁCH -->
+        <div class="slide flex-col items-center justify-start pt-8 pb-4 px-4">
+            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
+                <div class="text-center z-20 shrink-0">
+                    <h2 class="text-3xl font-bold text-blue-800">4. Kích hoạt tài khoản</h2>
+                    <p class="text-xl text-gray-600 mt-2">Sau khi hồ sơ được duyệt, bạn có thể kích hoạt bằng cách quét mã QR từ Email hoặc trực tiếp trên App.</p>
+                </div>
+                <div class="mt-4 relative z-10 flex flex-col items-center flex-1 overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085850/CKSR_221025-16.png" 
+                         class="object-contain max-h-full rounded-xl shadow-2xl border border-gray-200 bg-white">
+                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-4 font-medium mb-2">
+                        Quét mã QR để kích hoạt
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <h2 class="text-5xl font-bold text-blue-800">III. Các thao tác thực hiện trên máy tính</h2>
-                <p class="mt-4 text-3xl text-gray-600">(Giao diện Web)</p>
+        <!-- SLIDE 17: TẠO MÃ PIN -->
+        <div class="slide flex-col items-center justify-start pt-8 pb-4 px-4">
+            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
+                <div class="text-center z-20 shrink-0">
+                    <h2 class="text-3xl font-bold text-blue-800">Tạo mã PIN bảo mật</h2>
+                    <p class="text-xl text-gray-600 mt-2">Nhập mã OTP xác thực và thiết lập mã PIN 6 chữ số.</p>
+                </div>
+                <div class="mt-4 relative z-10 flex flex-col items-center flex-1 overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085924/CKSR_221025-19.png" 
+                         class="object-contain max-h-full rounded-xl shadow-2xl border border-gray-200 bg-white">
+                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-4 font-medium mb-2">
+                        Quy trình thiết lập PIN
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">1. Khai báo thông tin đăng ký</h2>
-                <p class="text-2xl text-gray-700 leading-relaxed">Đăng nhập vào màn hình <span class="font-semibold text-blue-600">Quản lý → Hồ sơ gian hàng → Quản lý chữ ký số <br>→</span> nhấn <span class="font-semibold text-blue-600">"Bắt đầu"</span>.</p>
+        <!-- SLIDE 18: HOÀN TẤT -->
+        <div class="slide flex-col items-center justify-start pt-8 pb-4 px-4">
+            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
+                <div class="text-center z-20 shrink-0">
+                    <h2 class="text-3xl font-bold text-green-700">Đăng ký thành công!</h2>
+                    <p class="text-xl text-gray-600 mt-2">Trạng thái chứng thư chuyển sang <b>"Hoạt động"</b>.</p>
+                </div>
+                <div class="mt-4 relative z-10 flex flex-col items-center flex-1 overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22090006/CKSR_221025-22.png" 
+                         class="object-contain max-h-full rounded-xl shadow-2xl border border-gray-200 bg-white">
+                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-4 font-medium mb-2">
+                        Trạng thái: Hoạt động
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22090021/CKSR_221025-23.png" class="h-[850px] w-auto object-contain" alt="Truy cập mục Quản lý chữ ký số trên giao diện web.">
-                <p class="mt-4 text-lg text-gray-600 italic">Truy cập mục Quản lý chữ ký số trên giao diện web.</p>
+        <!-- SLIDE 19: SECTION BREAK WEB -->
+        <div class="slide flex-col items-center justify-center text-center p-12">
+            <div class="glass p-20 rounded-full animate-zoom-in w-[600px] h-[600px] flex flex-col items-center justify-center border-4 border-white/40">
+                <h2 class="text-3xl text-gray-500 uppercase tracking-widest mb-4">Phần III</h2>
+                <h1 class="text-6xl font-extrabold text-blue-700">Thao tác trên<br>Máy tính</h1>
+                <p class="mt-4 text-2xl text-blue-500 font-medium">(Giao diện Web)</p>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">Khai báo thông tin trên Web</h2>
-                <p class="text-2xl text-gray-700 leading-relaxed">Quy trình khai báo thông tin doanh nghiệp và người thực hiện tương tự như trên điện thoại.</p>
+        <!-- SLIDE 20: WEB - KHAI BÁO -->
+        <div class="slide flex-col items-center justify-start pt-8 pb-4 px-4">
+            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
+                <div class="text-center z-20 shrink-0">
+                    <h2 class="text-3xl font-bold text-blue-800">Khai báo thông tin trên Web</h2>
+                    <p class="text-xl text-gray-600 mt-2">Truy cập <b>Quản lý</b> → <b>Hồ sơ gian hàng</b> → <b>Quản lý chữ ký số</b>.</p>
+                </div>
+                <div class="mt-4 relative z-10 flex flex-col items-center flex-1 overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22090128/CKSR_221025-24.png" 
+                         class="object-contain max-h-full rounded-xl shadow-2xl border border-gray-200 bg-white">
+                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-4 font-medium mb-2">
+                        Giao diện khai báo trên Web
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22090128/CKSR_221025-24.png" class="h-[850px] w-auto object-contain" alt="Form khai báo thông tin trên giao diện web.">
-                <p class="mt-4 text-lg text-gray-600 italic">Form khai báo thông tin trên giao diện web.</p>
+        <!-- SLIDE 21: WEB - HOÀN TẤT & QR -->
+        <div class="slide flex-col items-center justify-start pt-8 pb-4 px-4">
+            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
+                <div class="text-center z-20 shrink-0">
+                    <h2 class="text-3xl font-bold text-blue-800">Chuyển tiếp sang Mobile</h2>
+                    <p class="text-xl text-gray-600 mt-2">Sau khi khai báo trên Web, quét mã QR để thực hiện eKYC trên điện thoại.</p>
+                </div>
+                <div class="mt-4 relative z-10 flex flex-col items-center flex-1 overflow-hidden">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22090059/CKSR_221025-28.png" 
+                         class="object-contain max-h-full rounded-xl shadow-2xl border border-gray-200 bg-white">
+                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-4 font-medium mb-2">
+                        Mã QR xác thực
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22090033/CKSR_221025-25.png" class="h-[850px] w-auto object-contain" alt="Tiện ích gợi ý thông tin doanh nghiệp trên web.">
-                <p class="mt-4 text-lg text-gray-600 italic">Tiện ích gợi ý thông tin doanh nghiệp trên web.</p>
+        <!-- SLIDE 22: CẢM ƠN -->
+        <div class="slide flex-col items-center justify-center text-center p-12">
+            <div class="glass p-16 rounded-3xl animate-zoom-in max-w-4xl">
+                <h1 class="text-5xl font-extrabold text-blue-800 mb-6">CẢM ƠN BẠN ĐÃ THEO DÕI!</h1>
+                <p class="text-2xl text-gray-600">Chúc bạn kinh doanh thành công cùng KiotViet</p>
             </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22090140/CKSR_221025-26.png" class="h-[850px] w-auto object-contain" alt="Khai báo thông tin Người đại diện pháp luật trên web.">
-                <p class="mt-4 text-lg text-gray-600 italic">Khai báo thông tin Người đại diện pháp luật trên web.</p>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22090153/CKSR_221025-27.png" class="h-[850px] w-auto object-contain" alt="Khai báo thông tin Người được ủy quyền trên web.">
-                <p class="mt-4 text-lg text-gray-600 italic">Khai báo thông tin Người được ủy quyền trên web.</p>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">Hoàn tất khai báo trên Web</h2>
-                <p class="text-2xl text-gray-700 leading-relaxed">Sau khi khai báo và xác nhận, hệ thống sẽ hiển thị mã QR để bạn tiếp tục xác thực eKYC trên ứng dụng di động.</p>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22090059/CKSR_221025-28.png" class="h-[850px] w-auto object-contain" alt="Màn hình hiển thị mã QR để chuyển sang xác thực trên điện thoại.">
-                <p class="mt-4 text-lg text-gray-600 italic">Màn hình hiển thị mã QR để chuyển sang xác thực trên điện thoại.</p>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22090113/CKSR_221025-29.png" class="h-[850px] w-auto object-contain" alt="Minh họa quá trình quét mã QR bằng điện thoại.">
-                <p class="mt-4 text-lg text-gray-600 italic">Minh họa quá trình quét mã QR bằng điện thoại.</p>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">2. Cập nhật thông tin</h2>
-                <ul class="list-disc list-inside text-2xl text-gray-700 space-y-4">
-                    <li>Bạn có thể chỉnh sửa hồ sơ với các trạng thái tương tự.</li>
-                    <li>Truy cập Danh sách chữ ký số, chọn chứng thư cần sửa và nhấn "Cập nhật".</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22090211/CKSR_221025-30.png" class="h-[850px] w-auto object-contain" alt="Truy cập danh sách chứng thư số để cập nhật.">
-                <p class="mt-4 text-lg text-gray-600 italic">Truy cập danh sách chứng thư số để cập nhật.</p>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22090221/CKSR_221025-31.png" class="h-[850px] w-auto object-contain" alt="Nhấn nút Cập nhật trong chi tiết chứng thư.">
-                <p class="mt-4 text-lg text-gray-600 italic">Nhấn nút Cập nhật trong chi tiết chứng thư.</p>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">2. Cập nhật thông tin (tiếp)</h2>
-                <ul class="list-disc list-inside text-2xl text-gray-700 space-y-4">
-                    <li>Xem lý do bị từ chối và chỉnh sửa theo yêu cầu.</li>
-                    <li>Nhấn "Cập nhật" → "Xác nhận" để gửi lại hồ sơ và nhận mã QR mới để xác thực lại.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22090235/CKSR_221025-32.png" class="h-[850px] w-auto object-contain" alt="Màn hình xác nhận sau khi cập nhật thông tin trên web.">
-                <p class="mt-4 text-lg text-gray-600 italic">Màn hình xác nhận sau khi cập nhật thông tin trên web.</p>
-            </div>
-        </section>
-
-        <!-- Slide Bìa/Kết thúc -->
-        <section class="slide relative bg-gradient-to-br from-blue-700 to-blue-900 flex justify-center items-center">
-            <!-- LỚP LOGO (OVERLAY) -->
-            <img class="absolute top-[150px] left-1/2 -translate-x-1/2 h-12 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg">
-            
-            <!-- LỚP NỘI DUNG (KHUNG VIỀN) -->
-            <div class="w-[calc(100%-100px)] h-[calc(100%-100px)] border-4 border-white rounded-xl flex flex-col justify-center items-center p-8">
-                <!-- TOÀN BỘ NỘI DUNG VĂN BẢN (TIÊU ĐỀ, TÊN...) ĐẶT Ở ĐÂY -->
-                <h1 class="text-6xl font-bold text-white">Cảm ơn bạn đã theo dõi!</h1>
-                <p class="mt-4 text-2xl text-blue-200">Chúc bạn kinh doanh hiệu quả cùng KiotViet</p>
-            </div>
-        </section>
+        </div>
 
     </div>
 
@@ -775,32 +435,53 @@
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
-        function showSlide(index) {
-            slides.forEach((slide, i) => { slide.classList.toggle('active', i === index); });
+
+        function resetAnimations(slide) {
+            const animatedElements = slide.querySelectorAll('.animate-zoom-in');
+            animatedElements.forEach(el => {
+                el.style.animation = 'none';
+                el.offsetHeight; 
+                el.style.animation = '';
+            });
         }
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.add('active');
+                    resetAnimations(slide);
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+        }
+
         function nextSlide() {
             currentSlide = (currentSlide + 1) % totalSlides;
             showSlide(currentSlide);
         }
+
         function prevSlide() {
             currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
             showSlide(currentSlide);
         }
+
         function toggleFullScreen() {
             if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => {
-                    alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-                });
+                document.documentElement.requestFullscreen().catch(err => alert(`Error: ${err.message}`));
             } else if (document.exitFullscreen) {
                 document.exitFullscreen();
             }
         }
+
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') { nextSlide(); } 
-            else if (e.key === 'ArrowLeft') { prevSlide(); } 
-            else if (e.key.toLowerCase() === 'f') { toggleFullScreen(); }
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            else if (e.key === 'ArrowLeft') prevSlide();
+            else if (e.key.toLowerCase() === 'f') toggleFullScreen();
+            else if (e.key === '1') { currentSlide = 0; showSlide(0); }
         });
-        if (totalSlides > 0) { showSlide(currentSlide); }
+
+        if (totalSlides > 0) showSlide(currentSlide);
     </script>
 </body>
 </html>
