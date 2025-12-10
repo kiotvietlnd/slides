@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quy trình Hóa đơn điện tử - KiotViet</title>
+    <!-- TAILWIND CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    colors: { navy: { 900: '#1e3a8a' } },
                     animation: {
                         'blob': 'blob 10s infinite',
-                        'fade-up': 'fadeUp 0.8s ease-out forwards',
-                        'zoom-in': 'zoomIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards', /* Soft Ease Out */
+                        'zoom-in': 'zoomIn 0.5s ease-out forwards',
                     },
                     keyframes: {
                         blob: {
@@ -21,12 +25,8 @@
                             '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
                             '100%': { transform: 'translate(0px, 0px) scale(1)' },
                         },
-                        fadeUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
                         zoomIn: {
-                            '0%': { opacity: '0', transform: 'scale(0.96)' }, /* Zoom nhẹ từ 96% */
+                            '0%': { opacity: '0', transform: 'scale(0.95)' },
                             '100%': { opacity: '1', transform: 'scale(1)' },
                         }
                     }
@@ -36,356 +36,256 @@
     </script>
     <style>
         html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; background-color: #f8fafc; }
-        .slide { display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.5s ease-in-out; }
+        
+        .slide { display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.4s ease-in-out; z-index: 10; flex-direction: column; }
         .slide.active { display: flex; opacity: 1; }
+        
+        /* GLASS EFFECT */
         .glass {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            background: rgba(255, 255, 255, 0.7); 
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
         }
-        .text-gradient {
-            background: linear-gradient(to right, #1e3a8a, #0ea5e9);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        /* Hide animations initially */
-        .animate-fade-up, .animate-zoom-in { opacity: 0; } 
-        .slide.active .animate-fade-up, .slide.active .animate-zoom-in { animation-play-state: running; }
+
+        #global-logo { position: fixed; top: 24px; left: 32px; height: 36px; z-index: 9999; transition: opacity 0.3s ease; }
+        .animate-zoom-in { opacity: 0; }
+        .slide.active .animate-zoom-in { animation-play-state: running; }
     </style>
 </head>
-<body class="text-gray-800 relative selection:bg-blue-200">
+<body class="text-gray-800 relative select-none cursor-none">
 
-    <!-- Background Blobs (Retail: Blue + Cyan + Sky) -->
+    <!-- 1. LOGO -->
+    <img id="global-logo" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+
+    <!-- 2. BACKGROUND (Retail: Blue + Cyan) -->
     <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-0 left-0 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
-        <div class="absolute top-0 right-0 w-96 h-96 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
-        <div class="absolute -bottom-32 left-20 w-96 h-96 bg-sky-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-4000"></div>
+        <!-- Blob 1: Blue -->
+        <div class="absolute top-0 left-0 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob"></div>
+        <!-- Blob 2: Cyan (Retail) -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-cyan-400 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-2000"></div>
+        <!-- Blob 3: Light Blue -->
+        <div class="absolute -bottom-32 left-20 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-4000"></div>
     </div>
 
+    <!-- 3. CONTAINER -->
     <div id="slide-container" class="relative z-10 w-full h-full flex items-center justify-center">
 
-        <!-- SLIDE 1: BÌA (Giữ nguyên Zoom-in) -->
-        <div class="slide flex-col items-center justify-center text-center p-12">
-            <div class="glass p-16 rounded-3xl max-w-5xl animate-zoom-in relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-600 to-cyan-400"></div>
-                <img class="h-16 w-auto mx-auto mb-10" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
-                <h1 class="text-6xl font-extrabold mb-6 leading-tight text-gradient">Quy trình triển khai<br>Hóa đơn điện tử</h1>
-                <p class="text-3xl text-gray-600 font-light mb-8">(Ngành Bán buôn, Bán lẻ)</p>
-                <div class="inline-block px-8 py-3 rounded-full bg-blue-50 text-blue-800 font-semibold text-lg border border-blue-100">
-                    Giải pháp tổng thể & Toàn diện
+        <!-- SLIDE 1: BÌA -->
+        <div class="slide flex items-center justify-center p-8">
+            <div class="bg-white/80 backdrop-blur-xl p-12 rounded-3xl shadow-2xl border border-white/50 max-w-4xl w-full text-center animate-zoom-in">
+                <h1 class="text-5xl font-extrabold text-blue-900 mb-6 leading-tight">QUY TRÌNH HÓA ĐƠN ĐIỆN TỬ</h1>
+                <div class="h-1.5 w-24 bg-blue-600 mx-auto rounded-full mb-6"></div>
+                <p class="text-xl text-gray-600 font-medium">Giải pháp tổng thể Ngành Bán buôn & Bán lẻ</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: GIỚI THIỆU CHUNG -->
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Giải pháp Tổng thể</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
+                <!-- Concept -->
+                <div class="bg-white/80 p-8 rounded-2xl shadow-lg border border-white/50 col-span-2 animate-zoom-in delay-100">
+                    <p class="text-xl text-gray-700 leading-relaxed text-center">
+                        Bộ giải pháp bao gồm: 
+                        <span class="font-bold text-blue-600">Phần mềm bán hàng</span>, 
+                        <span class="font-bold text-blue-600">Hóa đơn điện tử</span>, 
+                        <span class="font-bold text-blue-600">Chữ ký số</span>. 
+                        Hỗ trợ tự động hóa Sổ kế toán và Tờ khai thuế, giúp vận hành đúng quy định pháp luật.
+                    </p>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 2: GIỚI THIỆU -->
-        <div class="slide flex-col items-center justify-center p-12">
-            <div class="glass p-12 rounded-3xl max-w-5xl w-full animate-zoom-in">
-                <h2 class="text-4xl font-bold mb-8 text-blue-800 border-l-8 border-blue-600 pl-6">I. Giới thiệu chung</h2>
-                <p class="text-2xl text-gray-700 leading-relaxed text-justify">
-                    Để đáp ứng yêu cầu pháp lý, KiotViet cung cấp bộ giải pháp tổng thể bao gồm 
-                    <span class="font-bold text-blue-600">Phần mềm bán hàng</span>, 
-                    <span class="font-bold text-blue-600">Hóa đơn điện tử</span>, 
-                    <span class="font-bold text-blue-600">Chữ ký số</span>, 
-                    và các tính năng tự động cho Sổ kế toán, Tờ khai thuế. Giải pháp giúp bạn vận hành đúng quy định một cách đơn giản và hiệu quả.
-                </p>
-            </div>
-        </div>
-
-        <!-- SLIDE 3: CÁC THÀNH PHẦN CỐT LÕI (Giữ Fade-up Staggered vì đây là các khối rời) -->
-        <div class="slide flex-col items-center justify-center p-12">
-            <h2 class="text-5xl font-bold mb-16 text-center text-gradient animate-zoom-in">Các thành phần cốt lõi</h2>
-            <div class="grid grid-cols-3 gap-8 w-full max-w-7xl px-4">
-                <!-- Card 1 -->
-                <div class="glass p-8 rounded-2xl text-center animate-zoom-in flex flex-col items-center hover:shadow-xl transition-shadow duration-300" style="animation-delay: 100ms;">
-                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-6 text-blue-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
-                        </svg>
+        <!-- SLIDE 3: 3 THÀNH PHẦN CỐT LÕI -->
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Thành phần Cốt lõi</h2>
+            <div class="grid grid-cols-3 gap-6 w-full max-w-6xl">
+                <!-- Item 1 -->
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex flex-col items-center text-center animate-zoom-in delay-100">
+                    <div class="w-16 h-16 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 mb-4">
+                        <i class="fa-solid fa-cash-register text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Phần mềm máy tính tiền</h3>
-                    <p class="text-lg text-gray-600">Nơi thực hiện giao dịch và là điểm khởi tạo để phát hành hóa đơn.</p>
+                    <h3 class="text-xl font-bold text-gray-800">PM Máy tính tiền</h3>
+                    <p class="text-gray-600 text-sm mt-2">Nơi thực hiện giao dịch và khởi tạo hóa đơn.</p>
                 </div>
-                <!-- Card 2 -->
-                <div class="glass p-8 rounded-2xl text-center animate-zoom-in flex flex-col items-center hover:shadow-xl transition-shadow duration-300" style="animation-delay: 200ms;">
-                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6 text-green-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                        </svg>
+                <!-- Item 2 -->
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex flex-col items-center text-center animate-zoom-in delay-200">
+                    <div class="w-16 h-16 bg-green-100/80 rounded-full flex items-center justify-center text-green-600 mb-4">
+                        <i class="fa-solid fa-file-invoice text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Phần mềm HĐĐT</h3>
-                    <p class="text-lg text-gray-600">Nơi quản lý, lưu trữ và xử lý hóa đơn (KiotViet eInvoice, MISA...).</p>
+                    <h3 class="text-xl font-bold text-gray-800">Phần mềm HĐĐT</h3>
+                    <p class="text-gray-600 text-sm mt-2">Quản lý, lưu trữ và xử lý hóa đơn tập trung.</p>
                 </div>
-                <!-- Card 3 -->
-                <div class="glass p-8 rounded-2xl text-center animate-zoom-in flex flex-col items-center hover:shadow-xl transition-shadow duration-300" style="animation-delay: 300ms;">
-                    <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mb-6 text-purple-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                        </svg>
+                <!-- Item 3 -->
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex flex-col items-center text-center animate-zoom-in delay-300">
+                    <div class="w-16 h-16 bg-purple-100/80 rounded-full flex items-center justify-center text-purple-600 mb-4">
+                        <i class="fa-solid fa-signature text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Chữ ký số</h3>
-                    <p class="text-lg text-gray-600">Công cụ bắt buộc để thực hiện giao dịch điện tử (KiotViet IntrustCA / USB Token).</p>
+                    <h3 class="text-xl font-bold text-gray-800">Chữ ký số</h3>
+                    <p class="text-gray-600 text-sm mt-2">Công cụ bắt buộc để ký và thực hiện giao dịch điện tử.</p>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 4: QUY TRÌNH TỔNG QUAN -->
-        <div class="slide flex-col items-center justify-center p-12">
-            <div class="glass p-12 rounded-3xl w-full max-w-6xl animate-zoom-in">
-                <h2 class="text-4xl font-bold text-blue-800 mb-12 text-center">II. Quy trình triển khai tổng quan</h2>
-                <div class="grid grid-cols-2 gap-12">
-                    <div class="bg-blue-50/50 border border-blue-200 p-8 rounded-2xl">
-                        <h3 class="text-3xl font-bold text-blue-900 mb-4">Giai đoạn 1:<br>Thiết lập ban đầu</h3>
-                        <p class="text-xl text-gray-700">Bao gồm 7 bước cần thực hiện một lần duy nhất khi bắt đầu triển khai.</p>
-                    </div>
-                    <div class="bg-green-50/50 border border-green-200 p-8 rounded-2xl">
-                        <h3 class="text-3xl font-bold text-green-900 mb-4">Giai đoạn 2:<br>Vận hành hàng ngày</h3>
-                        <p class="text-xl text-gray-700">Bao gồm 4 thao tác cửa hàng sẽ thực hiện thường xuyên trong kinh doanh.</p>
-                    </div>
+        <!-- SLIDE 4: TỔNG QUAN QUY TRÌNH -->
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Lộ trình Triển khai</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
+                <div class="bg-blue-50 border-2 border-blue-200 p-8 rounded-2xl animate-zoom-in delay-100">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">Giai đoạn 1: Thiết lập</h3>
+                    <p class="text-gray-700">Thực hiện <span class="font-bold">một lần duy nhất</span> ban đầu. Bao gồm 7 bước cài đặt cấu hình.</p>
+                </div>
+                <div class="bg-green-50 border-2 border-green-200 p-8 rounded-2xl animate-zoom-in delay-200">
+                    <h3 class="text-2xl font-bold text-green-800 mb-4">Giai đoạn 2: Vận hành</h3>
+                    <p class="text-gray-700">Thực hiện <span class="font-bold">hàng ngày</span>. Bao gồm 4 thao tác bán hàng & quản lý.</p>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 5: LỘ TRÌNH CHI TIẾT -->
-        <div class="slide flex-col items-center justify-center p-12">
-            <div class="glass p-10 rounded-3xl w-full max-w-7xl animate-zoom-in h-[85vh] flex flex-col">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8 text-center shrink-0">Lộ trình triển khai chi tiết</h2>
-                <div class="grid grid-cols-2 gap-8 grow overflow-hidden">
-                    <div class="flex flex-col h-full">
-                        <div class="bg-blue-100 p-4 rounded-t-xl border-b border-blue-200">
-                            <h3 class="text-2xl font-bold text-blue-800">A. Giai đoạn 1 (Thiết lập)</h3>
-                        </div>
-                        <div class="bg-white/50 p-6 rounded-b-xl grow border border-blue-100">
-                            <ol class="list-decimal list-inside text-xl text-gray-700 space-y-3 font-medium">
-                                <li class="p-2 hover:bg-white rounded">Đăng ký Chữ ký số</li>
-                                <li class="p-2 hover:bg-white rounded">Thiết lập Thuế VAT</li>
-                                <li class="p-2 hover:bg-white rounded">Đăng ký KiotViet eInvoice</li>
-                                <li class="p-2 hover:bg-white rounded">Thiết lập CKS (trên eInvoice)</li>
-                                <li class="p-2 hover:bg-white rounded">Lập Tờ khai HĐĐT</li>
-                                <li class="p-2 hover:bg-white rounded">Tạo mẫu hóa đơn</li>
-                                <li class="p-2 hover:bg-white rounded">Kết nối phần mềm</li>
-                            </ol>
-                        </div>
-                    </div>
-                    <div class="flex flex-col h-full">
-                        <div class="bg-green-100 p-4 rounded-t-xl border-b border-green-200">
-                            <h3 class="text-2xl font-bold text-green-800">B. Giai đoạn 2 (Vận hành)</h3>
-                        </div>
-                        <div class="bg-white/50 p-6 rounded-b-xl grow border border-green-100">
-                            <ol class="list-decimal list-inside text-xl text-gray-700 space-y-3 font-medium" start="8">
-                                <li class="p-2 hover:bg-white rounded">Phát hành HĐĐT</li>
-                                <li class="p-2 hover:bg-white rounded">Quản lý HĐĐT</li>
-                                <li class="p-2 hover:bg-white rounded">Quản lý Sổ kế toán</li>
-                                <li class="p-2 hover:bg-white rounded">Quản lý Tờ khai thuế</li>
-                            </ol>
-                        </div>
-                    </div>
+        <!-- SLIDE 5: BRIDGE CHAPTER 1 -->
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-blue-600 pr-12 animate-zoom-in">
+                    <p class="text-xl text-gray-500 uppercase tracking-widest mb-2">Giai đoạn 1</p>
+                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight">Thiết Lập Ban Đầu</h2>
+                </div>
+                <div class="flex-1 animate-zoom-in" style="animation-delay: 0.1s;">
+                    <ul class="space-y-4 text-lg text-gray-800 font-medium">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-blue-600"></i> Đăng ký Chữ ký số</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-blue-600"></i> Thiết lập Thuế VAT</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-blue-600"></i> Đăng ký KiotViet eInvoice</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-blue-600"></i> Thiết lập CKS trên eInvoice</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-blue-600"></i> Lập Tờ khai HĐĐT</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-blue-600"></i> Tạo mẫu hóa đơn</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-blue-600"></i> Kết nối phần mềm</li>
+                    </ul>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 6: TITLE GIAI ĐOẠN 1 -->
-        <div class="slide flex-col items-center justify-center text-center p-12">
-            <div class="glass p-20 rounded-full animate-zoom-in w-[600px] h-[600px] flex flex-col items-center justify-center border-4 border-white/40">
-                <h2 class="text-3xl text-gray-500 uppercase tracking-widest mb-4">Phần A</h2>
-                <h1 class="text-6xl font-extrabold text-blue-700">Thiết lập<br>ban đầu</h1>
+        <!-- SLIDE 6: BƯỚC 1 -->
+        <div class="slide glass flex flex-col items-center justify-start pt-8 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Bước 1: Đăng ký Chữ ký số</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Chuẩn bị công cụ ký số để bắt đầu.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085625/CKSR_221025-6.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
             </div>
         </div>
 
-        <!-- SLIDE 7: BƯỚC 1 (ẢNH ĐỘC LẬP - STANDALONE) -->
-        <div class="slide flex-col items-center justify-center p-4">
-            <div class="w-full max-w-6xl animate-zoom-in flex flex-col h-full justify-center">
-                <h2 class="text-4xl font-bold text-blue-800 mb-6 text-center">Bước 1: Đăng ký Chữ ký số</h2>
-                <div class="relative flex-1 flex items-center justify-center overflow-hidden">
-                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085625/CKSR_221025-6.png" 
-                         class="max-h-[80vh] w-auto rounded-xl shadow-2xl border-4 border-white object-contain bg-white">
-                </div>
+        <!-- SLIDE 7: BƯỚC 2 -->
+        <div class="slide glass flex flex-col items-center justify-start pt-8 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Bước 2: Thiết lập Thuế VAT</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Cấu hình thuế suất phù hợp với mô hình kinh doanh.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23104111/TLVAT_231025-2.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
             </div>
         </div>
 
-        <!-- SLIDE 8: BƯỚC 2 (ĐỒNG BỘ ZOOM IN) -->
-        <div class="slide flex-col items-center justify-start pt-10 pb-4 px-4">
-            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
-                <div class="text-center z-20">
-                    <h2 class="text-3xl font-bold text-blue-800">Bước 2: Thiết lập Thuế VAT</h2>
-                    <p class="text-xl text-gray-600 mt-2 max-w-4xl mx-auto">Cấu hình các thiết lập thuế trong KiotViet đúng mô hình kinh doanh.</p>
-                </div>
-                <div class="mt-6 relative z-10 flex flex-col items-center">
-                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23104111/TLVAT_231025-2.png" 
-                         class="max-h-[65vh] w-auto rounded-xl shadow-2xl border border-gray-200 object-contain bg-white">
-                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-6 font-medium">
-                        Giao diện thiết lập Thuế VAT
-                    </div>
-                </div>
+        <!-- SLIDE 8: BƯỚC 3 -->
+        <div class="slide glass flex flex-col items-center justify-start pt-8 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Bước 3: Đăng ký KiotViet eInvoice</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Khởi tạo tài khoản hóa đơn điện tử.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23082012/DKHDDT-8.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
             </div>
         </div>
 
-        <!-- SLIDE 9: BƯỚC 3 (ĐỒNG BỘ ZOOM IN) -->
-        <div class="slide flex-col items-center justify-start pt-10 pb-4 px-4">
-            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
-                <div class="text-center z-20">
-                    <h2 class="text-3xl font-bold text-blue-800">Bước 3: Đăng ký KiotViet eInvoice</h2>
-                    <p class="text-xl text-gray-600 mt-2 max-w-4xl mx-auto">Đăng ký tài khoản Hóa đơn điện tử ngay trên phần mềm KiotViet.</p>
-                </div>
-                <div class="mt-6 relative z-10 flex flex-col items-center">
-                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23082012/DKHDDT-8.png" 
-                         class="max-h-[65vh] w-auto rounded-xl shadow-2xl border border-gray-200 object-contain bg-white">
-                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-6 font-medium">
-                        Thông báo đăng ký thành công
-                    </div>
-                </div>
+        <!-- SLIDE 9: BƯỚC 4 -->
+        <div class="slide glass flex flex-col items-center justify-start pt-8 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Bước 4: Thiết lập CKS (eInvoice)</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Liên kết chữ ký số để ký tờ khai và hóa đơn.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24014807/TLCKS-2.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
             </div>
         </div>
 
-        <!-- SLIDE 10: BƯỚC 4 (ĐỒNG BỘ ZOOM IN) -->
-        <div class="slide flex-col items-center justify-start pt-10 pb-4 px-4">
-            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
-                <div class="text-center z-20">
-                    <h2 class="text-3xl font-bold text-blue-800">Bước 4: Thiết lập Chữ ký số (trên eInvoice)</h2>
-                    <p class="text-xl text-gray-600 mt-2 max-w-4xl mx-auto">Liên kết chữ ký số để có thể lập tờ khai và ký hóa đơn.</p>
-                </div>
-                <div class="mt-6 relative z-10 flex flex-col items-center">
-                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24014807/TLCKS-2.png" 
-                         class="max-h-[65vh] w-auto rounded-xl shadow-2xl border border-gray-200 object-contain bg-white">
-                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-6 font-medium">
-                        Giao diện thiết lập CKS trên eInvoice
-                    </div>
-                </div>
+        <!-- SLIDE 10: BƯỚC 5 -->
+        <div class="slide glass flex flex-col items-center justify-start pt-8 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Bước 5: Lập Tờ khai HĐĐT</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Gửi tờ khai đăng ký sử dụng đến Cơ quan Thuế.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23094725/TKT_231025-6.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
             </div>
         </div>
 
-        <!-- SLIDE 11: BƯỚC 5 (ĐỒNG BỘ ZOOM IN) -->
-        <div class="slide flex-col items-center justify-start pt-10 pb-4 px-4">
-            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
-                <div class="text-center z-20">
-                    <h2 class="text-3xl font-bold text-blue-800">Bước 5: Lập Tờ khai HĐĐT</h2>
-                    <p class="text-xl text-gray-600 mt-2 max-w-4xl mx-auto">Lập và nộp tờ khai đăng ký sử dụng HĐĐT đến Cơ quan Thuế.</p>
+        <!-- SLIDE 11: BƯỚC 6 -->
+        <div class="slide glass flex flex-col items-center justify-start pt-8 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Bước 6: Tạo mẫu hóa đơn</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Lựa chọn và thiết lập mẫu hóa đơn sử dụng.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22095308/MIKVE_221025-2.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
+            </div>
+        </div>
+
+        <!-- SLIDE 12: BƯỚC 7 -->
+        <div class="slide glass flex flex-col items-center justify-start pt-8 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Bước 7: Kết nối Phần mềm</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Đồng bộ KiotViet Retail với hệ thống HĐĐT.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23074509/hdsd-kiotviet-retail-google-docs-2.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
+            </div>
+        </div>
+
+        <!-- SLIDE 13: BRIDGE CHAPTER 2 -->
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-green-600 pr-12 animate-zoom-in">
+                    <p class="text-xl text-gray-500 uppercase tracking-widest mb-2">Giai đoạn 2</p>
+                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight">Vận Hành Hàng Ngày</h2>
                 </div>
-                <div class="mt-6 relative z-10 flex flex-col items-center">
-                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23094725/TKT_231025-6.png" 
-                         class="max-h-[65vh] w-auto rounded-xl shadow-2xl border border-gray-200 object-contain bg-white">
-                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-6 font-medium">
-                        Giao diện lập Tờ khai HĐĐT
-                    </div>
+                <div class="flex-1 animate-zoom-in" style="animation-delay: 0.1s;">
+                    <ul class="space-y-6 text-lg text-gray-800 font-medium">
+                        <li class="flex items-center gap-4"><i class="fa-solid fa-play text-green-600"></i> Phát hành Hóa đơn điện tử</li>
+                        <li class="flex items-center gap-4"><i class="fa-solid fa-play text-green-600"></i> Quản lý & Xử lý sai sót</li>
+                        <li class="flex items-center gap-4"><i class="fa-solid fa-play text-green-600"></i> Quản lý Sổ kế toán</li>
+                        <li class="flex items-center gap-4"><i class="fa-solid fa-play text-green-600"></i> Quản lý Tờ khai thuế</li>
+                    </ul>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 12: BƯỚC 6 (ĐỒNG BỘ ZOOM IN) -->
-        <div class="slide flex-col items-center justify-start pt-10 pb-4 px-4">
-            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
-                <div class="text-center z-20">
-                    <h2 class="text-3xl font-bold text-blue-800">Bước 6: Tạo mẫu hóa đơn</h2>
-                    <p class="text-xl text-gray-600 mt-2 max-w-4xl mx-auto">Tạo mẫu hóa đơn điện tử sẽ sử dụng trên hệ thống.</p>
-                </div>
-                <div class="mt-6 relative z-10 flex flex-col items-center">
-                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22095308/MIKVE_221025-2.png" 
-                         class="max-h-[65vh] w-auto rounded-xl shadow-2xl border border-gray-200 object-contain bg-white">
-                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-6 font-medium">
-                        Thư viện mẫu hóa đơn
-                    </div>
-                </div>
+        <!-- SLIDE 14: BƯỚC 8 -->
+        <div class="slide glass flex flex-col items-center justify-start pt-8 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Bước 8: Phát hành HĐĐT</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Thực hiện ngay trên màn hình bán hàng.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23075559/PHHDT-3.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
             </div>
         </div>
 
-        <!-- SLIDE 13: BƯỚC 7 (ĐỒNG BỘ ZOOM IN) -->
-        <div class="slide flex-col items-center justify-start pt-10 pb-4 px-4">
-            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
-                <div class="text-center z-20">
-                    <h2 class="text-3xl font-bold text-blue-800">Bước 7: Kết nối KiotViet với Phần mềm HĐĐT</h2>
-                    <p class="text-xl text-gray-600 mt-2 max-w-4xl mx-auto">Cho phép dữ liệu bán hàng được chuyển qua để phát hành hóa đơn.</p>
-                </div>
-                <div class="mt-6 relative z-10 flex flex-col items-center">
-                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23074509/hdsd-kiotviet-retail-google-docs-2.png" 
-                         class="max-h-[65vh] w-auto rounded-xl shadow-2xl border border-gray-200 object-contain bg-white">
-                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-6 font-medium">
-                        Màn hình kết nối HĐĐT
-                    </div>
-                </div>
+        <!-- SLIDE 15: BƯỚC 9 -->
+        <div class="slide glass flex flex-col items-center justify-start pt-8 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Bước 9: Quản lý HĐĐT</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Tra cứu, gửi email và xử lý sai sót tập trung.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020540/QLHDDT-11.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
             </div>
         </div>
 
-        <!-- SLIDE 14: TITLE GIAI ĐOẠN 2 -->
-        <div class="slide flex-col items-center justify-center text-center p-12">
-            <div class="glass p-20 rounded-full animate-zoom-in w-[600px] h-[600px] flex flex-col items-center justify-center border-4 border-white/40">
-                <h2 class="text-3xl text-gray-500 uppercase tracking-widest mb-4">Phần B</h2>
-                <h1 class="text-6xl font-extrabold text-green-700">Vận hành<br>hàng ngày</h1>
+        <!-- SLIDE 16: BƯỚC 10 -->
+        <div class="slide glass flex flex-col items-center justify-start pt-8 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Bước 10: Quản lý Sổ kế toán</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Tự động đồng bộ 7 loại sổ theo Thông tư 88.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/09/25094153/SKTR_25092502.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
             </div>
         </div>
 
-        <!-- SLIDE 15: BƯỚC 8 (ĐỒNG BỘ ZOOM IN) -->
-        <div class="slide flex-col items-center justify-start pt-10 pb-4 px-4">
-            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
-                <div class="text-center z-20">
-                    <h2 class="text-3xl font-bold text-blue-800">Bước 8: Phát hành HĐĐT</h2>
-                    <p class="text-xl text-gray-600 mt-2 max-w-4xl mx-auto">Phát hành tự động, thủ công hoặc hàng loạt từ màn hình bán hàng.</p>
-                </div>
-                <div class="mt-6 relative z-10 flex flex-col items-center">
-                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23075559/PHHDT-3.png" 
-                         class="max-h-[65vh] w-auto rounded-xl shadow-2xl border border-gray-200 object-contain bg-white">
-                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-6 font-medium">
-                        Màn hình bán hàng & Phát hành hóa đơn
-                    </div>
-                </div>
+        <!-- SLIDE 17: BƯỚC 11 -->
+        <div class="slide glass flex flex-col items-center justify-start pt-8 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Bước 11: Quản lý Tờ khai thuế</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Xuất file XML chuẩn để nộp thuế.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/09/25072513/TKTR_25092504.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
             </div>
         </div>
 
-        <!-- SLIDE 16: BƯỚC 9 (ĐỒNG BỘ ZOOM IN) -->
-        <div class="slide flex-col items-center justify-start pt-10 pb-4 px-4">
-            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
-                <div class="text-center z-20">
-                    <h2 class="text-3xl font-bold text-blue-800">Bước 9: Quản lý HĐĐT</h2>
-                    <p class="text-xl text-gray-600 mt-2 max-w-4xl mx-auto">Xem, sửa, gửi email, gửi Cơ quan Thuế và xử lý sai sót tập trung.</p>
-                </div>
-                <div class="mt-6 relative z-10 flex flex-col items-center">
-                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24020540/QLHDDT-11.png" 
-                         class="max-h-[65vh] w-auto rounded-xl shadow-2xl border border-gray-200 object-contain bg-white">
-                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-6 font-medium">
-                        Giao diện quản lý HĐĐT
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 17: BƯỚC 10 (ĐỒNG BỘ ZOOM IN) -->
-        <div class="slide flex-col items-center justify-start pt-10 pb-4 px-4">
-            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
-                <div class="text-center z-20">
-                    <h2 class="text-3xl font-bold text-blue-800">Bước 10: Quản lý Sổ kế toán</h2>
-                    <p class="text-xl text-gray-600 mt-2 max-w-4xl mx-auto">Tự động đồng bộ tạo 7 loại sổ kế toán theo chuẩn Thông tư 88.</p>
-                </div>
-                <div class="mt-6 relative z-10 flex flex-col items-center">
-                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/09/25094153/SKTR_25092502.png" 
-                         class="max-h-[65vh] w-auto rounded-xl shadow-2xl border border-gray-200 object-contain bg-white">
-                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-6 font-medium">
-                        Tổng quan Sổ kế toán
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 18: BƯỚC 11 (ĐỒNG BỘ ZOOM IN) -->
-        <div class="slide flex-col items-center justify-start pt-10 pb-4 px-4">
-            <div class="w-full h-full flex flex-col items-center justify-start max-w-6xl animate-zoom-in">
-                <div class="text-center z-20">
-                    <h2 class="text-3xl font-bold text-blue-800">Bước 11: Quản lý Tờ khai thuế</h2>
-                    <p class="text-xl text-gray-600 mt-2 max-w-4xl mx-auto">Tổng hợp dữ liệu và tạo file XML chuẩn để nộp tờ khai.</p>
-                </div>
-                <div class="mt-6 relative z-10 flex flex-col items-center">
-                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/09/25072513/TKTR_25092504.png" 
-                         class="max-h-[65vh] w-auto rounded-xl shadow-2xl border border-gray-200 object-contain bg-white">
-                    <div class="bg-blue-600 text-white px-6 py-2 rounded-full shadow-lg mt-6 font-medium">
-                        Chi tiết Tờ khai thuế
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 19: CẢM ƠN -->
-        <div class="slide flex-col items-center justify-center text-center p-12">
-            <div class="glass p-16 rounded-3xl animate-zoom-in max-w-4xl">
-                <h1 class="text-5xl font-extrabold text-blue-800 mb-6">CẢM ƠN BẠN ĐÃ THEO DÕI!</h1>
-                <p class="text-2xl text-gray-600">Chúc bạn kinh doanh thành công cùng KiotViet</p>
+        <!-- SLIDE 18: END -->
+        <div class="slide flex items-center justify-center p-8">
+            <div class="bg-white/80 backdrop-blur-xl p-16 rounded-3xl shadow-2xl border border-white/50 text-center animate-zoom-in">
+                <h1 class="text-6xl font-extrabold text-blue-900 mb-6">XIN CẢM ƠN!</h1>
+                <p class="text-2xl text-gray-600">Chúc quý khách kinh doanh thành công.</p>
             </div>
         </div>
 
@@ -395,53 +295,35 @@
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
+        const logo = document.getElementById('global-logo');
 
-        function resetAnimations(slide) {
-            const animatedElements = slide.querySelectorAll('[class*="animate-"]');
-            animatedElements.forEach(el => {
-                el.style.animation = 'none';
-                el.offsetHeight; 
-                el.style.animation = '';
-            });
-        }
-
-        function showSlide(index) {
+        function updateUI(index) {
             slides.forEach((slide, i) => {
                 if (i === index) {
                     slide.classList.add('active');
-                    resetAnimations(slide);
+                    const animated = slide.querySelectorAll('.animate-zoom-in');
+                    animated.forEach(el => { el.style.animation = 'none'; el.offsetHeight; el.style.animation = ''; });
+                    
+                    const isInfographic = slide.getAttribute('data-type') === 'infographic';
+                    if (isInfographic) logo.style.opacity = '0';
+                    else logo.style.opacity = '1';
                 } else {
                     slide.classList.remove('active');
                 }
             });
         }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            showSlide(currentSlide);
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            showSlide(currentSlide);
-        }
-
-        function toggleFullScreen() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => alert(`Error: ${err.message}`));
-            } else if (document.exitFullscreen) {
-                document.exitFullscreen();
-            }
-        }
-
+        function nextSlide() { currentSlide = (currentSlide + 1) % totalSlides; updateUI(currentSlide); }
+        function prevSlide() { currentSlide = (currentSlide - 1 + totalSlides) % totalSlides; updateUI(currentSlide); }
+        function toggleFullScreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else if (document.exitFullscreen) document.exitFullscreen(); }
+        
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
             else if (e.key === 'ArrowLeft') prevSlide();
+            else if (e.key === 'Home') { currentSlide = 0; updateUI(currentSlide); }
+            else if (e.key === 'End') { currentSlide = totalSlides - 1; updateUI(currentSlide); }
             else if (e.key.toLowerCase() === 'f') toggleFullScreen();
-            else if (e.key === '1') { currentSlide = 0; showSlide(0); }
         });
-
-        if (totalSlides > 0) showSlide(currentSlide);
+        if (totalSlides > 0) updateUI(currentSlide);
     </script>
 </body>
 </html>
