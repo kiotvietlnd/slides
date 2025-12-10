@@ -3,364 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài thuyết trình</title>
+    <title>Thiết lập Chữ ký số trên KiotViet EInvoice</title>
+    <!-- TAILWIND CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FONT AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { navy: { 900: '#1e3a8a' } },
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                        'zoom-in': 'zoomIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        zoomIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.95)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; }
-        .slide { display: none; width: 100%; height: 100%; padding: 0; box-sizing: border-box; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: absolute; top: 0; left: 0; transition: opacity 0.5s ease-in-out; }
-        .slide-content-wrapper { width: 100%; height: 100%; padding: 60px 80px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .slide.active { display: flex; }
-        .slide-container { width: 100%; height: 100%; position: relative; }
-        h1, h2, h3, h4, p, li, span { word-wrap: break-word; overflow-wrap: break-word; -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; background-color: #f8fafc; }
+        
+        .slide { display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.4s ease-in-out; z-index: 10; flex-direction: column; }
+        .slide.active { display: flex; opacity: 1; }
+        
+        /* GLASS EFFECT */
+        .glass {
+            background: rgba(255, 255, 255, 0.7); 
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+        }
+
+        #global-logo { position: fixed; top: 24px; left: 32px; height: 36px; z-index: 9999; transition: opacity 0.3s ease; }
+        .animate-zoom-in { opacity: 0; }
+        .slide.active .animate-zoom-in { animation-play-state: running; }
     </style>
 </head>
-<body>
-    <div id="slide-container" class="slide-container">
-        <!-- SLIDES GO HERE -->
-        <!-- Slide Bìa/Kết thúc -->
-        <section class="slide relative bg-gradient-to-br from-blue-700 to-blue-900 flex justify-center items-center">
-            <!-- LỚP LOGO (OVERLAY) -->
-            <img class="absolute top-[150px] left-1/2 -translate-x-1/2 h-12 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg">
-            
-            <!-- LỚP NỘI DUNG (KHUNG VIỀN) -->
-            <div class="w-[calc(100%-100px)] h-[calc(100%-100px)] border-4 border-white rounded-xl flex flex-col justify-center items-center p-8">
-                <!-- TOÀN BỘ NỘI DUNG VĂN BẢN (TIÊU ĐỀ, TÊN...) ĐẶT Ở ĐÂY -->
-                <h1 class="text-6xl font-bold text-white">Thiết lập Chữ ký số<br>trên KiotViet eInvoice</h1>
-                <p class="mt-4 text-2xl text-blue-200">(Ngành Bán buôn, Bán lẻ)</p>
-            </div>
-        </section>
+<body class="text-gray-800 relative select-none cursor-none">
 
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">I. Giới thiệu chung</h2>
-                <p class="text-2xl text-gray-700 leading-relaxed">Tính năng thiết lập Chữ ký số (CKS) trên KiotViet eInvoice cho phép cửa hàng của bạn xác thực thông tin và quản lý việc ký điện tử cho các hóa đơn theo đúng quy định của Cơ quan Thuế. <br><br>Thao tác này được thực hiện sau khi bạn đã có tài khoản KiotViet eInvoice.</p>
-            </div>
-        </section>
+    <!-- 1. LOGO -->
+    <img id="global-logo" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
 
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <h2 class="text-4xl font-bold text-blue-800 mb-12">Lợi ích nổi bật</h2>
-                <div class="grid grid-cols-3 gap-8 w-full max-w-6xl">
-                    <div class="bg-blue-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-                        <i class="fa-solid fa-scale-balanced text-5xl text-blue-600 mb-4"></i>
-                        <h3 class="text-2xl font-semibold text-blue-900 mb-2">Tuân thủ Pháp luật</h3>
-                        <p class="text-lg text-gray-700">Giúp bạn thực hiện kê khai thuế và phát hành hóa đơn điện tử (HĐĐT) tuân thủ các quy định hiện hành.</p>
-                    </div>
-                    <div class="bg-green-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-                        <i class="fa-solid fa-puzzle-piece text-5xl text-green-600 mb-4"></i>
-                        <h3 class="text-2xl font-semibold text-green-900 mb-2">Tích hợp liền mạch</h3>
-                        <p class="text-lg text-gray-700">Tương thích với USB Token và Chữ ký số từ xa (RMS), giúp bạn ký hóa đơn mọi lúc mọi nơi.</p>
-                    </div>
-                    <div class="bg-purple-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-                        <i class="fa-solid fa-sliders text-5xl text-purple-600 mb-4"></i>
-                        <h3 class="text-2xl font-semibold text-purple-900 mb-2">Linh hoạt Ký hóa đơn</h3>
-                        <p class="text-lg text-gray-700">Tùy chọn cấu hình thời điểm ký và gửi HĐĐT lên Cơ quan Thuế (tự động hoặc thủ công).</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- 2. BACKGROUND (Retail: Blue + Cyan) -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-cyan-400 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-32 left-20 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- 3. CONTAINER -->
+    <div id="slide-container" class="relative z-10 w-full h-full flex items-center justify-center">
         
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <h2 class="text-4xl font-bold text-blue-800 mb-10">Nội dung chính</h2>
-                <div class="w-full max-w-6xl grid grid-cols-3 gap-8 text-left">
-                    <div class="bg-gray-100 p-6 rounded-lg">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-4">1: Giới thiệu chung</h3>
-                        <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
-                            <li>Tổng quan & Mục đích</li>
-                            <li>Lợi ích nổi bật</li>
-                        </ul>
-                    </div>
-                    <div class="bg-gray-100 p-6 rounded-lg">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-4">2: Thao tác cơ bản</h3>
-                        <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
-                            <li>Tích hợp Chữ ký số từ xa (RMS)</li>
-                        </ul>
-                    </div>
-                    <div class="bg-gray-100 p-6 rounded-lg">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-4">3: Tính năng nâng cao</h3>
-                        <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
-                            <li>Cấu hình Ký tự động (RMS)</li>
-                            <li>Thiết lập & Sử dụng USB Token</li>
-                        </ul>
+        <!-- SLIDE 1: BÌA -->
+        <div class="slide flex items-center justify-center p-8">
+            <div class="bg-white/80 backdrop-blur-xl p-12 rounded-3xl shadow-2xl border border-white/50 max-w-4xl w-full text-center animate-zoom-in">
+                <h1 class="text-5xl font-extrabold text-blue-900 mb-6 leading-tight">THIẾT LẬP CHỮ KÝ SỐ TRÊN KIOTVIET EINVOICE</h1>
+                <div class="h-1.5 w-24 bg-blue-600 mx-auto rounded-full mb-6"></div>
+                <p class="text-xl text-gray-600 font-medium">Dành cho Ngành Bán buôn & Bán lẻ</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: LỢI ÍCH -->
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Lợi ích nổi bật</h2>
+            <div class="grid grid-cols-3 gap-8 w-full max-w-6xl">
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in" style="animation-delay: 0.1s;">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-gavel text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Tuân thủ pháp luật</h3><p class="text-gray-700 text-sm mt-1">Đảm bảo HĐĐT hợp lệ theo quy định của nhà nước.</p></div>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in" style="animation-delay: 0.2s;">
+                    <div class="w-14 h-14 bg-green-100/80 rounded-full flex items-center justify-center text-green-600 shrink-0"><i class="fa-solid fa-link text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Tích hợp liền mạch</h3><p class="text-gray-700 text-sm mt-1">Tương thích với cả CKS từ xa (RMS) và USB Token.</p></div>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in" style="animation-delay: 0.3s;">
+                    <div class="w-14 h-14 bg-purple-100/80 rounded-full flex items-center justify-center text-purple-600 shrink-0"><i class="fa-solid fa-sliders text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Linh hoạt</h3><p class="text-gray-700 text-sm mt-1">Tùy chọn cấu hình ký tự động hoặc thủ công.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: BRIDGE - CKS TỪ XA -->
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-blue-600 pr-12 animate-zoom-in">
+                    <p class="text-xl text-gray-500 uppercase tracking-widest mb-2">Thao tác cơ bản</p>
+                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight">Tích hợp CKS từ xa (RMS)</h2>
+                </div>
+                <div class="flex-1 animate-zoom-in" style="animation-delay: 0.1s;">
+                    <ul class="space-y-6">
+                        <li class="flex items-center gap-4 text-xl text-gray-800 font-medium"><i class="fa-solid fa-arrow-right text-blue-600"></i> Truy cập Tham số hệ thống</li>
+                        <li class="flex items-center gap-4 text-xl text-gray-800 font-medium"><i class="fa-solid fa-arrow-right text-blue-600"></i> Cấu hình thông tin CKS</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDES CKS TỪ XA -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Truy cập Tham số hệ thống</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Vào Quản trị -> Tham số hệ thống -> Tích hợp.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24014754/TLCKS-1.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Cấu hình CKS từ xa</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Tích chọn RMS, nhập Tên đăng nhập (UUID) và lưu lại.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24014807/TLCKS-2.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+
+        <!-- SLIDE 6: BRIDGE - NÂNG CAO -->
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-green-600 pr-12 animate-zoom-in">
+                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight">Tính năng Nâng cao</h2>
+                </div>
+                <div class="flex-1 animate-zoom-in" style="animation-delay: 0.1s;">
+                    <ul class="space-y-6">
+                        <li class="flex items-center gap-4 text-xl text-gray-800 font-medium"><i class="fa-solid fa-wand-magic-sparkles text-green-600"></i> Cấu hình Ký tự động (RMS)</li>
+                        <li class="flex items-center gap-4 text-xl text-gray-800 font-medium"><i class="fa-solid fa-usb text-green-600"></i> Thiết lập USB Token</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDES NÂNG CAO -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Cấu hình Ký tự động (RMS)</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Tùy chọn thời điểm ký và gửi HĐĐT lên Cơ quan Thuế.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24014820/TLCKS-3.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Tải & Cài đặt KV-Sign (USB Token)</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Tải bộ cài đặt công cụ ký số KV-Sign cho USB Token.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24014832/TLCKS-4.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Hướng dẫn cài đặt KV-Sign</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Thực hiện cài đặt theo các bước hướng dẫn.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24014845/TLCKS-5.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Cấu hình cho USB Token</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Tắt các tính năng ký & gửi tự động để phù hợp với việc ký thủ công.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24014900/TLCKS-6.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Lưu ý khi dùng USB Token</h2>
+            <div class="grid grid-cols-1 gap-8 w-full max-w-3xl">
+                <div class="bg-white/80 p-8 rounded-2xl shadow-lg border border-white/50 flex items-center gap-6 animate-zoom-in" style="animation-delay: 0.1s;">
+                    <div class="w-16 h-16 bg-amber-100/80 rounded-full flex items-center justify-center text-amber-600 shrink-0"><i class="fa-solid fa-circle-info text-3xl"></i></div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">Hóa đơn vẫn hợp lệ dù không có ảnh chữ ký</h3>
+                        <p class="text-gray-700 mt-2">Do thiết lập ký thủ công, file PDF sẽ không hiển thị hình ảnh chữ ký của bên bán, nhưng hóa đơn vẫn hoàn toàn hợp lệ và có giá trị pháp lý.</p>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">II. Thao tác cơ bản</h2>
-                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
-                    <h3 class="text-2xl font-semibold text-blue-900 mb-2">Tình huống:</h3>
-                    <p class="text-xl text-gray-700 leading-relaxed">Sau khi đã đăng ký tài khoản KiotViet eInvoice thành công, bạn cần tích hợp Chữ ký số từ xa (RMS) vào hệ thống để có thể nộp tờ khai và ký hóa đơn điện tử.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">Tích hợp Chữ ký số từ xa (RMS)</h2>
-                <ol class="text-2xl text-gray-700 space-y-6">
-                    <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-10 w-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">1</span><span>Đăng nhập vào KiotViet Hóa đơn điện tử, chọn <strong>Quản trị - Hệ thống &rarr; Tham số hệ thống</strong>.</span></li>
-                    <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-10 w-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</span><span>Chọn <strong>Tích hợp &rarr;</strong> tích <strong>Tích hợp ký số từ xa (RMS)</strong>, sau đó nhấn biểu tượng cây bút.</span></li>
-                </ol>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24014754/TLCKS-1.png" class="h-[850px] w-auto object-contain" alt="Màn hình Tham số hệ thống, chọn Tích hợp ký số từ xa (RMS).">
-                <p class="mt-4 text-lg text-gray-600 italic">Màn hình Tham số hệ thống, chọn Tích hợp ký số từ xa (RMS).</p>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">Cấu hình Chữ ký số từ xa (RMS)</h2>
-                <ol class="text-2xl text-gray-700 space-y-6" start="3">
-                    <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-10 w-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">3</span><span>Chọn "Sử dụng hình thức xác thực qua mã PIN" <br>&rarr; nhập chính xác <strong>Tên đăng nhập (UUID)</strong>.</span></li>
-                    <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-10 w-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">4</span><span>Tùy chọn "Không phải nhập mật khẩu/mã pin khi ký" để tiết kiệm thời gian.</span></li>
-                    <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-10 w-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">5</span><span>Nhấn <strong>Ghi</strong> để hoàn tất.</span></li>
-                </ol>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24014807/TLCKS-2.png" class="h-[850px] w-auto object-contain" alt="Cửa sổ cấu hình chi tiết cho chữ ký số từ xa (RMS).">
-                <p class="mt-4 text-lg text-gray-600 italic">Cửa sổ cấu hình chi tiết cho chữ ký số từ xa (RMS).</p>
-            </div>
-        </section>
+        </div>
         
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <h2 class="text-5xl font-bold text-blue-800">III. Các tính năng nâng cao</h2>
-            </div>
-        </section>
+        <!-- SLIDE 12: INFOGRAPHIC -->
+        <div class="slide flex items-center justify-center w-full h-full p-0" data-type="infographic">
+            <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/12/07110302/HDDT-BUOC-4.jpg" class="max-w-[90%] max-h-[90%] object-contain rounded-3xl shadow-2xl border-4 border-white/50 animate-zoom-in">
+        </div>
 
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">1. Cấu hình Ký hóa đơn tự động <br><span class="text-3xl text-gray-500">(Dành cho CKS từ xa - RMS)</span></h2>
-                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg mb-6">
-                    <h3 class="text-2xl font-semibold text-blue-900 mb-2">Tình huống:</h3>
-                    <p class="text-xl text-gray-700 leading-relaxed">Sau khi đã liên kết CKS từ xa, bạn muốn hệ thống tự động ký và gửi hóa đơn đi để tiết kiệm thời gian.</p>
-                </div>
-                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-lg">
-                    <p class="text-lg text-yellow-800"><strong>Lưu ý:</strong> Thiết lập này chỉ hỗ trợ Chữ ký số từ xa RMS KiotViet IntrustCA.</p>
-                </div>
+        <!-- SLIDE 13: END -->
+        <div class="slide flex items-center justify-center p-8">
+            <div class="bg-white/80 backdrop-blur-xl p-16 rounded-3xl shadow-2xl border border-white/50 text-center animate-zoom-in">
+                <h1 class="text-6xl font-extrabold text-blue-900 mb-6">XIN CẢM ƠN!</h1>
+                <p class="text-2xl text-gray-600">Chúc bạn kinh doanh thành công.</p>
             </div>
-        </section>
-        
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">Các bước cấu hình Ký tự động</h2>
-                 <ol class="text-xl text-gray-700 space-y-4">
-                    <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">1</span><span>Vào <strong>Quản trị – Hệ thống &rarr; Tham số hệ thống</strong>.</span></li>
-                    <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">2</span><span>Chọn tab <strong>"Hóa đơn khởi tạo từ MTT"</strong>.</span></li>
-                    <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">3</span><span>Tại mục "Ký hóa đơn", tùy chọn có ký số và hiển thị chữ ký.</span></li>
-                    <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">4</span><span>Tại mục "Thời điểm gửi hóa đơn lên CQT", chọn một trong các tùy chọn: Tự động gửi ngay, Gửi thủ công, hoặc Tự động gửi theo lịch.</span></li>
-                    <li class="flex items-start"><span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold mr-4 flex-shrink-0 mt-1">5</span><span>Nhấn <strong>Ghi</strong> để lưu thông tin.</span></li>
-                </ol>
-            </div>
-        </section>
+        </div>
 
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24014820/TLCKS-3.png" class="h-[850px] w-auto object-contain" alt="Giao diện cấu hình ký tự động và thời điểm gửi hóa đơn lên Cơ quan Thuế.">
-                <p class="mt-4 text-lg text-gray-600 italic">Giao diện cấu hình ký tự động và thời điểm gửi hóa đơn lên Cơ quan Thuế.</p>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">2. Thiết lập và sử dụng Chữ ký số USB Token</h2>
-                <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg">
-                    <h3 class="text-2xl font-semibold text-green-900 mb-2">Tình huống:</h3>
-                    <p class="text-xl text-gray-700 leading-relaxed">Bạn đã có sẵn Chữ ký số dạng USB Token từ một nhà cung cấp khác và muốn sử dụng nó trên KiotViet eInvoice.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">USB Token: Bước 1 - Chuẩn bị ban đầu</h2>
-                <ul class="list-disc list-inside text-2xl text-gray-700 space-y-4">
-                    <li>Cắm USB Token vào máy tính.</li>
-                    <li>Cài đặt phần mềm Token Manager đi kèm.</li>
-                    <li>Cài đặt thiết bị ký số <strong>KV-Sign</strong> (Tải từ link hoặc từ màn hình "Đăng ký SD").</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24014832/TLCKS-4.png" class="h-[850px] w-auto object-contain" alt="Màn hình Đăng ký SD hóa đơn, nơi có thể tải bộ cài KV-Sign.">
-                <p class="mt-4 text-lg text-gray-600 italic">Màn hình Đăng ký SD hóa đơn, nơi có thể tải bộ cài KV-Sign.</p>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24014845/TLCKS-5.png" class="h-[850px] w-auto object-contain" alt="Minh họa quá trình tải và cài đặt KV-Sign.">
-                <p class="mt-4 text-lg text-gray-600 italic">Minh họa quá trình tải và cài đặt KV-Sign.</p>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">USB Token: Bước 2 - Cấu hình Hệ thống</h2>
-                 <ul class="list-disc list-inside text-xl text-gray-700 space-y-3">
-                    <li>Vào "Tham số hệ thống" &rarr; tab "Hóa đơn khởi tạo từ MTT".</li>
-                    <li><strong class="text-red-600">Bỏ dấu tích</strong> ở mục "Bên bán phải có chữ ký trên hóa đơn".</li>
-                    <li>Chọn tùy chọn <strong class="text-red-600">"Không tự động gửi sang CQT"</strong>.</li>
-                    <li>Gộp nhiều hóa đơn vào chung 1 thông điệp để giảm số lần nhập PIN.</li>
-                    <li>Nhấn <strong>Ghi</strong>.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Slide Hình ảnh Minh họa -->
-        <section class="slide bg-gray-100">
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper">
-                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/24014900/TLCKS-6.png" class="h-[850px] w-auto object-contain" alt="Cấu hình hệ thống phù hợp cho việc sử dụng USB Token.">
-                <p class="mt-4 text-lg text-gray-600 italic">Cấu hình hệ thống phù hợp cho việc sử dụng USB Token.</p>
-            </div>
-        </section>
-
-        <!-- Slide Nội dung -->
-        <section class="slide relative bg-white">
-            <!-- LỚP LOGO -->
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            
-            <!-- LỚP NỘI DUNG -->
-            <div class="slide-content-wrapper text-left w-full max-w-5xl">
-                <h2 class="text-4xl font-bold text-blue-800 mb-8">USB Token: Bước 3 - Quy trình hàng ngày</h2>
-                <ul class="list-disc list-inside text-2xl text-gray-700 space-y-4">
-                    <li>Để ký và gửi, bạn cần đăng nhập vào KiotViet eInvoice, cắm USB Token và thực hiện thao tác ký số gửi Cơ quan thuế.</li>
-                    <li class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-lg text-xl">
-                        <strong>Lưu ý quan trọng:</strong> File PDF hóa đơn sẽ <strong>không hiển thị hình ảnh chữ ký</strong> của bên bán nhưng vẫn hoàn toàn hợp lệ và có giá trị pháp lý.
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Slide Bìa/Kết thúc -->
-        <section class="slide relative bg-gradient-to-br from-blue-700 to-blue-900 flex justify-center items-center">
-            <!-- LỚP LOGO (OVERLAY) -->
-            <img class="absolute top-[150px] left-1/2 -translate-x-1/2 h-12 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg">
-            
-            <!-- LỚP NỘI DUNG (KHUNG VIỀN) -->
-            <div class="w-[calc(100%-100px)] h-[calc(100%-100px)] border-4 border-white rounded-xl flex flex-col justify-center items-center p-8">
-                <!-- TOÀN BỘ NỘI DUNG VĂN BẢN (TIÊU ĐỀ, TÊN...) ĐẶT Ở ĐÂY -->
-                <h1 class="text-6xl font-bold text-white">Cảm ơn bạn đã theo dõi!</h1>
-                <p class="mt-4 text-2xl text-blue-200">Chúc bạn kinh doanh hiệu quả cùng KiotViet</p>
-            </div>
-        </section>
     </div>
 
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
-        function showSlide(index) {
-            slides.forEach((slide, i) => { slide.classList.toggle('active', i === index); });
+        const logo = document.getElementById('global-logo');
+
+        function updateUI(index) {
+            slides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.add('active');
+                    const animated = slide.querySelectorAll('.animate-zoom-in');
+                    animated.forEach(el => { el.style.animation = 'none'; el.offsetHeight; el.style.animation = ''; });
+                    
+                    const isInfographic = slide.getAttribute('data-type') === 'infographic';
+                    if (isInfographic) logo.style.opacity = '0';
+                    else logo.style.opacity = '1';
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
         }
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            showSlide(currentSlide);
-        }
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            showSlide(currentSlide);
-        }
-        function toggleFullScreen() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => {
-                    alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-                });
-            } else if (document.exitFullscreen) {
-                document.exitFullscreen();
-            }
-        }
+        function nextSlide() { currentSlide = (currentSlide + 1) % totalSlides; updateUI(currentSlide); }
+        function prevSlide() { currentSlide = (currentSlide - 1 + totalSlides) % totalSlides; updateUI(currentSlide); }
+        function toggleFullScreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else if (document.exitFullscreen) document.exitFullscreen(); }
+        
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') { nextSlide(); } 
-            else if (e.key === 'ArrowLeft') { prevSlide(); } 
-            else if (e.key.toLowerCase() === 'f') { toggleFullScreen(); }
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            else if (e.key === 'ArrowLeft') prevSlide();
+            else if (e.key === 'Home') { currentSlide = 0; updateUI(currentSlide); }
+            else if (e.key === 'End') { currentSlide = totalSlides - 1; updateUI(currentSlide); }
+            else if (e.key.toLowerCase() === 'f') toggleFullScreen();
         });
-        if (totalSlides > 0) { showSlide(currentSlide); }
+        if (totalSlides > 0) updateUI(currentSlide);
     </script>
 </body>
 </html>
