@@ -3,511 +3,544 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài thuyết trình</title>
+    <title>Phương án In Chế Biến - KiotViet FNB</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { navy: { 900: '#1e3a8a' } },
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                        'zoom-in': 'zoomIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        zoomIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.95)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; }
-        .slide { display: none; width: 100%; height: 100%; padding: 0; box-sizing: border-box; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: absolute; top: 0; left: 0; transition: opacity 0.5s ease-in-out; }
-        .slide-content-wrapper { width: 100%; height: 100%; padding: 60px 80px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .slide.active { display: flex; }
-        .slide-container { width: 100%; height: 100%; position: relative; }
-        h1, h2, h3, h4, p, li, span { word-wrap: break-word; overflow-wrap: break-word; -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; background-color: #fff7ed; } /* Orange Tint Background */
+        
+        .slide { display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.4s ease-in-out; z-index: 10; flex-direction: column; }
+        .slide.active { display: flex; opacity: 1; }
+        
+        /* GLASS EFFECT */
+        .glass {
+            background: rgba(255, 255, 255, 0.65); 
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+        }
+
+        #global-logo { position: fixed; top: 24px; left: 32px; height: 36px; z-index: 9999; transition: opacity 0.3s ease; }
+        .animate-zoom-in { opacity: 0; }
+        .slide.active .animate-zoom-in { animation-play-state: running; }
+        
+        /* Table Styling */
+        .glass-table th { background-color: rgba(251, 146, 60, 0.2); color: #1e3a8a; }
+        .glass-table td, .glass-table th { border: 1px solid rgba(255,255,255,0.5); padding: 12px; }
+        .glass-table tr:nth-child(even) { background-color: rgba(255,255,255,0.3); }
     </style>
 </head>
-<body>
-    <div id="slide-container" class="slide-container">
-        <!-- SLIDES GO HERE -->
-        <!-- Slide 1: Bìa -->
-        <section class="slide relative bg-gradient-to-br from-pink-500 to-orange-500 flex justify-center items-center">
-            <img class="absolute top-[150px] left-1/2 -translate-x-1/2 h-12 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg">
-            <div class="w-[calc(100%-100px)] h-[calc(100%-100px)] border-4 border-white rounded-xl flex flex-col justify-center items-center p-8">
-                <h1 class="text-7xl font-bold text-white leading-tight">Lựa chọn Phương án<br>In Chế Biến và In Tem Nhãn</h1>
-                <p class="text-3xl text-pink-100 mt-4">(Ngành Ăn uống, Giải trí)</p>
-            </div>
-        </section>
+<body class="text-gray-800 relative select-none cursor-none">
 
-        <!-- Slide 2: Tiêu đề chương Giới thiệu -->
-        <section class="slide relative bg-gray-50">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper w-full max-w-6xl mx-auto items-start">
-                <p class="text-9xl font-bold text-orange-200 mb-4">01</p>
-                <div class="text-left pl-12 border-l-4 border-orange-200">
-                    <h2 class="text-6xl font-bold text-blue-900 leading-tight">Giới thiệu chung</h2>
-                    <p class="mt-4 text-2xl text-gray-600">Tổng quan về tầm quan trọng và lợi ích của hệ thống in trong vận hành F&B.</p>
+    <img id="global-logo" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-orange-400 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-32 left-20 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <div id="slide-container" class="relative z-10 w-full h-full flex items-center justify-center">
+
+        <div class="slide flex items-center justify-center p-8">
+            <div class="bg-white/80 backdrop-blur-xl p-12 rounded-3xl shadow-2xl border border-white/50 max-w-5xl w-full text-center animate-zoom-in">
+                <h1 class="text-6xl font-extrabold text-blue-900 mb-6 leading-tight">PHƯƠNG ÁN IN CHẾ BIẾN & TEM NHÃN</h1>
+                <div class="h-2 w-32 bg-orange-500 mx-auto rounded-full mb-6"></div>
+                <p class="text-2xl text-gray-600 font-medium">Giải pháp tối ưu cho ngành F&B (Nhà hàng, Café, Giải trí)</p>
+            </div>
+        </div>
+
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-orange-500 pr-12 animate-zoom-in">
+                    <h2 class="text-8xl font-black text-orange-200/50 absolute -top-20 right-10 z-0">01</h2>
+                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight relative z-10">Giới Thiệu Chung</h2>
+                </div>
+                <div class="flex-1 animate-zoom-in" style="animation-delay: 0.1s;">
+                    <p class="text-2xl text-gray-700 font-medium">Tầm quan trọng của hệ thống in trong vận hành F&B</p>
                 </div>
             </div>
-        </section>
-        
-        <!-- Slide 3: Infographic Tóm tắt -->
-        <section class="slide relative bg-white">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper max-w-6xl">
-                 <h2 class="text-5xl font-bold text-blue-900">"Xương sống" của quy trình vận hành</h2>
-                 <p class="text-2xl text-gray-700 mt-6 leading-relaxed">Hệ thống in chế biến và in tem nhãn quyết định trực tiếp đến tốc độ phục vụ và sự hài lòng của khách hàng bằng cách gửi yêu cầu nhanh chóng, chính xác, ngay cả khi mất Internet.</p>
-            </div>
-        </section>
-        
-        <!-- Slide 4: Dạng thẻ 4 cột -->
-        <section class="slide relative bg-white">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper max-w-7xl">
-                <h2 class="text-5xl font-bold text-blue-900 mb-12">Lợi ích của tính năng In Chế Biến trên KiotViet</h2>
-                <div class="grid grid-cols-4 gap-8 text-left w-full">
-                    <div class="bg-gray-100 p-6 rounded-lg">
-                        <i class="fas fa-cogs text-4xl text-orange-500 mb-4"></i>
-                        <h3 class="text-xl font-bold text-gray-800">Linh hoạt tối đa</h3>
-                        <p class="text-gray-600 mt-2">5 phương án thiết lập phù hợp với mọi mô hình kinh doanh.</p>
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">"Xương Sống" Của Vận Hành</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
+                <div class="bg-white/80 p-8 rounded-2xl shadow-lg border border-white/50 flex items-center gap-6 animate-zoom-in delay-100">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 shrink-0 text-3xl">
+                        <i class="fa-solid fa-stopwatch"></i>
                     </div>
-                    <div class="bg-gray-100 p-6 rounded-lg">
-                        <i class="fas fa-rocket text-4xl text-orange-500 mb-4"></i>
-                        <h3 class="text-xl font-bold text-gray-800">Tối ưu tốc độ phục vụ</h3>
-                        <p class="text-gray-600 mt-2">Gửi yêu cầu đến bếp ngay lập tức, giảm thời gian chờ.</p>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-800">Tốc Độ Phục Vụ</h3>
+                        <p class="text-gray-600 mt-2">Gửi yêu cầu chế biến tức thì, giảm thời gian chờ đợi của khách.</p>
                     </div>
-                    <div class="bg-gray-100 p-6 rounded-lg">
-                        <i class="fas fa-wifi text-4xl text-orange-500 mb-4"></i>
-                        <h3 class="text-xl font-bold text-gray-800">Đảm bảo hoạt động liên tục</h3>
-                        <p class="text-gray-600 mt-2">Hỗ trợ in ngay cả khi mất kết nối Internet.</p>
+                </div>
+                <div class="bg-white/80 p-8 rounded-2xl shadow-lg border border-white/50 flex items-center gap-6 animate-zoom-in delay-200">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 shrink-0 text-3xl">
+                        <i class="fa-solid fa-check-double"></i>
                     </div>
-                    <div class="bg-gray-100 p-6 rounded-lg">
-                        <i class="fas fa-clipboard-check text-4xl text-orange-500 mb-4"></i>
-                        <h3 class="text-xl font-bold text-gray-800">Chuyên nghiệp hóa vận hành</h3>
-                        <p class="text-gray-600 mt-2">Giảm sai sót, thông tin rõ ràng và chính xác.</p>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-800">Sự Chính Xác</h3>
+                        <p class="text-gray-600 mt-2">Tránh sai sót món, ghi chú rõ ràng (ít đường, không đá...).</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide 5: Tiêu đề chương 1 -->
-        <section class="slide relative bg-gray-50">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper w-full max-w-6xl mx-auto items-start">
-                <p class="text-9xl font-bold text-orange-200 mb-4">02</p>
-                <div class="text-left pl-12 border-l-4 border-orange-200">
-                    <h2 class="text-6xl font-bold text-blue-900 leading-tight">Phương án 1:<br>Chỉ sử dụng máy tính</h2>
-                    <p class="mt-4 text-2xl text-gray-600">Giải pháp tiết kiệm, ổn định cho mô hình take-away hoặc quy mô nhỏ gọn.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Slide 6: Infographic PA1 -->
-        <section class="slide relative bg-white">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper max-w-5xl text-left items-start">
-                <h2 class="text-5xl font-bold text-blue-900 mb-8 self-center">Đặc điểm chính - Phương án 1</h2>
-                <ul class="text-2xl text-gray-700 list-disc list-inside space-y-4">
-                    <li><span class="font-bold">Tình huống áp dụng:</span> Quán cà phê, trà sữa, tiệm bánh take-away, quy mô nhỏ, khách order tại quầy.</li>
-                    <li><span class="font-bold">Mô tả:</span> Mọi thao tác order thực hiện trên máy tính tại quầy, máy in kết nối qua USB/LAN.</li>
-                    <li><span class="font-bold">Ưu điểm:</span> Đơn giản, ổn định, chi phí thấp, hoạt động khi mất Internet.</li>
-                    <li><span class="font-bold">Nhược điểm:</span> Cứng nhắc, không hỗ trợ order tại bàn, dễ ùn tắc.</li>
-                </ul>
-            </div>
-        </section>
-        
-        <!-- Slide 7: Hình ảnh PA1 -->
-        <section class="slide bg-gray-100">
-            <div class="slide-content-wrapper">
-                <div class="w-full text-center mb-6 flex-shrink-0">
-                    <h2 class="text-4xl font-bold text-blue-900">Mô hình Phương án 1</h2>
-                    <p class="text-xl text-gray-600 mt-2">Mọi thao tác order và thông báo chế biến đều được thực hiện trên một máy tính duy nhất tại quầy thu ngân.</p>
-                </div>
-                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
-                    <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdQCPvf4gO1lnTOpx6bTmkPRq8TiqChWjcANVkAzc_942JoQ0cnDpaVkovbp9oQHPUtrStqMgg2w1ht2PeoNy_LZL2bTxBO0qdzb4TEZeL91o_OrE_WeR4wvXblZ3rBHHosJ69fJ2jv7O6LJE57lD65ibNUEsI?key=kyqv5w43o69ogX2RsipIdA" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Mô hình 1: Chỉ dùng PC">
-                </div>
-            </div>
-        </section>
-        
-        <!-- Slide 8: Ưu nhược PA1 -->
-        <section class="slide relative bg-white">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper max-w-6xl">
-                <h2 class="text-5xl font-bold text-blue-900 mb-12">Ưu và Nhược điểm - Phương án 1</h2>
-                <div class="grid grid-cols-2 gap-12 text-left w-full">
-                    <div class="border-l-4 border-green-400 pl-4">
-                        <h3 class="text-3xl font-bold text-gray-800 mb-4">Ưu điểm</h3>
-                        <ul class="text-xl text-gray-600 list-disc list-inside space-y-2">
-                            <li>Đơn giản và ổn định</li>
-                            <li>Chi phí thấp</li>
-                            <li>Hoạt động khi mất Internet</li>
-                        </ul>
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Lợi Ích Tính Năng In Chế Biến</h2>
+            <div class="grid grid-cols-2 gap-6 w-full max-w-6xl">
+                <div class="bg-white/60 p-6 rounded-xl shadow border border-white/50 flex gap-4 animate-zoom-in delay-100">
+                    <i class="fa-solid fa-shapes text-3xl text-blue-500"></i>
+                    <div>
+                        <h3 class="font-bold text-lg text-blue-900">Linh hoạt tối đa</h3>
+                        <p class="text-sm text-gray-600">5 phương án phù hợp mọi mô hình.</p>
                     </div>
-                    <div class="border-l-4 border-red-400 pl-4">
-                        <h3 class="text-3xl font-bold text-gray-800 mb-4">Nhược điểm</h3>
-                        <ul class="text-xl text-gray-600 list-disc list-inside space-y-2">
-                            <li>Quy trình vận hành cứng nhắc</li>
-                            <li>Không hỗ trợ order tại bàn</li>
-                            <li>Có thể gây ùn tắc tại quầy</li>
-                        </ul>
+                </div>
+                <div class="bg-white/60 p-6 rounded-xl shadow border border-white/50 flex gap-4 animate-zoom-in delay-200">
+                    <i class="fa-solid fa-bolt text-3xl text-yellow-500"></i>
+                    <div>
+                        <h3 class="font-bold text-lg text-blue-900">Tối ưu tốc độ</h3>
+                        <p class="text-sm text-gray-600">Gửi lệnh ngay lập tức xuống bếp/bar.</p>
+                    </div>
+                </div>
+                <div class="bg-white/60 p-6 rounded-xl shadow border border-white/50 flex gap-4 animate-zoom-in delay-300">
+                    <i class="fa-solid fa-wifi text-3xl text-red-500"></i>
+                    <div>
+                        <h3 class="font-bold text-lg text-blue-900">Hoạt động Offline</h3>
+                        <p class="text-sm text-gray-600">Hỗ trợ in ngay cả khi mất Internet.</p>
+                    </div>
+                </div>
+                <div class="bg-white/60 p-6 rounded-xl shadow border border-white/50 flex gap-4 animate-zoom-in delay-400">
+                    <i class="fa-solid fa-briefcase text-3xl text-green-500"></i>
+                    <div>
+                        <h3 class="font-bold text-lg text-blue-900">Chuyên nghiệp hóa</h3>
+                        <p class="text-sm text-gray-600">Quy trình vận hành trơn tru, hiện đại.</p>
                     </div>
                 </div>
             </div>
-        </section>
-        
-        <!-- Slide 9: Tiêu đề chương 2 -->
-        <section class="slide relative bg-gray-50">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper w-full max-w-6xl mx-auto items-start">
-                <p class="text-9xl font-bold text-orange-200 mb-4">03</p>
-                <div class="text-left pl-12 border-l-4 border-orange-200">
-                    <h2 class="text-6xl font-bold text-blue-900 leading-tight">Phương án 2:<br>Chỉ sử dụng máy POS Android</h2>
-                    <p class="mt-4 text-2xl text-gray-600">Giải pháp chuyên dụng, gọn nhẹ và hiện đại cho mô hình order tại quầy.</p>
-                </div>
-            </div>
-        </section>
+        </div>
 
-        <!-- Slide 10: Infographic PA2 -->
-        <section class="slide relative bg-white">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper max-w-5xl text-left items-start">
-                <h2 class="text-5xl font-bold text-blue-900 mb-8 self-center">Đặc điểm chính - Phương án 2</h2>
-                <ul class="text-2xl text-gray-700 list-disc list-inside space-y-4">
-                    <li><span class="font-bold">Tình huống áp dụng:</span> Tương tự PA1, nhưng muốn thiết bị chuyên dụng, gọn nhẹ, hiện đại hơn.</li>
-                    <li><span class="font-bold">Mô tả:</span> Mọi thao tác order thực hiện trên máy POS tại quầy, máy in kết nối qua USB/LAN.</li>
-                    <li><span class="font-bold">Ưu điểm:</span> Gọn nhẹ, chuyên nghiệp, ổn định cao, hoạt động khi mất Internet.</li>
-                    <li><span class="font-bold">Nhược điểm:</span> Chi phí đầu tư cao hơn, vẫn là quy trình cứng nhắc.</li>
-                </ul>
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-orange-500 pr-12 animate-zoom-in">
+                    <h2 class="text-8xl font-black text-orange-200/50 absolute -top-20 right-10 z-0">02</h2>
+                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight relative z-10">Phương Án 1</h2>
+                    <p class="text-xl text-orange-600 font-bold mt-2">Chỉ sử dụng Máy Tính (PC)</p>
+                </div>
+                <div class="flex-1 animate-zoom-in delay-100">
+                     <p class="text-2xl text-gray-700 font-medium">Giải pháp tiết kiệm & ổn định cho mô hình nhỏ/Take-away.</p>
+                </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide 11: Hình ảnh PA2 -->
-        <section class="slide bg-gray-100">
-            <div class="slide-content-wrapper">
-                <div class="w-full text-center mb-6 flex-shrink-0">
-                    <h2 class="text-4xl font-bold text-blue-900">Mô hình Phương án 2</h2>
-                    <p class="text-xl text-gray-600 mt-2">Mọi thao tác order và thông báo chế biến đều được thực hiện trên một máy KiotViet POS duy nhất tại quầy.</p>
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-8 text-center animate-zoom-in">Đặc Điểm: Chỉ Dùng Máy Tính</h2>
+            <div class="w-full max-w-4xl space-y-4">
+                <div class="bg-white/80 p-5 rounded-xl border-l-8 border-blue-500 shadow-md animate-zoom-in delay-100">
+                    <h3 class="font-bold text-lg"><i class="fa-solid fa-shop mr-2 text-blue-500"></i> Áp dụng</h3>
+                    <p class="text-gray-600">Café, Trà sữa, Tiệm bánh Take-away, Khách order tại quầy.</p>
                 </div>
-                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
-                    <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXfS7ZeYBjFIsn-c6k8yYKXgp4p21WjDtI99BRSOid2OZ-M15J5CSECJj0Wt-t-Tb3xMD2uS6PiN9BgkesKJSvBB8qTOLpICwpJxaHXeSLB7QTzZenfTGO-Jici7snZE91OMp51uWEAEI6uqaWr9EgCsns6QSxE?key=kyqv5w43o69ogX2RsipIdA" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Mô hình 2: Chỉ dùng POS">
+                <div class="bg-white/80 p-5 rounded-xl border-l-8 border-gray-500 shadow-md animate-zoom-in delay-200">
+                    <h3 class="font-bold text-lg"><i class="fa-solid fa-desktop mr-2 text-gray-500"></i> Mô tả</h3>
+                    <p class="text-gray-600">Thao tác Order & In trên cùng 1 máy tính. Máy in cắm dây trực tiếp (USB/LAN).</p>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide 12: Ưu nhược PA2 -->
-        <section class="slide relative bg-white">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper max-w-6xl">
-                <h2 class="text-5xl font-bold text-blue-900 mb-12">Ưu và Nhược điểm - Phương án 2</h2>
-                <div class="grid grid-cols-2 gap-12 text-left w-full">
-                    <div class="border-l-4 border-green-400 pl-4">
-                        <h3 class="text-3xl font-bold text-gray-800 mb-4">Ưu điểm</h3>
-                        <ul class="text-xl text-gray-600 list-disc list-inside space-y-2">
-                            <li>Gọn nhẹ, chuyên nghiệp</li>
-                            <li>Độ ổn định cao</li>
-                            <li>Hoạt động khi mất Internet</li>
-                        </ul>
-                    </div>
-                    <div class="border-l-4 border-red-400 pl-4">
-                        <h3 class="text-3xl font-bold text-gray-800 mb-4">Nhược điểm</h3>
-                        <ul class="text-xl text-gray-600 list-disc list-inside space-y-2">
-                            <li>Chi phí đầu tư ban đầu cao hơn</li>
-                            <li>Vẫn là quy trình cứng nhắc, chỉ order tại quầy</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Slide 13: Tiêu đề chương 3 -->
-        <section class="slide relative bg-gray-50">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper w-full max-w-7xl mx-auto items-start">
-                <p class="text-9xl font-bold text-orange-200 mb-4">04</p>
-                <div class="text-left pl-12 border-l-4 border-orange-200">
-                    <h2 class="text-6xl font-bold text-blue-900 leading-tight">Phương án 3:<br>Máy tính làm trung tâm</h2>
-                    <p class="mt-4 text-2xl text-gray-600">Tối ưu hóa tốc độ và chuyên nghiệp hóa quy trình cho các quán có phục vụ tại bàn.</p>
-                </div>
-            </div>
-        </section>
+        <div class="slide flex items-center justify-center w-full h-full p-0" data-type="infographic">
+            <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdQCPvf4gO1lnTOpx6bTmkPRq8TiqChWjcANVkAzc_942JoQ0cnDpaVkovbp9oQHPUtrStqMgg2w1ht2PeoNy_LZL2bTxBO0qdzb4TEZeL91o_OrE_WeR4wvXblZ3rBHHosJ69fJ2jv7O6LJE57lD65ibNUEsI?key=kyqv5w43o69ogX2RsipIdA" class="max-w-[90%] max-h-[90%] object-contain rounded-3xl shadow-2xl border-4 border-white/50 animate-zoom-in">
+        </div>
 
-        <!-- Slide 14: Infographic PA3 -->
-        <section class="slide relative bg-white">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper max-w-5xl text-left items-start">
-                <h2 class="text-5xl font-bold text-blue-900 mb-8 self-center">Đặc điểm chính - Phương án 3</h2>
-                <ul class="text-2xl text-gray-700 list-disc list-inside space-y-4">
-                    <li><span class="font-bold">Tình huống áp dụng:</span> Nhà hàng, quán cà phê có nhân viên phục vụ tại bàn.</li>
-                    <li><span class="font-bold">Mô tả:</span> Nhân viên dùng điện thoại order, lệnh gửi về máy tính trung tâm (chạy KiotViet Kết Nối) để in.</li>
-                    <li><span class="font-bold">Ưu điểm:</span> Linh hoạt, hiệu quả, quản lý tập trung.</li>
-                    <li><span class="font-bold">Nhược điểm:</span> Phụ thuộc máy tính trung tâm, cần đảm bảo ứng dụng luôn chạy.</li>
-                </ul>
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-8 animate-zoom-in">Ưu & Nhược Điểm (PA1)</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-6xl h-3/5">
+                <div class="bg-green-50/80 p-8 rounded-2xl border border-green-200 shadow-lg animate-zoom-in delay-100">
+                    <h3 class="text-2xl font-bold text-green-700 mb-4"><i class="fa-solid fa-thumbs-up"></i> Ưu điểm</h3>
+                    <ul class="space-y-3 text-lg text-gray-700">
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Đơn giản, Rất ổn định.</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Chi phí đầu tư thấp nhất.</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Hoạt động tốt khi mất mạng.</li>
+                    </ul>
+                </div>
+                <div class="bg-red-50/80 p-8 rounded-2xl border border-red-200 shadow-lg animate-zoom-in delay-200">
+                    <h3 class="text-2xl font-bold text-red-700 mb-4"><i class="fa-solid fa-thumbs-down"></i> Nhược điểm</h3>
+                    <ul class="space-y-3 text-lg text-gray-700">
+                        <li><i class="fa-solid fa-xmark text-red-500 mr-2"></i> Quy trình cứng nhắc (chỉ tại quầy).</li>
+                        <li><i class="fa-solid fa-xmark text-red-500 mr-2"></i> Dễ gây ùn tắc giờ cao điểm.</li>
+                        <li><i class="fa-solid fa-xmark text-red-500 mr-2"></i> Không hỗ trợ order tại bàn.</li>
+                    </ul>
+                </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide 15: Hình ảnh PA3 -->
-        <section class="slide bg-gray-100">
-            <div class="slide-content-wrapper">
-                <div class="w-full text-center mb-6 flex-shrink-0">
-                    <h2 class="text-4xl font-bold text-blue-900">Mô hình Phương án 3</h2>
-                    <p class="text-xl text-gray-600 mt-2">Nhân viên dùng app order tại bàn, lệnh gửi về máy tính trung tâm để ra lệnh cho máy in.</p>
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-orange-500 pr-12 animate-zoom-in">
+                    <h2 class="text-8xl font-black text-orange-200/50 absolute -top-20 right-10 z-0">03</h2>
+                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight relative z-10">Phương Án 2</h2>
+                    <p class="text-xl text-orange-600 font-bold mt-2">Chỉ sử dụng Máy POS</p>
                 </div>
-                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
-                    <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdQlC78Ly9Dgq0mv_b5DfMXN2C0ed9kgTQ-NK5BHr2IMr9CzDH7av4JqJnLnSKaJMLZSjGyRC45Ggd0jIA5DDkovXW5-amQ08bi_7xT0HffeQ6Lsw_qYX3AzZjSEcOrOkMtaHXVbvz6mpMuP-1zF840o4rHECY?key=kyqv5w43o69ogX2RsipIdA" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Mô hình 3: PC làm trung tâm">
+                <div class="flex-1 animate-zoom-in delay-100">
+                     <p class="text-2xl text-gray-700 font-medium">Giải pháp chuyên dụng, gọn nhẹ và hiện đại cho quầy thu ngân.</p>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide 16: Ưu nhược PA3 -->
-        <section class="slide relative bg-white">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper max-w-6xl">
-                <h2 class="text-5xl font-bold text-blue-900 mb-12">Ưu và Nhược điểm - Phương án 3</h2>
-                <div class="grid grid-cols-2 gap-12 text-left w-full">
-                    <div class="border-l-4 border-green-400 pl-4">
-                        <h3 class="text-3xl font-bold text-gray-800 mb-4">Ưu điểm</h3>
-                        <ul class="text-xl text-gray-600 list-disc list-inside space-y-2">
-                            <li>Linh hoạt và hiệu quả</li>
-                            <li>Quản lý tập trung</li>
-                            <li>Hoạt động khi mất Internet (cần KiotViet Proxy)</li>
-                        </ul>
-                    </div>
-                    <div class="border-l-4 border-red-400 pl-4">
-                        <h3 class="text-3xl font-bold text-gray-800 mb-4">Nhược điểm</h3>
-                        <ul class="text-xl text-gray-600 list-disc list-inside space-y-2">
-                            <li>Phụ thuộc vào máy tính trung tâm</li>
-                            <li>Cần đảm bảo KiotViet Kết Nối luôn chạy</li>
-                        </ul>
-                    </div>
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-8 text-center animate-zoom-in">Đặc Điểm: Chỉ Dùng POS</h2>
+            <div class="w-full max-w-4xl space-y-4">
+                <div class="bg-white/80 p-5 rounded-xl border-l-8 border-orange-400 shadow-md animate-zoom-in delay-100">
+                    <h3 class="font-bold text-lg"><i class="fa-solid fa-store mr-2 text-orange-400"></i> Áp dụng</h3>
+                    <p class="text-gray-600">Mô hình vừa & nhỏ, ưu tiên sự gọn gàng, thẩm mỹ cao.</p>
+                </div>
+                <div class="bg-white/80 p-5 rounded-xl border-l-8 border-gray-500 shadow-md animate-zoom-in delay-200">
+                    <h3 class="font-bold text-lg"><i class="fa-solid fa-tablet-screen-button mr-2 text-gray-500"></i> Mô tả</h3>
+                    <p class="text-gray-600">Thay PC bằng máy POS Android cảm ứng. Kết nối máy in qua USB hoặc LAN.</p>
                 </div>
             </div>
-        </section>
-        
-        <!-- Slide 17: Tiêu đề chương 4 -->
-        <section class="slide relative bg-gray-50">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper w-full max-w-7xl mx-auto items-start">
-                <p class="text-9xl font-bold text-orange-200 mb-4">05</p>
-                <div class="text-left pl-12 border-l-4 border-orange-200">
-                    <h2 class="text-6xl font-bold text-blue-900 leading-tight">Phương án 4:<br>Máy POS làm trung tâm</h2>
-                    <p class="mt-4 text-2xl text-gray-600">Giải pháp toàn diện, ổn định và hiện đại cho các chuỗi hoặc nhà hàng chuyên nghiệp.</p>
-                </div>
-            </div>
-        </section>
+        </div>
 
-        <!-- Slide 18: Infographic PA4 -->
-        <section class="slide relative bg-white">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper max-w-5xl text-left items-start">
-                <h2 class="text-5xl font-bold text-blue-900 mb-8 self-center">Đặc điểm chính - Phương án 4</h2>
-                <ul class="text-2xl text-gray-700 list-disc list-inside space-y-4">
-                    <li><span class="font-bold">Tình huống áp dụng:</span> Chuỗi cửa hàng, nhà hàng chuyên nghiệp muốn giải pháp toàn diện.</li>
-                    <li><span class="font-bold">Mô tả:</span> Máy POS làm "máy chủ mini", nhận lệnh in từ các điện thoại của nhân viên và điều phối.</li>
-                    <li><span class="font-bold">Ưu điểm:</span> Độ ổn định vượt trội, gọn nhẹ, dễ sử dụng.</li>
-                    <li><span class="font-bold">Nhược điểm:</span> Chi phí đầu tư, chưa hỗ trợ gửi lệnh từ điện thoại khi mất Internet.</li>
-                </ul>
-            </div>
-        </section>
-        
-        <!-- Slide 19: Hình ảnh PA4 -->
-        <section class="slide bg-gray-100">
-            <div class="slide-content-wrapper">
-                <div class="w-full text-center mb-6 flex-shrink-0">
-                    <h2 class="text-4xl font-bold text-blue-900">Mô hình Phương án 4</h2>
-                    <p class="text-xl text-gray-600 mt-2">Máy KiotViet POS làm "máy chủ mini", nhận lệnh in từ các ứng dụng của nhân viên và điều phối.</p>
-                </div>
-                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
-                    <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXcKKiXmVQKYTvNXtx7ci4XzGD5Qg8wR5gGq_FmLg77xtpaTtuVS_-53qP5qBsIdbqN8miECBpqU-xkSRjfFZw8xBPFPyWuhwNeUsG9NH3UuNZ-1tlsC-T8EgURW4vKPFIDnOanOoB4f9pdAkpVbyCtQAuriokg?key=kyqv5w43o69ogX2RsipIdA" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Mô hình 4: POS làm trung tâm">
-                </div>
-            </div>
-        </section>
+        <div class="slide flex items-center justify-center w-full h-full p-0" data-type="infographic">
+            <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXfS7ZeYBjFIsn-c6k8yYKXgp4p21WjDtI99BRSOid2OZ-M15J5CSECJj0Wt-t-Tb3xMD2uS6PiN9BgkesKJSvBB8qTOLpICwpJxaHXeSLB7QTzZenfTGO-Jici7snZE91OMp51uWEAEI6uqaWr9EgCsns6QSxE?key=kyqv5w43o69ogX2RsipIdA" class="max-w-[90%] max-h-[90%] object-contain rounded-3xl shadow-2xl border-4 border-white/50 animate-zoom-in">
+        </div>
 
-        <!-- Slide 20: Ưu nhược PA4 -->
-        <section class="slide relative bg-white">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper max-w-6xl">
-                <h2 class="text-5xl font-bold text-blue-900 mb-12">Ưu và Nhược điểm - Phương án 4</h2>
-                <div class="grid grid-cols-2 gap-12 text-left w-full">
-                    <div class="border-l-4 border-green-400 pl-4">
-                        <h3 class="text-3xl font-bold text-gray-800 mb-4">Ưu điểm</h3>
-                        <ul class="text-xl text-gray-600 list-disc list-inside space-y-2">
-                            <li>Độ ổn định vượt trội</li>
-                            <li>Gọn nhẹ, dễ sử dụng</li>
-                            <li>Hoạt động khi mất Internet (trên máy POS)</li>
-                        </ul>
-                    </div>
-                    <div class="border-l-4 border-red-400 pl-4">
-                        <h3 class="text-3xl font-bold text-gray-800 mb-4">Nhược điểm</h3>
-                        <ul class="text-xl text-gray-600 list-disc list-inside space-y-2">
-                            <li>Chi phí đầu tư ban đầu cho thiết bị</li>
-                            <li>Chưa hỗ trợ gửi lệnh từ điện thoại khi mất Internet</li>
-                        </ul>
-                    </div>
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-8 animate-zoom-in">Ưu & Nhược Điểm (PA2)</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-6xl h-3/5">
+                <div class="bg-green-50/80 p-8 rounded-2xl border border-green-200 shadow-lg animate-zoom-in delay-100">
+                    <h3 class="text-2xl font-bold text-green-700 mb-4"><i class="fa-solid fa-thumbs-up"></i> Ưu điểm</h3>
+                    <ul class="space-y-3 text-lg text-gray-700">
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Gọn nhẹ, Chuyên nghiệp.</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Độ ổn định rất cao.</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Hoạt động tốt khi mất mạng.</li>
+                    </ul>
+                </div>
+                <div class="bg-red-50/80 p-8 rounded-2xl border border-red-200 shadow-lg animate-zoom-in delay-200">
+                    <h3 class="text-2xl font-bold text-red-700 mb-4"><i class="fa-solid fa-thumbs-down"></i> Nhược điểm</h3>
+                    <ul class="space-y-3 text-lg text-gray-700">
+                        <li><i class="fa-solid fa-xmark text-red-500 mr-2"></i> Chi phí đầu tư POS cao hơn PC cũ.</li>
+                        <li><i class="fa-solid fa-xmark text-red-500 mr-2"></i> Vẫn phải order tại quầy cố định.</li>
+                    </ul>
                 </div>
             </div>
-        </section>
-        
-        <!-- Slide 21: Tiêu đề chương 5 -->
-        <section class="slide relative bg-gray-50">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper w-full max-w-7xl mx-auto items-start">
-                <p class="text-9xl font-bold text-orange-200 mb-4">06</p>
-                <div class="text-left pl-12 border-l-4 border-orange-200">
-                    <h2 class="text-6xl font-bold text-blue-900 leading-tight">Phương án 5:<br>Chỉ sử dụng điện thoại</h2>
-                    <p class="mt-4 text-2xl text-gray-600">Giải pháp siêu tinh gọn, tiết kiệm chi phí, không cần thiết bị trung tâm.</p>
-                </div>
-            </div>
-        </section>
+        </div>
 
-        <!-- Slide 22: Infographic PA5 -->
-        <section class="slide relative bg-white">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper max-w-5xl text-left items-start">
-                <h2 class="text-5xl font-bold text-blue-900 mb-8 self-center">Đặc điểm chính - Phương án 5</h2>
-                <ul class="text-2xl text-gray-700 list-disc list-inside space-y-4">
-                    <li><span class="font-bold">Tình huống áp dụng:</span> Food truck, hội chợ, sự kiện, quán muốn tiết kiệm tối đa chi phí.</li>
-                    <li><span class="font-bold">Mô tả:</span> Không có máy chủ. Điện thoại gửi lệnh in trực tiếp đến IP tĩnh của máy in LAN.</li>
-                    <li><span class="font-bold">Ưu điểm:</span> Siêu tinh gọn, tiết kiệm, độc lập, hoạt động khi mất Internet.</li>
-                    <li><span class="font-bold">Nhược điểm:</span> Yêu cầu kỹ thuật cao, mạng phải ổn định, quản lý phức tạp.</li>
-                </ul>
-            </div>
-        </section>
-        
-        <!-- Slide 23: Hình ảnh PA5 -->
-        <section class="slide bg-gray-100">
-            <div class="slide-content-wrapper">
-                <div class="w-full text-center mb-6 flex-shrink-0">
-                    <h2 class="text-4xl font-bold text-blue-900">Mô hình Phương án 5</h2>
-                    <p class="text-xl text-gray-600 mt-2">Điện thoại gửi lệnh in trực tiếp đến địa chỉ IP của máy in LAN mà không cần máy chủ.</p>
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-orange-500 pr-12 animate-zoom-in">
+                    <h2 class="text-8xl font-black text-orange-200/50 absolute -top-20 right-10 z-0">04</h2>
+                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight relative z-10">Phương Án 3</h2>
+                    <p class="text-xl text-orange-600 font-bold mt-2">Máy Tính Làm Trung Tâm</p>
                 </div>
-                <div class="flex-grow w-full flex items-center justify-center overflow-hidden">
-                    <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXeCXX5CqrCGQL93eByzRXcbcT2Q7BkV0rFcl9WbJ4Wa5ZZJ4FIQ9n0Mcwk6v1RWI1zWl1gf4_bngIKjcDNdJSXVOr4g5kKZFGwL0_lqqbhtuHhGES_Rgf2iua15KwAyl8RgvI7LRbPt-7o-MWE4BMn9mDnJHQ?key=kyqv5w43o69ogX2RsipIdA" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Mô hình 5: Chỉ dùng điện thoại">
+                <div class="flex-1 animate-zoom-in delay-100">
+                     <p class="text-2xl text-gray-700 font-medium">Tối ưu cho nhà hàng có nhân viên phục vụ tại bàn (Order bằng điện thoại).</p>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide 24: Ưu nhược PA5 -->
-        <section class="slide relative bg-white">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper max-w-6xl">
-                <h2 class="text-5xl font-bold text-blue-900 mb-12">Ưu và Nhược điểm - Phương án 5</h2>
-                <div class="grid grid-cols-2 gap-12 text-left w-full">
-                    <div class="border-l-4 border-green-400 pl-4">
-                        <h3 class="text-3xl font-bold text-gray-800 mb-4">Ưu điểm</h3>
-                        <ul class="text-xl text-gray-600 list-disc list-inside space-y-2">
-                            <li>Siêu tinh gọn, tiết kiệm chi phí</li>
-                            <li>Hoạt động độc lập, không phụ thuộc máy chủ</li>
-                            <li>Hoạt động khi mất Internet</li>
-                        </ul>
-                    </div>
-                    <div class="border-l-4 border-red-400 pl-4">
-                        <h3 class="text-3xl font-bold text-gray-800 mb-4">Nhược điểm</h3>
-                        <ul class="text-xl text-gray-600 list-disc list-inside space-y-2">
-                            <li>Yêu cầu kỹ thuật cao về mạng</li>
-                            <li>Hạ tầng mạng phải rất ổn định</li>
-                            <li>Quản lý và xử lý lỗi phức tạp</li>
-                        </ul>
-                    </div>
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-8 text-center animate-zoom-in">Đặc Điểm: PC Trung Tâm</h2>
+            <div class="w-full max-w-4xl space-y-4">
+                <div class="bg-white/80 p-5 rounded-xl border-l-8 border-purple-500 shadow-md animate-zoom-in delay-100">
+                    <h3 class="font-bold text-lg"><i class="fa-solid fa-utensils mr-2 text-purple-500"></i> Áp dụng</h3>
+                    <p class="text-gray-600">Nhà hàng, Quán ăn lớn, Café sân vườn cần nhân viên di chuyển.</p>
+                </div>
+                <div class="bg-white/80 p-5 rounded-xl border-l-8 border-gray-500 shadow-md animate-zoom-in delay-200">
+                    <h3 class="font-bold text-lg"><i class="fa-solid fa-network-wired mr-2 text-gray-500"></i> Cơ chế</h3>
+                    <p class="text-gray-600">Nhân viên dùng App điện thoại order -> Gửi lệnh về PC (cài KiotViet Kết Nối) -> PC điều khiển máy in.</p>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide 25: Tiêu đề chương Bảng tóm tắt -->
-        <section class="slide relative bg-gray-50">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper w-full max-w-6xl mx-auto items-start">
-                <p class="text-9xl font-bold text-orange-200 mb-4">07</p>
-                <div class="text-left pl-12 border-l-4 border-orange-200">
-                    <h2 class="text-6xl font-bold text-blue-900 leading-tight">Bảng Tóm Tắt Lựa Chọn</h2>
-                    <p class="mt-4 text-2xl text-gray-600">So sánh tổng quan 5 phương án dựa trên các tiêu chí chính để đưa ra quyết định phù hợp nhất.</p>
+        <div class="slide flex items-center justify-center w-full h-full p-0" data-type="infographic">
+            <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdQlC78Ly9Dgq0mv_b5DfMXN2C0ed9kgTQ-NK5BHr2IMr9CzDH7av4JqJnLnSKaJMLZSjGyRC45Ggd0jIA5DDkovXW5-amQ08bi_7xT0HffeQ6Lsw_qYX3AzZjSEcOrOkMtaHXVbvz6mpMuP-1zF840o4rHECY?key=kyqv5w43o69ogX2RsipIdA" class="max-w-[90%] max-h-[90%] object-contain rounded-3xl shadow-2xl border-4 border-white/50 animate-zoom-in">
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-8 animate-zoom-in">Ưu & Nhược Điểm (PA3)</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-6xl h-3/5">
+                <div class="bg-green-50/80 p-8 rounded-2xl border border-green-200 shadow-lg animate-zoom-in delay-100">
+                    <h3 class="text-2xl font-bold text-green-700 mb-4"><i class="fa-solid fa-thumbs-up"></i> Ưu điểm</h3>
+                    <ul class="space-y-3 text-lg text-gray-700">
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Linh hoạt (Order tại bàn).</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Quản lý in tập trung.</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Hỗ trợ Offline (qua KiotViet Proxy).</li>
+                    </ul>
+                </div>
+                <div class="bg-red-50/80 p-8 rounded-2xl border border-red-200 shadow-lg animate-zoom-in delay-200">
+                    <h3 class="text-2xl font-bold text-red-700 mb-4"><i class="fa-solid fa-thumbs-down"></i> Nhược điểm</h3>
+                    <ul class="space-y-3 text-lg text-gray-700">
+                        <li><i class="fa-solid fa-xmark text-red-500 mr-2"></i> Phụ thuộc hoàn toàn vào PC chủ.</li>
+                        <li><i class="fa-solid fa-xmark text-red-500 mr-2"></i> PC phải luôn bật "KiotViet Kết Nối".</li>
+                    </ul>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide 26: Bảng so sánh -->
-        <section class="slide relative bg-white">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper max-w-7xl mx-auto">
-                <h2 class="text-5xl font-bold text-blue-900 mb-10">Bảng Tóm Tắt Lựa Chọn</h2>
-                <table class="w-full text-lg border-collapse">
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-orange-500 pr-12 animate-zoom-in">
+                    <h2 class="text-8xl font-black text-orange-200/50 absolute -top-20 right-10 z-0">05</h2>
+                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight relative z-10">Phương Án 4</h2>
+                    <p class="text-xl text-orange-600 font-bold mt-2">Máy POS Làm Trung Tâm</p>
+                </div>
+                <div class="flex-1 animate-zoom-in delay-100">
+                     <p class="text-2xl text-gray-700 font-medium">Giải pháp "Flagship" toàn diện cho chuỗi và nhà hàng chuyên nghiệp.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-8 text-center animate-zoom-in">Đặc Điểm: POS Trung Tâm</h2>
+            <div class="w-full max-w-4xl space-y-4">
+                <div class="bg-white/80 p-5 rounded-xl border-l-8 border-orange-500 shadow-md animate-zoom-in delay-100">
+                    <h3 class="font-bold text-lg"><i class="fa-solid fa-building mr-2 text-orange-500"></i> Áp dụng</h3>
+                    <p class="text-gray-600">Chuỗi cửa hàng, Nhà hàng chuyên nghiệp cần độ ổn định tuyệt đối.</p>
+                </div>
+                <div class="bg-white/80 p-5 rounded-xl border-l-8 border-gray-500 shadow-md animate-zoom-in delay-200">
+                    <h3 class="font-bold text-lg"><i class="fa-solid fa-server mr-2 text-gray-500"></i> Cơ chế</h3>
+                    <p class="text-gray-600">Máy POS đóng vai trò như "Máy chủ Mini". Nhận lệnh từ điện thoại nhân viên và điều phối in.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide flex items-center justify-center w-full h-full p-0" data-type="infographic">
+            <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXcKKiXmVQKYTvNXtx7ci4XzGD5Qg8wR5gGq_FmLg77xtpaTtuVS_-53qP5qBsIdbqN8miECBpqU-xkSRjfFZw8xBPFPyWuhwNeUsG9NH3UuNZ-1tlsC-T8EgURW4vKPFIDnOanOoB4f9pdAkpVbyCtQAuriokg?key=kyqv5w43o69ogX2RsipIdA" class="max-w-[90%] max-h-[90%] object-contain rounded-3xl shadow-2xl border-4 border-white/50 animate-zoom-in">
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-8 animate-zoom-in">Ưu & Nhược Điểm (PA4)</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-6xl h-3/5">
+                <div class="bg-green-50/80 p-8 rounded-2xl border border-green-200 shadow-lg animate-zoom-in delay-100">
+                    <h3 class="text-2xl font-bold text-green-700 mb-4"><i class="fa-solid fa-thumbs-up"></i> Ưu điểm</h3>
+                    <ul class="space-y-3 text-lg text-gray-700">
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Ổn định vượt trội.</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Gọn nhẹ, dễ vận hành.</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Bản thân POS vẫn in được khi mất mạng.</li>
+                    </ul>
+                </div>
+                <div class="bg-red-50/80 p-8 rounded-2xl border border-red-200 shadow-lg animate-zoom-in delay-200">
+                    <h3 class="text-2xl font-bold text-red-700 mb-4"><i class="fa-solid fa-thumbs-down"></i> Nhược điểm</h3>
+                    <ul class="space-y-3 text-lg text-gray-700">
+                        <li><i class="fa-solid fa-xmark text-red-500 mr-2"></i> Chi phí đầu tư thiết bị.</li>
+                        <li><i class="fa-solid fa-xmark text-red-500 mr-2"></i> ĐT nhân viên không gửi lệnh được khi mất mạng.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-orange-500 pr-12 animate-zoom-in">
+                    <h2 class="text-8xl font-black text-orange-200/50 absolute -top-20 right-10 z-0">06</h2>
+                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight relative z-10">Phương Án 5</h2>
+                    <p class="text-xl text-orange-600 font-bold mt-2">Chỉ sử dụng Điện Thoại</p>
+                </div>
+                <div class="flex-1 animate-zoom-in delay-100">
+                     <p class="text-2xl text-gray-700 font-medium">Giải pháp siêu tinh gọn, độc lập, không cần máy chủ.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-8 text-center animate-zoom-in">Đặc Điểm: Mobile Only</h2>
+            <div class="w-full max-w-4xl space-y-4">
+                <div class="bg-white/80 p-5 rounded-xl border-l-8 border-cyan-500 shadow-md animate-zoom-in delay-100">
+                    <h3 class="font-bold text-lg"><i class="fa-solid fa-truck-fast mr-2 text-cyan-500"></i> Áp dụng</h3>
+                    <p class="text-gray-600">Food Truck, Hội chợ, Gian hàng sự kiện, Quán siêu nhỏ.</p>
+                </div>
+                <div class="bg-white/80 p-5 rounded-xl border-l-8 border-gray-500 shadow-md animate-zoom-in delay-200">
+                    <h3 class="font-bold text-lg"><i class="fa-solid fa-mobile-screen mr-2 text-gray-500"></i> Cơ chế</h3>
+                    <p class="text-gray-600">Điện thoại gửi lệnh trực tiếp đến IP tĩnh của máy in (qua WiFi/LAN) không cần qua thiết bị trung gian.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide flex items-center justify-center w-full h-full p-0" data-type="infographic">
+            <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXeCXX5CqrCGQL93eByzRXcbcT2Q7BkV0rFcl9WbJ4Wa5ZZJ4FIQ9n0Mcwk6v1RWI1zWl1gf4_bngIKjcDNdJSXVOr4g5kKZFGwL0_lqqbhtuHhGES_Rgf2iua15KwAyl8RgvI7LRbPt-7o-MWE4BMn9mDnJHQ?key=kyqv5w43o69ogX2RsipIdA" class="max-w-[90%] max-h-[90%] object-contain rounded-3xl shadow-2xl border-4 border-white/50 animate-zoom-in">
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-8 animate-zoom-in">Ưu & Nhược Điểm (PA5)</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-6xl h-3/5">
+                <div class="bg-green-50/80 p-8 rounded-2xl border border-green-200 shadow-lg animate-zoom-in delay-100">
+                    <h3 class="text-2xl font-bold text-green-700 mb-4"><i class="fa-solid fa-thumbs-up"></i> Ưu điểm</h3>
+                    <ul class="space-y-3 text-lg text-gray-700">
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Chi phí thấp nhất (0đ thiết bị trung tâm).</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Độc lập hoàn toàn.</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Hoạt động tốt khi mất mạng.</li>
+                    </ul>
+                </div>
+                <div class="bg-red-50/80 p-8 rounded-2xl border border-red-200 shadow-lg animate-zoom-in delay-200">
+                    <h3 class="text-2xl font-bold text-red-700 mb-4"><i class="fa-solid fa-thumbs-down"></i> Nhược điểm</h3>
+                    <ul class="space-y-3 text-lg text-gray-700">
+                        <li><i class="fa-solid fa-xmark text-red-500 mr-2"></i> Cấu hình IP phức tạp.</li>
+                        <li><i class="fa-solid fa-xmark text-red-500 mr-2"></i> Yêu cầu hạ tầng mạng rất ổn định.</li>
+                        <li><i class="fa-solid fa-xmark text-red-500 mr-2"></i> Khó xử lý khi gặp sự cố in.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-orange-500 pr-12 animate-zoom-in">
+                    <h2 class="text-8xl font-black text-orange-200/50 absolute -top-20 right-10 z-0">07</h2>
+                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight relative z-10">Tổng Kết</h2>
+                </div>
+                <div class="flex-1 animate-zoom-in delay-100">
+                     <p class="text-2xl text-gray-700 font-medium">Bảng so sánh giúp bạn lựa chọn phương án tối ưu nhất.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-8">
+            <h2 class="text-4xl font-bold text-blue-900 mb-8 animate-zoom-in">Bảng Tóm Tắt Lựa Chọn</h2>
+            <div class="w-full max-w-6xl overflow-hidden rounded-xl shadow-2xl animate-zoom-in delay-100">
+                <table class="glass-table w-full text-lg border-collapse">
                     <thead>
-                        <tr class="bg-orange-100">
-                            <th class="p-4 border border-orange-200 text-left">Phương án</th>
-                            <th class="p-4 border border-orange-200">Phục vụ tại bàn</th>
-                            <th class="p-4 border border-orange-200">In khi mất Internet (từ Điện thoại)</th>
-                            <th class="p-4 border border-orange-200">Độ khó cài đặt</th>
+                        <tr>
+                            <th class="text-left font-bold text-xl">Phương án</th>
+                            <th class="font-bold text-xl">Phục vụ tại bàn</th>
+                            <th class="font-bold text-xl">In khi mất Internet (Từ ĐT)</th>
+                            <th class="font-bold text-xl">Độ khó cài đặt</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="bg-gray-50">
-                            <td class="p-4 border border-gray-200 font-bold">1. Chỉ dùng PC</td>
-                            <td class="p-4 border border-gray-200">Không</td>
-                            <td class="p-4 border border-gray-200">Không áp dụng</td>
-                            <td class="p-4 border border-gray-200">Dễ</td>
+                        <tr>
+                            <td class="font-bold">1. Chỉ dùng PC</td>
+                            <td class="text-center text-red-500"><i class="fa-solid fa-xmark"></i></td>
+                            <td class="text-center text-gray-400">N/A</td>
+                            <td class="text-center text-green-600">Dễ</td>
                         </tr>
                         <tr>
-                            <td class="p-4 border border-gray-200 font-bold">2. Chỉ dùng POS</td>
-                            <td class="p-4 border border-gray-200">Không</td>
-                            <td class="p-4 border border-gray-200">Không áp dụng</td>
-                            <td class="p-4 border border-gray-200">Rất dễ</td>
-                        </tr>
-                        <tr class="bg-gray-50">
-                            <td class="p-4 border border-gray-200 font-bold">3. PC làm trung tâm</td>
-                            <td class="p-4 border border-gray-200">Có</td>
-                            <td class="p-4 border border-gray-200">Có (cần KiotViet Proxy)</td>
-                            <td class="p-4 border border-gray-200">Trung bình</td>
+                            <td class="font-bold">2. Chỉ dùng POS</td>
+                            <td class="text-center text-red-500"><i class="fa-solid fa-xmark"></i></td>
+                            <td class="text-center text-gray-400">N/A</td>
+                            <td class="text-center text-green-600 font-bold">Rất dễ</td>
                         </tr>
                         <tr>
-                            <td class="p-4 border border-gray-200 font-bold">4. POS làm trung tâm</td>
-                            <td class="p-4 border border-gray-200">Có</td>
-                            <td class="p-4 border border-gray-200">Không</td>
-                            <td class="p-4 border border-gray-200">Dễ</td>
+                            <td class="font-bold">3. PC Trung Tâm</td>
+                            <td class="text-center text-green-500"><i class="fa-solid fa-check"></i></td>
+                            <td class="text-center text-green-500"><i class="fa-solid fa-check"></i> (Proxy)</td>
+                            <td class="text-center text-yellow-600">Trung bình</td>
                         </tr>
-                        <tr class="bg-gray-50">
-                            <td class="p-4 border border-gray-200 font-bold">5. Chỉ dùng Điện thoại</td>
-                            <td class="p-4 border border-gray-200">Có</td>
-                            <td class="p-4 border border-gray-200">Có</td>
-                            <td class="p-4 border border-gray-200">Khó</td>
+                        <tr>
+                            <td class="font-bold">4. POS Trung Tâm</td>
+                            <td class="text-center text-green-500"><i class="fa-solid fa-check"></i></td>
+                            <td class="text-center text-red-500"><i class="fa-solid fa-xmark"></i></td>
+                            <td class="text-center text-green-600">Dễ</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">5. Chỉ Điện Thoại</td>
+                            <td class="text-center text-green-500"><i class="fa-solid fa-check"></i></td>
+                            <td class="text-center text-green-500"><i class="fa-solid fa-check"></i></td>
+                            <td class="text-center text-red-600 font-bold">Khó</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide 27: Kết thúc -->
-        <section class="slide relative bg-gradient-to-br from-pink-500 to-orange-500 flex justify-center items-center">
-            <img class="absolute top-[150px] left-1/2 -translate-x-1/2 h-12 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg">
-            <div class="w-[calc(100%-100px)] h-[calc(100%-100px)] border-4 border-white rounded-xl flex flex-col justify-center items-center p-8">
-                <h2 class="text-6xl font-bold text-white mb-8">Thông Tin Hỗ Trợ</h2>
-                <div class="text-2xl text-pink-100 space-y-4">
-                    <p><i class="fas fa-phone-alt mr-3"></i>Tổng đài tư vấn bán hàng: 1800 6162</p>
-                    <p><i class="fas fa-headset mr-3"></i>Tổng đài hỗ trợ phần mềm: 1900 6522</p>
-                    <p><i class="fas fa-envelope mr-3"></i>Email hỗ trợ: hotro@kiotviet.com</p>
-                </div>
+        <div class="slide flex items-center justify-center p-8">
+            <div class="bg-white/80 backdrop-blur-xl p-16 rounded-full shadow-2xl border border-white/50 text-center animate-zoom-in">
+                <div class="text-6xl text-orange-500 mb-6"><i class="fa-solid fa-heart"></i></div>
+                <h1 class="text-5xl font-extrabold text-blue-900 leading-tight">Cảm Ơn Bạn Đã Theo Dõi!</h1>
             </div>
-        </section>
+        </div>
+
     </div>
 
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
-        const slideContainer = document.getElementById('slide-container');
+        const logo = document.getElementById('global-logo');
 
-        function showSlide(index) {
-            slides.forEach((slide, i) => { slide.classList.toggle('active', i === index); });
+        function updateUI(index) {
+            slides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.add('active');
+                    // Reset Animations
+                    const animated = slide.querySelectorAll('.animate-zoom-in');
+                    animated.forEach(el => {
+                        el.style.animation = 'none';
+                        el.offsetHeight; /* trigger reflow */
+                        el.style.animation = '';
+                    });
+                    
+                    // Handle Logo Visibility for Infographics
+                    const isInfographic = slide.getAttribute('data-type') === 'infographic';
+                    if (isInfographic) logo.style.opacity = '0';
+                    else logo.style.opacity = '1';
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
         }
+
         function nextSlide() {
             currentSlide = (currentSlide + 1) % totalSlides;
-            showSlide(currentSlide);
+            updateUI(currentSlide);
         }
+
         function prevSlide() {
             currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            showSlide(currentSlide);
+            updateUI(currentSlide);
         }
+
         function toggleFullScreen() {
             if (!document.fullscreenElement) {
-                slideContainer.requestFullscreen().catch(err => {
-                    alert(`Không thể bật chế độ toàn màn hình: ${err.message} (${err.name})`);
-                });
+                document.documentElement.requestFullscreen();
             } else if (document.exitFullscreen) {
                 document.exitFullscreen();
             }
         }
+        
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') { nextSlide(); } 
-            else if (e.key === 'ArrowLeft') { prevSlide(); } 
-            else if (e.key.toLowerCase() === 'f') { toggleFullScreen(); }
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'Home') {
+                currentSlide = 0;
+                updateUI(currentSlide);
+            } else if (e.key === 'End') {
+                currentSlide = totalSlides - 1;
+                updateUI(currentSlide);
+            } else if (e.key.toLowerCase() === 'f') {
+                toggleFullScreen();
+            }
         });
-        if (totalSlides > 0) { showSlide(currentSlide); }
+
+        // Initialize
+        if (totalSlides > 0) updateUI(currentSlide);
     </script>
 </body>
 </html>
