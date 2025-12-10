@@ -3,244 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài thuyết trình</title>
+    <title>Giải pháp Ngành Nhà thuốc - KiotViet</title>
+    <!-- TAILWIND CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FONT AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { navy: { 900: '#1e3a8a' } },
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                        'zoom-in': 'zoomIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        zoomIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.95)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; }
-        .slide { display: none; width: 100%; height: 100%; padding: 0; box-sizing: border-box; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: absolute; top: 0; left: 0; transition: opacity 0.5s ease-in-out; }
-        .slide-content-wrapper { width: 100%; height: 100%; padding: 60px 80px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .slide.active { display: flex; }
-        .slide-container { width: 100%; height: 100%; position: relative; }
-        h1, h2, h3, h4, p, li, span { word-wrap: break-word; overflow-wrap: break-word; -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; background-color: #f8fafc; }
+        
+        .slide { display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.4s ease-in-out; z-index: 10; flex-direction: column; }
+        .slide.active { display: flex; opacity: 1; }
+        
+        /* GLASS EFFECT */
+        .glass {
+            background: rgba(255, 255, 255, 0.7); 
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+        }
+
+        #global-logo { position: fixed; top: 24px; left: 32px; height: 36px; z-index: 9999; transition: opacity 0.3s ease; }
+        .animate-zoom-in { opacity: 0; }
+        .slide.active .animate-zoom-in { animation-play-state: running; }
     </style>
 </head>
-<body>
-    <div id="slide-container" class="slide-container">
-        <!-- SLIDES GO HERE -->
-        <!-- Slide Bìa -->
-        <section class="slide relative bg-gradient-to-br from-blue-700 to-blue-900 flex justify-center items-center">
-            <img class="absolute top-[150px] left-1/2 -translate-x-1/2 h-12 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg">
-            <div class="w-[calc(100%-100px)] h-[calc(100%-100px)] border-4 border-white rounded-xl flex flex-col justify-center items-center p-8">
-                <h1 class="text-7xl font-bold text-white">Ngành Nhà thuốc</h1>
-                <p class="mt-6 text-2xl text-blue-200">Giải pháp quản lý bán hàng toàn diện</p>
-            </div>
-        </section>
+<body class="text-gray-800 relative select-none cursor-none">
 
-        <!-- Slide Giới thiệu chung -->
-        <section class="slide relative bg-white">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper text-left max-w-6xl mx-auto">
-                <h2 class="text-5xl font-bold text-blue-900 mb-8">Giới thiệu giải pháp chuyên ngành Dược</h2>
-                <p class="text-2xl text-gray-600 leading-relaxed">KiotViet đã phát triển một bộ tính năng chuyên biệt cho ngành Dược, giúp các nhà thuốc vận hành hiệu quả, an toàn và tuân thủ quy định của Bộ Y tế. Đây là giải pháp toàn diện từ quản lý Lô – Hạn sử dụng, liên thông Dược Quốc gia, đến tối ưu bán thuốc theo đơn.</p>
-            </div>
-        </section>
+    <!-- 1. LOGO -->
+    <img id="global-logo" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
 
-        <!-- Slide Lợi ích -->
-        <section class="slide relative bg-white">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper">
-                <h2 class="text-5xl font-bold text-blue-900 mb-12">Lợi ích nổi bật của giải pháp</h2>
-                <div class="w-full max-w-7xl grid grid-cols-3 gap-8">
-                    <div class="bg-gray-50 p-8 rounded-xl shadow-md flex flex-col items-center">
-                        <i class="fa-solid fa-shield-halved text-5xl text-blue-600 mb-4"></i>
-                        <h4 class="text-2xl font-bold text-gray-800 mb-2">Tuân thủ quy định Bộ Y tế</h4>
-                        <p class="text-lg text-gray-600">Hỗ trợ kết nối và liên thông dữ liệu trực tiếp với Cơ sở dữ liệu Dược Quốc gia (CSDLDQG).</p>
-                    </div>
-                    <div class="bg-gray-50 p-8 rounded-xl shadow-md flex flex-col items-center">
-                        <i class="fa-solid fa-boxes-stacked text-5xl text-blue-600 mb-4"></i>
-                        <h4 class="text-2xl font-bold text-gray-800 mb-2">Quản lý Lô – HSD chính xác</h4>
-                        <p class="text-lg text-gray-600">Tự động gợi ý xuất bán theo nguyên tắc FEFO, giảm thiểu rủi ro và thất thoát do hàng hết hạn.</p>
-                    </div>
-                    <div class="bg-gray-50 p-8 rounded-xl shadow-md flex flex-col items-center">
-                        <i class="fa-solid fa-clock-rotate-left text-5xl text-blue-600 mb-4"></i>
-                        <h4 class="text-2xl font-bold text-gray-800 mb-2">Tối ưu & Tiết kiệm thời gian</h4>
-                        <p class="text-lg text-gray-600">Đồng bộ đơn thuốc mẫu, tự động gợi ý thông tin, đẩy nhanh tốc độ phục vụ và giảm sai sót.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- 2. BACKGROUND (Retail/Khác: Blue + Cyan) -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-cyan-400 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-32 left-20 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-4000"></div>
+    </div>
 
-        <!-- Slide Tiêu đề Chương 1 -->
-        <section class="slide relative bg-gray-50">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper w-full max-w-6xl mx-auto items-start">
-                <p class="text-9xl font-bold text-blue-200 mb-4">01</p>
-                <div class="text-left pl-12 border-l-4 border-blue-200">
-                    <h2 class="text-6xl font-bold text-blue-900 leading-tight">Các thao tác cơ bản</h2>
-                    <p class="mt-4 text-2xl text-gray-600">Hướng dẫn các thiết lập và nghiệp vụ cốt lõi hàng ngày tại nhà thuốc.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Slide Tóm tắt Thao tác 1 -->
-        <section class="slide relative bg-white">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper w-full max-w-6xl">
-                <h2 class="text-5xl font-bold text-blue-900 mb-12">Tóm tắt các thao tác cơ bản</h2>
-                <div class="w-full text-left space-y-4">
-                    <div class="flex items-center bg-gray-50 p-3 rounded-lg"><span class="text-xl font-bold text-blue-600 bg-blue-100 w-10 h-10 flex items-center justify-center rounded-full mr-5">1</span><p class="text-xl text-gray-700">Thiết lập kết nối với CSDL Dược Quốc gia</p></div>
-                    <div class="flex items-center bg-gray-50 p-3 rounded-lg"><span class="text-xl font-bold text-blue-600 bg-blue-100 w-10 h-10 flex items-center justify-center rounded-full mr-5">2</span><p class="text-xl text-gray-700">Quản lý Danh mục hàng hóa (Thuốc)</p></div>
-                    <div class="flex items-center bg-gray-50 p-3 rounded-lg"><span class="text-xl font-bold text-blue-600 bg-blue-100 w-10 h-10 flex items-center justify-center rounded-full mr-5">3</span><p class="text-xl text-gray-700">Quản lý h&agrave;ng h&oacute;a (Nội bộ)</p></div>
-                    <div class="flex items-center bg-gray-50 p-3 rounded-lg"><span class="text-xl font-bold text-blue-600 bg-blue-100 w-10 h-10 flex items-center justify-center rounded-full mr-5">4</span><p class="text-xl text-gray-700">Nhập h&agrave;ng theo L&ocirc; - Hạn sử dụng</p></div>
-                    <div class="flex items-center bg-gray-50 p-3 rounded-lg"><span class="text-xl font-bold text-blue-600 bg-blue-100 w-10 h-10 flex items-center justify-center rounded-full mr-5">5</span><p class="text-xl text-gray-700">B&aacute;n h&agrave;ng theo L&ocirc; - Hạn sử dụng</p></div>
-                </div>
-            </div>
-        </section>
+    <!-- 3. CONTAINER -->
+    <div id="slide-container" class="relative z-10 w-full h-full flex items-center justify-center">
         
-        <!-- Các Slide hình ảnh cho Chương 1 -->
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Thiết lập kết nối với CSDL Dược Quốc gia</h2><p class="text-xl text-gray-600 mt-2">Tại Thiết lập → Quản lý chi nhánh, điền thông tin tài khoản kết nối và Lưu lại.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15030937/NTR_141025-1-1.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Thiết lập kết nối Dược Quốc gia"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Thêm mới Thuốc</h2><p class="text-xl text-gray-600 mt-2">Tại Hàng hóa → Danh sách hàng hóa, nhấn Tạo mới → chọn Thuốc.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15030949/NTR_141025-2-1.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Thêm mới Thuốc"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Thêm thuốc từ Danh mục Cục Quản lý Dược</h2><p class="text-xl text-gray-600 mt-2">Tìm và chọn thuốc theo danh mục có sẵn. Các thông tin sẽ được tự động điền.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031002/NTR_141025-3.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Thêm thuốc từ danh mục có sẵn"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Thêm thuốc ngoài Danh mục</h2><p class="text-xl text-gray-600 mt-2">Tự nhập Tên thuốc và tích chọn "Đồng bộ lên CSDL Dược Quốc gia" nếu muốn liên thông.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031020/NTR_141025-4.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Thêm thuốc ngoài danh mục"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Quản lý theo Lô và Tên viết tắt</h2><p class="text-xl text-gray-600 mt-2">Thuốc mặc định quản lý theo Lô – Hạn sử dụng. Có thể đặt Tên viết tắt để tìm kiếm nhanh.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031040/NTR_141025-5.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Quản lý theo Lô và Tên viết tắt"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Thêm Hàng hóa Nội bộ</h2><p class="text-xl text-gray-600 mt-2">Để quản lý các sản phẩm khác theo lô, chọn Tạo mới → Hàng hóa.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031056/NTR_141025-6.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Thêm hàng hóa nội bộ"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Kích hoạt quản lý theo Lô</h2><p class="text-xl text-gray-600 mt-2">Chọn "Có" tại mục "Quản lý theo l&ocirc;, hạn sử dụng".</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031118/NTR_141025-7.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Kích hoạt quản lý theo lô"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Nhập hàng theo Lô - Hạn sử dụng</h2><p class="text-xl text-gray-600 mt-2">Khi nhập hàng, nhấn "Thêm mới l&ocirc;, hạn sử dụng" và điền thông tin chi tiết.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031131/NTR_141025-8.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Nhập hàng theo lô"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Hoàn tất phiếu nhập hàng</h2><p class="text-xl text-gray-600 mt-2">Nhập đơn giá, thông tin thanh toán và nhấn "Hoàn thành".</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031145/NTR_141025-9.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Hoàn tất phiếu nhập"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Bán hàng theo Lô - Hạn sử dụng</h2><p class="text-xl text-gray-600 mt-2">Hệ thống tự động gợi ý lô có HSD gần nhất (FEFO) và cảnh báo bằng màu sắc.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031201/NTR_141025-10.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Bán hàng theo lô"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Hoàn tất bán hàng</h2><p class="text-xl text-gray-600 mt-2">Nhập thông tin khách hàng và thanh toán để hoàn tất giao dịch.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031214/NTR_141025-11.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Hoàn tất bán hàng"></div></div></section>
-
-        <!-- Slide Tiêu đề Chương 2 -->
-        <section class="slide relative bg-gray-50">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper w-full max-w-6xl mx-auto items-start">
-                <p class="text-9xl font-bold text-blue-200 mb-4">02</p>
-                <div class="text-left pl-12 border-l-4 border-blue-200">
-                    <h2 class="text-6xl font-bold text-blue-900 leading-tight">Các tính năng nâng cao</h2>
-                    <p class="mt-4 text-2xl text-gray-600">Khám phá các công cụ chuyên sâu giúp tối ưu hóa vận hành nhà thuốc.</p>
-                </div>
+        <!-- SLIDE 1: BÌA -->
+        <div class="slide flex items-center justify-center p-8">
+            <div class="bg-white/80 backdrop-blur-xl p-12 rounded-3xl shadow-2xl border border-white/50 max-w-4xl w-full text-center animate-zoom-in">
+                <h1 class="text-5xl font-extrabold text-blue-900 mb-6 leading-tight">NGÀNH NHÀ THUỐC</h1>
+                <div class="h-1.5 w-24 bg-blue-600 mx-auto rounded-full mb-6"></div>
+                <p class="text-xl text-gray-600 font-medium">Giải pháp Quản lý Bán hàng Toàn diện</p>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide Tóm tắt Thao tác 2 -->
-        <section class="slide relative bg-white">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper w-full max-w-6xl">
-                <h2 class="text-5xl font-bold text-blue-900 mb-12">Tóm tắt các tính năng nâng cao</h2>
-                <div class="w-full text-left space-y-3">
-                    <div class="flex items-center bg-gray-50 p-3 rounded-lg"><span class="text-xl font-bold text-blue-600 bg-blue-100 w-10 h-10 flex items-center justify-center rounded-full mr-5">1</span><p class="text-xl text-gray-700">Tạo và sử dụng Đơn thuốc mẫu</p></div>
-                    <div class="flex items-center bg-gray-50 p-3 rounded-lg"><span class="text-xl font-bold text-blue-600 bg-blue-100 w-10 h-10 flex items-center justify-center rounded-full mr-5">2</span><p class="text-xl text-gray-700">Quản lý thông tin Bác sĩ</p></div>
-                    <div class="flex items-center bg-gray-50 p-3 rounded-lg"><span class="text-xl font-bold text-blue-600 bg-blue-100 w-10 h-10 flex items-center justify-center rounded-full mr-5">3</span><p class="text-xl text-gray-700">Bán thuốc theo đơn (Li&ecirc;n th&ocirc;ng Đơn thuốc Quốc gia)</p></div>
-                    <div class="flex items-center bg-gray-50 p-3 rounded-lg"><span class="text-xl font-bold text-blue-600 bg-blue-100 w-10 h-10 flex items-center justify-center rounded-full mr-5">4</span><p class="text-xl text-gray-700">Quản l&yacute; c&aacute;c giao dịch li&ecirc;n th&ocirc;ng</p></div>
-                    <div class="flex items-center bg-gray-50 p-3 rounded-lg"><span class="text-xl font-bold text-blue-600 bg-blue-100 w-10 h-10 flex items-center justify-center rounded-full mr-5">5</span><p class="text-xl text-gray-700">Xem b&aacute;o c&aacute;o h&agrave;ng h&oacute;a theo hạn sử dụng</p></div>
-                </div>
+        <!-- SLIDE 2: GIỚI THIỆU -->
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Giải pháp chuyên ngành Dược</h2>
+            <div class="bg-white/80 p-8 rounded-2xl shadow-lg border border-white/50 max-w-4xl animate-zoom-in" style="animation-delay: 0.1s;">
+                <p class="text-xl text-gray-700 leading-relaxed text-center">
+                    KiotViet phát triển bộ tính năng chuyên biệt cho ngành Dược, giúp nhà thuốc vận hành hiệu quả, an toàn và tuân thủ quy định của Bộ Y tế. Đây là giải pháp toàn diện từ quản lý Lô – Hạn sử dụng, liên thông Dược Quốc gia, đến tối ưu bán thuốc theo đơn.
+                </p>
             </div>
-        </section>
+        </div>
 
-        <!-- Các Slide hình ảnh cho Chương 2 -->
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Thêm mới Đơn thuốc mẫu</h2><p class="text-xl text-gray-600 mt-2">Vào Bác sĩ → Đơn thuốc mẫu và nhấn "Thêm mới".</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031225/NTR_141025-12.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Thêm đơn thuốc mẫu"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Nhập thông tin cho Đơn thuốc mẫu</h2><p class="text-xl text-gray-600 mt-2">Nhập tên, tìm và thêm các loại thuốc cùng liều dùng vào đơn.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031237/NTR_141025-13.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Nhập thông tin đơn thuốc mẫu"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Sử dụng Đơn thuốc mẫu khi bán hàng</h2><p class="text-xl text-gray-600 mt-2">Tìm kiếm theo đơn thuốc mẫu để thêm nhanh toàn bộ sản phẩm vào hóa đơn.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031247/NTR_141025-14.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Sử dụng đơn thuốc mẫu"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Quản lý thông tin Bác sĩ</h2><p class="text-xl text-gray-600 mt-2">Vào menu Bác sĩ để thêm mới hoặc chỉnh sửa thông tin chi tiết.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031302/NTR_141025-15.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Quản lý thông tin bác sĩ"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Giao diện thêm mới thông tin Bác sĩ</h2><p class="text-xl text-gray-600 mt-2">Điền đầy đủ thông tin như tên, số điện thoại, chuyên khoa, nơi công tác...</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031317/NTR_141025-16.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Thêm mới thông tin bác sĩ"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Bán thuốc theo Đơn thuốc Quốc gia</h2><p class="text-xl text-gray-600 mt-2">Nhấn vào "Bán thuốc theo đơn" và nhập Mã đơn thuốc của khách.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031328/NTR_141025-17.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Bán thuốc theo Đơn thuốc Quốc gia"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Tự động điền thông tin từ Đơn thuốc Quốc gia</h2><p class="text-xl text-gray-600 mt-2">Hệ thống sẽ tự động điền thông tin bệnh nhân, bác sĩ và cơ sở khám bệnh.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031340/NTR_141025-18.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Tự động điền thông tin đơn thuốc"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Đối chiếu thuốc và hoàn tất thanh toán</h2><p class="text-xl text-gray-600 mt-2">Khi thanh toán, dữ liệu sẽ được ghi nhận lên Đơn thuốc Quốc gia.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031355/NTR_141025-19.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Đối chiếu thuốc và thanh toán"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Xử lý thuốc không trùng khớp</h2><p class="text-xl text-gray-600 mt-2">Hệ thống sẽ cảnh báo để người bán chọn thuốc thay thế hoặc không bán.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031413/NTR_141025-20.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Xử lý thuốc không trùng khớp"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Quản lý giao dịch liên thông</h2><p class="text-xl text-gray-600 mt-2">Các giao dịch đã đồng bộ sẽ có biểu tượng tích xanh bên cạnh.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031502/NTR_141025-24.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Quản lý giao dịch liên thông"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Báo cáo chi tiết Hạn sử dụng</h2><p class="text-xl text-gray-600 mt-2">Chọn mối quan tâm "Hạn sử dụng" để xem chi tiết các lô hàng sắp và đã hết hạn.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031530/NTR_141025-26.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Báo cáo chi tiết hạn sử dụng"></div></div></section>
+        <!-- SLIDE 3: LỢI ÍCH -->
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Lợi ích nổi bật</h2>
+            <div class="grid grid-cols-3 gap-8 w-full max-w-6xl">
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in" style="animation-delay: 0.1s;"><div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-shield-halved text-2xl"></i></div><div><h3 class="text-xl font-bold">Tuân thủ quy định</h3><p class="text-sm mt-1">Hỗ trợ liên thông dữ liệu với CSDL Dược Quốc gia.</p></div></div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in" style="animation-delay: 0.2s;"><div class="w-14 h-14 bg-green-100/80 rounded-full flex items-center justify-center text-green-600 shrink-0"><i class="fa-solid fa-boxes-stacked text-2xl"></i></div><div><h3 class="text-xl font-bold">Quản lý Lô-HSD</h3><p class="text-sm mt-1">Tự động gợi ý xuất bán theo FEFO, giảm rủi ro hàng hết hạn.</p></div></div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in" style="animation-delay: 0.3s;"><div class="w-14 h-14 bg-purple-100/80 rounded-full flex items-center justify-center text-purple-600 shrink-0"><i class="fa-solid fa-clock-rotate-left text-2xl"></i></div><div><h3 class="text-xl font-bold">Tối ưu thời gian</h3><p class="text-sm mt-1">Đồng bộ đơn thuốc mẫu, đẩy nhanh tốc độ phục vụ.</p></div></div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: BRIDGE - CHƯƠNG 1 -->
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-blue-600 pr-12 animate-zoom-in"><h2 class="text-5xl font-extrabold text-blue-900 leading-tight">Các thao tác Cơ bản</h2></div>
+                <div class="flex-1 animate-zoom-in" style="animation-delay: 0.1s;"><ul class="space-y-3">
+                    <li class="flex items-center gap-4 text-xl font-medium"><i class="fa-solid fa-list-check text-blue-600"></i> Kết nối CSDL Dược Quốc gia</li>
+                    <li class="flex items-center gap-4 text-xl font-medium"><i class="fa-solid fa-list-check text-blue-600"></i> Quản lý Danh mục hàng hóa (Thuốc)</li>
+                    <li class="flex items-center gap-4 text-xl font-medium"><i class="fa-solid fa-list-check text-blue-600"></i> Quản lý hàng hóa (Nội bộ)</li>
+                    <li class="flex items-center gap-4 text-xl font-medium"><i class="fa-solid fa-list-check text-blue-600"></i> Nhập hàng theo Lô - HSD</li>
+                    <li class="flex items-center gap-4 text-xl font-medium"><i class="fa-solid fa-list-check text-blue-600"></i> Bán hàng theo Lô - HSD</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <!-- SLIDES HƯỚNG DẪN CHƯƠNG 1 -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Thiết lập kết nối Dược Quốc gia</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Tại Thiết lập → Quản lý chi nhánh, điền thông tin tài khoản và Lưu lại.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15030937/NTR_141025-1-1.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Thêm mới hàng hóa loại "Thuốc"</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Tại Hàng hóa → Danh sách hàng hóa, nhấn Tạo mới → chọn Thuốc.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15030949/NTR_141025-2-1.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Thêm thuốc từ Danh mục Cục QLD</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Tìm và chọn thuốc, các thông tin sẽ được tự động điền.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031002/NTR_141025-3.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Thêm thuốc ngoài Danh mục</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Tự nhập Tên thuốc và tích "Đồng bộ lên CSDL Dược Quốc gia" nếu muốn.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031020/NTR_141025-4.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Quản lý theo Lô và Tên viết tắt</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Thuốc mặc định quản lý theo Lô–HSD. Có thể đặt Tên viết tắt để tìm nhanh.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031040/NTR_141025-5.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Thêm Hàng hóa Nội bộ</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Để quản lý các sản phẩm khác theo lô, chọn Tạo mới → Hàng hóa.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031056/NTR_141025-6.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Kích hoạt quản lý theo Lô</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Chọn "Có" tại mục "Quản lý theo l&ocirc;, hạn sử dụng".</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031118/NTR_141025-7.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Nhập hàng theo Lô - Hạn sử dụng</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Khi nhập hàng, nhấn "Thêm mới l&ocirc;, hạn sử dụng" và điền thông tin.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031131/NTR_141025-8.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Hoàn tất phiếu nhập hàng</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Nhập đơn giá, thông tin thanh toán và nhấn "Hoàn thành".</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031145/NTR_141025-9.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Bán hàng theo Lô (Gợi ý FEFO)</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Hệ thống tự động gợi ý lô có HSD gần nhất và cảnh báo bằng màu sắc.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031201/NTR_141025-10.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Hoàn tất bán hàng</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Nhập thông tin khách hàng và thanh toán để hoàn tất giao dịch.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031214/NTR_141025-11.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+
+        <!-- SLIDE 16: BRIDGE - CHƯƠNG 2 -->
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-green-600 pr-12 animate-zoom-in"><h2 class="text-5xl font-extrabold text-blue-900 leading-tight">Các tính năng Nâng cao</h2></div>
+                <div class="flex-1 animate-zoom-in" style="animation-delay: 0.1s;"><ul class="space-y-3">
+                    <li class="flex items-center gap-4 text-xl font-medium"><i class="fa-solid fa-list-check text-green-600"></i> Tạo & sử dụng Đơn thuốc mẫu</li>
+                    <li class="flex items-center gap-4 text-xl font-medium"><i class="fa-solid fa-list-check text-green-600"></i> Quản lý thông tin Bác sĩ</li>
+                    <li class="flex items-center gap-4 text-xl font-medium"><i class="fa-solid fa-list-check text-green-600"></i> Bán thuốc theo Đơn thuốc Quốc gia</li>
+                    <li class="flex items-center gap-4 text-xl font-medium"><i class="fa-solid fa-list-check text-green-600"></i> Quản lý giao dịch liên thông</li>
+                    <li class="flex items-center gap-4 text-xl font-medium"><i class="fa-solid fa-list-check text-green-600"></i> Báo cáo hạn sử dụng</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <!-- SLIDES HƯỚNG DẪN CHƯƠNG 2 -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Thêm mới Đơn thuốc mẫu</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Vào Bác sĩ → Đơn thuốc mẫu và nhấn "Thêm mới".</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031225/NTR_141025-12.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Nhập thông tin cho Đơn thuốc mẫu</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Nhập tên, tìm và thêm các loại thuốc cùng liều dùng vào đơn.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031237/NTR_141025-13.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Sử dụng Đơn thuốc mẫu khi bán hàng</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Tìm kiếm theo đơn mẫu để thêm nhanh toàn bộ sản phẩm vào hóa đơn.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031247/NTR_141025-14.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Quản lý thông tin Bác sĩ</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Vào menu Bác sĩ để thêm mới hoặc chỉnh sửa thông tin chi tiết.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031302/NTR_141025-15.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Thêm mới thông tin Bác sĩ</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Điền đầy đủ thông tin như tên, SĐT, chuyên khoa, nơi công tác...</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031317/NTR_141025-16.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Bán thuốc theo Đơn thuốc Quốc gia</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Nhấn "Bán thuốc theo đơn" và nhập Mã đơn thuốc của khách.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031328/NTR_141025-17.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Tự động điền thông tin từ Đơn thuốc</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Hệ thống sẽ tự động điền thông tin bệnh nhân, bác sĩ và CSKB.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031340/NTR_141025-18.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Đối chiếu thuốc và hoàn tất thanh toán</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Khi thanh toán, dữ liệu sẽ được ghi nhận lên Đơn thuốc Quốc gia.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031355/NTR_141025-19.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Xử lý thuốc không trùng khớp</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Hệ thống cảnh báo để người bán chọn thuốc thay thế hoặc không bán.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031413/NTR_141025-20.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Quản lý giao dịch liên thông</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Các giao dịch đã đồng bộ sẽ có biểu tượng tích xanh bên cạnh.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031502/NTR_141025-24.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Báo cáo chi tiết Hạn sử dụng</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Xem chi tiết các lô hàng sắp và đã hết hạn.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031530/NTR_141025-26.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
         
-        <!-- Slide Tiêu đề Chương 3 -->
-        <section class="slide relative bg-gray-50">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper w-full max-w-6xl mx-auto items-start">
-                <p class="text-9xl font-bold text-blue-200 mb-4">03</p>
-                <div class="text-left pl-12 border-l-4 border-blue-200">
-                    <h2 class="text-6xl font-bold text-blue-900 leading-tight">Thao tác trên Điện thoại</h2>
-                    <p class="mt-4 text-2xl text-gray-600">Quản lý nhà thuốc linh hoạt mọi lúc mọi nơi với ứng dụng di động.</p>
-                </div>
+        <!-- SLIDE 28: BRIDGE - CHƯƠNG 3 -->
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-purple-600 pr-12 animate-zoom-in"><h2 class="text-5xl font-extrabold text-blue-900 leading-tight">Thao tác trên Điện thoại</h2></div>
+                <div class="flex-1 animate-zoom-in" style="animation-delay: 0.1s;"><ul class="space-y-6">
+                    <li class="flex items-center gap-4 text-xl font-medium"><i class="fa-solid fa-mobile-alt text-purple-600"></i> Thêm mới & Nhập hàng</li>
+                    <li class="flex items-center gap-4 text-xl font-medium"><i class="fa-solid fa-mobile-alt text-purple-600"></i> Bán hàng theo Lô-HSD</li>
+                </ul></div>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide Tóm tắt Thao tác 3 -->
-        <section class="slide relative bg-white">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper w-full max-w-6xl">
-                <h2 class="text-5xl font-bold text-blue-900 mb-12">Tóm tắt thao tác trên Điện thoại</h2>
-                <div class="w-full text-left space-y-6">
-                    <div class="flex items-center bg-gray-50 p-4 rounded-lg"><span class="text-xl font-bold text-blue-600 bg-blue-100 w-10 h-10 flex items-center justify-center rounded-full mr-5">1</span><p class="text-xl text-gray-700">Thêm mới và Nhập hàng theo Lô - Hạn sử dụng.</p></div>
-                    <div class="flex items-center bg-gray-50 p-4 rounded-lg"><span class="text-xl font-bold text-blue-600 bg-blue-100 w-10 h-10 flex items-center justify-center rounded-full mr-5">2</span><p class="text-xl text-gray-700">Bán hàng theo Lô - Hạn sử dụng.</p></div>
-                </div>
+        <!-- SLIDES HƯỚNG DẪN CHƯƠNG 3 -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Thêm mới Thuốc trên di động</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Chạm vào dấu "+" trong menu Hàng hóa để thêm thuốc mới.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031548/NTR_141025-27.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Nhập hàng theo Lô trên di động</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Khi nhập hàng, ứng dụng sẽ hiển thị màn hình "Thêm lô".</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031615/NTR_141025-29.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Bán hàng theo Lô trên di động</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Chạm vào lô cần bán và nhập số lượng để thêm vào hóa đơn.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031635/NTR_141025-30.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+
+        <!-- SLIDE 32: BRIDGE - CHƯƠNG 4 -->
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-yellow-500 pr-12 animate-zoom-in"><h2 class="text-5xl font-extrabold text-blue-900 leading-tight">Thao tác trên Máy POS</h2></div>
+                <div class="flex-1 animate-zoom-in" style="animation-delay: 0.1s;"><ul class="space-y-6">
+                    <li class="flex items-center gap-4 text-xl font-medium"><i class="fa-solid fa-cash-register text-yellow-500"></i> Tìm kiếm thuốc</li>
+                    <li class="flex items-center gap-4 text-xl font-medium"><i class="fa-solid fa-cash-register text-yellow-500"></i> Chọn lô và bán hàng</li>
+                    <li class="flex items-center gap-4 text-xl font-medium"><i class="fa-solid fa-cash-register text-yellow-500"></i> Hoàn tất thanh toán</li>
+                </ul></div>
             </div>
-        </section>
+        </div>
 
-        <!-- Các Slide hình ảnh cho Chương 3 -->
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Thêm mới Thuốc trên di động</h2><p class="text-xl text-gray-600 mt-2">Chạm vào dấu "+" trong menu Hàng hóa để thêm thuốc mới.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031548/NTR_141025-27.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Thêm thuốc trên di động"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Nhập hàng theo Lô trên di động</h2><p class="text-xl text-gray-600 mt-2">Khi nhập hàng, ứng dụng sẽ hiển thị màn hình "Thêm lô" để bạn nhập thông tin.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031615/NTR_141025-29.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Nhập hàng theo lô trên di động"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Bán hàng theo Lô trên di động</h2><p class="text-xl text-gray-600 mt-2">Chạm vào lô cần bán và nhập số lượng để thêm vào hóa đơn.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031635/NTR_141025-30.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Bán hàng theo lô trên di động"></div></div></section>
+        <!-- SLIDES HƯỚNG DẪN CHƯƠNG 4 -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Bán hàng trên Máy POS</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Hệ thống tự động gợi ý lô có HSD gần nhất. Bạn có thể chọn lô khác.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031651/NTR_141025-31.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full"><h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Hoàn tất bán hàng trên Máy POS</h2><p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Sau khi chọn lô, thuốc sẽ được thêm vào hóa đơn để thanh toán.</p><div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031705/NTR_141025-32.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50"></div></div>
 
-        <!-- Slide Tiêu đề Chương 4 -->
-        <section class="slide relative bg-gray-50">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper w-full max-w-6xl mx-auto items-start">
-                <p class="text-9xl font-bold text-blue-200 mb-4">04</p>
-                <div class="text-left pl-12 border-l-4 border-blue-200">
-                    <h2 class="text-6xl font-bold text-blue-900 leading-tight">Thao tác trên Máy POS</h2>
-                    <p class="mt-4 text-2xl text-gray-600">Bán hàng nhanh chóng và chuyên nghiệp tại quầy với thiết bị POS Android.</p>
-                </div>
+        <!-- SLIDE 35: INFOGRAPHIC -->
+        <div class="slide flex items-center justify-center w-full h-full p-0" data-type="infographic">
+            <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/12/07123037/CHUYEN-NGANH-NHA-THUOC.jpg" class="max-w-[90%] max-h-[90%] object-contain rounded-3xl shadow-2xl border-4 border-white/50 animate-zoom-in">
+        </div>
+
+        <!-- SLIDE 36: END -->
+        <div class="slide flex items-center justify-center p-8">
+            <div class="bg-white/80 backdrop-blur-xl p-16 rounded-3xl shadow-2xl border border-white/50 text-center animate-zoom-in">
+                <h1 class="text-6xl font-extrabold text-blue-900 mb-6">XIN CẢM ƠN!</h1>
+                <p class="text-2xl text-gray-600">Chúc bạn kinh doanh hiệu quả cùng KiotViet.</p>
             </div>
-        </section>
+        </div>
 
-        <!-- Slide Tóm tắt Thao tác 4 -->
-        <section class="slide relative bg-white">
-            <img class="absolute top-10 right-10 h-10 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg">
-            <div class="slide-content-wrapper w-full max-w-6xl">
-                <h2 class="text-5xl font-bold text-blue-900 mb-12">Tóm tắt thao tác trên Máy POS</h2>
-                <div class="w-full text-left space-y-6">
-                    <div class="flex items-center bg-gray-50 p-4 rounded-lg"><span class="text-xl font-bold text-blue-600 bg-blue-100 w-10 h-10 flex items-center justify-center rounded-full mr-5">1</span><p class="text-xl text-gray-700">Tìm kiếm thuốc theo tên, mã, lô hoặc tên viết tắt.</p></div>
-                    <div class="flex items-center bg-gray-50 p-4 rounded-lg"><span class="text-xl font-bold text-blue-600 bg-blue-100 w-10 h-10 flex items-center justify-center rounded-full mr-5">2</span><p class="text-xl text-gray-700">Chọn lô được gợi ý (FEFO) hoặc chọn lô khác từ danh sách.</p></div>
-                    <div class="flex items-center bg-gray-50 p-4 rounded-lg"><span class="text-xl font-bold text-blue-600 bg-blue-100 w-10 h-10 flex items-center justify-center rounded-full mr-5">3</span><p class="text-xl text-gray-700">Thêm vào hóa đơn và tiến hành thanh toán.</p></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Các Slide hình ảnh cho Chương 4 -->
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Bán hàng trên Máy POS</h2><p class="text-xl text-gray-600 mt-2">Hệ thống tự động gợi ý lô có HSD gần nhất. Bạn có thể chọn lô khác từ danh sách.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031651/NTR_141025-31.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Bán hàng trên máy POS"></div></div></section>
-        <section class="slide bg-gray-100"><div class="slide-content-wrapper"><div class="w-full text-center mb-6 flex-shrink-0"><h2 class="text-4xl font-bold text-blue-900">Hoàn tất bán hàng trên Máy POS</h2><p class="text-xl text-gray-600 mt-2">Sau khi chọn lô, thuốc sẽ được thêm vào hóa đơn để tiến hành thanh toán.</p></div><div class="flex-grow w-full flex items-center justify-center overflow-hidden"><img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/15031705/NTR_141025-32.png" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl" alt="Hoàn tất bán hàng trên máy POS"></div></div></section>
-
-        <!-- Slide Kết thúc -->
-        <section class="slide relative bg-gradient-to-br from-blue-700 to-blue-900 flex justify-center items-center">
-            <img class="absolute top-[150px] left-1/2 -translate-x-1/2 h-12 w-auto" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal-White.svg">
-            <div class="w-[calc(100%-100px)] h-[calc(100%-100px)] border-4 border-white rounded-xl flex flex-col justify-center items-center p-8">
-                <h1 class="text-7xl font-bold text-white">Cảm ơn bạn đã theo dõi!</h1>
-                <p class="mt-6 text-2xl text-blue-200">Chúc bạn kinh doanh hiệu quả cùng KiotViet</p>
-            </div>
-        </section>
     </div>
 
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
-        const slideContainer = document.getElementById('slide-container');
+        const logo = document.getElementById('global-logo');
 
-        function showSlide(index) {
-            slides.forEach((slide, i) => { slide.classList.toggle('active', i === index); });
+        function updateUI(index) {
+            slides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.add('active');
+                    const animated = slide.querySelectorAll('.animate-zoom-in');
+                    animated.forEach(el => { el.style.animation = 'none'; el.offsetHeight; el.style.animation = ''; });
+                    
+                    const isInfographic = slide.getAttribute('data-type') === 'infographic';
+                    if (isInfographic) logo.style.opacity = '0';
+                    else logo.style.opacity = '1';
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
         }
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            showSlide(currentSlide);
-        }
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            showSlide(currentSlide);
-        }
-        function toggleFullScreen() {
-            if (!document.fullscreenElement) {
-                slideContainer.requestFullscreen().catch(err => {
-                    alert(`Không thể bật chế độ toàn màn hình: ${err.message} (${err.name})`);
-                });
-            } else if (document.exitFullscreen) {
-                document.exitFullscreen();
-            }
-        }
+        function nextSlide() { currentSlide = (currentSlide + 1) % totalSlides; updateUI(currentSlide); }
+        function prevSlide() { currentSlide = (currentSlide - 1 + totalSlides) % totalSlides; updateUI(currentSlide); }
+        function toggleFullScreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else if (document.exitFullscreen) document.exitFullscreen(); }
+        
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') { nextSlide(); } 
-            else if (e.key === 'ArrowLeft') { prevSlide(); } 
-            else if (e.key.toLowerCase() === 'f') { toggleFullScreen(); }
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            else if (e.key === 'ArrowLeft') prevSlide();
+            else if (e.key === 'Home') { currentSlide = 0; updateUI(currentSlide); }
+            else if (e.key === 'End') { currentSlide = totalSlides - 1; updateUI(currentSlide); }
+            else if (e.key.toLowerCase() === 'f') toggleFullScreen();
         });
-        if (totalSlides > 0) { showSlide(currentSlide); }
+        if (totalSlides > 0) updateUI(currentSlide);
     </script>
 </body>
 </html>
