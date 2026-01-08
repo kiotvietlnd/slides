@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KiotViet - Kết nối Facebook (Full Mode)</title>
+    <!-- TAILWIND CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { navy: { 900: '#1e3a8a' } },
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                        'zoom-in': 'zoomIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        zoomIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.95)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; background-color: #f8fafc; }
+        
+        .slide { display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.4s ease-in-out; z-index: 10; flex-direction: column; }
+        .slide.active { display: flex; opacity: 1; }
+        
+        /* GLASS EFFECT */
+        .glass {
+            background: rgba(255, 255, 255, 0.65); 
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+        }
+
+        #global-logo { position: fixed; top: 24px; left: 32px; height: 36px; z-index: 9999; transition: opacity 0.3s ease; }
+        .animate-zoom-in { opacity: 0; }
+        .slide.active .animate-zoom-in { animation-play-state: running; }
+    </style>
+</head>
+<body class="text-gray-800 relative select-none cursor-none">
+
+    <!-- 1. LOGO -->
+    <img id="global-logo" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+
+    <!-- 2. BACKGROUND (Retail Industry -> Cyan) -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <!-- Blob 1: Blue -->
+        <div class="absolute top-0 left-0 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob"></div>
+        <!-- Blob 2: Cyan (Retail) -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-cyan-400 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-2000"></div>
+        <!-- Blob 3: Light Blue -->
+        <div class="absolute -bottom-32 left-20 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- 3. CONTAINER -->
+    <div id="slide-container" class="relative z-10 w-full h-full flex items-center justify-center">
+        
+        <!-- SLIDE 1: COVER -->
+        <div class="slide flex items-center justify-center p-8">
+            <div class="bg-white/80 backdrop-blur-xl p-12 rounded-3xl shadow-2xl border border-white/50 max-w-5xl w-full text-center animate-zoom-in">
+                <div class="mb-6 inline-block p-4 bg-blue-50 rounded-full">
+                    <i class="fa-brands fa-facebook text-6xl text-blue-600"></i>
+                </div>
+                <h1 class="text-5xl font-extrabold text-blue-900 mb-6 leading-tight uppercase">Hướng Dẫn Kết Nối<br>& Bán Hàng Trên Facebook</h1>
+                <div class="h-1.5 w-32 bg-cyan-500 mx-auto rounded-full mb-6"></div>
+                <p class="text-xl text-gray-600 font-medium">Giải pháp quản lý tin nhắn, chốt đơn và Livestream toàn diện</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: BRIDGE CHƯƠNG I -->
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-cyan-500 pr-12 animate-zoom-in">
+                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight">Chương I:<br>Giới Thiệu Chung</h2>
+                </div>
+                <div class="flex-1 animate-zoom-in" style="animation-delay: 0.1s;">
+                    <ul class="space-y-6">
+                        <li class="flex items-center gap-4 text-2xl text-gray-800 font-medium">
+                            <i class="fa-solid fa-layer-group text-blue-600"></i> Quản lý hội thoại tập trung
+                        </li>
+                        <li class="flex items-center gap-4 text-2xl text-gray-800 font-medium">
+                            <i class="fa-solid fa-cart-shopping text-blue-600"></i> Tối ưu quy trình chốt đơn
+                        </li>
+                        <li class="flex items-center gap-4 text-2xl text-gray-800 font-medium">
+                            <i class="fa-solid fa-video text-blue-600"></i> Hỗ trợ Livestream chuyên nghiệp
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: CONCEPT - LỢI ÍCH -->
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-12 text-center animate-zoom-in">Lợi Ích Cốt Lõi</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-6xl">
+                <!-- Item 1 -->
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 shrink-0">
+                        <i class="fa-solid fa-comments text-3xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">Hội Thoại Tập Trung</h3>
+                        <p class="text-gray-700 text-sm mt-1">Gom tin nhắn/bình luận từ nhiều Fanpage về một màn hình.</p>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-200">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-green-600 shrink-0">
+                        <i class="fa-solid fa-file-invoice-dollar text-3xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">Chốt Đơn Tức Thời</h3>
+                        <p class="text-gray-700 text-sm mt-1">Tạo đơn hàng & gọi ship ngay trong khung chat.</p>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-300">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center text-red-600 shrink-0">
+                        <i class="fa-solid fa-video text-3xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">Livestream Pro</h3>
+                        <p class="text-gray-700 text-sm mt-1">Tự động bắt đơn theo cú pháp, in bình luận.</p>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-300">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 shrink-0">
+                        <i class="fa-solid fa-chart-line text-3xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">Đo Lường Hiệu Quả</h3>
+                        <p class="text-gray-700 text-sm mt-1">Thống kê doanh thu từ quảng cáo & Fanpage.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: BRIDGE CHƯƠNG II -->
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-cyan-500 pr-12 animate-zoom-in">
+                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight">Chương II:<br>Thao Tác Cơ Bản</h2>
+                </div>
+                <div class="flex-1 animate-zoom-in" style="animation-delay: 0.1s;">
+                    <ul class="space-y-6">
+                        <li class="flex items-center gap-4 text-2xl text-gray-800 font-medium">
+                            <i class="fa-solid fa-plug text-blue-600"></i> Thiết lập kết nối
+                        </li>
+                        <li class="flex items-center gap-4 text-2xl text-gray-800 font-medium">
+                            <i class="fa-brands fa-facebook-messenger text-blue-600"></i> Quản lý hội thoại
+                        </li>
+                        <li class="flex items-center gap-4 text-2xl text-gray-800 font-medium">
+                            <i class="fa-solid fa-box text-blue-600"></i> Tạo đơn & Vận chuyển
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: SCREENSHOT - THIẾT LẬP -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">1. Thiết Lập Kết Nối</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Vào Bán Online > Mạng xã hội > Thiết lập > Chọn Facebook.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/11/05075035/KNFB_-1.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
+            </div>
+        </div>
+
+        <!-- SLIDE 6: SCREENSHOT - CẤP QUYỀN -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">2. Cấp Quyền Truy Cập</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Đăng nhập tài khoản Facebook và tích chọn các Trang muốn tích hợp.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/11/05075045/KNFB_-4.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
+            </div>
+        </div>
+
+        <!-- SLIDE 7: CONCEPT - QUY TRÌNH HỘI THOẠI -->
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-12 text-center animate-zoom-in">Quy Trình Xử Lý Hội Thoại</h2>
+            <div class="flex justify-center items-center gap-8 w-full max-w-6xl">
+                <!-- Step 1 -->
+                <div class="bg-white/90 p-8 rounded-2xl shadow-lg flex-1 text-center animate-zoom-in delay-100">
+                    <i class="fa-solid fa-magnifying-glass text-4xl text-cyan-500 mb-4"></i>
+                    <h3 class="text-xl font-bold text-blue-900">Tìm Kiếm</h3>
+                    <p class="text-gray-600 mt-2">Theo tên khách hoặc nội dung tin nhắn.</p>
+                </div>
+                <i class="fa-solid fa-arrow-right text-3xl text-gray-400"></i>
+                <!-- Step 2 -->
+                <div class="bg-white/90 p-8 rounded-2xl shadow-lg flex-1 text-center animate-zoom-in delay-200">
+                    <i class="fa-solid fa-filter text-4xl text-cyan-500 mb-4"></i>
+                    <h3 class="text-xl font-bold text-blue-900">Lọc</h3>
+                    <p class="text-gray-600 mt-2">Lọc SĐT, Bình luận, Tin nhắn chưa đọc.</p>
+                </div>
+                <i class="fa-solid fa-arrow-right text-3xl text-gray-400"></i>
+                <!-- Step 3 -->
+                <div class="bg-white/90 p-8 rounded-2xl shadow-lg flex-1 text-center animate-zoom-in delay-300">
+                    <i class="fa-solid fa-user-tag text-4xl text-cyan-500 mb-4"></i>
+                    <h3 class="text-xl font-bold text-blue-900">Phân Loại</h3>
+                    <p class="text-gray-600 mt-2">Gắn nhãn: Chốt đơn, Bom hàng, VIP.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: SCREENSHOT - GIAO DIỆN HỘI THOẠI -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">3. Giao Diện Hội Thoại</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Danh sách chat (Trái) - Nội dung (Giữa) - Thông tin khách/Đơn hàng (Phải).</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/11/05075120/KNFB_-13.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
+            </div>
+        </div>
+
+        <!-- SLIDE 9: SCREENSHOT - TẠO ĐƠN -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">4. Tạo Đơn Ngay Khi Chat</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Tạo Hóa đơn hoặc Đặt hàng, thêm sản phẩm và khuyến mãi trực tiếp.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/11/05075253/KNFB_-34.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
+            </div>
+        </div>
+
+        <!-- SLIDE 10: SCREENSHOT - QR & SHIP -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">5. Giao Hàng & Thanh Toán</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Gửi mã QR chuyển khoản và kết nối trực tiếp với hãng vận chuyển.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/11/05075334/KNFB_-43.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
+            </div>
+        </div>
+
+        <!-- SLIDE 11: SCREENSHOT - BÀI VIẾT -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">6. Quản Lý Bài Viết</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Đăng bài mới hoặc lên lịch đăng bài ngay trên phần mềm KiotViet.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/11/10031431/FBHD_-8.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
+            </div>
+        </div>
+
+        <!-- SLIDE 12: SCREENSHOT - DANH SÁCH ĐƠN -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">7. Quản Lý Đơn Hàng FB</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Theo dõi danh sách Hóa đơn và Đặt hàng riêng cho kênh Facebook.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/11/10031436/FBHD_-9.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
+            </div>
+        </div>
+
+        <!-- SLIDE 13: BRIDGE CHƯƠNG III -->
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-cyan-500 pr-12 animate-zoom-in">
+                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight">Chương III:<br>Tính Năng Nâng Cao</h2>
+                </div>
+                <div class="flex-1 animate-zoom-in" style="animation-delay: 0.1s;">
+                    <ul class="space-y-6">
+                        <li class="flex items-center gap-4 text-2xl text-gray-800 font-medium">
+                            <i class="fa-solid fa-video text-blue-600"></i> Quản lý Livestream
+                        </li>
+                        <li class="flex items-center gap-4 text-2xl text-gray-800 font-medium">
+                            <i class="fa-solid fa-store text-blue-600"></i> Facebook Catalog
+                        </li>
+                        <li class="flex items-center gap-4 text-2xl text-gray-800 font-medium">
+                            <i class="fa-solid fa-robot text-blue-600"></i> Tự động hóa & Chat đa kênh
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 14: CONCEPT - QUY TRÌNH LIVESTREAM -->
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-12 text-center animate-zoom-in">Quy Trình Livestream</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-6xl">
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-file-pen text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold">1. Tạo Kịch Bản</h3><p class="text-gray-700 text-sm">Thiết lập hàng hóa, giá bán dự kiến.</p></div>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-200">
+                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-keyboard text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold">2. Cú Pháp Chốt Đơn</h3><p class="text-gray-700 text-sm">Ví dụ: MÃ HÀNG + SĐT.</p></div>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-300">
+                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-print text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold">3. Tự Động In</h3><p class="text-gray-700 text-sm">In nhãn bình luận chốt đơn ngay lập tức.</p></div>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-400">
+                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-chart-pie text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold">4. Thống Kê</h3><p class="text-gray-700 text-sm">Báo cáo hiệu quả sau buổi Live.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 15: SCREENSHOT - THIẾT LẬP LIVE -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Thiết Lập Kịch Bản Live</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Cài đặt từ khóa đặt hàng và tùy chọn xử lý bình luận đúng cú pháp.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/11/10031524/FBHD_-18.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
+            </div>
+        </div>
+
+        <!-- SLIDE 16: SCREENSHOT - MÀN HÌNH LIVE -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Màn Hình Livestream</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Lọc bình luận đúng cú pháp, tạo đơn và in phiếu thông tin.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/11/10031553/FBHD_-23.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
+            </div>
+        </div>
+
+        <!-- SLIDE 17: SCREENSHOT - CATALOG -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Facebook Catalog</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Đồng bộ hàng hóa từ KiotViet lên Facebook Shop để bán 24/7.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/11/10031812/FBHD_-44.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
+            </div>
+        </div>
+
+        <!-- SLIDE 18: SCREENSHOT - BÁO CÁO -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Hệ Thống Báo Cáo</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Thống kê tương tác, khách hàng mới và hiệu quả quảng cáo Facebook Ads.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/11/10031918/FBHD_-57.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
+            </div>
+        </div>
+
+        <!-- SLIDE 19: SCREENSHOT - CHAT ĐA KÊNH -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Chat Đa Kênh</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Quản lý tin nhắn Facebook, Instagram, Shopee trên cùng 1 giao diện.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/11/10033805/FBHDSD_-6.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
+            </div>
+        </div>
+
+        <!-- SLIDE 20: SCREENSHOT - TỰ ĐỘNG HÓA -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Cấu Hình Tự Động Hóa</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Ẩn bình luận SĐT, trả lời tự động, thiết lập tin nhắn mẫu.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/11/10033958/FBHDSD_-26.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
+            </div>
+        </div>
+
+        <!-- SLIDE 21: BRIDGE CHƯƠNG IV -->
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-cyan-500 pr-12 animate-zoom-in">
+                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight">Chương IV:<br>Mobile App</h2>
+                </div>
+                <div class="flex-1 animate-zoom-in" style="animation-delay: 0.1s;">
+                    <ul class="space-y-6">
+                        <li class="flex items-center gap-4 text-2xl text-gray-800 font-medium">
+                            <i class="fa-solid fa-mobile-screen-button text-blue-600"></i> Quản lý mọi lúc mọi nơi
+                        </li>
+                        <li class="flex items-center gap-4 text-2xl text-gray-800 font-medium">
+                            <i class="fa-solid fa-print text-blue-600"></i> In đơn từ điện thoại
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 22: SCREENSHOT - MOBILE CHAT -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Hội Thoại Trên Mobile</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Nhận thông báo, trả lời tin nhắn và đánh dấu hội thoại trên App.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/11/10034111/FBHDSD_-37.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
+            </div>
+        </div>
+
+        <!-- SLIDE 23: SCREENSHOT - MOBILE ORDER -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Tạo Đơn Trên Mobile</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Chốt đơn, chọn hàng hóa và đẩy đơn sang hãng vận chuyển.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/11/10034206/FBHDSD_-47.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
+            </div>
+        </div>
+
+        <!-- SLIDE 24: SCREENSHOT - MOBILE MERGE PAGE -->
+        <div class="slide glass flex flex-col items-center justify-start pt-10 pb-6 px-12 h-full">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2 shrink-0 animate-zoom-in">Gộp Fanpage Mobile</h2>
+            <p class="text-gray-700 mb-4 text-center shrink-0 animate-zoom-in font-medium">Quản lý nhiều Fanpage cùng lúc trên một màn hình điện thoại.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden animate-zoom-in delay-100">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/11/10034226/FBHDSD_-51.png" class="max-h-full w-auto object-contain rounded-lg shadow-xl border border-white/50">
+            </div>
+        </div>
+
+        <!-- SLIDE 25: INFOGRAPHIC -->
+        <div class="slide flex items-center justify-center w-full h-full p-0" data-type="infographic">
+            <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/12/07145818/MANG-XA-HOI-FACEBOOK.jpg" class="max-w-[90%] max-h-[90%] object-contain rounded-3xl shadow-2xl border-4 border-white/50 animate-zoom-in">
+        </div>
+
+        <!-- SLIDE 26: THANK YOU -->
+        <div class="slide flex items-center justify-center p-8">
+            <div class="bg-white/80 backdrop-blur-xl p-16 rounded-3xl shadow-2xl border border-white/50 text-center animate-zoom-in">
+                <h1 class="text-6xl font-extrabold text-blue-900 mb-6">CẢM ƠN!</h1>
+                <p class="text-2xl text-gray-600">Chúc bạn kinh doanh thành công cùng KiotViet.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const logo = document.getElementById('global-logo');
+
+        function updateUI(index) {
+            slides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.add('active');
+                    const animated = slide.querySelectorAll('.animate-zoom-in');
+                    animated.forEach(el => { el.style.animation = 'none'; el.offsetHeight; el.style.animation = ''; });
+                    
+                    const isInfographic = slide.getAttribute('data-type') === 'infographic';
+                    if (isInfographic) logo.style.opacity = '0';
+                    else logo.style.opacity = '1';
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+        }
+        function nextSlide() { currentSlide = (currentSlide + 1) % totalSlides; updateUI(currentSlide); }
+        function prevSlide() { currentSlide = (currentSlide - 1 + totalSlides) % totalSlides; updateUI(currentSlide); }
+        function toggleFullScreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else if (document.exitFullscreen) document.exitFullscreen(); }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            else if (e.key === 'ArrowLeft') prevSlide();
+            else if (e.key === 'Home') { currentSlide = 0; updateUI(currentSlide); }
+            else if (e.key === 'End') { currentSlide = totalSlides - 1; updateUI(currentSlide); }
+            else if (e.key.toLowerCase() === 'f') toggleFullScreen();
+        });
+        if (totalSlides > 0) updateUI(currentSlide);
+    </script>
+</body>
+</html>
