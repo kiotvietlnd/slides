@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kỹ thuật đặt câu hỏi 3H - KiotViet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { navy: { 900: '#1e3a8a' } },
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                        'zoom-in': 'zoomIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        zoomIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.95)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; background-color: #f8fafc; }
+        
+        .slide { display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.4s ease-in-out; z-index: 10; flex-direction: column; }
+        .slide.active { display: flex; opacity: 1; }
+        
+        /* GLASS EFFECT */
+        .glass {
+            background: rgba(255, 255, 255, 0.65); 
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+        }
+
+        #global-logo { position: fixed; top: 24px; left: 32px; height: 36px; z-index: 9999; transition: opacity 0.3s ease; }
+        .animate-zoom-in { opacity: 0; }
+        .slide.active .animate-zoom-in { animation-play-state: running; }
+    </style>
+</head>
+<body class="text-gray-800 relative select-none cursor-none">
+
+    <img id="global-logo" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-cyan-400 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-32 left-20 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <div id="slide-container" class="relative z-10 w-full h-full flex items-center justify-center">
+        
+        <div class="slide flex items-center justify-center p-8 active">
+            <div class="bg-white/80 backdrop-blur-xl p-12 rounded-3xl shadow-2xl border border-white/50 max-w-4xl w-full text-center animate-zoom-in">
+                <h1 class="text-5xl font-extrabold text-blue-900 mb-6 leading-tight">KỸ THUẬT ĐẶT CÂU HỎI 3H</h1>
+                <div class="h-1.5 w-24 bg-blue-600 mx-auto rounded-full mb-6"></div>
+                <p class="text-2xl text-gray-700 font-bold mb-2">Từ khai thác nhu cầu đến chạm điểm đau</p>
+                <p class="text-xl text-gray-500 font-medium">Công thức tối ưu dành riêng cho Telesales</p>
+            </div>
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Tại sao khách hàng từ chối trả lời?</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-comment-slash text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Trả lời qua loa</h3><p class="text-gray-700 text-sm mt-1">Rất ngắn hoặc chỉ trả lời cho có.</p></div>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-clock text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Lý do bận rộn</h3><p class="text-gray-700 text-sm mt-1">Trả lời chung chung, báo bận, hoặc im lặng.</p></div>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100 col-span-2 w-1/2 mx-auto">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-ban text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Cuộc gọi ngõ cụt</h3><p class="text-gray-700 text-sm mt-1">Giao tiếp bế tắc do thiếu tính gợi mở.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Mục tiêu bài học</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-magnifying-glass text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Nhận diện</h3><p class="text-gray-700 text-sm mt-1">3 nguyên nhân khách hàng ngại mở lời.</p></div>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-graduation-cap text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Làm chủ</h3><p class="text-gray-700 text-sm mt-1">Tiến trình đặt câu hỏi 3H chuyên sâu.</p></div>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-heart text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Thấu hiểu</h3><p class="text-gray-700 text-sm mt-1">Phân biệt nhu cầu bề mặt & điểm đau thực sự.</p></div>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-book-open text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Áp dụng</h3><p class="text-gray-700 text-sm mt-1">Kết hợp Cẩm nang ngành hàng để tư vấn.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Tại sao khách hàng "kiệm lời"?</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-cloud text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Câu hỏi chung chung</h3><p class="text-gray-700 text-sm mt-1">"Anh chị gặp khó khăn gì không?" -> Lười suy nghĩ, báo bận.</p></div>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-door-closed text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Lạm dụng câu hỏi Đóng</h3><p class="text-gray-700 text-sm mt-1">Chỉ trả lời Có/Không làm đứt mạch giao tiếp.</p></div>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100 col-span-2 w-1/2 mx-auto">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-bomb text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Hỏi dồn dập</h3><p class="text-gray-700 text-sm mt-1">Gây cảm giác bị điều tra, khách phòng thủ.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide glass flex items-center justify-center p-12">
+            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
+                <div class="flex-1 text-right border-r-4 border-blue-600 pr-12 animate-zoom-in">
+                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight">Tiến trình 3H</h2>
+                </div>
+                <div class="flex-1 animate-zoom-in" style="animation-delay: 0.1s;">
+                    <ul class="space-y-6">
+                        <li class="flex items-center gap-4 text-xl text-gray-800 font-medium"><i class="fa-solid fa-house text-blue-600"></i> H1 - Hiện trạng</li>
+                        <li class="flex items-center gap-4 text-xl text-gray-800 font-medium"><i class="fa-solid fa-triangle-exclamation text-blue-600"></i> H2 - Hạn chế</li>
+                        <li class="flex items-center gap-4 text-xl text-gray-800 font-medium"><i class="fa-solid fa-hourglass-end text-blue-600"></i> H3 - Hậu quả</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">H1 - Hiện trạng</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-crosshairs text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Mục đích</h3><p class="text-gray-700 text-sm mt-1">Tìm hiểu cách vận hành hiện tại của cửa hàng.</p></div>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-scale-balanced text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Nguyên tắc</h3><p class="text-gray-700 text-sm mt-1">Khách quan - Không đánh giá - Không phán xét.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">H2 - Hạn chế</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-circle-exclamation text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Khơi gợi rủi ro</h3><p class="text-gray-700 text-sm mt-1">Để khách tự nói ra bất tiện, sai sót hàng ngày.</p></div>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-bullseye text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Cách thực hiện</h3><p class="text-gray-700 text-sm mt-1">Xoáy vào tình huống cụ thể (đông khách, chốt sổ).</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">H3 - Hậu quả (Bước then chốt)</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-money-bill-trend-up text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Quy đổi giá trị</h3><p class="text-gray-700 text-sm mt-1">Biến khó khăn thành Tiền bạc và Thời gian.</p></div>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-bolt text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Tạo tính cấp bách</h3><p class="text-gray-700 text-sm mt-1">Đánh vào tâm lý sợ mất mát (thất thoát, uy tín).</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide flex items-center justify-center w-full h-full p-0" data-type="infographic">
+            <img src="https://images.unsplash.com/photo-1548684787-84bc760773d3?q=80&w=1000&auto=format&fit=crop" alt="Iceberg" class="max-w-[90%] max-h-[90%] object-contain rounded-3xl shadow-2xl border-4 border-white/50 animate-zoom-in">
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Phân tích: Ngành Mẹ & Bé (Chị Mai)</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-pen text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">H1: Ghi sổ thủ công</h3><p class="text-gray-700 text-sm mt-1">Quản lý bỉm sữa, nhiều size, nhiều date bằng tay.</p></div>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-calendar-xmark text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">H2: Khó theo dõi date</h3><p class="text-gray-700 text-sm mt-1">Lệch tiền, hàng sắp hết hạn không kiểm soát kịp.</p></div>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100 col-span-2 w-1/2 mx-auto">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-coins text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">H3: Mất tiền oan</h3><p class="text-gray-700 text-sm mt-1">Phải bỏ hàng hết hạn, mất uy tín và cạn thời gian nghỉ.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">3H + Cẩm nang ngành hàng</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-shirt text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Ngành Thời trang</h3><p class="text-gray-700 text-sm mt-1">Xoáy vào hàng tồn, size/màu, vòng đời ngắn.</p></div>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-utensils text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Ngành F&B</h3><p class="text-gray-700 text-sm mt-1">Xoáy vào order cao điểm, thất thoát nguyên liệu.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide glass flex flex-col items-center justify-center p-12">
+            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Thực hành tình huống</h2>
+            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-store text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Tạp hóa chung cư</h3><p class="text-gray-700 text-sm mt-1">Cô Mai bán tạp hóa với lượng khách tấp nập.</p></div>
+                </div>
+                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
+                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-mug-hot text-2xl"></i></div>
+                    <div><h3 class="text-xl font-bold text-gray-800">Cà phê rang xay</h3><p class="text-gray-700 text-sm mt-1">Anh Minh có tiệm ngay sau lưng khối văn phòng.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide flex items-center justify-center p-8">
+            <div class="bg-white/80 backdrop-blur-xl p-12 rounded-3xl shadow-2xl border border-white/50 max-w-4xl w-full text-center animate-zoom-in">
+                <h1 class="text-5xl font-extrabold text-blue-900 mb-6 leading-tight">CẢM ƠN BẠN ĐÃ THEO DÕI!</h1>
+                <div class="h-1.5 w-24 bg-blue-600 mx-auto rounded-full mb-6"></div>
+                <p class="text-xl text-gray-600 font-medium">Chúc bạn áp dụng kỹ thuật 3H thành công.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const logo = document.getElementById('global-logo');
+
+        function updateUI(index) {
+            slides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.add('active');
+                    const animated = slide.querySelectorAll('.animate-zoom-in');
+                    animated.forEach(el => { el.style.animation = 'none'; el.offsetHeight; el.style.animation = ''; });
+                    
+                    const isInfographic = slide.getAttribute('data-type') === 'infographic';
+                    if (isInfographic) logo.style.opacity = '0';
+                    else logo.style.opacity = '1';
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+        }
+        function nextSlide() { currentSlide = (currentSlide + 1) % totalSlides; updateUI(currentSlide); }
+        function prevSlide() { currentSlide = (currentSlide - 1 + totalSlides) % totalSlides; updateUI(currentSlide); }
+        function toggleFullScreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else if (document.exitFullscreen) document.exitFullscreen(); }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            else if (e.key === 'ArrowLeft') prevSlide();
+            else if (e.key === 'Home') { currentSlide = 0; updateUI(currentSlide); }
+            else if (e.key === 'End') { currentSlide = totalSlides - 1; updateUI(currentSlide); }
+            else if (e.key.toLowerCase() === 'f') toggleFullScreen();
+        });
+        if (totalSlides > 0) updateUI(currentSlide);
+    </script>
+</body>
+</html>
