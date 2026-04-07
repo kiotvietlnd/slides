@@ -1,285 +1,740 @@
+--- START OF FILE Paste April 07, 2026 - 11:56AM ---
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kỹ thuật đặt câu hỏi 3H - KiotViet</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: { navy: { 900: '#1e3a8a' } },
-                    animation: {
-                        'blob': 'blob 10s infinite',
-                        'zoom-in': 'zoomIn 0.5s ease-out forwards',
-                    },
-                    keyframes: {
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
-                        },
-                        zoomIn: {
-                            '0%': { opacity: '0', transform: 'scale(0.95)' },
-                            '100%': { opacity: '1', transform: 'scale(1)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <title>Khóa Học Telesales - KiotViet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; background-color: #f8fafc; }
-        
-        .slide { display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.4s ease-in-out; z-index: 10; flex-direction: column; }
-        .slide.active { display: flex; opacity: 1; }
-        
-        /* GLASS EFFECT */
-        .glass {
-            background: rgba(255, 255, 255, 0.65); 
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+        /* 1. THE SETUP & VARIABLES */
+        :root {
+            --kv-green: #00b14f;
+            --kv-dark-blue: #001529;
+            --kv-light-blue: #e6f7ef;
+            --kv-text-main: #334155;
+            --kv-bg-light: #f8fafc;
+            --kv-white: #ffffff;
+            --kv-gray: #94a3b8;
+            --kv-shadow: 0 10px 25px rgba(0, 21, 41, 0.08);
         }
 
-        #global-logo { position: fixed; top: 24px; left: 32px; height: 36px; z-index: 9999; transition: opacity 0.3s ease; }
-        .animate-zoom-in { opacity: 0; }
-        .slide.active .animate-zoom-in { animation-play-state: running; }
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        p {
+            margin: 0;
+            margin-bottom: 15px;
+        }
+
+
+        body {
+            background-color: #cbd5e1;
+            display: grid;
+            gap: 30px;
+            grid-template-columns: 1fr;
+            margin: 0;
+            min-height: 100vh;
+            padding: 30px 0;
+            place-items: center;
+        }
+
+
+        .slide-container {
+            align-items: center;
+            background-color: var(--kv-bg-light);
+            border-radius: 12px;
+            box-shadow: var(--kv-shadow);
+            display: flex;
+            flex-direction: column;
+            font-family: 'Inter', sans-serif;
+            height: 720px;
+            justify-content: center;
+            overflow: hidden;
+            padding: 60px;
+            position: relative;
+            width: 1280px;
+        }
+
+
+        /* 1.1 BACKGROUND STYLING (Subtle Tech Pattern) */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--kv-light-blue) 2px, transparent 2px);
+            background-size: 40px 40px;
+            opacity: 0.4;
+            z-index: 0;
+        }
+       
+        .slide-container::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0,177,79,0.05) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+
+        .slide-container > * {
+            position: relative;
+            z-index: 1;
+        }
+
+
+        /* 2. CONSISTENT TYPOGRAPHY */
+        .slide-container h1,
+        .slide-container h2,
+        .slide-container h3 {
+            color: var(--kv-dark-blue);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+        }
+
+
+        .slide-container p,
+        .slide-container li,
+        .slide-container .subtitle,
+        .slide-container th,
+        .slide-container td {
+            color: var(--kv-text-main);
+            font-family: 'Inter', sans-serif;
+        }
+
+
+        .slide-container h1 {
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+
+        .slide-container .slide-title {
+            font-size: 44px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: left;
+            width: 100%;
+            letter-spacing: -0.5px;
+        }
+
+
+        .slide-container h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+
+        .slide-container p,
+        .slide-container li,
+        .slide-container th,
+        .slide-container td {
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+
+        .slide-container .subtitle {
+            font-size: 24px;
+            font-weight: 500;
+            margin: 20px auto;
+            color: var(--kv-text-main);
+        }
+
+
+        .slide-container .content-area {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: flex-start;
+            width: 100%;
+        }
+
+
+        /* 3. LAYOUT DEFINITIONS */
+       
+        /* Title Slide Layout -- START OF CHANGES */
+        .title-slide-layout {
+            background-color: #F0F9FF; /* Changed from dark blue to light blue */
+        }
+        .title-slide-layout::before { 
+            opacity: 0.4; /* Adjusted opacity */
+            background-image: radial-gradient(var(--kv-light-blue) 2px, transparent 2px); /* Matched other slides */
+        }
+        .title-slide-layout::after { 
+            background: radial-gradient(circle, rgba(0,177,79,0.05) 0%, rgba(255,255,255,0) 70%); /* Matched other slides */
+        }
+        .title-slide-layout h1 { 
+            color: var(--kv-dark-blue); /* Changed from white to dark blue */
+        }
+        .title-slide-layout .subtitle { 
+            color: var(--kv-text-main); /* Changed from light gray to main text color */
+        }
+        .title-layout {
+            text-align: center;
+            max-width: 900px;
+        }
+        .presenter-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background-color: var(--kv-white); /* Changed from transparent white to solid white */
+            padding: 12px 24px;
+            border-radius: 50px;
+            margin-top: 40px;
+            border: 1px solid #e2e8f0; /* Changed from transparent border */
+        }
+        .presenter-badge i { color: var(--kv-green); font-size: 24px; }
+        .presenter-badge span { 
+            color: var(--kv-dark-blue); /* Changed from white to dark blue */
+            font-weight: 600; font-size: 18px; 
+        }
+        /* -- END OF CHANGES */
+
+
+        /* Two Column Layout */
+        .two-column {
+            align-items: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            width: 100%;
+        }
+
+
+        .two-column.tiled {
+            align-items: stretch;
+            gap: 40px;
+        }
+
+
+        .two-column.tiled > div {
+            background-color: var(--kv-white);
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .two-column.tiled h3 {
+            color: var(--kv-green);
+        }
+
+
+        .two-column ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        /* Custom Bullet Points */
+        .custom-bullets li {
+            position: relative;
+            padding-left: 45px;
+            margin-bottom: 25px;
+        }
+        .custom-bullets li i {
+            position: absolute;
+            left: 0;
+            top: 5px;
+            color: var(--kv-green);
+            font-size: 24px;
+            background: var(--kv-light-blue);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        .custom-bullets li strong {
+            color: var(--kv-dark-blue);
+            font-weight: 700;
+        }
+
+
+        .image-wrapper {
+            border-radius: 16px;
+            height: 400px;
+            max-width: 100%;
+            overflow: hidden;
+            width: 100%;
+            box-shadow: var(--kv-shadow);
+        }
+
+
+        .image-wrapper img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+
+        .two-column .image-wrapper img {
+            object-fit: cover;
+        }
+
+
+        /* Tiled Icons Layout */
+        .tiled-content {
+            align-items: stretch;
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            width: 100%;
+        }
+
+
+        .tile {
+            align-items: flex-start;
+            background-color: var(--kv-white);
+            border-radius: 16px;
+            border-top: 5px solid var(--kv-green);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding: 35px;
+            text-align: left;
+        }
+
+
+        .tile .icon {
+            background-color: var(--kv-light-blue);
+            color: var(--kv-green);
+            font-size: 32px;
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+
+        /* Bleed Image Right */
+        .slide-container.bleed-image-layout {
+            align-items: start;
+            display: grid;
+            gap: 50px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            padding: 0;
+        }
+
+
+        .slide-container.bleed-image-layout > .content-container {
+            padding: 60px 0 60px 60px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: center;
+        }
+
+
+        .slide-container.bleed-image-layout > .image-container {
+            height: 100%;
+            overflow: hidden;
+            width: 100%;
+        }
+
+
+        .slide-container.bleed-image-layout img.bleed-image-side {
+            display: block;
+            height: 720px;
+            object-fit: cover;
+            object-position: center;
+            width: 100%;
+        }
+       
+        .highlight-box {
+            background-color: var(--kv-light-blue);
+            border-left: 4px solid var(--kv-green);
+            padding: 25px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 30px;
+        }
+        .highlight-box p { margin: 0; font-weight: 500; color: var(--kv-dark-blue); }
+
+
+        /* Table Layout */
+        .table-layout {
+            width: 100%;
+            background: var(--kv-white);
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+
+        .table-layout table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+
+        .table-layout th,
+        .table-layout td {
+            border-bottom: 1px solid #f1f5f9;
+            padding: 24px 30px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+
+        .table-layout th {
+            background-color: var(--kv-dark-blue);
+            color: var(--kv-white);
+            font-size: 22px;
+            font-weight: 700;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            border-bottom: none;
+        }
+       
+        .table-layout td:first-child {
+            font-weight: 700;
+            color: var(--kv-green);
+            width: 20%;
+        }
+       
+        .table-layout td:nth-child(2) {
+            width: 35%;
+        }
+        .table-layout td em {
+            display: block;
+            margin-top: 10px;
+            color: var(--kv-gray);
+            font-size: 16px;
+            font-style: normal;
+        }
+
+
+        /* Rounded Image Layout */
+        .rounded-image-layout .image-wrapper {
+            border-radius: 50%;
+            flex-shrink: 0;
+            height: 400px;
+            width: 400px;
+            max-width: 400px;
+            margin: 0 auto;
+            border: 10px solid var(--kv-white);
+            box-shadow: var(--kv-shadow);
+        }
+
+
+        .rounded-image-layout.two-column {
+            align-items: center;
+        }
+       
+        .pain-point-list {
+            margin-top: 20px;
+        }
+        .pain-point-list p {
+            background: #fff1f2;
+            color: #be123c;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border-left: 4px solid #e11d48;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+
+        /* Q&A / CTA Layout */
+        .qa-layout {
+            margin: 0 auto;
+            text-align: center;
+            width: 100%;
+            align-self: center;
+            background: var(--kv-white);
+            padding: 60px;
+            border-radius: 24px;
+            box-shadow: var(--kv-shadow);
+            border-top: 8px solid var(--kv-green);
+        }
+
+
+        .qa-layout h2 {
+            font-size: 56px;
+            margin-bottom: 20px;
+        }
+
+
+        .qa-layout p {
+            font-size: 24px;
+            color: var(--kv-text-main);
+        }
+
+
+        .formula-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+        }
+        .formula-item {
+            background: var(--kv-bg-light);
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 24px;
+            color: var(--kv-dark-blue);
+            border: 1px solid #e2e8f0;
+        }
+        .formula-item.result {
+            background: var(--kv-green);
+            color: white;
+            border: none;
+        }
+        .formula-operator {
+            font-size: 36px;
+            color: var(--kv-gray);
+        }
+
+
     </style>
 </head>
-<body class="text-gray-800 relative select-none cursor-none">
+<body>
 
-    <img id="global-logo" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
 
-    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-0 left-0 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob"></div>
-        <div class="absolute top-0 right-0 w-96 h-96 bg-cyan-400 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-2000"></div>
-        <div class="absolute -bottom-32 left-20 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-4000"></div>
+<!-- Slide 1: Title_Slide -->
+<div class="slide-container title-slide-layout" id="slide1">
+    <div class="title-layout">
+        <h1>Khai Thác Thông Tin<br><span style="color: var(--kv-green);">& Khơi Gợi Nhu Cầu</span></h1>
+        <p class="subtitle">Tối ưu hóa kịch bản Telesales - Chạm đúng "điểm đau", chốt sale hiệu quả</p>
+        <div class="presenter-badge">
+            <i class="fa-solid fa-headset"></i>
+            <span>Phòng Đào tạo KiotViet</span>
+        </div>
     </div>
+</div>
 
-    <div id="slide-container" class="relative z-10 w-full h-full flex items-center justify-center">
-        
-        <div class="slide flex items-center justify-center p-8 active">
-            <div class="bg-white/80 backdrop-blur-xl p-12 rounded-3xl shadow-2xl border border-white/50 max-w-4xl w-full text-center animate-zoom-in">
-                <h1 class="text-5xl font-extrabold text-blue-900 mb-6 leading-tight">KỸ THUẬT ĐẶT CÂU HỎI 3H</h1>
-                <div class="h-1.5 w-24 bg-blue-600 mx-auto rounded-full mb-6"></div>
-                <p class="text-2xl text-gray-700 font-bold mb-2">Từ khai thác nhu cầu đến chạm điểm đau</p>
-                <p class="text-xl text-gray-500 font-medium">Công thức tối ưu dành riêng cho Telesales</p>
+
+<!-- Slide 2: Image_Right_Text_Left (Objectives) -->
+<div class="slide-container" id="slide2">
+    <h2 class="slide-title">Mục tiêu khóa học</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <ul class="custom-bullets">
+                    <li><i class="fa-solid fa-eye"></i> <strong>Nhận diện nguyên nhân</strong><br>Hiểu lý do khiến khách hàng trả lời ngắn, ngại tương tác.</li>
+                    <li><i class="fa-solid fa-comments"></i> <strong>Áp dụng quy trình</strong><br>Đặt câu hỏi có tiến trình để kết nối và duy trì cuộc gọi.</li>
+                    <li><i class="fa-solid fa-magnifying-glass-chart"></i> <strong>Khai thác chiều sâu</strong><br>Lấy đủ thông tin và khơi gợi đúng nhu cầu theo đặc trưng từng ngành hàng.</li>
+                    <li><i class="fa-solid fa-user-tie"></i> <strong>Định vị chuyên gia</strong><br>Trở thành người tư vấn giải pháp, gia tăng cơ hội chốt hợp đồng.</li>
+                </ul>
             </div>
-        </div>
-
-        <div class="slide glass flex flex-col items-center justify-center p-12">
-            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Tại sao khách hàng từ chối trả lời?</h2>
-            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-comment-slash text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Trả lời qua loa</h3><p class="text-gray-700 text-sm mt-1">Rất ngắn hoặc chỉ trả lời cho có.</p></div>
-                </div>
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-clock text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Lý do bận rộn</h3><p class="text-gray-700 text-sm mt-1">Trả lời chung chung, báo bận, hoặc im lặng.</p></div>
-                </div>
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100 col-span-2 w-1/2 mx-auto">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-ban text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Cuộc gọi ngõ cụt</h3><p class="text-gray-700 text-sm mt-1">Giao tiếp bế tắc do thiếu tính gợi mở.</p></div>
+            <div>
+                <div class="image-wrapper">
+                    <img src="https://1office.vn/wp-content/uploads/2020/02/Mo-ta-cong-viec-nhan-vien-telesales.jpg" alt="Sales agent smiling on a call">
                 </div>
             </div>
         </div>
-
-        <div class="slide glass flex flex-col items-center justify-center p-12">
-            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Mục tiêu bài học</h2>
-            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-magnifying-glass text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Nhận diện</h3><p class="text-gray-700 text-sm mt-1">3 nguyên nhân khách hàng ngại mở lời.</p></div>
-                </div>
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-graduation-cap text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Làm chủ</h3><p class="text-gray-700 text-sm mt-1">Tiến trình đặt câu hỏi 3H chuyên sâu.</p></div>
-                </div>
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-heart text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Thấu hiểu</h3><p class="text-gray-700 text-sm mt-1">Phân biệt nhu cầu bề mặt & điểm đau thực sự.</p></div>
-                </div>
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-book-open text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Áp dụng</h3><p class="text-gray-700 text-sm mt-1">Kết hợp Cẩm nang ngành hàng để tư vấn.</p></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide glass flex flex-col items-center justify-center p-12">
-            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Tại sao khách hàng "kiệm lời"?</h2>
-            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-cloud text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Câu hỏi chung chung</h3><p class="text-gray-700 text-sm mt-1">"Anh chị gặp khó khăn gì không?" -> Lười suy nghĩ, báo bận.</p></div>
-                </div>
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-door-closed text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Lạm dụng câu hỏi Đóng</h3><p class="text-gray-700 text-sm mt-1">Chỉ trả lời Có/Không làm đứt mạch giao tiếp.</p></div>
-                </div>
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100 col-span-2 w-1/2 mx-auto">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-bomb text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Hỏi dồn dập</h3><p class="text-gray-700 text-sm mt-1">Gây cảm giác bị điều tra, khách phòng thủ.</p></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide glass flex items-center justify-center p-12">
-            <div class="flex flex-row items-center gap-12 max-w-6xl w-full">
-                <div class="flex-1 text-right border-r-4 border-blue-600 pr-12 animate-zoom-in">
-                    <h2 class="text-5xl font-extrabold text-blue-900 leading-tight">Tiến trình 3H</h2>
-                </div>
-                <div class="flex-1 animate-zoom-in" style="animation-delay: 0.1s;">
-                    <ul class="space-y-6">
-                        <li class="flex items-center gap-4 text-xl text-gray-800 font-medium"><i class="fa-solid fa-house text-blue-600"></i> H1 - Hiện trạng</li>
-                        <li class="flex items-center gap-4 text-xl text-gray-800 font-medium"><i class="fa-solid fa-triangle-exclamation text-blue-600"></i> H2 - Hạn chế</li>
-                        <li class="flex items-center gap-4 text-xl text-gray-800 font-medium"><i class="fa-solid fa-hourglass-end text-blue-600"></i> H3 - Hậu quả</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide glass flex flex-col items-center justify-center p-12">
-            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">H1 - Hiện trạng</h2>
-            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-crosshairs text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Mục đích</h3><p class="text-gray-700 text-sm mt-1">Tìm hiểu cách vận hành hiện tại của cửa hàng.</p></div>
-                </div>
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-scale-balanced text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Nguyên tắc</h3><p class="text-gray-700 text-sm mt-1">Khách quan - Không đánh giá - Không phán xét.</p></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide glass flex flex-col items-center justify-center p-12">
-            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">H2 - Hạn chế</h2>
-            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-circle-exclamation text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Khơi gợi rủi ro</h3><p class="text-gray-700 text-sm mt-1">Để khách tự nói ra bất tiện, sai sót hàng ngày.</p></div>
-                </div>
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-bullseye text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Cách thực hiện</h3><p class="text-gray-700 text-sm mt-1">Xoáy vào tình huống cụ thể (đông khách, chốt sổ).</p></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide glass flex flex-col items-center justify-center p-12">
-            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">H3 - Hậu quả (Bước then chốt)</h2>
-            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-money-bill-trend-up text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Quy đổi giá trị</h3><p class="text-gray-700 text-sm mt-1">Biến khó khăn thành Tiền bạc và Thời gian.</p></div>
-                </div>
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-bolt text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Tạo tính cấp bách</h3><p class="text-gray-700 text-sm mt-1">Đánh vào tâm lý sợ mất mát (thất thoát, uy tín).</p></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide flex items-center justify-center w-full h-full p-0" data-type="infographic">
-            <img src="https://images.unsplash.com/photo-1548684787-84bc760773d3?q=80&w=1000&auto=format&fit=crop" alt="Iceberg" class="max-w-[90%] max-h-[90%] object-contain rounded-3xl shadow-2xl border-4 border-white/50 animate-zoom-in">
-        </div>
-
-        <div class="slide glass flex flex-col items-center justify-center p-12">
-            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Phân tích: Ngành Mẹ & Bé (Chị Mai)</h2>
-            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-pen text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">H1: Ghi sổ thủ công</h3><p class="text-gray-700 text-sm mt-1">Quản lý bỉm sữa, nhiều size, nhiều date bằng tay.</p></div>
-                </div>
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-calendar-xmark text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">H2: Khó theo dõi date</h3><p class="text-gray-700 text-sm mt-1">Lệch tiền, hàng sắp hết hạn không kiểm soát kịp.</p></div>
-                </div>
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100 col-span-2 w-1/2 mx-auto">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-coins text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">H3: Mất tiền oan</h3><p class="text-gray-700 text-sm mt-1">Phải bỏ hàng hết hạn, mất uy tín và cạn thời gian nghỉ.</p></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide glass flex flex-col items-center justify-center p-12">
-            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">3H + Cẩm nang ngành hàng</h2>
-            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-shirt text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Ngành Thời trang</h3><p class="text-gray-700 text-sm mt-1">Xoáy vào hàng tồn, size/màu, vòng đời ngắn.</p></div>
-                </div>
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-utensils text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Ngành F&B</h3><p class="text-gray-700 text-sm mt-1">Xoáy vào order cao điểm, thất thoát nguyên liệu.</p></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide glass flex flex-col items-center justify-center p-12">
-            <h2 class="text-4xl font-bold text-blue-900 mb-10 text-center animate-zoom-in">Thực hành tình huống</h2>
-            <div class="grid grid-cols-2 gap-8 w-full max-w-5xl">
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-store text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Tạp hóa chung cư</h3><p class="text-gray-700 text-sm mt-1">Cô Mai bán tạp hóa với lượng khách tấp nập.</p></div>
-                </div>
-                <div class="bg-white/80 p-6 rounded-2xl shadow-lg border border-white/50 flex items-center gap-5 animate-zoom-in delay-100">
-                    <div class="w-14 h-14 bg-blue-100/80 rounded-full flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-mug-hot text-2xl"></i></div>
-                    <div><h3 class="text-xl font-bold text-gray-800">Cà phê rang xay</h3><p class="text-gray-700 text-sm mt-1">Anh Minh có tiệm ngay sau lưng khối văn phòng.</p></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide flex items-center justify-center p-8">
-            <div class="bg-white/80 backdrop-blur-xl p-12 rounded-3xl shadow-2xl border border-white/50 max-w-4xl w-full text-center animate-zoom-in">
-                <h1 class="text-5xl font-extrabold text-blue-900 mb-6 leading-tight">CẢM ƠN BẠN ĐÃ THEO DÕI!</h1>
-                <div class="h-1.5 w-24 bg-blue-600 mx-auto rounded-full mb-6"></div>
-                <p class="text-xl text-gray-600 font-medium">Chúc bạn áp dụng kỹ thuật 3H thành công.</p>
-            </div>
-        </div>
-
     </div>
+</div>
 
-    <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
-        const logo = document.getElementById('global-logo');
 
-        function updateUI(index) {
-            slides.forEach((slide, i) => {
-                if (i === index) {
-                    slide.classList.add('active');
-                    const animated = slide.querySelectorAll('.animate-zoom-in');
-                    animated.forEach(el => { el.style.animation = 'none'; el.offsetHeight; el.style.animation = ''; });
-                    
-                    const isInfographic = slide.getAttribute('data-type') === 'infographic';
-                    if (isInfographic) logo.style.opacity = '0';
-                    else logo.style.opacity = '1';
-                } else {
-                    slide.classList.remove('active');
-                }
-            });
-        }
-        function nextSlide() { currentSlide = (currentSlide + 1) % totalSlides; updateUI(currentSlide); }
-        function prevSlide() { currentSlide = (currentSlide - 1 + totalSlides) % totalSlides; updateUI(currentSlide); }
-        function toggleFullScreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else if (document.exitFullscreen) document.exitFullscreen(); }
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
-            else if (e.key === 'ArrowLeft') prevSlide();
-            else if (e.key === 'Home') { currentSlide = 0; updateUI(currentSlide); }
-            else if (e.key === 'End') { currentSlide = totalSlides - 1; updateUI(currentSlide); }
-            else if (e.key.toLowerCase() === 'f') toggleFullScreen();
-        });
-        if (totalSlides > 0) updateUI(currentSlide);
-    </script>
+<!-- Slide 3: Tiled_Text_With_Icons (3 Mistakes) -->
+<div class="slide-container" id="slide3">
+    <h2 class="slide-title">3 Sai lầm khiến cuộc gọi đi vào ngõ cụt</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-cloud"></i></div>
+                <h3>Hỏi quá chung chung</h3>
+                <p><em>"Anh chị có gặp khó khăn gì không?"</em></p>
+                <p>Câu hỏi quá rộng khiến khách hàng lười suy nghĩ để đúc kết vấn đề. Thay vì mất thời gian trả lời, họ chọn cách im lặng hoặc báo bận cho nhanh.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-door-closed"></i></div>
+                <h3>Lạm dụng câu hỏi đóng</h3>
+                <p><em>"Shop vẫn ghi sổ đúng không?"</em></p>
+                <p>Khách hàng chỉ cần đáp "Ừ" hoặc "Không". Dấu chấm hết này đã cướp đi cơ hội để bạn gợi mở, thăm dò thực sự vấn đề nằm ở đâu.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-handcuffs"></i></div>
+                <h3>Hỏi dồn dập "hỏi cung"</h3>
+                <p><em>"Bao nhiêu nhân viên? Kho bao nhiêu mã?"</em></p>
+                <p>Áp dụng kịch bản máy móc liên tục tạo ra tâm lý phòng thủ. Khách hàng cảm thấy bạn như nhân viên điều tra chứ không phải người giúp đỡ.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Slide 4: Bleed_Image_Right (3H Introduction) -->
+<div class="slide-container bleed-image-layout" id="slide4">
+    <div class="content-container">
+        <h2 class="slide-title">Chiến thuật 3H: Từ "Bắt mạch" đến "Kê đơn"</h2>
+        <div class="content-area">
+            <div style="width: 100%;">
+                <p>Làm thế nào để hỏi đúng, hỏi trúng và khiến khách hàng tự nhiên trải lòng? Chúng ta cần một chiến thuật rõ ràng mang tên <strong>Tiến trình 3H</strong>.</p>
+                <p>3H không phải là kịch bản học vẹt, mà là một tiến trình dẫn dắt tâm lý. Nó giúp nhu cầu của chủ shop bộc lộ một cách tự nhiên và rõ nét nhất.</p>
+                <div class="highlight-box">
+                    <p><i class="fa-solid fa-lightbulb" style="color: var(--kv-green); margin-right: 10px;"></i>Khách hàng chỉ mở lòng khi họ cảm thấy bạn thực sự hiểu ngành hàng của họ, và cách bạn đặt câu hỏi chạm trúng "chỗ ngứa".</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="image-container">
+        <img class="bleed-image-side" src="https://mphr.com.vn/wp-content/uploads/2022/05/khao-sat-qua-dien-thoai2-5.jpg" alt="Professionals having an engaging conversation">
+    </div>
+</div>
+
+
+<!-- Slide 5: Table Layout (3H Detail) -->
+<div class="slide-container" id="slide5">
+    <h2 class="slide-title">Phân tích Tiến trình 3H</h2>
+    <div class="content-area">
+        <div class="table-layout">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tiến trình</th>
+                        <th>Mục đích & Nguyên tắc</th>
+                        <th>Ví dụ áp dụng thực tế</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>H1 - HIỆN TRẠNG</td>
+                        <td><strong>Tìm hiểu cách thức vận hành.</strong><em>Nguyên tắc: Khách quan - Không đánh giá - Không phán xét. Đừng chê cách làm của khách.</em></td>
+                        <td>"Dạ, hàng ngày khách ra vào liên tục, thường lúc đông khách vậy các bạn nhân viên sẽ ghi sổ tay hay lưu luôn vào file Excel hả chị?"</td>
+                    </tr>
+                    <tr>
+                        <td>H2 - HẠN CHẾ</td>
+                        <td><strong>Tìm hiểu khó khăn hiện tại.</strong><em>Nguyên tắc: Khơi gợi để khách tự nói ra sự bất tiện, những "nỗi đau" hàng ngày.</em></td>
+                        <td>"Chị ơi, ghi sổ lúc đông khách như thế thì cuối ngày chốt ca cộng tiền, chị có hay bị lệch lãi hay mất thời gian dò lại từng dòng không?"</td>
+                    </tr>
+                    <tr>
+                        <td>H3 - HẬU QUẢ</td>
+                        <td><strong>Tác động động cơ mua hàng.</strong><em>Nguyên tắc: Quy đổi hạn chế ra Tiền bạc & Thời gian để tạo sự cấp bách.</em></td>
+                        <td>"Tính thử xem, rớt 2-3 cái áo là đi tong tiền triệu. Chưa kể thời gian buổi tối đáng lẽ được nghỉ ngơi thì lại phải căng mắt ra dò sổ."</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- Slide 6: Image_Right_Text_Left (Needs vs Pain Points) -->
+<div class="slide-container" id="slide6">
+    <h2 class="slide-title">Phần nổi và Tảng băng chìm</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <ul class="custom-bullets">
+                    <li><i class="fa-solid fa-snowflake"></i> <strong>Nhu cầu (Phần nổi)</strong><br>Những gì khách trực tiếp nói với bạn (VD: "Anh cần phần mềm quản lý kho"). Đây chỉ là bề mặt của vấn đề!</li>
+                    <li><i class="fa-solid fa-anchor"></i> <strong>Điểm Đau (Phần chìm)</strong><br>Lý do cốt lõi buộc họ tìm giải pháp. Luôn gắn liền với <strong>Cảm xúc</strong> (căng thẳng, bất lực) và <strong>Tài chính</strong> (mất tiền, lãng phí thời gian).</li>
+                </ul>
+                <div class="highlight-box" style="background: #fff7ed; border-color: #f97316;">
+                    <p><i class="fa-solid fa-triangle-exclamation" style="color: #ea580c; margin-right: 10px;"></i><strong>Lưu ý:</strong> Khách hàng xuống tiền để giải quyết ĐIỂM ĐAU, chứ không bỏ tiền ra chỉ để mua TÍNH NĂNG!</p>
+                </div>
+            </div>
+            <div>
+                <div class="image-wrapper" style="border: 1px solid #e2e8f0;">
+                    <img src="https://cdnphoto.dantri.com.vn/I0rMAJNm_QiwBWu8P7Uf7oIu9Pg=/zoom/1200_630/c05a76d21c/2016/08/18/img20160818105705490-4830b.jpg" alt="Iceberg showing hidden depth" style="object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Slide 7: Rounded_Image_and_Text (Case Study) -->
+<div class="slide-container" id="slide7">
+    <h2 class="slide-title">Case Study: Cửa hàng Mẹ & Bé</h2>
+    <div class="content-area">
+        <div class="two-column rounded-image-layout">
+            <div>
+                <div class="image-wrapper">
+                    <img src="https://anviethouse.vn/wp-content/uploads/2021/10/thiet-ke-cua-hang-bim-sua-1-1.jpg" alt="Modern baby store">
+                </div>
+            </div>
+            <div>
+                <h3>Khách hàng: Chị Mai</h3>
+                <p><strong>Nhu cầu bề mặt:</strong> Theo dõi bỉm sữa với size số và lô hạn sử dụng chính xác.</p>
+               
+                <div class="pain-point-list">
+                    <p><i class="fa-solid fa-money-bill-wave"></i> <strong>Mất tiền oan</strong> do sữa hết hạn phải vứt đi.</p>
+                    <p><i class="fa-solid fa-shield-halved"></i> <strong>Mất uy tín</strong> vì sợ bán nhầm hàng hết date cho khách.</p>
+                    <p><i class="fa-solid fa-face-tired"></i> <strong>Mệt mỏi, mất tự do</strong> phải có mặt 24/7, không dám giao việc.</p>
+                </div>
+
+
+                <p style="margin-top: 20px;"><strong>Giải pháp KiotViet:</strong> Nhấn mạnh tính năng Quản lý Lô/Date (Cảnh báo cận date) & Thuộc tính hàng hóa (Size/Màu).</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Slide 8: Two_Column_Tiled_Text (Industry Handbook) -->
+<div class="slide-container" id="slide8">
+    <h2 class="slide-title">Vũ khí: Cẩm nang ngành hàng</h2>
+    <div class="content-area">
+        <p style="text-align: left; width: 100%; margin-bottom: 30px;">Bạn không thể dùng kịch bản Tạp hóa cho quán Cafe. Mỗi ngành là một chiến trường khác biệt. Hãy dùng Cẩm nang ngành để thiết kế kịch bản 3H bách phát bách trúng!</p>
+        <div class="two-column tiled">
+            <div>
+                <h3>Ngành Thời Trang</h3>
+                <ul class="custom-bullets" style="margin-top: 15px;">
+                    <li><i class="fa-solid fa-shirt"></i> <strong>Đặc thù:</strong> Quản lý Size/Màu, vòng đời sản phẩm ngắn.</li>
+                    <li><i class="fa-solid fa-arrow-trend-down"></i> <strong>Điểm đau (H2/H3):</strong> Ôm hàng tồn giam vốn, thất thoát không rõ.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Giải pháp:</strong> Quản lý hàng hóa theo thuộc tính & Cảnh báo tồn kho để tối ưu dòng vốn.</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Ngành F&B (Nhà hàng/Cafe)</h3>
+                <ul class="custom-bullets" style="margin-top: 15px;">
+                    <li><i class="fa-solid fa-utensils"></i> <strong>Đặc thù:</strong> Quản lý order cao điểm, định mức nguyên vật liệu.</li>
+                    <li><i class="fa-solid fa-arrow-trend-down"></i> <strong>Điểm đau (H2/H3):</strong> Nghe nhầm món, khách bực bỏ đi, đổ bỏ nguyên liệu.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Giải pháp:</strong> Order qua Tablet/Điện thoại & Quản lý định mức chống thất thoát.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Slide 9: Q&A Layout (Summary & CTA) -->
+<div class="slide-container" id="slide9">
+    <div class="qa-layout">
+        <h2>Trở thành Nhà Tư Vấn Giải Pháp</h2>
+        <div class="formula-box">
+            <div class="formula-item">Cẩm Nang Ngành Hàng<br><span style="font-size: 16px; font-weight: 500;">(Sự thấu hiểu)</span></div>
+            <div class="formula-operator">+</div>
+            <div class="formula-item">Tiến trình 3H<br><span style="font-size: 16px; font-weight: 500;">(Kỹ năng dẫn dắt)</span></div>
+            <div class="formula-operator">=</div>
+            <div class="formula-item result">Giải pháp chính xác <br><span style="font-size: 16px; font-weight: 500;">(Giải quyết điểm đau)</span></div>
+        </div>
+        <p style="margin-top: 30px;"><strong>Thực hành ngay:</strong> Mở Cẩm nang ngành hàng KiotViet, chọn 1 mô hình kinh doanh yêu thích và tự viết kịch bản 3H của riêng bạn!</p>
+    </div>
+</div>
+
+
 </body>
 </html>
