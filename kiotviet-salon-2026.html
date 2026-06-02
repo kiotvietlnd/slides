@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KiotViet Salon 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { navy: { 900: '#1e3a8a' } },
+                    animation: { 'blob': 'blob 10s infinite' },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; background-color: #fdf2f8; }
+        
+        /* HIỆU ỨNG DUAL-WIPE CỐT LÕI */
+        @keyframes wipeDownActive {
+            from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); }
+        }
+        @keyframes wipeUpPrevious {
+            from { clip-path: inset(0 0 0 0); } to { clip-path: inset(100% 0 0 0); }
+        }
+
+        .slide { 
+            display: none !important; width: 100%; height: 100%; position: absolute; top: 0; left: 0; 
+            flex-direction: column; background: transparent; 
+        }
+        
+        .slide.previous { display: flex !important; z-index: 15; animation: wipeUpPrevious 0.7s cubic-bezier(0.65, 0, 0.35, 1) forwards; }
+        .slide.active { display: flex !important; z-index: 20; animation: wipeDownActive 0.7s cubic-bezier(0.65, 0, 0.35, 1) forwards; }
+
+        /* Nền Glass cố định toàn cục */
+        #global-glass {
+            position: fixed; inset: 0; z-index: 5;
+            background: rgba(255, 255, 255, 0.75); 
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        #global-logo { position: fixed; top: 24px; left: 32px; height: 36px; z-index: 9999; transition: opacity 0.3s ease; }
+    </style>
+</head>
+<body class="text-gray-800 relative select-none cursor-none">
+
+    <img id="global-logo" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-32 left-20 w-96 h-96 bg-rose-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <div id="global-glass" class="pointer-events-none"></div>
+
+    <div id="slide-container" class="relative z-10 w-full h-full">
+        
+        <!-- Slide 1: Bìa -->
+        <div class="slide flex items-center justify-center p-8">
+            <div class="bg-white/90 p-12 rounded-3xl shadow-2xl border border-white max-w-4xl w-full text-center">
+                <h1 class="text-5xl font-extrabold text-pink-900 mb-6 leading-tight">CẬP NHẬT SẢN PHẨM:<br>KIOTVIET SALON 2026</h1>
+                <div class="h-1.5 w-24 bg-pink-500 mx-auto rounded-full mb-6"></div>
+                <p class="text-xl text-gray-600 font-medium">Buổi Meetings Cập nhật Tính năng Giao diện mới</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Chapter Bridge I -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-4xl flex flex-col items-center gap-10">
+                <div class="bg-pink-600 p-12 rounded-3xl shadow-xl w-full text-center flex flex-col items-center border border-pink-400/50">
+                    <h2 class="text-6xl font-black text-white mb-6 tracking-wide">PHẦN I</h2>
+                    <div class="h-2 w-32 bg-white/50 mx-auto rounded-full mb-6"></div>
+                    <h3 class="text-4xl font-bold text-white mb-4">GIỚI THIỆU CHUNG</h3>
+                    <p class="text-pink-200 text-2xl font-medium"><i class="fa-regular fa-clock mr-2"></i>Thời lượng dự kiến: 10 phút</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Concept 1 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-10">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-extrabold text-pink-900 inline-block border-b-4 border-pink-500 pb-2">1. Hiện Trạng Giao Diện Mới</h2>
+                    <p class="text-xl text-gray-600 font-medium mt-4">KiotViet chính thức ra mắt giao diện màn hình bán hàng mới dành riêng cho ngành Salon năm 2026.</p>
+                </div>
+                <div class="flex flex-col gap-6 w-full">
+                    <div class="bg-white/90 p-5 rounded-2xl shadow-md border border-white/60 flex items-center gap-6 w-full">
+                        <div class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center text-pink-600 shrink-0 shadow-inner">
+                            <i class="fa-solid fa-palette text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-1">Giao diện thị giác mới</h3>
+                            <p class="text-gray-600 text-lg">Bộ màu sắc nhã nhặn, sang trọng, phù hợp thẩm mỹ ngành làm đẹp.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white/90 p-5 rounded-2xl shadow-md border border-white/60 flex items-center gap-6 w-full">
+                        <div class="w-16 h-16 bg-rose-100 rounded-2xl flex items-center justify-center text-rose-600 shrink-0 shadow-inner">
+                            <i class="fa-solid fa-wand-magic-sparkles text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-1">Tối giản hóa thao tác</h3>
+                            <p class="text-gray-600 text-lg">Tái cấu trúc luồng phức tạp, giảm thiểu số bước đặt lịch, chọn dịch vụ, ghi chú và thanh toán.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white/90 p-5 rounded-2xl shadow-md border border-white/60 flex items-center gap-6 w-full">
+                        <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center text-purple-600 shrink-0 shadow-inner">
+                            <i class="fa-solid fa-layer-group text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-1">Bố cục khoa học</h3>
+                            <p class="text-gray-600 text-lg">Phân cấp nhóm chức năng giúp nhân viên mới dễ tiếp cận và nhân viên cũ tăng tốc xử lý hóa đơn.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Concept 2 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-4xl flex flex-col items-center gap-10">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-extrabold text-pink-900 inline-block border-b-4 border-pink-500 pb-2">2. Bối Cảnh & Động Cơ Chiến Lược</h2>
+                </div>
+                <div class="flex flex-col gap-6 w-full">
+                    <div class="bg-white/90 p-6 rounded-2xl shadow-md border-t-4 border-blue-400 flex items-start gap-6 w-full">
+                        <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center text-blue-500 shrink-0 mt-1">
+                            <i class="fa-solid fa-earth-americas text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Cạnh tranh quốc tế</h3>
+                            <p class="text-gray-600 text-lg">Đáp ứng tiêu chuẩn của thị trường quốc tế (Mỹ, Úc, Âu, Canada) - nơi yêu cầu cao về tính thẩm mỹ và tốc độ.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white/90 p-6 rounded-2xl shadow-md border-t-4 border-orange-400 flex items-start gap-6 w-full">
+                        <div class="w-14 h-14 bg-orange-50 rounded-full flex items-center justify-center text-orange-500 shrink-0 mt-1">
+                            <i class="fa-solid fa-hammer text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Khắc phục hạn chế của giao diện cũ</h3>
+                            <p class="text-gray-600 text-lg">Giải quyết các điểm ma sát: quá nhiều bước cho tác vụ đơn giản, phân bổ thông tin chưa hợp lý.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white/90 p-6 rounded-2xl shadow-md border-t-4 border-green-400 flex items-start gap-6 w-full">
+                        <div class="w-14 h-14 bg-green-50 rounded-full flex items-center justify-center text-green-500 shrink-0 mt-1">
+                            <i class="fa-solid fa-magnet text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Tăng tỷ lệ giữ chân khách hàng</h3>
+                            <p class="text-gray-600 text-lg">Giao diện dễ dùng giúp giảm tỷ lệ rời bỏ phần mềm (SaaS churn rate).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Concept 3 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-4xl flex flex-col items-center gap-10">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-extrabold text-pink-900 inline-block border-b-4 border-pink-500 pb-2">3. Tác Động Nội Bộ</h2>
+                    <p class="text-xl text-gray-600 font-medium mt-4">Yêu cầu đối với đội ngũ Kinh doanh (Sales) và Hỗ trợ (Support, Triển khai):</p>
+                </div>
+                <div class="flex flex-col gap-6 w-full">
+                    <div class="bg-white/90 p-8 rounded-3xl shadow-lg border-2 border-pink-200 flex flex-col items-center text-center">
+                        <div class="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center text-pink-600 mb-4 shadow-inner">
+                            <i class="fa-solid fa-chalkboard-user text-4xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Nắm Vững Kiến Trúc</h3>
+                        <p class="text-gray-600 text-lg">Tự tin demo theo từng quy mô: salon nhỏ, chuỗi salon, nail spa cao cấp.</p>
+                    </div>
+                    <div class="bg-white/90 p-8 rounded-3xl shadow-lg border-2 border-rose-200 flex flex-col items-center text-center">
+                        <div class="w-20 h-20 bg-rose-100 rounded-full flex items-center justify-center text-rose-600 mb-4 shadow-inner">
+                            <i class="fa-solid fa-shield-cat text-4xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Hỗ Trợ Chuyển Đổi An Toàn</h3>
+                        <p class="text-gray-600 text-lg">Hỗ trợ khách hàng cũ chuyển đổi dữ liệu, tránh gián đoạn vận hành kinh doanh.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Concept 4 (Agenda) -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-4xl flex flex-col items-center gap-10">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-extrabold text-pink-900 inline-block border-b-4 border-pink-500 pb-2">4. Agenda Chương Trình Đào Tạo</h2>
+                </div>
+                <div class="flex flex-col gap-6 w-full">
+                    <div class="bg-white/90 p-6 rounded-2xl shadow-md border-l-8 border-pink-400 flex items-center gap-6">
+                        <h3 class="text-4xl font-black text-pink-200">01</h3>
+                        <div>
+                            <p class="text-gray-800 font-bold text-xl">Giới thiệu các thay đổi về tính năng cốt lõi</p>
+                            <span class="text-pink-500 font-medium text-sm">20 Phút</span>
+                        </div>
+                    </div>
+                    <div class="bg-white/90 p-6 rounded-2xl shadow-md border-l-8 border-rose-400 flex items-center gap-6">
+                        <h3 class="text-4xl font-black text-rose-200">02</h3>
+                        <div>
+                            <p class="text-gray-800 font-bold text-xl">Demo luồng thao tác thực tế qua 4 Case Study</p>
+                            <span class="text-rose-500 font-medium text-sm">80 Phút</span>
+                        </div>
+                    </div>
+                    <div class="bg-white/90 p-6 rounded-2xl shadow-md border-l-8 border-purple-400 flex items-center gap-6">
+                        <h3 class="text-4xl font-black text-purple-200">03</h3>
+                        <div>
+                            <p class="text-gray-800 font-bold text-xl">Lộ trình phát triển tiếp theo và đề xuất hỗ trợ</p>
+                            <span class="text-purple-500 font-medium text-sm">10 Phút</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Chapter Bridge II -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-4xl flex flex-col items-center gap-10">
+                <div class="bg-rose-600 p-12 rounded-3xl shadow-xl w-full text-center flex flex-col items-center border border-rose-400/50">
+                    <h2 class="text-6xl font-black text-white mb-6 tracking-wide">PHẦN II</h2>
+                    <div class="h-2 w-32 bg-white/50 mx-auto rounded-full mb-6"></div>
+                    <h3 class="text-4xl font-bold text-white mb-4">CÁC THAY ĐỔI VỀ TÍNH NĂNG CỐT LÕI</h3>
+                    <p class="text-rose-200 text-2xl font-medium"><i class="fa-regular fa-clock mr-2"></i>Thời lượng dự kiến: 20 phút</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Concept (Tính năng 1) -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-10">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-extrabold text-pink-900 inline-block border-b-4 border-pink-500 pb-2">1. Quản Lý & Thêm Mới Lịch Hẹn</h2>
+                </div>
+                <div class="grid grid-cols-2 gap-8 w-full">
+                    <div class="bg-white/90 p-6 rounded-3xl shadow-lg border border-gray-100 flex flex-col">
+                        <div class="flex items-center gap-3 mb-4 border-b pb-3">
+                            <i class="fa-solid fa-calendar-plus text-2xl text-pink-500"></i>
+                            <h3 class="text-xl font-bold text-gray-800">A. Luồng thêm mới 4 bước</h3>
+                        </div>
+                        <ul class="list-decimal pl-5 text-gray-700 space-y-2 mb-4">
+                            <li>Chọn ngày giờ mong muốn.</li>
+                            <li>Tìm kiếm/tạo mới hồ sơ khách.</li>
+                            <li>Chọn dịch vụ (hỗ trợ từ nhiều gói).</li>
+                            <li>Gán nhân viên phụ trách.</li>
+                        </ul>
+                        <p class="text-sm font-medium text-pink-700 mt-auto bg-pink-50 p-3 rounded-xl"><i class="fa-solid fa-check mr-2"></i>Không mặc định giờ sai, nhân viên mới dễ thao tác chuẩn xác.</p>
+                    </div>
+                    <div class="bg-white/90 p-6 rounded-3xl shadow-lg border border-gray-100 flex flex-col">
+                        <div class="flex items-center gap-3 mb-4 border-b pb-3">
+                            <i class="fa-solid fa-rotate text-2xl text-purple-500"></i>
+                            <h3 class="text-xl font-bold text-gray-800">B. Lịch định kỳ</h3>
+                        </div>
+                        <ul class="list-disc pl-5 text-gray-700 space-y-2 mb-4">
+                            <li>Nút "Đặt lịch định kỳ" cạnh nút Đặt lịch chính dạng dropdown.</li>
+                            <li>Chọn nhiều dịch vụ thuộc nhiều gói thẻ khác nhau.</li>
+                            <li>Hiển thị biểu tượng nhận diện riêng trên lịch tổng quan.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Screenshot 1 -->
+        <div class="slide flex flex-col items-center justify-start pt-12 pb-8 px-12 h-full">
+            <h2 class="text-3xl font-bold text-pink-900 mb-2 shrink-0">Hướng Dẫn: Thêm Mới Lịch Hẹn & Lịch Định Kỳ</h2>
+            <p class="text-gray-700 mb-6 text-center shrink-0 font-medium text-lg">Thao tác trên màn hình: Luồng 4 bước và cấu hình Đặt lịch định kỳ.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/05/18154746/DLHS_180526-32.png" class="max-h-full w-auto object-contain rounded-xl shadow-2xl border border-white">
+            </div>
+        </div>
+
+        <!-- Slide 10: Concept (Tính năng 2) -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-10">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-extrabold text-pink-900 inline-block border-b-4 border-pink-500 pb-2">2. Quản Lý Hồ Sơ Khách Hàng</h2>
+                </div>
+                <div class="flex flex-col gap-4 w-full">
+                    <div class="bg-white/90 p-5 rounded-2xl shadow-md border-l-4 border-pink-400">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1"><i class="fa-solid fa-magnifying-glass text-pink-500 mr-2"></i>Điểm truy cập mới</h3>
+                        <p class="text-gray-600">Ô tìm kiếm ngay trên thanh công cụ, không cần thoát màn hình khi đang lên hóa đơn.</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white/90 p-5 rounded-2xl shadow-md border-l-4 border-rose-400">
+                            <h3 class="text-xl font-bold text-gray-800 mb-1">Tab Tổng quan & Ghi chú</h3>
+                            <p class="text-gray-600">Hiển thị tổng bán, số lần ghé, nợ, điểm, và ghi chú chi tiết về da/sở thích.</p>
+                        </div>
+                        <div class="bg-white/90 p-5 rounded-2xl shadow-md border-l-4 border-purple-400">
+                            <h3 class="text-xl font-bold text-gray-800 mb-1">Tab Gói Dịch Vụ</h3>
+                            <p class="text-gray-600">Chia nhóm: "Gói đang dùng" (kèm số buổi, đặt lịch nhanh) và "Gói đã dùng hết/bảo lưu".</p>
+                        </div>
+                        <div class="bg-white/90 p-5 rounded-2xl shadow-md border-l-4 border-teal-400">
+                            <h3 class="text-xl font-bold text-gray-800 mb-1">Tab Thẻ Tài Khoản</h3>
+                            <p class="text-gray-600">Phân chia "Thẻ đang dùng" (hỗ trợ Trừ/Gộp thẻ) và "Thẻ cũ".</p>
+                        </div>
+                        <div class="bg-white/90 p-5 rounded-2xl shadow-md border-l-4 border-orange-400">
+                            <h3 class="text-xl font-bold text-gray-800 mb-1">Tab Voucher</h3>
+                            <p class="text-gray-600">Theo dõi "Voucher khả dụng" và "Voucher đã dùng/hết hạn".</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Screenshot 2 -->
+        <div class="slide flex flex-col items-center justify-start pt-12 pb-8 px-12 h-full">
+            <h2 class="text-3xl font-bold text-pink-900 mb-2 shrink-0">Hướng Dẫn: Tra Cứu Hồ Sơ & Các Tab</h2>
+            <p class="text-gray-700 mb-6 text-center shrink-0 font-medium text-lg">Tìm kiếm Header và Giao diện chi tiết Hồ sơ Khách hàng.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/05/25045539/HSKHS_250526-5.png" class="max-h-full w-auto object-contain rounded-xl shadow-2xl border border-white">
+            </div>
+        </div>
+
+        <!-- Slide 12: Concept (Tính năng 3) -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-4xl flex flex-col items-center gap-10">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-extrabold text-pink-900 inline-block border-b-4 border-pink-500 pb-2">3. Bán & Quản Lý Gói Thẻ</h2>
+                </div>
+                <div class="flex flex-col gap-6 w-full">
+                    <div class="bg-white/90 p-8 rounded-3xl shadow-lg border border-gray-100 flex items-start gap-6">
+                        <i class="fa-solid fa-eye text-4xl text-pink-500 mt-1"></i>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Tab "Gói đã mua" tự động</h3>
+                            <p class="text-gray-600 text-lg">Tự động hiển thị khi thêm khách. Phân biệt rõ dịch vụ còn buổi (chữ đậm) và đã hết (chữ mờ), hỗ trợ ẩn các gói cũ để tránh rối mắt.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white/90 p-8 rounded-3xl shadow-lg border border-gray-100 flex items-start gap-6">
+                        <i class="fa-solid fa-bolt text-4xl text-rose-500 mt-1"></i>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Thao tác trực tiếp</h3>
+                            <p class="text-gray-600 text-lg">Nút "Trừ buổi" & "Điều chỉnh gói" được tích hợp ngay dưới từng dòng hóa đơn giúp thao tác nhanh không cần thoát màn hình.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Screenshot 3 -->
+        <div class="slide flex flex-col items-center justify-start pt-12 pb-8 px-12 h-full">
+            <h2 class="text-3xl font-bold text-pink-900 mb-2 shrink-0">Hướng Dẫn: Trừ Buổi & Điều Chỉnh Gói</h2>
+            <p class="text-gray-700 mb-6 text-center shrink-0 font-medium text-lg">Thao tác trừ dịch vụ trực tiếp trên Màn hình Bán hàng.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden">
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/05/25045331/TVBHS_250526-4.png" class="max-h-full w-auto object-contain rounded-xl shadow-2xl border border-white">
+            </div>
+        </div>
+
+        <!-- Slide 14: Chapter Bridge III -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-10">
+                <div class="bg-purple-600 p-12 rounded-3xl shadow-xl w-full text-center flex flex-col items-center border border-purple-400/50">
+                    <h2 class="text-6xl font-black text-white mb-6 tracking-wide">PHẦN III</h2>
+                    <div class="h-2 w-32 bg-white/50 mx-auto rounded-full mb-6"></div>
+                    <h3 class="text-4xl font-bold text-white mb-4 uppercase">Demo Luồng Thao Tác Qua 4 Case Study</h3>
+                    <p class="text-purple-200 text-2xl font-medium"><i class="fa-regular fa-clock mr-2"></i>Thời lượng dự kiến: 80 phút</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Concept Case 1 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-4xl flex flex-col items-center gap-10">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-extrabold text-pink-900 inline-block border-b-4 border-pink-500 pb-2">Case Study #1: "Rose Nails"</h2>
+                </div>
+                <div class="bg-white/90 p-10 rounded-3xl shadow-xl w-full border border-gray-100 flex flex-col gap-6">
+                    <div class="flex items-center gap-4 border-b pb-4">
+                        <i class="fa-solid fa-shop text-3xl text-pink-500"></i>
+                        <h3 class="text-2xl font-bold text-gray-800">Mô hình: Salon nhỏ quản lý cơ bản</h3>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-2">Mục tiêu:</h4>
+                        <p class="text-gray-600 text-lg">Demo luồng tạo lịch 4 bước chuẩn hóa.</p>
+                    </div>
+                    <div class="bg-pink-50 p-5 rounded-2xl border border-pink-100">
+                        <h4 class="text-xl font-bold text-pink-800 mb-2">Điểm nhấn:</h4>
+                        <p class="text-pink-700 text-lg">Giao diện tự dẫn dắt, tránh sai lệch giờ hẹn.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Screenshot Case 1 -->
+        <div class="slide flex flex-col items-center justify-start pt-12 pb-8 px-12 h-full">
+            <h2 class="text-3xl font-bold text-pink-900 mb-2 shrink-0">Thao Tác Hệ Thống: Rose Nails</h2>
+            <p class="text-gray-700 mb-6 text-center shrink-0 font-medium text-lg">Nhấn "+ Đặt lịch" <i class="fa-solid fa-arrow-right mx-1"></i> Chọn giờ <i class="fa-solid fa-arrow-right mx-1"></i> Thêm "Minh Anh" <i class="fa-solid fa-arrow-right mx-1"></i> "Sơn gel 150k" <i class="fa-solid fa-arrow-right mx-1"></i> Gán thợ A.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden">
+                <img src="https://i.postimg.cc/pLP2TcT9/Anh-quang-cao-cho-1-202606021615.jpg" class="max-h-full w-auto object-contain rounded-xl shadow-2xl border border-white">
+            </div>
+        </div>
+
+        <!-- Slide 17: Concept Case 2 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-4xl flex flex-col items-center gap-10">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-extrabold text-pink-900 inline-block border-b-4 border-pink-500 pb-2">Case Study #2: "Serene Beauty"</h2>
+                </div>
+                <div class="bg-white/90 p-10 rounded-3xl shadow-xl w-full border border-gray-100 flex flex-col gap-6">
+                    <div class="flex items-center gap-4 border-b pb-4">
+                        <i class="fa-solid fa-spa text-3xl text-teal-500"></i>
+                        <h3 class="text-2xl font-bold text-gray-800">Mô hình: Spa chuyên nghiệp quản lý liệu trình</h3>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-2">Mục tiêu:</h4>
+                        <p class="text-gray-600 text-lg">Demo lịch định kỳ, tra cứu hồ sơ và trừ gói trực tiếp trên MHBH.</p>
+                    </div>
+                    <div class="bg-teal-50 p-5 rounded-2xl border border-teal-100">
+                        <h4 class="text-xl font-bold text-teal-800 mb-2">Điểm nhấn:</h4>
+                        <p class="text-teal-700 text-lg">Quản lý liệu trình khép kín, nhân viên không cần rời màn hình bán hàng, tránh trừ nhầm gói.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18: Screenshot Case 2 -->
+        <div class="slide flex flex-col items-center justify-start pt-12 pb-8 px-12 h-full">
+            <h2 class="text-3xl font-bold text-pink-900 mb-2 shrink-0">Thao Tác Hệ Thống: Serene Beauty</h2>
+            <p class="text-gray-700 mb-6 text-center shrink-0 font-medium text-lg">Lịch định kỳ T6 <i class="fa-solid fa-arrow-right mx-1"></i> Tra cứu note Da <i class="fa-solid fa-arrow-right mx-1"></i> Chọn "Mặt nạ" từ Gói đã mua <i class="fa-solid fa-arrow-right mx-1"></i> Trừ buổi.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden">
+                <img src="https://i.postimg.cc/JzKRB3Db/Anh-quang-cao-cho-1-202606021618.jpg" class="max-h-full w-auto object-contain rounded-xl shadow-2xl border border-white">
+            </div>
+        </div>
+
+        <!-- Slide 19: Concept Case 3 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-4xl flex flex-col items-center gap-10">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-extrabold text-pink-900 inline-block border-b-4 border-pink-500 pb-2">Case Study #3: "Bloom Beauty"</h2>
+                </div>
+                <div class="bg-white/90 p-10 rounded-3xl shadow-xl w-full border border-gray-100 flex flex-col gap-6">
+                    <div class="flex items-center gap-4 border-b pb-4">
+                        <i class="fa-solid fa-crown text-3xl text-orange-500"></i>
+                        <h3 class="text-2xl font-bold text-gray-800">Mô hình: Salon có Chương trình Thành viên</h3>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-2">Mục tiêu:</h4>
+                        <p class="text-gray-600 text-lg">Demo thanh toán kết hợp bằng voucher và điểm tích lũy.</p>
+                    </div>
+                    <div class="bg-orange-50 p-5 rounded-2xl border border-orange-100">
+                        <h4 class="text-xl font-bold text-orange-800 mb-2">Điểm nhấn:</h4>
+                        <p class="text-orange-700 text-lg">Tránh bỏ sót voucher của khách, tự động quy đổi điểm sang tiền hạn chế sai sót tính tay.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20: Screenshot Case 3 -->
+        <div class="slide flex flex-col items-center justify-start pt-12 pb-8 px-12 h-full">
+            <h2 class="text-3xl font-bold text-pink-900 mb-2 shrink-0">Thao Tác Hệ Thống: Bloom Beauty</h2>
+            <p class="text-gray-700 mb-6 text-center shrink-0 font-medium text-lg">Nhập Voucher "FT607E" <i class="fa-solid fa-arrow-right mx-1"></i> Nhập 500 điểm vào ô <i class="fa-solid fa-arrow-right mx-1"></i> Giảm trừ tiền tự động.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden">
+                <img src="https://i.postimg.cc/t4D9VdZ3/Anh-quang-cao-cho-1-202606021618-(1).jpg" class="max-h-full w-auto object-contain rounded-xl shadow-2xl border border-white">
+            </div>
+        </div>
+
+        <!-- Slide 21: Concept Case 4 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-4xl flex flex-col items-center gap-10">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-extrabold text-pink-900 inline-block border-b-4 border-pink-500 pb-2">Case Study #4: "The Professional"</h2>
+                </div>
+                <div class="bg-white/90 p-10 rounded-3xl shadow-xl w-full border border-gray-100 flex flex-col gap-6">
+                    <div class="flex items-center gap-4 border-b pb-4">
+                        <i class="fa-solid fa-building text-3xl text-blue-500"></i>
+                        <h3 class="text-2xl font-bold text-gray-800">Mô hình: Salon có Khách doanh nghiệp</h3>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-2">Mục tiêu:</h4>
+                        <p class="text-gray-600 text-lg">Demo phát hành HĐĐT linh hoạt và xử lý lỗi tại quầy.</p>
+                    </div>
+                    <div class="bg-blue-50 p-5 rounded-2xl border border-blue-100">
+                        <h4 class="text-xl font-bold text-blue-800 mb-2">Điểm nhấn:</h4>
+                        <p class="text-blue-700 text-lg">Linh hoạt theo hóa đơn, sửa thông tin tại chỗ giúp tiết kiệm thời gian, giải quyết lỗi tức thời.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 22: Screenshot Case 4 -->
+        <div class="slide flex flex-col items-center justify-start pt-12 pb-8 px-12 h-full">
+            <h2 class="text-3xl font-bold text-pink-900 mb-2 shrink-0">Thao Tác Hệ Thống: The Professional</h2>
+            <p class="text-gray-700 mb-6 text-center shrink-0 font-medium text-lg">Tích "Phát hành HĐĐT" <i class="fa-solid fa-arrow-right mx-1"></i> Sửa MST sai tại chỗ <i class="fa-solid fa-arrow-right mx-1"></i> Theo dõi trạng thái trên Header.</p>
+            <div class="flex-1 min-h-0 w-full flex justify-center items-center overflow-hidden">
+                <img src="https://i.postimg.cc/rwgqtG04/Anh-quang-cao-cho-1-202606021618-(2).jpg" class="max-h-full w-auto object-contain rounded-xl shadow-2xl border border-white">
+            </div>
+        </div>
+
+        <!-- Slide 23: Chapter Bridge IV -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-4xl flex flex-col items-center gap-10">
+                <div class="bg-pink-800 p-12 rounded-3xl shadow-xl w-full text-center flex flex-col items-center border border-pink-600/50">
+                    <h2 class="text-6xl font-black text-white mb-6 tracking-wide">PHẦN IV</h2>
+                    <div class="h-2 w-32 bg-white/50 mx-auto rounded-full mb-6"></div>
+                    <h3 class="text-4xl font-bold text-white mb-4 uppercase">Lộ Trình Và Đề Xuất Khác</h3>
+                    <p class="text-pink-200 text-2xl font-medium"><i class="fa-regular fa-clock mr-2"></i>Thời lượng dự kiến: 10 phút</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 24: Concept Lộ trình -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-4xl flex flex-col items-center gap-10">
+                <div class="text-center w-full">
+                    <h2 class="text-4xl font-extrabold text-pink-900 inline-block border-b-4 border-pink-500 pb-2">Lộ Trình Phát Triển Sản Phẩm</h2>
+                </div>
+                <div class="bg-white/90 p-8 rounded-3xl shadow-lg border border-pink-200 w-full flex items-center gap-8">
+                    <div class="w-24 h-24 bg-pink-100 rounded-full flex flex-col items-center justify-center text-pink-600 shrink-0 border-4 border-white shadow-md">
+                        <span class="text-sm font-bold uppercase tracking-wider">Tháng</span>
+                        <span class="text-3xl font-black">06</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Bổ sung hoàn thiện tính năng</h3>
+                        <p class="text-gray-600 text-xl leading-relaxed">Phát triển và ra mắt tính năng <strong>Trả hàng trực tiếp</strong> ngay trên giao diện màn hình bán hàng mới, khép kín hoàn toàn chu trình dịch vụ.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 25: Infographic Tổng Kết -->
+        <div class="slide flex items-center justify-center w-full h-full p-8" data-type="infographic">
+            <div class="bg-white/70 backdrop-blur-xl p-10 rounded-[3rem] shadow-2xl border border-white max-w-5xl w-full flex flex-col items-center">
+                <h2 class="text-3xl font-black text-pink-900 mb-8 uppercase tracking-wide">Tổng kết 4 Thông Điệp Cốt Lõi</h2>
+                <div class="grid grid-cols-2 gap-6 w-full">
+                    <div class="bg-white/80 p-6 rounded-2xl shadow-sm border-l-4 border-pink-400 flex items-center gap-4">
+                        <i class="fa-solid fa-shop text-3xl text-pink-500 w-10 text-center"></i>
+                        <p class="text-gray-800 font-bold text-lg">Đơn giản hóa vận hành cho mô hình nhỏ.</p>
+                    </div>
+                    <div class="bg-white/80 p-6 rounded-2xl shadow-sm border-l-4 border-teal-400 flex items-center gap-4">
+                        <i class="fa-solid fa-spa text-3xl text-teal-500 w-10 text-center"></i>
+                        <p class="text-gray-800 font-bold text-lg">Quản lý chính xác liệu trình cho spa chuyên nghiệp.</p>
+                    </div>
+                    <div class="bg-white/80 p-6 rounded-2xl shadow-sm border-l-4 border-orange-400 flex items-center gap-4">
+                        <i class="fa-solid fa-crown text-3xl text-orange-500 w-10 text-center"></i>
+                        <p class="text-gray-800 font-bold text-lg">Gia tăng trải nghiệm thành viên tự động.</p>
+                    </div>
+                    <div class="bg-white/80 p-6 rounded-2xl shadow-sm border-l-4 border-blue-400 flex items-center gap-4">
+                        <i class="fa-solid fa-building text-3xl text-blue-500 w-10 text-center"></i>
+                        <p class="text-gray-800 font-bold text-lg">Chuyên nghiệp hóa luồng HĐĐT cho mô hình lớn.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 26: Infographic Đề Xuất & QR -->
+        <div class="slide flex items-center justify-center w-full h-full p-8" data-type="infographic">
+            <div class="bg-white/70 backdrop-blur-xl p-10 rounded-[3rem] shadow-2xl border border-white max-w-5xl w-full flex flex-col items-center">
+                <h2 class="text-3xl font-black text-pink-900 mb-8 uppercase tracking-wide">Đề Xuất & Hỗ Trợ</h2>
+                <div class="flex gap-8 w-full justify-center">
+                    <div class="bg-white p-6 rounded-3xl shadow-md flex flex-col items-center flex-1 max-w-[280px]">
+                        <div class="w-40 h-40 border-4 border-dashed border-pink-300 rounded-xl flex items-center justify-center text-pink-300 mb-4">
+                            <i class="fa-solid fa-qrcode text-4xl"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-lg text-center">Khảo sát phản hồi</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl shadow-md flex flex-col items-center flex-1 max-w-[280px]">
+                        <div class="w-40 h-40 border-4 border-dashed border-rose-300 rounded-xl flex items-center justify-center text-rose-300 mb-4">
+                            <i class="fa-solid fa-qrcode text-4xl"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-lg text-center">HDSD Hệ thống</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl shadow-md flex flex-col items-center flex-1 max-w-[280px]">
+                        <div class="w-40 h-40 border-4 border-dashed border-purple-300 rounded-xl flex items-center justify-center text-purple-300 mb-4">
+                            <i class="fa-solid fa-qrcode text-4xl"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-lg text-center">E-Learning KiotViet</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        let isAnimating = false;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const logo = document.getElementById('global-logo');
+
+        function updateUI(newIndex) {
+            if (isAnimating || newIndex === currentSlide || totalSlides < 2) return;
+            isAnimating = true;
+
+            const oldSlide = slides[currentSlide];
+            const newSlide = slides[newIndex];
+            
+            slides.forEach(s => s.classList.remove('active', 'previous'));
+
+            newSlide.classList.add('active');
+            oldSlide.classList.add('previous');
+
+            currentSlide = newIndex;
+
+            const isInfographic = newSlide.getAttribute('data-type') === 'infographic';
+            logo.style.opacity = isInfographic ? '0' : '1';
+
+            setTimeout(() => {
+                isAnimating = false;
+                oldSlide.classList.remove('previous');
+            }, 700);
+        }
+
+        if (totalSlides > 0) {
+            slides[0].classList.add('active');
+        }
+
+        function nextSlide() { updateUI((currentSlide + 1) % totalSlides); }
+        function prevSlide() { updateUI((currentSlide - 1 + totalSlides) % totalSlides); }
+        function toggleFullScreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else if (document.exitFullscreen) document.exitFullscreen(); }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === ' '){
+                e.preventDefault(); 
+                nextSlide();
+            }
+            else if (e.key === 'ArrowRight') nextSlide();
+            else if (e.key === 'ArrowLeft') prevSlide();
+            else if (e.key === 'Home') updateUI(0);
+            else if (e.key === 'End') updateUI(totalSlides - 1);
+            else if (e.key.toLowerCase() === 'f') toggleFullScreen();
+        });
+    </script>
+</body>
+</html>
