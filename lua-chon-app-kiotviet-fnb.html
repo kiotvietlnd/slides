@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Chọn Ứng Dụng KiotViet Phù Hợp - F&B</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { navy: { 900: '#0f172a' } },
+                    animation: { 'blob': 'blob 15s infinite' },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; background-color: #f8fafc; }
+        
+        /* ZOOM & GLIDE TRANSITION */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(40px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes slideOutScale {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.95); }
+        }
+
+        .slide { 
+            display: none !important; width: 100%; height: 100%; position: absolute; top: 0; left: 0; 
+            flex-direction: column; background: transparent; 
+        }
+        
+        .slide.previous { display: flex !important; z-index: 15; animation: slideOutScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .slide.active { display: flex !important; z-index: 20; animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        /* STAGGERED ENTRANCE */
+        .slide.active .stagger-1 { animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; opacity: 0; }
+        .slide.active .stagger-2 { animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards; opacity: 0; }
+        .slide.active .stagger-3 { animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; opacity: 0; }
+        .slide.active .stagger-4 { animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards; opacity: 0; }
+
+        #global-glass {
+            position: fixed; inset: 0; z-index: 5;
+            background: rgba(255, 255, 255, 0.7); 
+            backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        #global-logo { position: fixed; top: 24px; left: 32px; height: 36px; z-index: 9999; transition: opacity 0.3s ease; }
+
+        /* GLASS CARD COMPONENT */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover { transform: translateY(-4px); border-color: rgba(255, 255, 255, 1); }
+        
+        .gradient-text {
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            background-image: linear-gradient(to right, #0284c7, #10b981); /* Gradient mix Blue & Green */
+        }
+        
+        /* CUSTOM BULLETS */
+        ul.custom-bullets li { position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; }
+        ul.custom-bullets li::before {
+            content: "\f0da"; font-family: "Font Awesome 6 Free"; font-weight: 900;
+            position: absolute; left: 0; top: 0.25rem; 
+            color: #0ea5e9; /* Sky blue */
+            font-size: 0.875rem;
+        }
+        ul.custom-bullets.bullet-green li::before { color: #10b981; }
+        ul.custom-bullets.bullet-orange li::before { color: #f59e0b; }
+    </style>
+</head>
+<body class="text-gray-800 relative select-none cursor-none">
+
+    <img id="global-logo" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+
+    <!-- ĐỔI MÀU BLOB: Mix Xanh Dương, Xanh Lá, Vàng Cam -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none flex justify-center items-center">
+        <div class="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-sky-300 rounded-full mix-blend-multiply filter blur-[80px] opacity-60 animate-blob"></div>
+        <div class="absolute top-[-5%] right-[-5%] w-[500px] h-[500px] bg-emerald-300 rounded-full mix-blend-multiply filter blur-[80px] opacity-60 animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-[-10%] left-[20%] w-[700px] h-[700px] bg-amber-200 rounded-full mix-blend-multiply filter blur-[100px] opacity-60 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <div id="global-glass" class="pointer-events-none"></div>
+
+    <div id="slide-container" class="relative z-10 w-full h-full">
+
+        <!-- SLIDE 1: BÌA -->
+        <div class="slide flex items-center justify-center p-8">
+            <div class="glass-card p-14 rounded-[2.5rem] max-w-5xl w-full text-center stagger-1 border-t-4 border-blue-500">
+                <h1 class="text-6xl font-extrabold gradient-text mb-6 leading-tight">Hướng Dẫn Chọn Ứng Dụng <br> KiotViet Phù Hợp</h1>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-green-500 mx-auto rounded-full mb-8"></div>
+                <p class="text-2xl text-gray-700 font-medium stagger-2">Ngành Ăn uống, Giải trí (F&B)</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: GIỚI THIỆU CHUNG VỀ HỆ SINH THÁI -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Giới thiệu Hệ sinh thái</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-green-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-2 gap-6 w-full">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 stagger-2 flex flex-col">
+                        <i class="fa-solid fa-cash-register text-4xl text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Nhóm ứng dụng Thu ngân</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>KiotViet Thu ngân (Cài trên máy tính).</li>
+                            <li>KiotViet Web POS (Dùng trên trình duyệt).</li>
+                            <li>KiotViet Nhân viên nhà hàng (Mobile).</li>
+                            <li>KiotViet Máy POS Nhà hàng (Chuyên dụng).</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-green-500 stagger-3 flex flex-col">
+                        <i class="fa-solid fa-users-gear text-4xl text-green-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Nhóm Quản lý & Hỗ trợ</h3>
+                        <ul class="custom-bullets bullet-green text-gray-600 text-lg">
+                            <li>Web MAN (Máy tính) và Mobile MAN (Điện thoại).</li>
+                            <li>Hỗ trợ in ấn: KiotViet Kết nối, KiotViet Proxy.</li>
+                            <li>Trình điều khiển phần cứng: KiotViet Hardware Manager.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: ỨNG DỤNG THU NGÂN - PHƯƠNG ÁN 1 & 2 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Ứng dụng Thu ngân (Máy tính)</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-green-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-2 gap-6 w-full">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-orange-500 stagger-2 flex flex-col">
+                        <i class="fa-solid fa-desktop text-4xl text-orange-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Bản Cài Đặt (Khuyên dùng)</h3>
+                        <ul class="custom-bullets bullet-orange text-gray-600 text-lg">
+                            <li>Phù hợp: Quán hoạt động liên tục, xử lý đơn siêu tốc.</li>
+                            <li>Đã tích hợp sẵn KiotViet Proxy. Đảm bảo in ấn offline.</li>
+                            <li>Chỉ cần cài thêm KiotViet Kết nối để hoàn thiện.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-500 stagger-3 flex flex-col">
+                        <i class="fa-brands fa-chrome text-4xl text-cyan-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Bản Trình duyệt (Web POS)</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Phù hợp: Đang dùng thử, mô hình cơ bản, đăng nhập máy lạ.</li>
+                            <li>Chưa tích hợp sẵn các công cụ in ấn.</li>
+                            <li>Bắt buộc tải độc lập KiotViet Kết nối và KiotViet Proxy.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: ỨNG DỤNG THU NGÂN - PHƯƠNG ÁN 3 & 4 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Ứng dụng Thu ngân (Mobile & POS)</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-green-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-2 gap-6 w-full">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-green-500 stagger-2 flex flex-col">
+                        <i class="fa-solid fa-mobile-screen text-4xl text-green-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Nhân viên phục vụ (App)</h3>
+                        <ul class="custom-bullets bullet-green text-gray-600 text-lg">
+                            <li>Dùng app Nhân viên nhà hàng trên iOS/Android.</li>
+                            <li>Lên đơn trực tiếp tại bàn, báo bếp tự động.</li>
+                            <li>Tận dụng thiết bị cá nhân giúp tiết kiệm chi phí.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 stagger-3 flex flex-col">
+                        <i class="fa-solid fa-tablet-screen-button text-4xl text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Máy POS chuyên dụng</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Xử lý lượng đơn hàng lớn với thao tác chạm cảm ứng.</li>
+                            <li>Đồng bộ tức thì với máy in hóa đơn, ngăn kéo tiền.</li>
+                            <li>Mang lại sự chuyên nghiệp tại quầy thanh toán.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: ỨNG DỤNG QUẢN LÝ -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Ứng dụng Quản lý Cửa hàng</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-green-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-2 gap-6 w-full">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 stagger-2 flex flex-col">
+                        <i class="fa-solid fa-desktop text-4xl text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Quản lý trên PC (Web MAN)</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Không gian làm việc bao quát, cấu hình toàn hệ thống.</li>
+                            <li>Thiết lập thực đơn, kiểm kho, sổ quỹ, khuyến mại.</li>
+                            <li>Tự động hóa sổ sách, xuất tờ khai và xuất hóa đơn điện tử.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-orange-500 stagger-3 flex flex-col">
+                        <i class="fa-solid fa-mobile-retro text-4xl text-orange-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Quản lý Mobile (Mobile MAN)</h3>
+                        <ul class="custom-bullets bullet-orange text-gray-600 text-lg">
+                            <li>Dành riêng cho Chủ quán theo dõi kinh doanh từ xa.</li>
+                            <li>Xem biểu đồ doanh thu, giao dịch theo thời gian thực.</li>
+                            <li>Lưu ý: Thiết lập chuyên sâu (Thuế, Menu) cần thực hiện trên PC.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= Q&A SECTION ================= -->
+
+        <!-- SLIDE 6: Q&A 1 - HỎI -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-4xl text-center stagger-1 glass-card p-16 rounded-[3rem] border-t-4 border-blue-500">
+                <i class="fa-solid fa-circle-question text-7xl text-blue-400 mb-8 animate-bounce"></i>
+                <h2 class="text-4xl font-bold text-gray-800 leading-tight">Nên chọn phần mềm Cài đặt hay dùng Trình duyệt (Web POS) tại quầy?</h2>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: Q&A 1 - ĐÁP -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-3xl font-bold text-gray-700 mb-2">Nên chọn Cài đặt hay Web POS?</h2>
+                    <div class="h-1 w-16 bg-blue-500 mx-auto rounded-full mb-4"></div>
+                </div>
+                <div class="glass-card p-8 rounded-3xl border-l-8 border-blue-500 w-full stagger-2 flex items-start gap-6">
+                    <i class="fa-solid fa-lightbulb text-5xl text-blue-500 mt-2"></i>
+                    <div class="text-left">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Tùy thuộc vào cường độ bán hàng</h3>
+                        <ul class="custom-bullets text-gray-600 text-xl">
+                            <li><strong>Bản Cài đặt:</strong> Rất cần thiết cho quán hoạt động liên tục, yêu cầu tốc độ xử lý nhanh và độ ổn định cao.</li>
+                            <li><strong>Web POS:</strong> Chỉ nên dùng khi bạn đang thử nghiệm, mô hình đơn giản hoặc cần đăng nhập tạm thời trên máy tính khác.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: Q&A 2 - HỎI -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-4xl text-center stagger-1 glass-card p-16 rounded-[3rem] border-t-4 border-green-500">
+                <i class="fa-solid fa-print text-7xl text-green-400 mb-8 animate-bounce"></i>
+                <h2 class="text-4xl font-bold text-gray-800 leading-tight">Để in phiếu chế biến tự động từ điện thoại xuống bếp, tôi cần cài đặt ứng dụng gì?</h2>
+            </div>
+        </div>
+
+        <!-- SLIDE 9: Q&A 2 - ĐÁP -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-3xl font-bold text-gray-700 mb-2">Để in phiếu từ điện thoại, cần cài ứng dụng gì?</h2>
+                    <div class="h-1 w-16 bg-green-500 mx-auto rounded-full mb-4"></div>
+                </div>
+                <div class="glass-card p-8 rounded-3xl border-l-8 border-green-500 w-full stagger-2 flex items-start gap-6">
+                    <i class="fa-solid fa-check-double text-5xl text-green-500 mt-2"></i>
+                    <div class="text-left">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Cần 2 ứng dụng hỗ trợ trên Máy tính</h3>
+                        <ul class="custom-bullets bullet-green text-gray-600 text-xl">
+                            <li><strong>KiotViet Kết nối:</strong> Bắt buộc phải có để máy tính có thể nhận lệnh in truyền về từ điện thoại.</li>
+                            <li><strong>KiotViet Proxy:</strong> Ứng dụng chạy ngầm giúp hệ thống vẫn in được qua mạng LAN nội bộ kể cả khi quán bị rớt mạng Internet.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 10: Q&A 3 - HỎI -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-4xl text-center stagger-1 glass-card p-16 rounded-[3rem] border-t-4 border-orange-500">
+                <i class="fa-solid fa-users text-7xl text-orange-400 mb-8 animate-bounce"></i>
+                <h2 class="text-4xl font-bold text-gray-800 leading-tight">Nhân viên phục vụ có bắt buộc phải dùng máy POS chuyên dụng để order không?</h2>
+            </div>
+        </div>
+
+        <!-- SLIDE 11: Q&A 3 - ĐÁP -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-3xl font-bold text-gray-700 mb-2">Nhân viên có bắt buộc dùng máy POS không?</h2>
+                    <div class="h-1 w-16 bg-orange-500 mx-auto rounded-full mb-4"></div>
+                </div>
+                <div class="glass-card p-8 rounded-3xl border-l-8 border-orange-500 w-full stagger-2 flex items-start gap-6">
+                    <i class="fa-solid fa-mobile-button text-5xl text-orange-500 mt-2"></i>
+                    <div class="text-left">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Hoàn toàn KHÔNG bắt buộc</h3>
+                        <ul class="custom-bullets bullet-orange text-gray-600 text-xl">
+                            <li>Nhân viên hoàn toàn có thể sử dụng chính <strong>điện thoại thông minh cá nhân</strong> để làm việc.</li>
+                            <li>Chỉ cần tải App "KiotViet Nhân viên nhà hàng" là có thể ghi nhận order tại bàn mượt mà, giúp quán tiết kiệm rất lớn chi phí mua sắm thiết bị phần cứng.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        let isAnimating = false;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const logo = document.getElementById('global-logo');
+
+        function updateUI(newIndex) {
+            if (isAnimating || newIndex === currentSlide || totalSlides < 2) return;
+            isAnimating = true;
+
+            const oldSlide = slides[currentSlide];
+            const newSlide = slides[newIndex];
+            
+            // Xóa animation override cũ
+            const oldElements = oldSlide.querySelectorAll('.stagger-1, .stagger-2, .stagger-3, .stagger-4');
+            oldElements.forEach(el => el.style.animationName = 'none');
+            
+            slides.forEach(s => s.classList.remove('active', 'previous'));
+            newSlide.classList.add('active');
+            oldSlide.classList.add('previous');
+
+            // Khôi phục animation cho slide mới
+            const newElements = newSlide.querySelectorAll('.stagger-1, .stagger-2, .stagger-3, .stagger-4');
+            newElements.forEach(el => { el.style.animationName = ''; });
+
+            currentSlide = newIndex;
+
+            const isInfographic = newSlide.getAttribute('data-type') === 'infographic';
+            logo.style.opacity = isInfographic ? '0' : '1';
+
+            setTimeout(() => {
+                isAnimating = false;
+                oldSlide.classList.remove('previous');
+            }, 700);
+        }
+
+        if (totalSlides > 0) { slides[0].classList.add('active'); }
+
+        function nextSlide() { updateUI((currentSlide + 1) % totalSlides); }
+        function prevSlide() { updateUI((currentSlide - 1 + totalSlides) % totalSlides); }
+        function toggleFullScreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else if (document.exitFullscreen) document.exitFullscreen(); }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === ' '){ e.preventDefault(); nextSlide(); }
+            else if (e.key === 'ArrowRight') nextSlide();
+            else if (e.key === 'ArrowLeft') prevSlide();
+            else if (e.key === 'Home') updateUI(0);
+            else if (e.key === 'End') updateUI(totalSlides - 1);
+            else if (e.key.toLowerCase() === 'f') toggleFullScreen();
+        });
+    </script>
+</body>
+</html>
