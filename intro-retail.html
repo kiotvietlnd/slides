@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tổng quan Hệ thống Giải pháp KiotViet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { navy: { 900: '#0f172a' } },
+                    animation: { 'blob': 'blob 15s infinite' },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; background-color: #f0f9ff; }
+        
+        /* HIỆU ỨNG CHUYỂN CẢNH MỚI: ZOOM & GLIDE */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(40px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes slideOutScale {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.95); }
+        }
+
+        .slide { 
+            display: none !important; width: 100%; height: 100%; position: absolute; top: 0; left: 0; 
+            flex-direction: column; background: transparent; 
+        }
+        
+        .slide.previous { display: flex !important; z-index: 15; animation: slideOutScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .slide.active { display: flex !important; z-index: 20; animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        /* HIỆU ỨNG XUẤT HIỆN TUẦN TỰ (STAGGERED ENTRANCE) */
+        .slide.active .stagger-1 { animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; opacity: 0; }
+        .slide.active .stagger-2 { animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards; opacity: 0; }
+        .slide.active .stagger-3 { animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; opacity: 0; }
+        .slide.active .stagger-4 { animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards; opacity: 0; }
+
+        /* Nền Glass cố định toàn cục */
+        #global-glass {
+            position: fixed; inset: 0; z-index: 5;
+            background: rgba(255, 255, 255, 0.65); 
+            backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        #global-logo { position: fixed; top: 24px; left: 32px; height: 36px; z-index: 9999; transition: opacity 0.3s ease; }
+
+        /* Khối Card Glassmorphism chung */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+            border-color: rgba(255, 255, 255, 1);
+        }
+        
+        .gradient-text {
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            background-image: linear-gradient(to right, #1e3a8a, #0284c7);
+        }
+        
+        /* Tùy chỉnh danh sách ul li */
+        ul.custom-bullets li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        ul.custom-bullets li::before {
+            content: "\f0da"; /* FontAwesome check or arrow */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 0.25rem;
+            color: #0ea5e9; /* text-sky-500 */
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body class="text-gray-800 relative select-none cursor-none">
+
+    <img id="global-logo" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+
+    <!-- Lớp nền Bright Gradient mượt mà rực rỡ -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none flex justify-center items-center">
+        <div class="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-300 rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob"></div>
+        <div class="absolute top-[-5%] right-[-5%] w-[500px] h-[500px] bg-cyan-300 rounded-full mix-blend-multiply filter blur-[80px] opacity-70 animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-[-10%] left-[20%] w-[700px] h-[700px] bg-indigo-200 rounded-full mix-blend-multiply filter blur-[100px] opacity-70 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <div id="global-glass" class="pointer-events-none"></div>
+
+    <div id="slide-container" class="relative z-10 w-full h-full">
+        
+        <!-- Slide 1: Bìa -->
+        <div class="slide flex items-center justify-center p-8">
+            <div class="glass-card p-14 rounded-[2.5rem] max-w-5xl w-full text-center stagger-1">
+                <h1 class="text-6xl font-extrabold gradient-text mb-6 leading-tight">Tổng quan Hệ thống Giải pháp<br>Phần mềm KiotViet</h1>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mb-8"></div>
+                <p class="text-2xl text-gray-700 font-medium leading-relaxed stagger-2">(Ngành Bán buôn, Bán lẻ)</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Chapter Bridge I -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-4xl flex flex-col items-center gap-10">
+                <div class="bg-gradient-to-br from-blue-600 to-cyan-600 p-14 rounded-[3rem] shadow-2xl w-full text-center flex flex-col items-center border border-white/20 stagger-1">
+                    <h2 class="text-6xl font-black text-white mb-6 tracking-wide drop-shadow-md">I. GIỚI THIỆU CHUNG</h2>
+                    <div class="h-2 w-32 bg-white/50 mx-auto rounded-full mb-8"></div>
+                    <p class="text-cyan-100 text-2xl font-medium leading-relaxed">Chào mừng bạn đến với tài liệu Tổng quan Hệ thống Giải pháp KiotViet dành cho ngành hàng Bán buôn, Bán lẻ.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Concept Giới thiệu 1 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-10">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Hệ Sinh Thái Quản Lý Bán Hàng Toàn Diện</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-2 gap-6 w-full">
+                    <div class="glass-card p-8 rounded-3xl border-t-4 border-blue-500 stagger-2">
+                        <i class="fa-solid fa-face-smile text-4xl text-blue-500 mb-4"></i>
+                        <ul class="custom-bullets text-gray-700 text-xl">
+                            <li>Là một hệ sinh thái quản lý bán hàng toàn diện, không chỉ là phần mềm đơn thuần.</li>
+                            <li>Tiêu chí: <strong>Đơn giản, dễ sử dụng, thân thiện</strong> với mọi người dùng.</li>
+                            <li>Thiết kế linh hoạt, phục vụ hiệu quả cho mọi vị trí trong cửa hàng.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-8 rounded-3xl border-t-4 border-cyan-500 stagger-3">
+                        <i class="fa-solid fa-store text-4xl text-cyan-500 mb-4"></i>
+                        <ul class="custom-bullets text-gray-700 text-xl">
+                            <li>Tùy biến sâu sắc cho nhiều mô hình: Siêu thị mini, thời trang, nhà thuốc, VLXD...</li>
+                            <li>Giải quyết triệt để bài toán đặc thù của từng ngành hàng.</li>
+                            <li>Hoạt động đa thiết bị: Máy tính, Điện thoại (iOS/Android), Máy POS Android.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Concept Giới thiệu 2 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-8">
+                <div class="glass-card p-8 rounded-3xl w-full border-l-8 border-indigo-500 stagger-1">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3"><i class="fa-solid fa-network-wired text-indigo-500 mr-3"></i>Bệ phóng đa kênh (Omnichannel)</h3>
+                    <ul class="custom-bullets text-gray-700 text-xl">
+                        <li>Liên tục cập nhật và nâng cấp tính năng đáp ứng môi trường kinh doanh biến động.</li>
+                        <li>Hỗ trợ bán hàng xuất sắc tại điểm bán truyền thống (Offline).</li>
+                        <li>Đồng bộ hóa liền mạch với Online: Sàn TMĐT, Mạng xã hội, Website riêng.</li>
+                    </ul>
+                </div>
+                <div class="text-center w-full mt-2 stagger-2">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">Hệ thống hóa dữ liệu với 2 Nhóm cốt lõi:</h3>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="glass-card p-6 rounded-2xl bg-blue-50/50 border border-blue-200 text-left">
+                            <h4 class="text-xl font-bold text-blue-700 mb-3"><i class="fa-solid fa-1 mr-2"></i>Hệ thống Giải pháp Quản lý bán hàng</h4>
+                            <ul class="custom-bullets text-gray-700 text-lg">
+                                <li>Tối ưu hóa quy trình vận hành trực tiếp.</li>
+                                <li>Quản lý nội bộ và gia tăng doanh thu đa kênh.</li>
+                            </ul>
+                        </div>
+                        <div class="glass-card p-6 rounded-2xl bg-cyan-50/50 border border-cyan-200 text-left">
+                            <h4 class="text-xl font-bold text-cyan-700 mb-3"><i class="fa-solid fa-2 mr-2"></i>Hệ thống Giải pháp Tuân thủ Quy định</h4>
+                            <ul class="custom-bullets text-gray-700 text-lg">
+                                <li>Cung cấp hoàn toàn miễn phí.</li>
+                                <li>Hỗ trợ tuân thủ chặt chẽ pháp luật về Thuế, Kế toán và Hóa đơn điện tử.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Chapter Bridge II -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-4xl flex flex-col items-center gap-10">
+                <div class="bg-gradient-to-br from-blue-600 to-indigo-600 p-14 rounded-[3rem] shadow-2xl w-full text-center flex flex-col items-center border border-white/20 stagger-1">
+                    <h2 class="text-5xl font-black text-white mb-6 tracking-wide leading-tight drop-shadow-md">II. CÁC NHÓM GIẢI PHÁP<br>QUẢN LÝ BÁN HÀNG</h2>
+                    <div class="h-2 w-32 bg-white/50 mx-auto rounded-full mb-8"></div>
+                    <ul class="text-indigo-100 text-2xl font-medium leading-relaxed max-w-2xl list-none space-y-3">
+                        <li>Bao gồm 3 nhóm giải pháp cốt lõi.</li>
+                        <li>Đồng hành từ thao tác tính tiền cơ bản nhất.</li>
+                        <li>Hỗ trợ chiến lược mở rộng quy mô, bứt phá doanh thu.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Sub Bridge II.1 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-10">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">1. Nhóm giải pháp Tối ưu vận hành</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="glass-card p-10 rounded-[2.5rem] border-t-8 border-blue-500 w-full stagger-2 shadow-lg">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-4"><i class="fa-solid fa-crosshairs text-blue-500 mr-2"></i>Mục tiêu & Đối tượng</h3>
+                    <ul class="custom-bullets text-gray-700 text-xl space-y-3">
+                        <li><strong>Đối tượng:</strong> Nhân viên thu ngân và đội ngũ vận hành trực tiếp tại cửa hàng.</li>
+                        <li>Tăng tốc độ giao dịch, hạn chế tối đa sai sót khi tính tiền.</li>
+                        <li>Kết nối mượt mà với các thiết bị ngoại vi phần cứng chuyên nghiệp.</li>
+                        <li>Tự động hóa quy trình xử lý đơn giao hàng.</li>
+                        <li>Tạo ra trải nghiệm mua sắm hoàn hảo nhất cho khách hàng.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Concept Tối ưu vận hành 1 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Tối ưu vận hành (Phần 1)</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-400 stagger-2 flex flex-col">
+                        <i class="fa-solid fa-magnifying-glass text-3xl text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Tra cứu sản phẩm</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Tra cứu thông minh và chớp nhoáng.</li>
+                            <li>Tìm theo tên, mã vạch hoặc thuộc tính đặc thù.</li>
+                            <li>Tư vấn khách và tìm vị trí hàng hóa tại quầy chính xác.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-400 stagger-3 flex flex-col">
+                        <i class="fa-solid fa-cart-shopping text-3xl text-cyan-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Bán hàng</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Giao diện trực quan, thân thiện.</li>
+                            <li>Tạo hóa đơn, áp dụng chiết khấu nhanh chóng.</li>
+                            <li>Ghi nhận khách hàng và thanh toán chỉ trong vài giây.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-400 stagger-4 flex flex-col">
+                        <i class="fa-solid fa-arrow-rotate-left text-3xl text-indigo-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Trả hàng</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Tự động hóa quy trình, ghi nhận chi tiết lý do.</li>
+                            <li>Tính toán chuẩn xác số tiền hoàn lại/cấn trừ công nợ.</li>
+                            <li>Lập tức cập nhật tồn kho thực tế, tránh thất thoát.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Concept Tối ưu vận hành 2 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Tối ưu vận hành (Phần 2)</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-teal-400 stagger-2 flex flex-col">
+                        <i class="fa-solid fa-clipboard-list text-3xl text-teal-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Đặt hàng</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Ghi nhận giao dịch đặt hàng trước.</li>
+                            <li>Theo dõi tiền cọc, tình trạng chuẩn bị hàng.</li>
+                            <li>Chuyển đổi liền mạch sang hóa đơn chính thức.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-green-400 stagger-3 flex flex-col">
+                        <i class="fa-solid fa-money-check-dollar text-3xl text-green-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Thanh toán</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Hỗ trợ mã QR động, Ví điện tử (MoMo, Zalopay).</li>
+                            <li>Kết nối trực tiếp hệ thống ngân hàng lớn.</li>
+                            <li>Quản lý tiền tệ và các khoản thu khác minh bạch.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-orange-400 stagger-4 flex flex-col">
+                        <i class="fa-solid fa-truck-fast text-3xl text-orange-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Giao vận</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Tích hợp các hãng vận chuyển hàng đầu.</li>
+                            <li>Tạo đơn nhiều kiện, đa điểm Ahamove, KShip.</li>
+                            <li>Đối soát nhanh, nắm rõ quy định bồi thường/khiếu nại.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Concept Tối ưu vận hành 3 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Tối ưu vận hành (Phần 3)</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="flex flex-col gap-6 w-full">
+                    <div class="glass-card p-8 rounded-3xl border-l-8 border-gray-600 stagger-2">
+                        <div class="flex items-center gap-4 mb-3">
+                            <i class="fa-solid fa-print text-3xl text-gray-700"></i>
+                            <h3 class="text-2xl font-bold text-gray-800">Thiết bị phần cứng</h3>
+                        </div>
+                        <ul class="custom-bullets text-gray-600 text-xl">
+                            <li>Tương thích đa dạng thiết bị qua KiotViet Hardware Manager.</li>
+                            <li>Hỗ trợ POS Android, máy in hóa đơn/tem mã, máy quét, QR, ngăn kéo tiền...</li>
+                            <li>Cung cấp sẵn Driver cài đặt và hướng dẫn thay đổi DNS.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-8 rounded-3xl border-l-8 border-blue-500 stagger-3">
+                        <div class="flex items-center gap-4 mb-3">
+                            <i class="fa-solid fa-star text-3xl text-blue-600"></i>
+                            <h3 class="text-2xl font-bold text-gray-800">Chuyên ngành</h3>
+                        </div>
+                        <ul class="custom-bullets text-gray-600 text-xl">
+                            <li><strong>Thời trang:</strong> Quản lý size/màu.</li>
+                            <li><strong>Nhà thuốc:</strong> Quản lý lô/HSD, liên thông Dược Quốc gia.</li>
+                            <li><strong>Điện thoại:</strong> Quản lý Serial/IMEI.</li>
+                            <li><strong>Tạp hóa/Mẹ bé/VLXD:</strong> Tối ưu gợi ý và đơn vị tính đặc thù.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Sub Bridge II.2 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-10">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">2. Nhóm giải pháp Tối ưu quản lý</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="glass-card p-10 rounded-[2.5rem] border-t-8 border-cyan-500 w-full stagger-2 shadow-lg">
+                    <h3 class="text-2xl font-bold text-cyan-900 mb-4"><i class="fa-solid fa-crosshairs text-cyan-500 mr-2"></i>Mục tiêu & Đối tượng</h3>
+                    <ul class="custom-bullets text-gray-700 text-xl space-y-3">
+                        <li><strong>Đối tượng:</strong> Thiết kế dành riêng cho chủ cửa hàng và cấp quản lý.</li>
+                        <li>Giải quyết trọn vẹn bài toán kiểm soát nội bộ toàn diện.</li>
+                        <li>Nắm bắt chính xác lượng tồn kho, nhân sự, khách hàng, công nợ nhà cung cấp.</li>
+                        <li>Cung cấp báo cáo trực quan giúp ra quyết định kinh doanh kịp thời.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Concept Tối ưu quản lý 1 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Tối ưu quản lý (Phần 1)</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-400 stagger-2 flex flex-col">
+                        <i class="fa-solid fa-box-open text-3xl text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Hàng hóa</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Quản lý định dạng đa dạng: thường, dịch vụ, combo, sản xuất.</li>
+                            <li>Theo dõi theo Lô-HSD, Serial/IMEI.</li>
+                            <li>Kiểm kho, thiết lập giá, xuất dùng nội bộ, xuất hủy, chuyển chi nhánh.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-400 stagger-3 flex flex-col">
+                        <i class="fa-solid fa-right-left text-3xl text-cyan-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Giao dịch</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Ghi nhận phiếu nhập hàng, đặt hàng nhập, trả hàng nhập.</li>
+                            <li>Hạch toán chính xác chi phí nhập và dịch vụ ngoài.</li>
+                            <li>Phân bổ đúng vào giá vốn hàng bán.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-400 stagger-4 flex flex-col">
+                        <i class="fa-solid fa-file-invoice text-3xl text-indigo-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Hóa đơn đầu vào</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Tiếp nhận và quản lý tập trung hóa đơn từ đối tác.</li>
+                            <li>Lưu trữ chứng từ hợp lệ.</li>
+                            <li>Đối chiếu số liệu nhập hàng minh bạch, dễ truy xuất.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Concept Tối ưu quản lý 2 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Tối ưu quản lý (Phần 2)</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-400 stagger-2 flex flex-col">
+                        <i class="fa-solid fa-boxes-packing text-3xl text-purple-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Nhà cung cấp</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Lưu trữ chi tiết danh bạ và lịch sử giao dịch.</li>
+                            <li>Theo dõi sát sao tình hình nhập hàng.</li>
+                            <li>Đối soát công nợ minh bạch, duy trì nguồn cung.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-400 stagger-3 flex flex-col">
+                        <i class="fa-solid fa-users text-3xl text-pink-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Khách hàng</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Cơ sở dữ liệu mạnh mẽ: liên hệ, lịch sử mua sắm.</li>
+                            <li>Phân nhóm khách hàng, quản lý công nợ.</li>
+                            <li>Tạo tiền đề cho các chiến dịch chăm sóc sau bán.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-teal-400 stagger-4 flex flex-col">
+                        <i class="fa-solid fa-id-badge text-3xl text-teal-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Nhân viên</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Phân quyền chi tiết, bảo mật hệ thống.</li>
+                            <li>Quản lý chấm công, thiết lập hoa hồng.</li>
+                            <li>Tự động hóa quy trình tính lương hàng tháng.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Concept Tối ưu quản lý 3 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Tối ưu quản lý (Phần 3)</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="flex flex-col gap-6 w-full">
+                    <div class="glass-card p-8 rounded-3xl border-l-8 border-green-500 stagger-2">
+                        <div class="flex items-center gap-4 mb-3">
+                            <i class="fa-solid fa-wallet text-3xl text-green-600"></i>
+                            <h3 class="text-2xl font-bold text-gray-800">Sổ quỹ</h3>
+                        </div>
+                        <ul class="custom-bullets text-gray-600 text-xl">
+                            <li>Quản lý dòng tiền ra vào cửa hàng cực kỳ chặt chẽ.</li>
+                            <li>Tự động ghi nhận mọi khoản thu chi phát sinh.</li>
+                            <li>Nắm bắt số dư tiền mặt và tiền gửi ngân hàng theo thời gian thực.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-8 rounded-3xl border-l-8 border-orange-500 stagger-3">
+                        <div class="flex items-center gap-4 mb-3">
+                            <i class="fa-solid fa-chart-pie text-3xl text-orange-600"></i>
+                            <h3 class="text-2xl font-bold text-gray-800">Báo cáo</h3>
+                        </div>
+                        <ul class="custom-bullets text-gray-600 text-xl">
+                            <li>Cung cấp hệ thống báo cáo trực quan và đa chiều.</li>
+                            <li>Phân tích chi tiết doanh thu, lợi nhuận, tồn kho.</li>
+                            <li>Giúp nhà quản lý nắm bắt sức khỏe gian hàng nhanh chóng.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Concept Tối ưu quản lý 4 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Tối ưu quản lý (Phần 4)</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="flex flex-col gap-6 w-full">
+                    <div class="glass-card p-8 rounded-3xl border-l-8 border-blue-600 stagger-2">
+                        <div class="flex items-center gap-4 mb-3">
+                            <i class="fa-solid fa-gears text-3xl text-blue-700"></i>
+                            <h3 class="text-2xl font-bold text-gray-800">Thiết lập</h3>
+                        </div>
+                        <ul class="custom-bullets text-gray-600 text-xl">
+                            <li>Tùy biến linh hoạt: thiết lập cửa hàng, người dùng, phân quyền.</li>
+                            <li>Quản lý chi nhánh, kho hàng, mẫu in, cài đặt thông báo.</li>
+                            <li>Hỗ trợ áp dụng địa bàn hành chính, xóa dữ liệu khi cần.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-8 rounded-3xl border-l-8 border-indigo-600 stagger-3">
+                        <div class="flex items-center gap-4 mb-3">
+                            <i class="fa-solid fa-plug text-3xl text-indigo-700"></i>
+                            <h3 class="text-2xl font-bold text-gray-800">Kết nối API</h3>
+                        </div>
+                        <ul class="custom-bullets text-gray-600 text-xl">
+                            <li>Mở rộng khả năng tích hợp qua cổng Public API.</li>
+                            <li>Đồng bộ dữ liệu hai chiều với phần mềm ERP, CRM.</li>
+                            <li>Kết nối dễ dàng với các hệ thống thứ ba của đối tác.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Sub Bridge II.3 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-10">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">3. Nhóm giải pháp Thúc đẩy doanh thu</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="glass-card p-10 rounded-[2.5rem] border-t-8 border-orange-500 w-full stagger-2 shadow-lg">
+                    <h3 class="text-2xl font-bold text-orange-900 mb-4"><i class="fa-solid fa-crosshairs text-orange-500 mr-2"></i>Mục tiêu & Đối tượng</h3>
+                    <ul class="custom-bullets text-gray-700 text-xl space-y-3">
+                        <li><strong>Đối tượng:</strong> Chủ kinh doanh, quản lý hệ thống và Marketing/Sales.</li>
+                        <li>Cung cấp nền tảng bán hàng đa kênh mạnh mẽ.</li>
+                        <li>Đồng bộ hóa dữ liệu online - offline, mở rộng phễu khách hàng (Sàn TMĐT, MXH).</li>
+                        <li>Gia tăng giá trị vòng đời khách hàng bằng công cụ khuyến mại, tích điểm.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Concept Thúc đẩy doanh thu 1 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Thúc đẩy doanh thu (Phần 1)</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-400 stagger-2 flex flex-col">
+                        <i class="fa-solid fa-globe text-3xl text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">KiotViet Web</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Tạo lập website bán hàng chuyên nghiệp.</li>
+                            <li>Thiết kế trang TMĐT mang thương hiệu riêng.</li>
+                            <li>Đồng bộ tự động hàng hóa, đơn hàng về phần mềm.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-400 stagger-3 flex flex-col">
+                        <i class="fa-solid fa-mobile-screen text-3xl text-cyan-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Bán Online</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Kết nối Sàn TMĐT (Shopee, TikTok, Lazada...).</li>
+                            <li>Kết nối MXH (Facebook, Instagram, Zalo).</li>
+                            <li>Công cụ chat đa kênh, gom tin nhắn chốt đơn nhanh.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-400 stagger-4 flex flex-col">
+                        <i class="fa-solid fa-chart-line text-3xl text-indigo-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Phân tích</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Bộ công cụ phân tích dữ liệu chuyên sâu.</li>
+                            <li>Đo lường chi tiết hiệu suất từng kênh (Online/Offline).</li>
+                            <li>Hỗ trợ điều chỉnh chiến lược kinh doanh thấu đáo.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17: Concept Thúc đẩy doanh thu 2 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Thúc đẩy doanh thu (Phần 2)</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-red-400 stagger-2 flex flex-col">
+                        <i class="fa-solid fa-bullhorn text-3xl text-red-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Khuyến mại</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Thiết lập kịch bản khuyến mại đa dạng.</li>
+                            <li>Giảm giá trực tiếp, mua tặng hàng, mua tặng điểm.</li>
+                            <li>Kích thích nhu cầu mua sắm và xả hàng hiệu quả.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-yellow-400 stagger-3 flex flex-col">
+                        <i class="fa-solid fa-ticket text-3xl text-yellow-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Voucher</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Phát hành và quản lý Voucher (thẻ quà tặng).</li>
+                            <li>Khách hàng áp dụng trừ tiền trực tiếp trên hóa đơn.</li>
+                            <li>Công cụ tuyệt vời thu hút khách quay lại cửa hàng.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-green-400 stagger-4 flex flex-col">
+                        <i class="fa-solid fa-tags text-3xl text-green-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Coupon</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Tạo mã giảm giá linh hoạt với điều kiện chặt chẽ.</li>
+                            <li>Phù hợp triển khai chiến dịch marketing online.</li>
+                            <li>Dễ dàng phân phát tặng riêng cho từng tệp khách.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18: Concept Thúc đẩy doanh thu 3 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Thúc đẩy doanh thu (Phần 3)</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="flex flex-col gap-6 w-full">
+                    <div class="glass-card p-8 rounded-3xl border-l-8 border-pink-500 stagger-2">
+                        <div class="flex items-center gap-4 mb-3">
+                            <i class="fa-solid fa-coins text-3xl text-pink-600"></i>
+                            <h3 class="text-2xl font-bold text-gray-800">Tích điểm</h3>
+                        </div>
+                        <ul class="custom-bullets text-gray-600 text-xl">
+                            <li>Tự động hóa chương trình khách hàng thân thiết.</li>
+                            <li>Ghi nhận tích điểm theo giá trị hóa đơn.</li>
+                            <li>Sử dụng điểm thanh toán cho lần mua sau, tăng độ trung thành.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-8 rounded-3xl border-l-8 border-cyan-500 stagger-3">
+                        <div class="flex items-center gap-4 mb-3">
+                            <i class="fa-solid fa-heart text-3xl text-cyan-600"></i>
+                            <h3 class="text-2xl font-bold text-gray-800">Chăm sóc khách hàng</h3>
+                        </div>
+                        <ul class="custom-bullets text-gray-600 text-xl">
+                            <li>Duy trì tương tác sau bán hàng chuyên nghiệp.</li>
+                            <li>Tự động gửi tin nhắn ZNS, SMS, Email CSKH.</li>
+                            <li>Quản lý tương tác tập trung qua Tin nhắn Zalo OA.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 19: Chapter Bridge III -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-4xl flex flex-col items-center gap-10">
+                <div class="bg-gradient-to-br from-teal-600 to-emerald-600 p-14 rounded-[3rem] shadow-2xl w-full text-center flex flex-col items-center border border-white/20 stagger-1">
+                    <h2 class="text-5xl font-black text-white mb-6 tracking-wide leading-tight drop-shadow-md">III. CÁC NHÓM GIẢI PHÁP<br>TUÂN THỦ PHÁP LÝ</h2>
+                    <div class="h-2 w-32 bg-white/50 mx-auto rounded-full mb-8"></div>
+                    <ul class="text-emerald-100 text-2xl font-medium leading-relaxed max-w-3xl list-none space-y-3">
+                        <li>Cung cấp hoàn toàn MIỄN PHÍ.</li>
+                        <li>Dữ liệu bán hàng tự động đồng bộ sang Kế toán.</li>
+                        <li>Giúp Hộ kinh doanh dễ dàng tuân thủ mọi quy định Nhà nước.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20: Sub Bridge III.1 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-10">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold text-teal-700">1. Nhóm giải pháp Thuế - Kế toán</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-teal-500 to-emerald-400 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="glass-card p-10 rounded-[2.5rem] border-t-8 border-teal-500 w-full stagger-2 shadow-lg">
+                    <h3 class="text-2xl font-bold text-teal-900 mb-4"><i class="fa-solid fa-crosshairs text-teal-500 mr-2"></i>Mục tiêu & Lợi ích</h3>
+                    <ul class="custom-bullets text-gray-700 text-xl space-y-3">
+                        <li><strong>Trợ thủ đắc lực:</strong> Dành cho chủ Hộ kinh doanh và kế toán viên.</li>
+                        <li>Giải quyết trọn vẹn nghiệp vụ kế toán bám sát theo các quy định hiện hành của cơ quan Thuế.</li>
+                        <li>Tự động hóa việc làm sổ sách, xuất tờ khai chuẩn chỉnh.</li>
+                        <li>Tiết kiệm chi phí thuê ngoài, loại bỏ hoàn toàn rủi ro sai sót do nhập liệu thủ công.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21: Concept Thuế - Kế toán 1 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold text-teal-700">Thuế - Kế toán (Phần 1)</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-teal-500 to-emerald-400 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-400 stagger-2 flex flex-col">
+                        <i class="fa-solid fa-cogs text-3xl text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Thiết lập ban đầu</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Khởi tạo và thiết lập hồ sơ hệ thống kê khai.</li>
+                            <li>Khai báo đúng thông tin cơ sở ngay từ đầu.</li>
+                            <li>Đảm bảo hệ thống hạch toán tự động chuẩn xác.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-emerald-400 stagger-3 flex flex-col">
+                        <i class="fa-solid fa-file-signature text-3xl text-emerald-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Tờ khai Thuế HKD</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Tự động tổng hợp số liệu kỳ tính thuế.</li>
+                            <li>Xuất mẫu 01/CNKD, 01/TKN-CNKD, Bảng kê 01/BK-STK...</li>
+                            <li>Hỗ trợ QTT TNCN và báo cáo doanh thu chuẩn form CQT.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-400 stagger-4 flex flex-col">
+                        <i class="fa-solid fa-book-journal-whills text-3xl text-cyan-500 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Sổ kế toán HKD</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg">
+                            <li>Số hóa 100% hệ thống kế toán Hộ kinh doanh.</li>
+                            <li>Trích xuất các mẫu sổ dựa trên dữ liệu bán hàng.</li>
+                            <li>Dễ dàng cập nhật, điều chỉnh khi có sai sót phát sinh.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 22: Concept Thuế - Kế toán 2 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold text-teal-700">Thuế - Kế toán (Phần 2)</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-teal-500 to-emerald-400 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="flex flex-col gap-6 w-full">
+                    <div class="glass-card p-8 rounded-3xl border-l-8 border-indigo-500 stagger-2">
+                        <div class="flex items-center gap-4 mb-3">
+                            <i class="fa-solid fa-money-bill-transfer text-3xl text-indigo-600"></i>
+                            <h3 class="text-2xl font-bold text-gray-800">Kế toán HKD - Giao dịch</h3>
+                        </div>
+                        <ul class="custom-bullets text-gray-600 text-xl">
+                            <li>Ghi nhận và hạch toán chính xác giao dịch hàng ngày.</li>
+                            <li>Đáp ứng nhu cầu nộp thuế theo phương pháp kê khai.</li>
+                            <li>Tự động hóa quản lý Mua hàng, Thu - Chi, đồng bộ từ phần mềm QLBH.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-8 rounded-3xl border-l-8 border-orange-500 stagger-3">
+                        <div class="flex items-center gap-4 mb-3">
+                            <i class="fa-solid fa-scale-balanced text-3xl text-orange-600"></i>
+                            <h3 class="text-2xl font-bold text-gray-800">Kế toán HKD - Hạch toán</h3>
+                        </div>
+                        <ul class="custom-bullets text-gray-600 text-xl">
+                            <li>Hỗ trợ xử lý các nghiệp vụ hạch toán chuyên sâu.</li>
+                            <li>Lập Bảng kê, Quản lý Chi phí trả trước, Tài sản cố định, Chi phí nhân sự.</li>
+                            <li>Hạch toán các nghiệp vụ khác thông qua Phiếu Kế toán tổng hợp.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 23: Sub Bridge III.2 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-10">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold text-teal-700">2. Nhóm giải pháp Hóa đơn điện tử - Chữ ký số</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-teal-500 to-emerald-400 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="glass-card p-10 rounded-[2.5rem] border-t-8 border-cyan-600 w-full stagger-2 shadow-lg">
+                    <h3 class="text-2xl font-bold text-cyan-900 mb-4"><i class="fa-solid fa-crosshairs text-cyan-500 mr-2"></i>Mục tiêu & Lợi ích</h3>
+                    <ul class="custom-bullets text-gray-700 text-xl space-y-3">
+                        <li>Phục vụ trực tiếp cho chủ cửa hàng và thu ngân khi tính tiền.</li>
+                        <li>Giải quyết bài toán phát hành hóa đơn hợp pháp nhanh chóng trên Màn hình bán hàng.</li>
+                        <li>Chữ ký số tích hợp sẵn với tính bảo mật cực cao.</li>
+                        <li>Tiện lợi, an toàn, không cần mua thiết bị USB Token hay cài đặt phức tạp.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 24: Concept HĐĐT 1 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold text-teal-700">HĐĐT & Chữ ký số (Phần 1)</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-teal-500 to-emerald-400 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="flex flex-col gap-6 w-full">
+                    <div class="glass-card p-8 rounded-3xl border-l-8 border-blue-500 stagger-2">
+                        <div class="flex items-center gap-4 mb-3">
+                            <i class="fa-solid fa-signature text-3xl text-blue-600"></i>
+                            <h3 class="text-2xl font-bold text-gray-800">Đăng ký Chữ ký số</h3>
+                        </div>
+                        <ul class="custom-bullets text-gray-600 text-xl">
+                            <li>Miễn phí dịch vụ đăng ký Chữ ký số KiotViet IntrustCA an toàn.</li>
+                            <li>Tự động thông báo và hỗ trợ gia hạn khi chứng thư số sắp hết hạn.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-8 rounded-3xl border-l-8 border-cyan-500 stagger-3">
+                        <div class="flex items-center gap-4 mb-3">
+                            <i class="fa-solid fa-wrench text-3xl text-cyan-600"></i>
+                            <h3 class="text-2xl font-bold text-gray-800">Thiết lập ban đầu HĐĐT</h3>
+                        </div>
+                        <ul class="custom-bullets text-gray-600 text-xl">
+                            <li>Hướng dẫn cấu hình Thuế VAT, Giá bán sau thuế, thiết lập mẫu hóa đơn.</li>
+                            <li>Hỗ trợ lập Tờ khai đăng ký HĐĐT, xử lý lỗi tờ khai và mã lỗi thường gặp.</li>
+                            <li>Kết nối liền mạch Phần mềm QLBH với Phần mềm HĐĐT.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 25: Concept HĐĐT 2 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold text-teal-700">HĐĐT & Chữ ký số (Phần 2)</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-teal-500 to-emerald-400 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="glass-card p-10 rounded-[2.5rem] border-t-8 border-emerald-500 w-full stagger-2 shadow-lg">
+                    <div class="flex items-center justify-center gap-4 mb-4">
+                        <i class="fa-solid fa-paper-plane text-4xl text-emerald-600"></i>
+                        <h3 class="text-3xl font-bold text-gray-800">Phát hành HĐĐT</h3>
+                    </div>
+                    <p class="text-gray-700 text-xl text-center mb-6">Tối ưu hóa quy trình phát hành HĐĐT ngay khi hoàn tất hóa đơn bán hàng.</p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-emerald-50/50 p-6 rounded-2xl border border-emerald-200">
+                            <h4 class="font-bold text-emerald-800 text-lg mb-3">Lập hóa đơn</h4>
+                            <ul class="custom-bullets text-gray-700 text-lg">
+                                <li>Lập HĐ bán hàng từ Máy tính tiền.</li>
+                                <li>Lập HĐ bán hàng (Thông thường).</li>
+                                <li>Lập HĐ GTGT (MTT & Thông thường).</li>
+                            </ul>
+                        </div>
+                        <div class="bg-blue-50/50 p-6 rounded-2xl border border-blue-200">
+                            <h4 class="font-bold text-blue-800 text-lg mb-3">Quản lý nâng cao</h4>
+                            <ul class="custom-bullets text-gray-700 text-lg">
+                                <li>Kết nối MISA, Viettel, VNPT, FPT.</li>
+                                <li>Theo dõi Bảng kê tổng hợp HĐĐT.</li>
+                                <li>Quản lý danh mục Khách hàng & Hàng hóa.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 26: Concept HĐĐT 3 -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold text-teal-700">HĐĐT & Chữ ký số (Phần 3)</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-teal-500 to-emerald-400 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="flex flex-col gap-6 w-full">
+                    <div class="glass-card p-8 rounded-3xl border-l-8 border-red-500 stagger-2">
+                        <div class="flex items-center gap-4 mb-3">
+                            <i class="fa-solid fa-triangle-exclamation text-3xl text-red-600"></i>
+                            <h3 class="text-2xl font-bold text-gray-800">Xử lý sai sót HĐĐT</h3>
+                        </div>
+                        <ul class="custom-bullets text-gray-600 text-xl">
+                            <li>Công cụ xử lý đúng luật: Gửi Thông báo sai sót, lập HĐ điều chỉnh/thay thế.</li>
+                            <li>Lưu trữ minh bạch qua các Bảng kê hóa đơn đã thông báo, điều chỉnh và thay thế.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-8 rounded-3xl border-l-8 border-cyan-600 stagger-3">
+                        <div class="flex items-center gap-4 mb-3">
+                            <i class="fa-solid fa-file-invoice text-3xl text-cyan-700"></i>
+                            <h3 class="text-2xl font-bold text-gray-800">Chứng từ điện tử & Phiếu xuất kho</h3>
+                        </div>
+                        <ul class="custom-bullets text-gray-600 text-xl">
+                            <li>Lập tờ khai đăng ký/thay đổi thông tin sử dụng chứng từ điện tử.</li>
+                            <li>Dễ dàng lập chứng từ khấu trừ thuế TNCN trực tiếp trên hệ thống.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 27: End Infographic -->
+        <div class="slide flex items-center justify-center p-12 h-full" data-type="infographic">
+            <div class="glass-card p-12 rounded-[3rem] w-full max-w-4xl text-center flex flex-col items-center border-4 border-white/50 stagger-1 shadow-2xl">
+                <i class="fa-solid fa-circle-info text-6xl text-blue-500 mb-6 drop-shadow-md"></i>
+                <h2 class="text-4xl font-black text-gray-800 mb-4 tracking-wide">THÔNG TIN HỖ TRỢ</h2>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto rounded-full mb-8"></div>
+                <p class="text-2xl text-gray-700 leading-relaxed font-medium">Để tìm hiểu thông tin chi tiết, các bạn có thể truy cập Kênh Hỗ trợ chính thức của KiotViet, lựa chọn chủ đề cần tra cứu hoặc sử dụng ô tìm kiếm để được đề xuất đến nội dung quan tâm.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        let isAnimating = false;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const logo = document.getElementById('global-logo');
+
+        function updateUI(newIndex) {
+            if (isAnimating || newIndex === currentSlide || totalSlides < 2) return;
+            isAnimating = true;
+
+            const oldSlide = slides[currentSlide];
+            const newSlide = slides[newIndex];
+            
+            // Xóa animation override của stagger elements
+            const oldElements = oldSlide.querySelectorAll('.stagger-1, .stagger-2, .stagger-3, .stagger-4');
+            oldElements.forEach(el => el.style.animationName = 'none');
+            
+            slides.forEach(s => s.classList.remove('active', 'previous'));
+
+            newSlide.classList.add('active');
+            oldSlide.classList.add('previous');
+
+            // Khôi phục animation cho khối mới
+            const newElements = newSlide.querySelectorAll('.stagger-1, .stagger-2, .stagger-3, .stagger-4');
+            newElements.forEach(el => {
+                el.style.animationName = ''; 
+            });
+
+            currentSlide = newIndex;
+
+            const isInfographic = newSlide.getAttribute('data-type') === 'infographic';
+            logo.style.opacity = isInfographic ? '0' : '1';
+
+            setTimeout(() => {
+                isAnimating = false;
+                oldSlide.classList.remove('previous');
+            }, 700);
+        }
+
+        if (totalSlides > 0) {
+            slides[0].classList.add('active');
+        }
+
+        function nextSlide() { updateUI((currentSlide + 1) % totalSlides); }
+        function prevSlide() { updateUI((currentSlide - 1 + totalSlides) % totalSlides); }
+        function toggleFullScreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else if (document.exitFullscreen) document.exitFullscreen(); }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === ' '){
+                e.preventDefault(); 
+                nextSlide();
+            }
+            else if (e.key === 'ArrowRight') nextSlide();
+            else if (e.key === 'ArrowLeft') prevSlide();
+            else if (e.key === 'Home') updateUI(0);
+            else if (e.key === 'End') updateUI(totalSlides - 1);
+            else if (e.key.toLowerCase() === 'f') toggleFullScreen();
+        });
+    </script>
+</body>
+</html>
