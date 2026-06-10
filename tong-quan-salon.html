@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Giải Pháp KiotViet Ngành Dịch Vụ Làm Đẹp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { navy: { 900: '#0f172a' } },
+                    animation: { 'blob': 'blob 15s infinite' },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; background-color: #f8fafc; }
+        
+        /* ZOOM & GLIDE TRANSITION */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(40px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes slideOutScale {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.95); }
+        }
+
+        .slide { 
+            display: none !important; width: 100%; height: 100%; position: absolute; top: 0; left: 0; 
+            flex-direction: column; background: transparent; 
+        }
+        
+        .slide.previous { display: flex !important; z-index: 15; animation: slideOutScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .slide.active { display: flex !important; z-index: 20; animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        /* STAGGERED ENTRANCE */
+        .slide.active .stagger-1 { animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; opacity: 0; }
+        .slide.active .stagger-2 { animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards; opacity: 0; }
+        .slide.active .stagger-3 { animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; opacity: 0; }
+        .slide.active .stagger-4 { animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards; opacity: 0; }
+
+        #global-glass {
+            position: fixed; inset: 0; z-index: 5;
+            background: rgba(255, 255, 255, 0.7); 
+            backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        #global-logo { position: fixed; top: 24px; left: 32px; height: 36px; z-index: 9999; transition: opacity 0.3s ease; }
+
+        /* GLASS CARD COMPONENT */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover { transform: translateY(-4px); border-color: rgba(255, 255, 255, 1); }
+        
+        .gradient-text {
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            background-image: linear-gradient(to right, #ec4899, #8b5cf6); /* Pink & Purple */
+        }
+    </style>
+</head>
+<body class="text-gray-800 relative select-none cursor-none">
+
+    <img id="global-logo" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+
+    <!-- BACKGROUND BLOBS CHUYỂN ĐỘNG (SALON PINK - PURPLE) -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none flex justify-center items-center">
+        <div class="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-pink-300 rounded-full mix-blend-multiply filter blur-[90px] opacity-60 animate-blob"></div>
+        <div class="absolute top-[-5%] right-[-5%] w-[500px] h-[500px] bg-purple-300 rounded-full mix-blend-multiply filter blur-[90px] opacity-60 animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-[-10%] left-[20%] w-[700px] h-[700px] bg-fuchsia-200 rounded-full mix-blend-multiply filter blur-[110px] opacity-60 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <div id="global-glass" class="pointer-events-none"></div>
+
+    <div id="slide-container" class="relative z-10 w-full h-full">
+
+        <!-- SLIDE 1: BÌA CHÍNH (TINH GIẢN) -->
+        <div class="slide flex items-center justify-center p-8 h-full">
+            <div class="glass-card p-16 rounded-[2.5rem] max-w-4xl w-full text-center stagger-1">
+                <h1 class="text-5xl font-extrabold gradient-text mb-6 leading-tight">
+                    Tổng Quan Hệ Thống Giải Pháp <br> KiotViet Ngành Dịch Vụ Làm Đẹp
+                </h1>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mb-8"></div>
+                <p class="text-2xl text-gray-700 font-semibold stagger-2">Bứt Phá Vận Hành - Tối Ưu Doanh Thu</p>
+                <p class="text-lg text-gray-500 mt-4 stagger-3">Giải pháp quản lý bán hàng toàn diện và đáp ứng đầy đủ các quy định hiện hành</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: GIỚI THIỆU CHUNG (NỘI DUNG) -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Hệ Sinh Thế Bán Hàng Salon Toàn Diện</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-2 gap-8 w-full">
+                    <div class="glass-card p-8 rounded-3xl border-t-4 border-pink-500 stagger-2 flex flex-col justify-between">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4"><i class="fa-solid fa-chair text-pink-500 mr-2"></i>Tối Ưu Tại Quầy & Kỹ Thuật Viên</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg space-y-3">
+                            <li>Xếp lịch hẹn nhanh chóng, tối ưu hóa phòng/giường trống và phân loại ca kíp thợ chính thợ phụ.</li>
+                            <li>Kỹ thuật viên, thợ tạo mẫu (stylist) chủ động theo dõi lịch làm việc, doanh số, hoa hồng tự động minh bạch.</li>
+                            <li>Tích hợp ứng dụng di động KiotViet Salon chuyên biệt và máy POS Android cảm ứng tại quầy.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-8 rounded-3xl border-t-4 border-purple-500 stagger-3 flex flex-col justify-between">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4"><i class="fa-solid fa-chart-line text-purple-500 mr-2"></i>Quản Trị Toàn Diện Cho Chủ Cơ Sở</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg space-y-3">
+                            <li>Lưu trữ chi tiết hồ sơ khách hàng, lịch sử dịch vụ và hình ảnh trị liệu trước sau qua từng buổi.</li>
+                            <li>Kiểm soát chính xác kho hàng mỹ phẩm, công nợ nhà cung cấp và thiết lập tài khoản trả trước của khách.</li>
+                            <li>Xây dựng cổng đặt lịch trực tuyến hiệu quả giúp bứt phá doanh số cho Spa, Salon tóc, Nails.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: HAI TRỤ CỘT GIẢI PHÁP (NỘI DUNG) -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Hệ Thống Hai Phân Hệ Giải Pháp Cốt Lõi</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-2 gap-8 w-full">
+                    <div class="glass-card p-8 rounded-3xl text-center border-t-4 border-pink-500 stagger-2 flex flex-col items-center">
+                        <i class="fa-solid fa-spa text-4xl text-pink-500 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Phân Hệ Quản Lý Bán Hàng</h3>
+                        <p class="text-gray-600">Đồng hành từ những thao tác xếp lịch hẹn cho khách hàng, quản trị phòng giường, theo dõi hoa hồng thợ đến các giải pháp đặt lịch và chăm sóc tự động trực tuyến.</p>
+                    </div>
+                    <div class="glass-card p-8 rounded-3xl text-center border-t-4 border-purple-500 stagger-3 flex flex-col items-center">
+                        <i class="fa-solid fa-scale-balanced text-4xl text-purple-500 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Phân Hệ Tuân Thủ Quy Định</h3>
+                        <p class="text-gray-600">Cung cấp hoàn toàn miễn phí phân hệ Kế toán hộ kinh doanh và Hóa đơn điện tử máy tính tiền, tự động đồng bộ luồng tiền bán hàng, tuân thủ đúng quy chuẩn hiện hành.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ================= PHÂN HỆ I: TỐI ƯU VẬN HÀNH ================= -->
+
+        <!-- SLIDE 4: VẬN HÀNH - 1A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Đặt Lịch Hẹn</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-calendar-plus"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tiếp nhận nhanh chóng và chính xác thông tin đặt lịch hẹn của khách hàng.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-business-time"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Cấu hình giới hạn số lượng cuộc hẹn theo ca để tránh quá tải cho tiệm.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-users-slash"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Loại bỏ hoàn toàn tình trạng chồng chéo khung giờ phục vụ tại tiệm.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: VẬN HÀNH - 1B - SCREENSHOT PURE (MÀU HỒNG SALON PLACEHOLDER) -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Đặt lịch hẹn" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 6: VẬN HÀNH - 2A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Sắp Xếp Lịch Hẹn</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-id-card-clip"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Giao diện sắp xếp lịch hẹn thông minh cho từng thợ chính, thợ phụ.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-bed"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Theo dõi trực quan sơ đồ phòng trống, ghế cắt, giường spa theo thời gian thực.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-arrows-to-eye"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tối ưu hóa tối đa năng suất vận hành và công suất phục vụ của tiệm.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: VẬN HÀNH - 2B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Sắp xếp lịch hẹn" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 8: VẬN HÀNH - 3A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Tư Tư Vấn Bán Hàng</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-comments"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Hỗ trợ tư vấn dịch vụ, sản phẩm đi kèm phù hợp nhu cầu khách hàng.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-box-open"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Gợi ý bán kèm các gói liệu trình chăm sóc da/tóc ngay trên phần mềm.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-receipt"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tăng giá trị hóa đơn trung bình và nâng cao doanh số thông minh.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 9: VẬN HÀNH - 3B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Tư vấn bán hàng" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 10: VẬN HÀNH - 4A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Quy Trình Thanh Toán</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-qrcode"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Quét mã QR động chính xác giá trị, thu ngân không cần gõ nhập thủ công.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-building-columns"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Liên thông trực tiếp với hệ thống ngân hàng lớn và ví điện tử phổ thông.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-money-bill-transfer"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Cài đặt tham số tiền tệ linh hoạt và quản lý thu khác rõ ràng.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 11: VẬN HÀNH - 4B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Thanh toán" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 12: VẬN HÀNH - 5A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Đồng Bộ Phần Cứng</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-laptop"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">KiotViet Hardware Manager đồng bộ mượt mà hệ thống phần cứng chuyên nghiệp.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-print"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Kết nối máy POS Android, máy in bill, in tem dán mỹ phẩm, máy chấm công.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-circle-check"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Đảm bảo luồng in ấn hóa đơn và in tem liên tục, hạn chế gián đoạn.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 13: VẬN HÀNH - 5B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Thiết bị phần cứng" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 14: VẬN HÀNH - 6A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Hồ Sơ Khách Hàng</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-folder-open"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Lưu trữ chi tiết thông tin cá nhân, tình trạng da/tóc hiện tại của khách.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-images"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Lưu trữ bộ ảnh trước và sau trị liệu qua từng buổi để theo dõi hiệu quả.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-stethoscope"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Hỗ trợ kỹ thuật viên kiểm tra lịch sử dịch vụ để điều chỉnh liệu trình.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 15: VẬN HÀNH - 6B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Hồ sơ khách hàng" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 16: VẬN HÀNH - 7A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Đánh Giá Dịch Vụ</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-face-smile"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Thu thập nhanh phản hồi và mức độ hài lòng của khách hàng sau làm đẹp.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-chart-line"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Theo dõi chi tiết trải nghiệm khách hàng để tối ưu quy trình phục vụ.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-pink-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-pink-600 text-xl"><i class="fa-solid fa-star"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Giúp chủ tiệm kiểm soát chất lượng kỹ thuật viên một cách khách quan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 17: VẬN HÀNH - 7B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Đánh giá dịch vụ" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+
+        <!-- ================= PHÂN HỆ II: TỐI ƯU QUẢN LÝ ================= -->
+
+        <!-- SLIDE 18: QUẢN LÝ - 1A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Quản Lý Danh Mục Hàng Hóa</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-boxes-stacked"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Quản lý sản phẩm đa dạng: hàng hóa thường, hàng dịch vụ, liệu trình dài ngày.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-wallet"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Theo dõi sát sao thẻ tài khoản trả trước đã bán cho khách hàng.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-trash-can"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Nghiệp vụ kiểm kho mỹ phẩm, xuất hủy hàng hết hạn sử dụng chuẩn xác.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 19: QUẢN LÝ - 1B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Hàng hóa" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 20: QUẢN LÝ - 2A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Quản Lý Giao Dịch</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-receipt"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Lưu trữ chi tiết hóa đơn bán hàng và lịch sử đổi trả sản phẩm của khách.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-arrow-down-long"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Kiểm soát phiếu nhập hàng mỹ phẩm và hoàn trả hàng nhập đối tác.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-coins"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tự động phân bổ các chi phí nhập hàng đi kèm trực tiếp vào giá vốn sản phẩm.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 21: QUẢN LÝ - 2B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Giao dịch" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 22: QUẢN LÝ - 3A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Quản Lý Nhà Cung Cấp</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-address-book"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Lưu trữ danh bạ chi tiết và đồng bộ toàn bộ lịch sử giao dịch.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-money-bill-transfer"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Theo dõi sát sao tình hình nhập hàng và đối soát công nợ đối tác.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-spa"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Duy trì chuỗi cung ứng mỹ phẩm chất lượng, ổn định và minh bạch.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 23: QUẢN LÝ - 3B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Nhà cung cấp" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 24: QUẢN LÝ - 4A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Quản Lý Thẻ Liệu Trình Khách Hàng</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-user-tag"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Lưu trữ dữ liệu khách hàng tập trung kèm số buổi liệu trình còn lại.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-credit-card"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Kiểm soát số dư tài khoản trả trước của khách hàng chặt chẽ.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-circle-check"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tránh xảy ra tranh chấp số buổi dịch vụ nhờ hệ thống lưu vết thông tin.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 25: QUẢN LÝ - 4B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Khách hàng" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 26: QUẢN LÝ - 5A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Quản Lý Nhân Viên & Hoa Hồng</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-key"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Phân quyền truy cập tài khoản chi tiết theo chức vụ lễ tân hoặc thợ.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-clipboard-user"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Ghi nhận lịch chấm công tự động, giám sát ca kíp làm việc thực tế.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-percent"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tự động tính toán hoa hồng kỹ thuật viên, thợ chính, thợ phụ định kỳ.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 27: QUẢN LÝ - 5B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Nhân viên" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 28: QUẢN LÝ - 6A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Quản Lý Sổ Quỹ</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-vault"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Kiểm soát biến động dòng tiền mặt và tiền gửi ngân hàng của salon.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-file-lines"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tự tạo nhanh chứng từ thu chi ngay sau khi đơn hàng hoàn tất.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-ban"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Quản lý minh bạch mọi dòng tiền ra vào, loại bỏ hoàn toàn nguy cơ thất thoát.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 29: QUẢN LÝ - 6B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Sổ quỹ" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 30: QUẢN LÝ - 7A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Hệ Thống Báo Cáo</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-chart-pie"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tự động tổng hợp số liệu kinh doanh: báo cáo tổng quan và chi tiết.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-user-check"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Thống kê chi tiết doanh thu theo nhóm dịch vụ và hiệu suất từng thợ.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-chart-simple"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Biểu diễn trực quan dòng tiền tài chính giúp chủ quán tối ưu vận hành.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 31: QUẢN LÝ - 7B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Báo cáo" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 32: QUẢN LÝ - 8A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Cài Đặt Hệ Thống</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-gears"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tùy biến cấu hình thông tin gian hàng và quản lý tài khoản người dùng.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-bed"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Thiết lập vị trí phòng trống, giường massage riêng cho từng chi nhánh.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-bell"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Cài đặt thông báo đẩy trực tiếp về ứng dụng di động vô cùng tiện lợi.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 33: QUẢN LÝ - 8B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Thiết lập" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 34: QUẢN LÝ - 9A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Kết Nối API</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-plug"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Cổng API công khai (Public API) ổn định cho salon quy mô liên kết lớn.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-arrows-spin"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Thiết lập Webhook đồng bộ dữ liệu nhanh với các hệ thống quản trị bên ngoài.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-purple-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600 text-xl"><i class="fa-solid fa-link"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Liên kết thông suốt hệ sinh thái số của cửa hàng với ERP, CRM bên thứ 3.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 35: QUẢN LÝ - 9B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Kết nối API" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+
+        <!-- ================= PHÂN HỆ III: THÚC ĐẨY DOANH THU ================= -->
+
+        <!-- SLIDE 36: DOANH THU - 1A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Đặt Lịch Trực Tuyến</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-calendar-days"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Khách hàng chủ động xem danh sách dịch vụ và tự đặt lịch 24/7.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-user-check"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Cho phép khách hàng lựa chọn kỹ thuật viên, thợ tạo mẫu yêu thích.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-bell"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Giảm tải tối đa công việc tiếp nhận và xếp lịch cho quầy lễ tân.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 37: DOANH THU - 1B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Đặt lịch Online" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 38: DOANH THU - 2A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">App Hội Viên HiKiot</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-mobile"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Ứng dụng di động dành riêng cho hội viên, tăng trải nghiệm thương hiệu.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-notes-medical"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Khách dễ theo dõi lịch hẹn cá nhân, số buổi liệu trình còn lại.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-gift"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tra cứu nhanh số dư tài khoản và nhận thông báo ưu đãi tự động.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 39: DOANH THU - 2B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="App Hội viên HiKiot" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 40: DOANH THU - 3A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Website Thương Hiệu KiotViet Web</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-globe"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Thiết lập website thương mại điện tử chuyên nghiệp mang thương hiệu riêng.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-cart-shopping"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Nhận đơn đặt lịch làm đẹp và bán mỹ phẩm trực tuyến 24/7.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-chart-line"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Nâng tầm uy tín thương hiệu và thu hút khách hàng đặt lịch hiệu quả.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 41: DOANH THU - 3B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="KiotViet Web" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 42: DOANH THU - 4A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Facebook POS</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-comments"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tập trung toàn bộ tin nhắn, bình luận từ nhiều Fanpage về một màn hình.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-bolt"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Lễ tân tư vấn bằng tin nhắn mẫu và đặt lịch cho khách khi đang chat.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-eye-slash"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Bảo mật thông tin số điện thoại khách nhờ tính năng ẩn bình luận tự động.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 43: DOANH THU - 4B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Facebook POS" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 44: DOANH THU - 5A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Chăm Sóc Khách Hàng</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-comment-sms"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tự động gửi SMS thương hiệu, tin Zalo ZNS sinh nhật, đặt lịch thành công.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-bell"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tự động nhắc lịch hẹn sắp đến giúp khách hàng không bị quên buổi làm đẹp.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-envelope"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Gửi kịch bản Email chăm sóc khách hàng cá nhân hóa kèm chương trình ưu đãi.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 45: DOANH THU - 5B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Chăm sóc khách hàng" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 46: DOANH THU - 6A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Tích Điểm Thành Viên</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-star"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tự động tích lũy điểm thưởng tương ứng theo giá trị đơn hàng thực tế.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-coins"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Cho phép trừ điểm tích lũy thay thế tiền mặt trực tiếp khi mua lần sau.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-heart"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Kích thích tần suất quay lại mua hàng, duy trì lòng trung thành của khách cũ.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 47: DOANH THU - 6B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Tích điểm" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 48: DOANH THU - 7A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Chương Trình Khuyến Mại</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-percent"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Thiết lập kịch bản đa dạng: Giảm giá dịch vụ giờ vàng, tặng kèm mỹ phẩm.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-clock"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Cài đặt theo chương trình mua gói liệu trình tặng sản phẩm đi kèm.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-fire"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Kích thích nhu cầu làm đẹp của thực khách, gia tăng doanh số quán.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 49: DOANH THU - 7B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Khuyến mại" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 50: DOANH THU - 8A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Hệ Thống Voucher</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-ticket"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Phát hành, quản lý hệ thống mã Voucher quà tặng cho thực khách.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-calculator"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Áp dụng tự động chiết khấu Voucher khi đặt lịch tại quầy hoặc online.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-ban"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tự hủy hiệu lực của Voucher ngay sau khi thanh toán hóa đơn thành công.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 51: DOANH THU - 8B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Voucher" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 52: DOANH THU - 9A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Phân Tích Kinh Doanh</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-chart-line"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Bộ công cụ phân tích sâu về thói quen làm đẹp của khách hàng.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Đo lường chi tiết doanh thu theo nhóm dịch vụ và chiến dịch ưu đãi.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-indigo-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 text-xl"><i class="fa-solid fa-lightbulb"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Hỗ trợ chủ cơ sở tối ưu hóa thực đơn và định hình hướng kinh doanh lâu dài.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 53: DOANH THU - 9B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Phân tích" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+
+        <!-- ================= PHÂN HỆ IV: TUÂN THỦ PHÁP LÝ ================= -->
+
+        <!-- SLIDE 54: PHÁP LÝ - TỔNG QUAN (NỘI DUNG - ĐỒNG BỘ HOÀN TOÀN MIỄN PHÍ) -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-6xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Hệ Thống Giải Pháp Tuân Thủ Pháp Lý</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-2 gap-8 w-full">
+                    <div class="glass-card p-8 rounded-3xl border-t-4 border-blue-500 stagger-2 flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4"><i class="fa-solid fa-scale-balanced text-blue-500 mr-2"></i>Chặt Chẽ & Tiện Lợi</h3>
+                        <ul class="custom-bullets text-gray-600 text-lg space-y-3">
+                            <li>Cung cấp hoàn toàn miễn phí phân hệ Kế toán số hóa và Hóa đơn điện tử KiotViet eInvoice.</li>
+                            <li>Dữ liệu bán hàng tự động kết chuyển sang kế toán, tránh các lỗi sai sót do nhập tay thủ công.</li>
+                            <li>Hỗ trợ Hộ kinh doanh thích ứng hoàn hảo biểu mẫu đúng chuẩn của cơ quan Thuế Nhà nước.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-8 rounded-3xl border-t-4 border-cyan-500 stagger-3 flex flex-col justify-center items-center text-center">
+                        <span class="px-4 py-1.5 bg-green-100 text-green-700 font-extrabold rounded-full text-xs uppercase tracking-wider mb-3">Tích hợp sẵn có</span>
+                        <h4 class="text-4xl font-black text-gray-800">Hoàn Toàn Miễn Phí</h4>
+                        <p class="text-gray-500 text-base mt-2 max-w-xs">Giải pháp đồng hành thông minh loại bỏ hoàn toàn chi phí thuê dịch vụ ngoài phức tạp.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 55: THUẾ - 1A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Thiết Lập Hồ Sơ Thuế Ban Đầu</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl"><i class="fa-solid fa-user-gear"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Hướng dẫn chi tiết cấu hình hồ sơ kê khai thuế ban đầu của tiệm.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl"><i class="fa-solid fa-circle-info"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Khai báo đúng các thông tin cơ sở trước khi tiến hành hạch toán.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl"><i class="fa-solid fa-shuffle"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tạo lập cơ sở dữ liệu đồng bộ luồng chứng từ kế toán tự động sau này.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 56: THUẾ - 1B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/05/27093755/Thietlaphs_n_-5.png" alt="Thiết lập ban đầu" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 57: THUẾ - 2A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Tờ Khai Thuế Hộ Kinh Doanh</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl"><i class="fa-solid fa-file-invoice"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tự động tổng hợp doanh thu hóa đơn dịch vụ để làm tờ khai thuế.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl"><i class="fa-solid fa-folder-open"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Trích xuất biểu mẫu chuẩn cơ quan Thuế: mẫu 01/CNKD, 01/BK-STK, 01/BK-HTK.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl"><i class="fa-solid fa-circle-check"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tự động hóa hoàn toàn quy trình biểu mẫu, loại bỏ tối đa thao tác tính tay.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 58: THUẾ - 2B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/04/24023356/TK01_240426-4.png" alt="Tờ khai thuế" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 59: THUẾ - 3A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Quyết Toán Thuế TNCN</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl"><i class="fa-solid fa-file-contract"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Lập Tờ khai quyết toán thuế thu nhập cá nhân (Mẫu 02/CNKD-TNCN-QTT).</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl"><i class="fa-solid fa-laptop-code"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tự động khởi tạo tờ khai ngay trên hệ thống một cách nhanh chóng.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl"><i class="fa-solid fa-circle-check"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Đảm bảo độ chính xác tuyệt đối thông tin dữ liệu nộp cơ quan Thuế.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 60: THUẾ - 3B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://placehold.co/1200x675/ec4899/ffffff/png?text=KiotViet+Salon+Screenshot" alt="Quyết toán thuế" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 61: THUẾ - 4A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Hệ Thống Sổ Kế Toán Số</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl"><i class="fa-solid fa-book"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tự động lập và kết xuất hệ thống sổ sách kế toán dành cho Hộ kinh doanh.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl"><i class="fa-solid fa-database"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Trích xuất đúng sổ chi tiết doanh thu, chi phí theo mẫu quy chuẩn pháp lý.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl"><i class="fa-solid fa-pen-to-square"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Hỗ trợ điều chỉnh linh hoạt số liệu sổ kế toán khi phát sinh sai lệch.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 62: THUẾ - 4B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/05/27124041/SKTR_270526-2.png" alt="Sổ kế toán" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 63: THUẾ - 5A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Đồng Bộ Nghiệp Vụ Giao Dịch</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Theo dõi và hạch toán các giao dịch mua hàng, thu chi quỹ nội bộ.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl"><i class="fa-solid fa-shield"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Đáp ứng trọn vẹn yêu cầu kiểm soát chứng từ của hộ kinh doanh kê khai.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Đồng bộ hóa dữ liệu mượt mà từ phần mềm quản lý sang kế toán.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 64: THUẾ - 5B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/05/21042739/QLTCR_210526-2.png" alt="Giao dịch" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 65: THUẾ - 6A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Nghiệp Vụ Hạch Toán Tự Động</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl"><i class="fa-solid fa-calculator"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tự động hạch toán Bảng kê 02/TNDN, quản lý chi phí trả trước.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl"><i class="fa-solid fa-users"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Ghi nhận chuẩn xác khấu hao tài sản cố định và chi phí nhân sự của tiệm.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 text-xl"><i class="fa-solid fa-check-double"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Đảm bảo hệ thống báo cáo luôn được chuẩn hóa đúng quy định cơ quan Thuế.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 66: THUẾ - 6B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/05/13090839/1D-QLBK-3.png" alt="Hạch toán" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+
+        <!-- ================= PHÂN HỆ V: TUÂN THỦ PHÁP LÝ - HÓA ĐƠN & CHỮ KÝ SỐ ================= -->
+
+        <!-- SLIDE 67: HÓA ĐƠN - 1A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Đăng Ký Chữ Ký Số</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-4 text-cyan-600 text-xl"><i class="fa-solid fa-signature"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Kích hoạt đăng ký chữ ký số HSM IntrustCA trực tuyến nhanh chóng.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-4 text-cyan-600 text-xl"><i class="fa-solid fa-key"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Ký số hóa đơn điện tử an toàn bảo mật, không cần USB Token vật lý.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-4 text-cyan-600 text-xl"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Thông báo cảnh báo gia hạn chứng thư số tự động khi sắp hết hạn.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 68: HÓA ĐƠN - 1B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/22085735/CKSR_221025-11.png" alt="Chữ ký số" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 69: HÓA ĐƠN - 2A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Thiết Lập Ban Đầu HĐĐT</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-4 text-cyan-600 text-xl"><i class="fa-solid fa-gears"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Hướng dẫn thiết lập hệ thống eInvoice phù hợp chuẩn giao dịch của tiệm.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-4 text-cyan-600 text-xl"><i class="fa-solid fa-percent"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Hạch toán tự động thuế suất VAT trực tiếp trên danh mục hàng hóa dịch vụ.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-4 text-cyan-600 text-xl"><i class="fa-solid fa-circle-check"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Lập tờ khai đăng ký sử dụng hóa đơn điện tử gửi cơ quan Thuế nhanh chóng.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 70: HÓA ĐƠN - 2B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/05/18032954/MIH_180526-1.png" alt="Thiết lập HĐĐT" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 71: HÓA ĐƠN - 3A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Phát Hành Hóa Đơn Điện Tử</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-4 text-cyan-600 text-xl"><i class="fa-solid fa-paper-plane"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Xuất hóa đơn điện tử trực tiếp từ phần mềm bán hàng KiotViet ngay khi lên bill.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-4 text-cyan-600 text-xl"><i class="fa-solid fa-desktop"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Đồng bộ máy tính tiền theo đúng lộ trình số hóa quy chuẩn cơ quan Thuế.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-4 text-cyan-600 text-xl"><i class="fa-solid fa-arrows-spin"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Kết nối linh hoạt dữ liệu với meInvoice, SInvoice, VNPT eInvoice, FPT eInvoice.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 72: HÓA ĐƠN - 3B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2025/10/23075559/PHHDT-3.png" alt="Phát hành" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 73: HÓA ĐƠN - 4A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Xử Lý Sai Sót HĐĐT</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-4 text-cyan-600 text-xl"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Cung cấp bộ công cụ đầy đủ lập thông báo hóa đơn sai sót gửi cơ quan Thuế.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-4 text-cyan-600 text-xl"><i class="fa-solid fa-pen-to-square"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Lập nhanh hóa đơn điện tử thay thế hoặc hóa đơn điều chỉnh chuẩn quy định.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-4 text-cyan-600 text-xl"><i class="fa-solid fa-file-shield"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Lưu trữ minh bạch danh sách chứng từ xử lý sai sót hỗ trợ đối chiếu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 74: HÓA ĐƠN - 4B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/04/10092956/New-LaphoadonDC-2.png" alt="Sai sót" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 75: HÓA ĐƠN - 5A - TEXT -->
+        <div class="slide flex items-center justify-center p-12 h-full">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-8">
+                <div class="text-center w-full stagger-1">
+                    <h2 class="text-4xl font-extrabold gradient-text">Chứng Từ & Phiếu Xuất Kho</h2>
+                    <div class="h-1.5 w-24 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 w-full px-4">
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-500 text-center stagger-2 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-4 text-cyan-600 text-xl"><i class="fa-solid fa-file-contract"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tạo lập chứng từ điện tử khấu trừ thuế thu nhập cá nhân tự động.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-500 text-center stagger-3 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-4 text-cyan-600 text-xl"><i class="fa-solid fa-laptop-code"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Tự khởi tạo tờ khai đăng ký sử dụng không cần phần mềm bên ngoài.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-t-4 border-cyan-500 text-center stagger-4 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-4 text-cyan-600 text-xl"><i class="fa-solid fa-truck-ramp-box"></i></div>
+                        <p class="text-gray-700 text-lg font-semibold leading-relaxed">Trích xuất phiếu kho vận chuyển nội bộ quy chuẩn lưu thông.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 76: HÓA ĐƠN - 5B - SCREENSHOT PURE -->
+        <div class="slide flex items-center justify-center p-16 h-full" data-type="infographic">
+            <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/04/10092617/New-Lapchungtu-3.png" alt="Chứng từ" class="max-w-full max-h-[78vh] object-contain rounded-2xl shadow-2xl border border-white/40 stagger-1">
+        </div>
+
+        <!-- SLIDE 77: CẢM ƠN + INFOGRAPHIC ĐẦU TIÊN (ĐÃ PHÓNG TO MAX-W-6XL VÀ ÔM KHÍT MÉP ẢNH Chuẩn 16:9) -->
+        <div class="slide flex items-center justify-center p-8 h-full" data-type="infographic">
+            <div class="w-full max-w-5xl flex flex-col items-center gap-6 text-center">
+                <h2 class="text-5xl font-black gradient-text stagger-1">Xin Chân Thành Cảm Ơn!</h2>
+                <p class="text-xl text-gray-600 font-medium mt-2 stagger-2">KiotViet luôn sẵn sàng đồng hành cùng hành trình phát triển của bạn</p>
+                <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/06/09092629/RETAIL-0.jpg" alt="Infographic Tổng Quan" class="w-full max-w-6xl aspect-video rounded-3xl shadow-2xl border border-white/40 object-cover stagger-3 mt-4">
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        let isAnimating = false;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const logo = document.getElementById('global-logo');
+
+        function updateUI(newIndex) {
+            if (isAnimating || newIndex === currentSlide || totalSlides < 2) return;
+            isAnimating = true;
+
+            const oldSlide = slides[currentSlide];
+            const newSlide = slides[newIndex];
+            
+            // Xóa hiệu ứng của slide cũ
+            const oldElements = oldSlide.querySelectorAll('.stagger-1, .stagger-2, .stagger-3, .stagger-4');
+            oldElements.forEach(el => el.style.animationName = 'none');
+            
+            slides.forEach(s => s.classList.remove('active', 'previous'));
+            newSlide.classList.add('active');
+            oldSlide.classList.add('previous');
+
+            // Kích hoạt hiệu ứng của slide mới
+            const newElements = newSlide.querySelectorAll('.stagger-1, .stagger-2, .stagger-3, .stagger-4');
+            newElements.forEach(el => { el.style.animationName = ''; });
+
+            currentSlide = newIndex;
+
+            // Ẩn logo ở slide dạng Infographic hoặc ảnh Screenshot phóng to
+            const isInfographic = newSlide.getAttribute('data-type') === 'infographic';
+            logo.style.opacity = isInfographic ? '0' : '1';
+
+            setTimeout(() => {
+                isAnimating = false;
+                oldSlide.classList.remove('previous');
+            }, 700);
+        }
+
+        // Khởi tạo slide đầu tiên
+        if (totalSlides > 0) { 
+            slides[0].classList.add('active'); 
+            const isInfographic = slides[0].getAttribute('data-type') === 'infographic';
+            logo.style.opacity = isInfographic ? '0' : '1';
+        }
+
+        function nextSlide() { updateUI((currentSlide + 1) % totalSlides); }
+        function prevSlide() { updateUI((currentSlide - 1 + totalSlides) % totalSlides); }
+        function toggleFullScreen() { 
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen(); 
+            } else if (document.exitFullscreen) {
+                document.exitFullscreen(); 
+            } 
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === ' '){ e.preventDefault(); nextSlide(); }
+            else if (e.key === 'ArrowRight') nextSlide();
+            else if (e.key === 'ArrowLeft') prevSlide();
+            else if (e.key === 'Home') updateUI(0);
+            else if (e.key === 'End') updateUI(totalSlides - 1);
+            else if (e.key.toLowerCase() === 'f') toggleFullScreen();
+        });
+    </script>
+</body>
+</html>
