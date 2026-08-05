@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khóa Học Kế Toán (Hộ Kinh Doanh) - KiotViet</title>
+    <!-- Import Google Font Inter chuẩn -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    fontFamily: {
+                        sans: ['Inter', 'Segoe UI', 'sans-serif'],
+                    },
+                    colors: { 
+                        kvblue: '#1d4ed8',
+                        kvcyan: '#0891b2'
+                    }
+                } 
+            } 
+        }
+    </script>
+    <style>
+        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #f1f5f9; }
+        
+        /* Animation xuất hiện mượt mà cho Slide */
+        @keyframes slideFadeIn {
+            from { opacity: 0; transform: translateY(14px) scale(0.99); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .slide { display: none !important; width: 100%; height: 100%; position: absolute; top: 0; left: 0; flex-direction: column; background: transparent; }
+        .slide.active { display: flex !important; z-index: 20; animation: slideFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        
+        /* Nền Gradient công nghệ đa lớp */
+        .tech-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+            background: linear-gradient(135deg, #dbeafe 0%, #f8fafc 40%, #ecfeff 75%, #bae6fd 100%);
+        }
+        .tech-grid {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(rgba(29, 78, 216, 0.06) 1.5px, transparent 1.5px);
+            background-size: 36px 36px;
+            opacity: 0.9;
+        }
+        .glow-spot-1 {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(29, 78, 216, 0.16) 0%, rgba(29, 78, 216, 0) 70%);
+            border-radius: 50%;
+        }
+        .glow-spot-2 {
+            position: absolute;
+            bottom: -10%;
+            right: -10%;
+            width: 900px;
+            height: 900px;
+            background: radial-gradient(circle, rgba(8, 145, 178, 0.16) 0%, rgba(8, 145, 178, 0) 70%);
+            border-radius: 50%;
+        }
+
+        #global-logo { position: fixed; top: 20px; left: 28px; height: 34px; z-index: 9999; }
+        
+        /* Hiệu ứng Kính mờ Glassmorphism */
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.92); 
+            backdrop-filter: blur(25px); 
+            -webkit-backdrop-filter: blur(25px); 
+            border: 1px solid rgba(255, 255, 255, 0.8); 
+            box-shadow: 0 15px 35px -10px rgba(29, 78, 216, 0.1); 
+            border-radius: 1.25rem; 
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -10px rgba(29, 78, 216, 0.15);
+        }
+
+        .gradient-text { color: transparent; background-clip: text; background-image: linear-gradient(to right, #1d4ed8, #0891b2); }
+        .text-balance { text-wrap: balance; }
+        
+        /* Badge tên Phần đặt cạnh Logo */
+        .header-section-badge {
+            position: fixed;
+            top: 20px;
+            left: 200px;
+            z-index: 9999;
+            background: rgba(239, 246, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid #bfdbfe;
+            color: #1d4ed8;
+            font-weight: 800;
+            font-size: 0.85rem;
+            padding: 6px 14px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(29, 78, 216, 0.08);
+        }
+
+        /* Thẻ Cảnh báo Pulse nhịp đập */
+        @keyframes pulseAlert {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+        }
+        .alert-pulse { animation: pulseAlert 2s infinite; }
+    </style>
+</head>
+<body class="text-gray-800 relative select-none font-sans">
+    <!-- Logo KiotViet cố định góc trên trái -->
+    <img id="global-logo" src="https://logo.kiotviet.vn/KiotViet-Logo-Horizontal.svg" alt="KiotViet Logo">
+    
+    <!-- Background Gradient công nghệ -->
+    <div class="tech-bg">
+        <div class="tech-grid"></div>
+        <div class="glow-spot-1"></div>
+        <div class="glow-spot-2"></div>
+    </div>
+
+    <div id="slide-container" class="relative z-10 w-full h-full">
+
+        <!-- SLIDE 1: SLIDE BÌA -->
+        <div class="slide active flex items-center justify-center p-8">
+            <div class="glass-card px-12 py-16 max-w-5xl w-full text-center relative overflow-hidden">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1.5 bg-gradient-to-r from-kvblue to-kvcyan rounded-b-full"></div>
+                <h1 class="text-3xl md:text-4xl lg:text-[2.75rem] font-black gradient-text mb-6 tracking-tight leading-snug uppercase text-balance py-2">
+                    KHÓA HỌC KẾ TOÁN (HỘ KINH DOANH)
+                </h1>
+                <p class="text-base md:text-lg text-gray-600 mb-8 font-medium max-w-3xl mx-auto leading-relaxed text-balance">
+                    Trang bị toàn bộ nền tảng kiến thức pháp lý thuế, quy trình quản lý sổ sách kế toán tự động và kịch bản tư vấn thực chiến giúp đội ngũ Nhân viên kinh doanh tự tin chinh phục khách hàng Hộ kinh doanh.
+                </p>
+                <div class="inline-block bg-blue-50 border border-blue-100 px-6 py-2.5 rounded-full">
+                    <p class="text-lg text-kvblue font-bold"><i class="fa-solid fa-store mr-2"></i>(Retail - FNB- Salon - Hotel)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: PHẦN I - TIÊU ĐỀ PHẦN -->
+        <div class="slide flex items-center justify-center p-8">
+            <div class="glass-card px-16 py-20 max-w-4xl w-full text-center relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-kvblue to-kvcyan"></div>
+                <h1 class="text-2xl md:text-3xl lg:text-4xl font-black gradient-text tracking-wide uppercase leading-snug py-1">PHẦN I - TỔNG QUAN KHÓA HỌC</h1>
+                <div class="h-1.5 w-28 bg-gradient-to-r from-kvblue to-kvcyan mx-auto mt-6 rounded-full"></div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: PHẦN I - 1.1 QUY ĐỊNH CHÍNH SÁCH MỚI -->
+        <div class="slide flex flex-col items-center justify-center p-8 pt-24 h-full relative">
+            <div class="header-section-badge"><i class="fa-solid fa-layer-group"></i>PHẦN I - TỔNG QUAN KHÓA HỌC</div>
+            <div class="w-full text-center mb-6">
+                <h3 class="text-3xl font-black gradient-text">1.1. Quy Định Chính Sách Mới Của Nhà Nước</h3>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-kvblue to-kvcyan mx-auto mt-3 rounded-full"></div>
+            </div>
+            
+            <div class="max-w-4xl w-full space-y-5 text-left">
+                <!-- Khối 1 -->
+                <div class="glass-card p-6 border-l-4 border-blue-600">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fa-solid fa-file-invoice-dollar text-2xl text-kvblue"></i>
+                        <h4 class="text-xl font-bold text-gray-800">Quy Định Kê Khai Thuế</h4>
+                    </div>
+                    <p class="text-base text-gray-700 leading-relaxed mb-3">
+                        Nhà nước đang siết chặt quản lý thuế đối với Hộ kinh doanh, xóa bỏ hoàn toàn thuế khoán từ ngày <span class="font-bold text-kvblue">01/01/2026</span>.
+                    </p>
+                    <p class="text-base text-gray-700 leading-relaxed">
+                        Bất kể bán nhiều hay ít, có phải nộp thuế hay không, đến kỳ <span class="font-bold text-kvblue">BẮT BUỘC</span> phải nộp Tờ khai thuế đúng hạn.
+                    </p>
+                </div>
+
+                <!-- Khối 2 -->
+                <div class="glass-card p-6 border-l-4 border-cyan-500">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fa-solid fa-book text-2xl text-kvcyan"></i>
+                        <h4 class="text-xl font-bold text-gray-800">Quy Định Sổ Kế Toán</h4>
+                    </div>
+                    <p class="text-base text-gray-700 leading-relaxed mb-3">
+                        <span class="font-bold text-kvcyan">Bắt buộc</span> có sổ sách ghi chép rõ ràng doanh thu, mặt hàng theo đúng mẫu biểu chuẩn của Bộ Tài chính.
+                    </p>
+                    <p class="text-base text-gray-700 leading-relaxed">
+                        Chính thức thay thế hoàn toàn cho hình thức ghi chép sổ tay thủ công của các tiểu thương trước đây.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: PHẦN I - 1.2 GIẢI PHÁP TỪ KIOTVIET -->
+        <div class="slide flex flex-col items-center justify-center p-8 pt-24 h-full relative">
+            <div class="header-section-badge"><i class="fa-solid fa-layer-group"></i>PHẦN I - TỔNG QUAN KHÓA HỌC</div>
+            <div class="w-full text-center mb-6">
+                <h3 class="text-3xl font-black gradient-text">1.2. Giải Pháp Tự Động Hóa Từ KiotViet</h3>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-kvblue to-kvcyan mx-auto mt-3 rounded-full"></div>
+            </div>
+            
+            <div class="glass-card p-8 max-w-4xl w-full text-left space-y-5">
+                <div class="flex items-start gap-4">
+                    <div class="bg-blue-100 p-3.5 rounded-2xl text-kvblue shrink-0">
+                        <i class="fa-solid fa-wand-magic-sparkles text-3xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-2">Tự Động Hóa Hoàn Toàn Nghiệp Vụ Kế Toán</h4>
+                        <p class="text-base text-gray-700 leading-relaxed mb-3">
+                            Sổ kế toán KiotViet được tự động hóa hoàn toàn. Khi bán hàng, dữ liệu tự động nhảy vào sổ kế toán mà không cần viết tay.
+                        </p>
+                        <p class="text-base text-gray-700 leading-relaxed">
+                            Đến kỳ, hệ thống tự động đẩy dữ liệu vào Tờ khai thuế, chủ cửa hàng chỉ cần tải về đi nộp cho Cơ quan Thuế.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-blue-50/80 rounded-xl border border-blue-100">
+                    <h5 class="font-bold text-kvblue text-base mb-1"><i class="fa-solid fa-gift mr-2"></i>Tích Hợp Miễn Phí</h5>
+                    <p class="text-base text-gray-700">Tính năng quản lý thuế và sổ sách kế toán được tích hợp miễn phí hoàn toàn trên phần mềm KiotViet.</p>
+                </div>
+
+                <div class="p-4 bg-cyan-50/80 rounded-xl border border-cyan-100">
+                    <h5 class="font-bold text-kvcyan text-base mb-1"><i class="fa-solid fa-user-check mr-2"></i>Bản Chất Giải Pháp</h5>
+                    <p class="text-base text-gray-700">Khách hàng không cần hiểu sâu nghiệp vụ kế toán, chỉ cần cung cấp dữ liệu đầu vào cơ bản, KiotViet lo toàn bộ đầu ra (Sổ sách & Tờ khai).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: PHẦN I - 1.3 MỤC TIÊU KHÓA HỌC -->
+        <div class="slide flex flex-col items-center justify-center p-8 pt-24 h-full relative">
+            <div class="header-section-badge"><i class="fa-solid fa-layer-group"></i>PHẦN I - TỔNG QUAN KHÓA HỌC</div>
+            <div class="w-full text-center mb-6">
+                <h3 class="text-3xl font-black gradient-text">1.3. Mục Tiêu Khóa Học Dành Cho Sales</h3>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-kvblue to-kvcyan mx-auto mt-3 rounded-full"></div>
+            </div>
+            
+            <div class="glass-card p-8 max-w-4xl w-full text-left space-y-4">
+                <div class="flex items-center gap-4 bg-white/80 p-4.5 rounded-xl border border-gray-200">
+                    <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center text-lg font-black shrink-0">1</div>
+                    <div>
+                        <h4 class="text-lg font-bold text-kvblue mb-1">Nắm chắc đáp ứng pháp lý</h4>
+                        <p class="text-base text-gray-700">Hiểu rõ khả năng đáp ứng toàn diện của KiotViet đối với các quy định thuế mới của Nhà nước.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 bg-white/80 p-4.5 rounded-xl border border-gray-200">
+                    <div class="w-10 h-10 rounded-full bg-cyan-600 text-white flex items-center justify-center text-lg font-black shrink-0">2</div>
+                    <div>
+                        <h4 class="text-lg font-bold text-kvcyan mb-1">Thành thạo thao tác thực hành</h4>
+                        <p class="text-base text-gray-700">Thiết lập hồ sơ khai thuế, tra cứu sổ kế toán, tờ khai thuế, chữ ký số, thiết lập & phát hành Hóa đơn điện tử.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 bg-white/80 p-4.5 rounded-xl border border-gray-200">
+                    <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center text-lg font-black shrink-0">3</div>
+                    <div>
+                        <h4 class="text-lg font-bold text-kvblue mb-1">Vũ khí chốt sale thực chiến</h4>
+                        <p class="text-base text-gray-700">Hỗ trợ Hộ kinh doanh "tuân thủ đúng - vận hành an tâm" kèm ưu đãi tặng gói giải pháp Thuế - Kế toán - Hóa đơn.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: PHẦN II - MỤC LỤC PHẦN II (XẾP DỌC TRÊN - DƯỚI) -->
+        <div class="slide flex flex-col items-center justify-center p-8 h-full relative">
+            <div class="w-full text-center mb-6">
+                <h1 class="text-2xl md:text-3xl lg:text-4xl font-black gradient-text uppercase leading-snug py-1">PHẦN II - THIẾT LẬP HỒ SƠ KHAI THUẾ</h1>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-kvblue to-kvcyan mx-auto mt-4 rounded-full"></div>
+            </div>
+            
+            <!-- Xếp dọc trên - dưới -->
+            <div class="glass-card p-8 max-w-3xl w-full">
+                <div class="space-y-4 text-base font-bold text-gray-800 text-left">
+                    <div class="flex items-center gap-4 bg-blue-50/70 p-3.5 rounded-xl border border-blue-100">
+                        <span class="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0 font-extrabold text-sm">2.1</span>
+                        <span>Kiến thức nền tảng & Bảng 4 Nhóm Hộ kinh doanh</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-cyan-50/70 p-3.5 rounded-xl border border-cyan-100">
+                        <span class="w-9 h-9 rounded-full bg-cyan-600 text-white flex items-center justify-center shrink-0 font-extrabold text-sm">2.2</span>
+                        <span>Nhận định & Kịch bản Tư vấn (Sales Script)</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-blue-50/70 p-3.5 rounded-xl border border-blue-100">
+                        <span class="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0 font-extrabold text-sm">2.3</span>
+                        <span>Hướng dẫn thao tác chi tiết (Input - Output)</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-cyan-50/70 p-3.5 rounded-xl border border-cyan-100">
+                        <span class="w-9 h-9 rounded-full bg-cyan-600 text-white flex items-center justify-center shrink-0 font-extrabold text-sm">2.4</span>
+                        <span>Luyện tập thực hành thiết lập hồ sơ thuế</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: PHẦN II - 2.1 CHUỖI DỮ LIỆU KHẾP KÍN -->
+        <div class="slide flex flex-col items-center justify-center p-8 pt-24 h-full relative">
+            <div class="header-section-badge"><i class="fa-solid fa-layer-group"></i>PHẦN II - THIẾT LẬP HỒ SƠ KHAI THUẾ</div>
+            <div class="w-full text-center mb-6">
+                <h3 class="text-3xl font-black gradient-text">2.1. Kiến Thức Nền Tảng: Mối Liên Hệ Dữ Liệu</h3>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-kvblue to-kvcyan mx-auto mt-3 rounded-full"></div>
+            </div>
+            
+            <div class="glass-card p-8 max-w-5xl w-full text-center">
+                <p class="text-base text-gray-700 mb-2 font-medium">Trong hình thức kê khai, sổ sách và tờ khai đóng vai trò là "bản lý lịch" tài chính.</p>
+                <p class="text-base text-gray-700 mb-6 font-medium">Cơ quan Thuế áp dụng đối soát tự động để phát hiện mọi sai lệch giữa dữ liệu hóa đơn và tờ khai.</p>
+                
+                <div class="flex flex-col md:flex-row items-center justify-around gap-4 my-6">
+                    <div class="bg-blue-50 border border-blue-200 p-5 rounded-2xl w-full md:w-1/3 text-center shadow-sm">
+                        <i class="fa-solid fa-receipt text-3xl text-kvblue mb-2"></i>
+                        <h4 class="text-lg font-bold text-gray-800">1. Hóa Đơn Điện Tử</h4>
+                        <p class="text-sm text-gray-600 mt-1">Xuất ra tự động tổng hợp số liệu</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right text-2xl text-kvcyan hidden md:block"></i>
+                    <div class="bg-cyan-50 border border-cyan-200 p-5 rounded-2xl w-full md:w-1/3 text-center shadow-sm">
+                        <i class="fa-solid fa-book-open text-3xl text-kvcyan mb-2"></i>
+                        <h4 class="text-lg font-bold text-gray-800">2. Sổ Kế Toán</h4>
+                        <p class="text-sm text-gray-600 mt-1">Tự động nhảy dữ liệu ghi sổ</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right text-2xl text-kvcyan hidden md:block"></i>
+                    <div class="bg-blue-50 border border-blue-200 p-5 rounded-2xl w-full md:w-1/3 text-center shadow-sm">
+                        <i class="fa-solid fa-file-invoice text-3xl text-kvblue mb-2"></i>
+                        <h4 class="text-lg font-bold text-gray-800">3. Tờ Khai Thuế</h4>
+                        <p class="text-sm text-gray-600 mt-1">Sẵn sàng xuất file nộp Cơ quan Thuế</p>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-green-50 border border-green-200 p-4 rounded-xl text-green-800 font-bold text-base">
+                    <i class="fa-solid fa-circle-check mr-2"></i>Tính năng đồng bộ tự động của KiotViet đảm bảo khớp số liệu 100% giữa 3 yếu tố này!
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: PHẦN II - 2.1 BẢNG BẢNG MA TRẬN SO SÁNH 4 NHÓM HKD -->
+        <div class="slide flex flex-col items-center justify-center p-8 pt-24 h-full relative">
+            <div class="header-section-badge"><i class="fa-solid fa-layer-group"></i>PHẦN II - THIẾT LẬP HỒ SƠ KHAI THUẾ</div>
+            <div class="w-full text-center mb-4">
+                <h3 class="text-2xl md:text-3xl font-black gradient-text">2.1. Phân Loại & Nghĩa Vụ 4 Nhóm Hộ Kinh Doanh</h3>
+            </div>
+            
+            <div class="overflow-hidden rounded-2xl border border-white/80 shadow-xl bg-white/90 backdrop-blur-md max-w-7xl w-full">
+                <table class="w-full text-left text-xs md:text-sm border-collapse">
+                    <thead>
+                        <tr class="bg-gradient-to-r from-blue-700 to-cyan-700 text-white font-black uppercase tracking-wider">
+                            <th class="p-3.5 w-1/6 border-b border-blue-800">Tiêu chí</th>
+                            <th class="p-3.5 w-1/5 border-b border-blue-800 bg-green-700/80">Nhóm 1 (&lt; 1 Tỷ)</th>
+                            <th class="p-3.5 w-1/5 border-b border-blue-800 bg-blue-800/80">Nhóm 2 (1 - 3 Tỷ)</th>
+                            <th class="p-3.5 w-1/5 border-b border-blue-800 bg-cyan-800/80">Nhóm 3 (3 - 50 Tỷ)</th>
+                            <th class="p-3.5 w-1/5 border-b border-blue-800 bg-purple-800/80">Nhóm 4 (&gt; 50 Tỷ)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 text-gray-800">
+                        <tr class="hover:bg-blue-50/50 transition-colors">
+                            <td class="p-3 font-bold bg-gray-50/80">Thuế GTGT</td>
+                            <td class="p-3 text-green-700 font-bold">Miễn nộp thuế</td>
+                            <td class="p-3">% x Doanh thu thực tế</td>
+                            <td class="p-3">% x Doanh thu thực tế</td>
+                            <td class="p-3">% x Doanh thu thực tế</td>
+                        </tr>
+                        <tr class="hover:bg-blue-50/50 transition-colors">
+                            <td class="p-3 font-bold bg-gray-50/80">Thuế TNCN</td>
+                            <td class="p-3 text-green-700 font-bold">Miễn nộp thuế</td>
+                            <td class="p-3">% x (DT - 1 tỷ) HOẶC 15% Thu nhập</td>
+                            <td class="p-3 font-bold text-kvblue">17% Thu nhập tính thuế</td>
+                            <td class="p-3 font-bold text-purple-700">20% Thu nhập tính thuế</td>
+                        </tr>
+                        <tr class="hover:bg-blue-50/50 transition-colors">
+                            <td class="p-3 font-bold bg-gray-50/80">Sổ Kế Toán</td>
+                            <td class="p-3">S1a (Sổ doanh thu)</td>
+                            <td class="p-3">S2a-HKD hoặc Bộ 4 sổ</td>
+                            <td class="p-3 font-bold text-kvcyan">Bắt buộc Bộ 4 sổ (S2b-e)</td>
+                            <td class="p-3 font-bold text-purple-700">Bắt buộc Bộ 4 sổ (S2b-e)</td>
+                        </tr>
+                        <tr class="hover:bg-blue-50/50 transition-colors">
+                            <td class="p-3 font-bold bg-gray-50/80">Tờ Khai Thuế</td>
+                            <td class="p-3">01-TKN/CNKD (Năm)</td>
+                            <td class="p-3">01/CNKD (Quý) + 02/CNKD</td>
+                            <td class="p-3">01/CNKD (Quý) + 02/CNKD (Năm)</td>
+                            <td class="p-3">01/CNKD (Tháng) + 02/CNKD (Năm)</td>
+                        </tr>
+                        <tr class="hover:bg-blue-50/50 transition-colors">
+                            <td class="p-3 font-bold bg-gray-50/80">Sử Dụng HĐĐT</td>
+                            <td class="p-3 text-gray-500">Không bắt buộc</td>
+                            <td class="p-3 font-extrabold text-red-600">Bắt buộc 100% HĐĐT</td>
+                            <td class="p-3 font-extrabold text-red-600">Bắt buộc 100% HĐĐT</td>
+                            <td class="p-3 font-extrabold text-red-600">Bắt buộc 100% HĐĐT</td>
+                        </tr>
+                        <tr class="hover:bg-blue-50/50 transition-colors">
+                            <td class="p-3 font-bold bg-gray-50/80">Tra Cứu Đầu Vào</td>
+                            <td class="p-3 text-gray-500">CQT không cấp tài khoản</td>
+                            <td class="p-3 font-medium text-kvblue">CQT cấp tài khoản tra cứu</td>
+                            <td class="p-3 font-medium text-kvblue">CQT cấp tài khoản tra cứu</td>
+                            <td class="p-3 font-medium text-kvblue">CQT cấp tài khoản tra cứu</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SLIDE 9: PHẦN II - 2.2 SALES SCRIPT HỒ SƠ THUẾ -->
+        <div class="slide flex flex-col items-center justify-center p-8 pt-24 h-full relative">
+            <div class="header-section-badge"><i class="fa-solid fa-layer-group"></i>PHẦN II - THIẾT LẬP HỒ SƠ KHAI THUẾ</div>
+            <div class="w-full text-center mb-5">
+                <h3 class="text-3xl font-black gradient-text">2.2. Nhận Định & Kịch Bản Tư Vấn (Sales Script)</h3>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-kvblue to-kvcyan mx-auto mt-3 rounded-full"></div>
+            </div>
+            
+            <div class="max-w-4xl w-full space-y-4 text-left">
+                <!-- Thực tế lựa chọn -->
+                <div class="glass-card p-5 border-l-4 border-amber-500">
+                    <h5 class="font-bold text-amber-900 text-lg mb-2"><i class="fa-solid fa-store mr-2"></i>Thực tế lựa chọn của Hộ kinh doanh:</h5>
+                    <p class="text-base text-gray-700 leading-relaxed mb-3">
+                        Khách hàng đã lựa chọn sẵn phương pháp tính thuế TNCN (theo Doanh thu hoặc theo Thu nhập) khi đăng ký hồ sơ với Cơ quan Thuế.
+                    </p>
+                    <p class="text-base text-gray-700 leading-relaxed">
+                        Nhiều khách chọn tính theo Thu nhập vì mong muốn khấu trừ chi phí, nhưng thực tế lại khó khăn do phải chứng minh hóa đơn đầu vào đầy đủ.
+                    </p>
+                </div>
+
+                <!-- Kịch bản Sales đồng cảm & khẳng định -->
+                <div class="glass-card p-6 border-l-4 border-green-600 bg-green-50/40">
+                    <h5 class="font-bold text-green-900 text-lg mb-3"><i class="fa-solid fa-comment-dots mr-2"></i>Kịch bản tư vấn (Sales đồng cảm & khẳng định):</h5>
+                    <p class="text-base text-gray-800 leading-relaxed mb-3 font-medium">
+                        "Em rất hiểu lý do Anh/Chị lựa chọn phương pháp tính thuế này cho cửa hàng của mình ạ!"
+                    </p>
+                    <p class="text-base text-green-900 font-bold leading-relaxed">
+                        "Anh/Chị chọn phương pháp nào (tính theo Doanh thu hay theo Thu nhập), phần mềm KiotViet cũng hỗ trợ tự động đầy đủ Sổ kế toán và Tờ khai thuế chuẩn đúng quy định pháp luật!"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 10: PHẦN II - 2.3 THAO TÁC CÔ ĐỌNG KEYWORDS -->
+        <div class="slide flex flex-col items-center justify-center p-8 pt-24 h-full relative">
+            <div class="header-section-badge"><i class="fa-solid fa-layer-group"></i>PHẦN II - THIẾT LẬP HỒ SƠ KHAI THUẾ</div>
+            <div class="w-full text-center mb-5">
+                <h3 class="text-3xl font-black gradient-text">2.3. Hướng Dẫn Thao Tác Chi Tiết (Input - Output)</h3>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-kvblue to-kvcyan mx-auto mt-3 rounded-full"></div>
+            </div>
+            
+            <div class="max-w-4xl w-full space-y-4 text-left">
+                <!-- INPUT -->
+                <div class="glass-card p-6 border-l-4 border-blue-600">
+                    <h4 class="text-xl font-bold text-kvblue mb-3"><i class="fa-solid fa-arrow-right-to-bracket mr-2"></i>ĐẦU VÀO (Khách Hàng Cung Cấp)</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-base text-gray-800 font-semibold">
+                        <div class="bg-blue-50/80 p-3 rounded-lg border border-blue-100 flex items-center gap-2">
+                            <i class="fa-solid fa-check text-kvblue"></i> Mã số thuế, Tên & Mã ĐĐKD
+                        </div>
+                        <div class="bg-blue-50/80 p-3 rounded-lg border border-blue-100 flex items-center gap-2">
+                            <i class="fa-solid fa-check text-kvblue"></i> Ngành hàng kinh doanh
+                        </div>
+                        <div class="bg-blue-50/80 p-3 rounded-lg border border-blue-100 flex items-center gap-2">
+                            <i class="fa-solid fa-check text-kvblue"></i> Doanh thu ước tính năm
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center text-kvcyan"><i class="fa-solid fa-arrow-down text-2xl"></i></div>
+
+                <!-- OUTPUT -->
+                <div class="glass-card p-6 border-l-4 border-cyan-500">
+                    <h4 class="text-xl font-bold text-kvcyan mb-3"><i class="fa-solid fa-arrow-right-from-bracket mr-2"></i>ĐẦU RA (KiotViet Tự Động Xử Lý)</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-base text-gray-800 font-semibold">
+                        <div class="bg-cyan-50/80 p-3 rounded-lg border border-cyan-100 flex items-center gap-2">
+                            <i class="fa-solid fa-gear text-kvcyan"></i> Tự xác định Nhóm thuế
+                        </div>
+                        <div class="bg-cyan-50/80 p-3 rounded-lg border border-cyan-100 flex items-center gap-2">
+                            <i class="fa-solid fa-gear text-kvcyan"></i> Khởi tạo Sổ kế toán chuẩn
+                        </div>
+                        <div class="bg-cyan-50/80 p-3 rounded-lg border border-cyan-100 flex items-center gap-2">
+                            <i class="fa-solid fa-gear text-kvcyan"></i> Lập sẵn Tờ khai thuế chuẩn
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 11: PHẦN II - 2.4 LUYỆN TẬP THỰC HÀNH -->
+        <div class="slide flex flex-col items-center justify-center p-8 pt-24 h-full relative">
+            <div class="header-section-badge"><i class="fa-solid fa-layer-group"></i>PHẦN II - THIẾT LẬP HỒ SƠ KHAI THUẾ</div>
+            <div class="w-full text-center mb-6">
+                <h3 class="text-3xl font-black gradient-text">2.4. Kịch Bản Luyện Tập Thực Hành</h3>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-kvblue to-kvcyan mx-auto mt-3 rounded-full"></div>
+            </div>
+            <div class="glass-card p-8 max-w-4xl w-full text-left">
+                <div class="space-y-3.5 text-gray-800 text-base">
+                    <div class="flex items-center gap-4 bg-white/80 p-3.5 rounded-xl border border-gray-200">
+                        <span class="w-8 h-8 rounded-full bg-kvblue text-white flex items-center justify-center font-bold shrink-0">1</span>
+                        <span>Tạo mới một gian hàng và chuẩn bị dữ liệu kinh doanh mẫu.</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/80 p-3.5 rounded-xl border border-gray-200">
+                        <span class="w-8 h-8 rounded-full bg-kvblue text-white flex items-center justify-center font-bold shrink-0">2</span>
+                        <span>Thao tác demo tạo hồ sơ khai thuế áp dụng cho Hộ kinh doanh Nhóm 1.</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/80 p-3.5 rounded-xl border border-gray-200">
+                        <span class="w-8 h-8 rounded-full bg-kvblue text-white flex items-center justify-center font-bold shrink-0">3</span>
+                        <span>Thực hiện một vài giao dịch bán hàng trên phần mềm KiotViet.</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/80 p-3.5 rounded-xl border border-gray-200">
+                        <span class="w-8 h-8 rounded-full bg-kvblue text-white flex items-center justify-center font-bold shrink-0">4</span>
+                        <span>Tra cứu Sổ kế toán và Tờ khai thuế tương ứng Nhóm 1 để xem dữ liệu nhảy tự động.</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/80 p-3.5 rounded-xl border border-gray-200">
+                        <span class="w-8 h-8 rounded-full bg-kvblue text-white flex items-center justify-center font-bold shrink-0">5</span>
+                        <span>Thiết lập chuyển đổi hồ sơ sang Hộ kinh doanh Nhóm 2 -&gt; Kiểm tra sự thay đổi biểu mẫu.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 12: PHẦN III - MỤC LỤC PHẦN III (XẾP DỌC TRÊN - DƯỚI) -->
+        <div class="slide flex flex-col items-center justify-center p-8 h-full relative">
+            <div class="w-full text-center mb-6">
+                <h1 class="text-2xl md:text-3xl lg:text-4xl font-black gradient-text uppercase leading-snug py-1">PHẦN III - QUY TRÌNH THIẾT LẬP HÓA ĐƠN ĐIỆN TỬ</h1>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-kvblue to-kvcyan mx-auto mt-4 rounded-full"></div>
+            </div>
+            
+            <!-- Xếp dọc trên - dưới -->
+            <div class="glass-card p-8 max-w-3xl w-full">
+                <div class="space-y-4 text-base font-bold text-gray-800 text-left">
+                    <div class="flex items-center gap-4 bg-blue-50/70 p-3.5 rounded-xl border border-blue-100">
+                        <span class="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0 font-extrabold text-sm">3.1</span>
+                        <span>Kiến thức nền tảng Hóa đơn điện tử & Chữ ký số</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-cyan-50/70 p-3.5 rounded-xl border border-cyan-100">
+                        <span class="w-9 h-9 rounded-full bg-cyan-600 text-white flex items-center justify-center shrink-0 font-extrabold text-sm">3.2</span>
+                        <span>Nhận định & Kịch bản Tư vấn (Sales Script)</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-blue-50/70 p-3.5 rounded-xl border border-blue-100">
+                        <span class="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0 font-extrabold text-sm">3.3</span>
+                        <span>Sơ đồ quy trình 6 bước thiết lập Hóa đơn điện tử</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-cyan-50/70 p-3.5 rounded-xl border border-cyan-100">
+                        <span class="w-9 h-9 rounded-full bg-cyan-600 text-white flex items-center justify-center shrink-0 font-extrabold text-sm">3.4</span>
+                        <span>Luyện tập thực hành quy trình Hóa đơn điện tử</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 13: PHẦN III - 3.1 KIẾN THỨC NỀN TẢNG HĐĐT & CKS -->
+        <div class="slide flex flex-col items-center justify-center p-8 pt-24 h-full relative">
+            <div class="header-section-badge"><i class="fa-solid fa-layer-group"></i>PHẦN III - THIẾT LẬP HÓA ĐƠN ĐIỆN TỬ</div>
+            <div class="w-full text-center mb-5">
+                <h3 class="text-3xl font-black gradient-text">3.1. Kiến Thức Nền Tảng Hóa Đơn Điện Tử & Chữ Ký Số</h3>
+            </div>
+            
+            <div class="max-w-4xl w-full space-y-4 text-left">
+                <div class="glass-card p-5 border-l-4 border-blue-600">
+                    <h4 class="font-bold text-gray-800 text-lg mb-2"><i class="fa-solid fa-file-code text-kvblue mr-2"></i>Hóa Đơn Điện Tử & Tệp XML</h4>
+                    <p class="text-base text-gray-700 leading-relaxed mb-2">
+                        Định dạng tệp dữ liệu chính thức và có giá trị pháp lý là <strong>tệp XML</strong> (chứa dữ liệu hóa đơn và mã chữ ký số để Cơ quan Thuế đọc và lưu trữ).
+                    </p>
+                    <p class="text-base text-gray-700 leading-relaxed">
+                        Hóa đơn điện tử khởi tạo từ máy tính tiền kết nối trực tiếp CQT, giúp xuất hóa đơn tức thì tại thời điểm thanh toán.
+                    </p>
+                </div>
+
+                <div class="glass-card p-5 border-l-4 border-cyan-500">
+                    <h4 class="font-bold text-gray-800 text-lg mb-2"><i class="fa-solid fa-building text-kvcyan mr-2"></i>Phân Biệt Mẫu Hóa Đơn</h4>
+                    <p class="text-base text-gray-700 leading-relaxed mb-2">
+                        <strong>Hộ kinh doanh:</strong> Sử dụng Hóa đơn bán hàng (hiển thị giá thanh toán tổng cộng).
+                    </p>
+                    <p class="text-base text-gray-700 leading-relaxed">
+                        <strong>Doanh nghiệp:</strong> Sử dụng Hóa đơn Giá trị gia tăng (hiển thị tách riêng Giá chưa thuế, Thuế % và Tổng tiền).
+                    </p>
+                </div>
+
+                <div class="glass-card p-5 border-l-4 border-purple-600">
+                    <h4 class="font-bold text-gray-800 text-lg mb-2"><i class="fa-solid fa-key text-purple-600 mr-2"></i>Chữ Ký Số Từ Xa (Remote Signing)</h4>
+                    <p class="text-base text-gray-700 leading-relaxed">
+                        Chữ ký số lưu trữ trực tuyến, không cần cắm USB Token vật lý. Cho phép ký số (ký phát hành hóa đơn, ký gửi tờ khai, ký gửi dữ liệu cho CQT) linh hoạt ngay trên điện thoại
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 14: PHẦN III - 3.2 SALES SCRIPT HĐĐT -->
+        <div class="slide flex flex-col items-center justify-center p-8 pt-24 h-full relative">
+            <div class="header-section-badge"><i class="fa-solid fa-layer-group"></i>PHẦN III - THIẾT LẬP HÓA ĐƠN ĐIỆN TỬ</div>
+            <div class="w-full text-center mb-6">
+                <h3 class="text-3xl font-black gradient-text">3.2. Nhận Định & Kịch Bản Tư Vấn (Sales Script)</h3>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-kvblue to-kvcyan mx-auto mt-3 rounded-full"></div>
+            </div>
+            
+            <div class="max-w-4xl w-full space-y-4 text-left">
+                <!-- Mốc doanh thu -->
+                <div class="glass-card p-5 border-l-4 border-amber-500">
+                    <h5 class="font-bold text-amber-900 text-lg mb-2"><i class="fa-solid fa-scale-balanced mr-2"></i>2 Mốc Doanh Thu Bắt Buộc Nhớ:</h5>
+                    <p class="text-base text-gray-700 leading-relaxed mb-2">
+                        • <strong>Dưới 1 tỷ/năm (Nhóm 1):</strong> Không bắt buộc dùng HĐĐT khởi tạo từ máy tính tiền (chỉ khuyến khích). Đã đăng ký là phải dùng liên tục.
+                    </p>
+                    <p class="text-base text-red-900 font-bold leading-relaxed">
+                        • <strong>Trên 1 tỷ/năm (Nhóm 2, 3, 4):</strong> BẮT BUỘC 100% phải sử dụng Hóa đơn điện tử khởi tạo từ máy tính tiền.
+                    </p>
+                </div>
+
+                <!-- Ưu đãi -->
+                <div class="glass-card p-6 border-l-4 border-green-600 bg-green-50/40">
+                    <h5 class="font-bold text-green-900 text-lg mb-2"><i class="fa-solid fa-gift mr-2"></i>Chính sách ưu đãi lớn chốt Sale:</h5>
+                    <p class="text-base text-gray-800 leading-relaxed font-medium mb-3">
+                        "Anh/Chị hoàn toàn yên tâm! Mua phần mềm KiotViet được <span class="text-green-700 font-bold">tặng Hóa đơn điện tử</span>, <span class="text-green-700 font-bold">tặng Chữ ký số từ xa KiotViet IntrustCA</span> và hỗ trợ quản lý Hóa đơn đầu vào."
+                    </p>
+                    <p class="text-base text-green-900 font-bold">
+                        Anh/Chị hoàn toàn yên tâm vận hành kinh doanh và tuân thủ đúng pháp luật!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 15: PHẦN III - 3.3 QUY TRÌNH 6 BƯỚC (DÙNG FONT INTER CHUẨN) -->
+        <div class="slide flex flex-col items-center justify-center p-8 pt-24 h-full relative">
+            <div class="header-section-badge"><i class="fa-solid fa-layer-group"></i>PHẦN III - THIẾT LẬP HÓA ĐƠN ĐIỆN TỬ</div>
+            <div class="w-full text-center mb-4">
+                <h3 class="text-2xl md:text-3xl font-black gradient-text">3.3. Sơ Đồ Quy Trình 6 Bước Thiết Lập Hóa Đơn Điện Tử</h3>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-7xl w-full text-left mb-4">
+                <!-- Step 1 -->
+                <div class="glass-card p-4 border-t-4 border-blue-600">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-black">1</span>
+                        <i class="fa-solid fa-file-signature text-kvblue text-lg"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 text-sm mb-1">Đăng Ký Chữ Ký Số</h4>
+                    <p class="text-xs text-gray-600 leading-relaxed">MST thật, CCCD gắn chip, ĐT NFC.<br><span class="text-kvblue font-bold">Lưu Email:</span> Mật khẩu, ID <br>Tạo và ghi nhớ Mã PIN 6 số.<br>=> 3 trường thông tin này cần nhập lên Phần mềm HĐĐT.</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="glass-card p-4 border-t-4 border-cyan-500">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="w-7 h-7 rounded-full bg-cyan-600 text-white flex items-center justify-center text-xs font-black">2</span>
+                        <i class="fa-solid fa-percent text-kvcyan text-lg"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 text-sm mb-1">Thiết Lập Thuế GTGT</h4>
+                    <p class="text-xs text-gray-600 leading-relaxed">Thiết lập -&gt; Thuế & Kế toán -&gt; Chọn <span class="font-bold">Thuế Trực Tiếp</span>.<br><span class="text-kvcyan font-bold">Bật NQ 204:</span> Giảm 20% thuế GTGT.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="glass-card p-4 border-t-4 border-blue-600">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-black">3</span>
+                        <i class="fa-solid fa-bolt text-kvblue text-lg"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 text-sm mb-1">Kích Hoạt HĐĐT KiotViet</h4>
+                    <p class="text-xs text-gray-600 leading-relaxed">Thuế & Kế toán -&gt; KiotViet eInvoice.<br><span class="text-kvblue font-bold">Cài CKS:</span> Chọn kê khai trực tiếp & <span class="font-bold">Xác thực tự động</span>.</p>
+                </div>
+                <!-- Step 4 -->
+                <div class="glass-card p-4 border-t-4 border-cyan-500">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="w-7 h-7 rounded-full bg-cyan-600 text-white flex items-center justify-center text-xs font-black">4</span>
+                        <i class="fa-solid fa-paper-plane text-kvcyan text-lg"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 text-sm mb-1">Lập Tờ Khai 01/ĐKTĐ</h4>
+                    <p class="text-xs text-gray-600 leading-relaxed">Menu Tờ khai -&gt; Tạo mới 01/ĐKTĐ.<br><span class="text-kvcyan font-bold">Chọn:</span> Đăng ký mới, HĐĐT từ máy tính tiền -&gt; Bấm Nộp.</p>
+                </div>
+                <!-- Step 5 -->
+                <div class="glass-card p-4 border-t-4 border-blue-600">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-black">5</span>
+                        <i class="fa-solid fa-sliders text-kvblue text-lg"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 text-sm mb-1">Thiết Lập Mẫu Hóa Đơn</h4>
+                    <p class="text-xs text-gray-600 leading-relaxed">Cài đặt -&gt; Mẫu hóa đơn -&gt; Tạo mẫu mới.<br><span class="text-kvblue font-bold">Điền:</span> Ký hiệu 2C26M-VV, Mã ĐĐKD NĐ141, Logo...</p>
+                </div>
+                <!-- Step 6 -->
+                <div class="glass-card p-4 border-t-4 border-cyan-500">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="w-7 h-7 rounded-full bg-cyan-600 text-white flex items-center justify-center text-xs font-black">6</span>
+                        <i class="fa-solid fa-link text-kvcyan text-lg"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 text-sm mb-1">Kết Nối Với Bán Hàng</h4>
+                    <p class="text-xs text-gray-600 leading-relaxed">Thiết lập -&gt; Hóa đơn điện tử -&gt; Nhập MST & OTP Zalo/SĐT.<br><span class="text-kvcyan font-bold">Bật:</span> Tự động phát hành & in QR tra cứu.</p>
+                </div>
+            </div>
+
+            <!-- Floating eTax Alert Bar -->
+            <div class="bg-red-500 text-white p-3.5 rounded-2xl max-w-7xl w-full text-center text-xs md:text-sm font-bold shadow-lg border border-red-400 alert-pulse flex items-center justify-center gap-3">
+                <i class="fa-solid fa-triangle-exclamation text-2xl text-yellow-300 shrink-0"></i>
+                <span>🚨 <strong>LƯU Ý CỐT LÕI (XÁC THỰC ETAX MOBILE TRONG 24H):</strong> Ngay sau khi bấm Nộp tờ khai 01, Chủ hộ BẮT BUỘC phải vào ứng dụng eTax Mobile trên điện thoại quét khuôn mặt sinh trắc học TRONG VÒNG 24 GIỜ. Nếu quá 24h, Cơ quan Thuế sẽ TỰ ĐỘNG TỪ CHỐI Tờ khai!</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 16: PHẦN III - 3.4 LUYỆN TẬP THỰC HÀNH (CẬP NHẬT 6 BƯỚC MỚI) -->
+        <div class="slide flex flex-col items-center justify-center p-8 pt-24 h-full relative">
+            <div class="header-section-badge"><i class="fa-solid fa-layer-group"></i>PHẦN III - THIẾT LẬP HÓA ĐƠN ĐIỆN TỬ</div>
+            <div class="w-full text-center mb-6">
+                <h3 class="text-3xl font-black gradient-text">3.4. Kịch Bản Luyện Tập Thực Hành</h3>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-kvblue to-kvcyan mx-auto mt-3 rounded-full"></div>
+            </div>
+            
+            <div class="glass-card p-7 max-w-4xl w-full text-left">
+                <div class="space-y-3 text-gray-800 text-base">
+                    <div class="flex items-center gap-4 bg-white/80 p-3 rounded-xl border border-gray-200">
+                        <span class="w-7 h-7 rounded-full bg-kvcyan text-white flex items-center justify-center font-bold text-sm shrink-0">1</span>
+                        <span>Xem video hướng dẫn đăng ký Chữ ký số từ xa (Do môi trường học tập không có ĐKKD thực tế).</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/80 p-3 rounded-xl border border-gray-200">
+                        <span class="w-7 h-7 rounded-full bg-kvcyan text-white flex items-center justify-center font-bold text-sm shrink-0">2</span>
+                        <span>Thực hành Thiết lập Thuế trên gian hàng dùng thử.</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/80 p-3 rounded-xl border border-gray-200">
+                        <span class="w-7 h-7 rounded-full bg-kvcyan text-white flex items-center justify-center font-bold text-sm shrink-0">3</span>
+                        <span>Tiếp tục dùng gian dùng thử, nhập Mã số thuế ảo để kích hoạt KiotViet eInvoice.</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/80 p-3 rounded-xl border border-gray-200">
+                        <span class="w-7 h-7 rounded-full bg-kvcyan text-white flex items-center justify-center font-bold text-sm shrink-0">4</span>
+                        <span>Truy cập và xem giao diện lập Tờ khai 01/ĐKTĐ.</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/80 p-3 rounded-xl border border-gray-200">
+                        <span class="w-7 h-7 rounded-full bg-kvcyan text-white flex items-center justify-center font-bold text-sm shrink-0">5</span>
+                        <span>Thực hành tạo mẫu Hóa đơn điện tử.</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/80 p-3 rounded-xl border border-gray-200">
+                        <span class="w-7 h-7 rounded-full bg-kvcyan text-white flex items-center justify-center font-bold text-sm shrink-0">6</span>
+                        <span>Thao tác kết nối KiotViet eInvoice với phần mềm Quản lý bán hàng KiotViet.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 17: PHẦN IV - MỤC LỤC PHẦN IV (XẾP DỌC TRÊN - DƯỚI) -->
+        <div class="slide flex flex-col items-center justify-center p-8 h-full relative">
+            <div class="w-full text-center mb-6">
+                <h1 class="text-2xl md:text-3xl lg:text-4xl font-black gradient-text uppercase leading-snug py-1">PHẦN IV - QUY TRÌNH VẬN HÀNH THỰC TẾ TẠI CỬA HÀNG</h1>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-kvblue to-kvcyan mx-auto mt-4 rounded-full"></div>
+            </div>
+            
+            <!-- Xếp dọc trên - dưới -->
+            <div class="glass-card p-8 max-w-3xl w-full">
+                <div class="space-y-4 text-base font-bold text-gray-800 text-left">
+                    <div class="flex items-center gap-4 bg-blue-50/70 p-3.5 rounded-xl border border-blue-100">
+                        <span class="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0 font-extrabold text-sm">4.1</span>
+                        <span>Kiến thức nền tảng & Mốc kiểm tra định kỳ</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-cyan-50/70 p-3.5 rounded-xl border border-cyan-100">
+                        <span class="w-9 h-9 rounded-full bg-cyan-600 text-white flex items-center justify-center shrink-0 font-extrabold text-sm">4.2</span>
+                        <span>Nhận định & Kịch bản Tư vấn (Giá trị 3 Miễn)</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-blue-50/70 p-3.5 rounded-xl border border-blue-100">
+                        <span class="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0 font-extrabold text-sm">4.3</span>
+                        <span>Hướng dẫn thao tác chi tiết vận hành</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-cyan-50/70 p-3.5 rounded-xl border border-cyan-100">
+                        <span class="w-9 h-9 rounded-full bg-cyan-600 text-white flex items-center justify-center shrink-0 font-extrabold text-sm">4.4</span>
+                        <span>Luyện tập thực hành vận hành cửa hàng</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 18: PHẦN IV - 4.1 KIẾN THỨC NỀN TẢNG & MỐC KIỂM TRA -->
+        <div class="slide flex flex-col items-center justify-center p-8 pt-24 h-full relative">
+            <div class="header-section-badge"><i class="fa-solid fa-layer-group"></i>PHẦN IV - VẬN HÀNH THỰC TẾ TẠI CỬA HÀNG</div>
+            <div class="w-full text-center mb-6">
+                <h3 class="text-3xl font-black gradient-text">4.1. Kiến Thức Nền Tảng & Mốc Kiểm Tra Định Kỳ</h3>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-kvblue to-kvcyan mx-auto mt-3 rounded-full"></div>
+            </div>
+            
+            <div class="max-w-4xl w-full space-y-4 text-left">
+                <div class="glass-card p-5 border-l-4 border-blue-600">
+                    <h4 class="text-lg font-bold text-gray-800 mb-2"><i class="fa-solid fa-clock text-kvblue mr-2"></i>Cuối Ngày</h4>
+                    <p class="text-base text-gray-700 leading-relaxed mb-2">
+                        Sau khi phát hành các Hóa đơn điện tử từ Máy tính tiền trong ngày, cần kiểm tra trạng thái hóa đơn <strong>"Chưa gửi Cơ quan Thuế"</strong>, bấm gửi hàng loạt đúng hạn.
+                    </p>
+                    <p class="text-base text-gray-700 leading-relaxed">
+                        Việc truyền dữ liệu Hóa đơn điện tử lên Cơ quan Thuế hàng ngày là bắt buộc để tránh rủi ro phạt vi phạm.
+                    </p>
+                </div>
+
+                <div class="glass-card p-5 border-l-4 border-cyan-500">
+                    <h4 class="text-lg font-bold text-gray-800 mb-2"><i class="fa-solid fa-calendar-check text-kvcyan mr-2"></i>Hàng Quý</h4>
+                    <p class="text-base text-gray-700 leading-relaxed">
+                        Kiểm tra doanh thu tổng hợp trên <strong>Tờ khai 01/CNKD</strong> và nộp thuế (Áp dụng cho Hộ kinh doanh Nhóm 2, 3, 4).
+                    </p>
+                </div>
+
+                <div class="glass-card p-5 border-l-4 border-purple-600">
+                    <h4 class="text-lg font-bold text-gray-800 mb-2"><i class="fa-solid fa-calendar-days text-purple-600 mr-2"></i>Hàng Năm</h4>
+                    <p class="text-base text-gray-700 leading-relaxed">
+                        Quyết toán thuế năm và nộp <strong>Tờ khai 01/TKN-CNKD</strong> (Áp dụng cho Hộ kinh doanh Nhóm 1 - Xác nhận doanh thu dưới 1 tỷ).
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 19: PHẦN IV - 4.2 KỊCH BẢN TƯ VẤN (VIẾT LẠI BỔ SUNG LƯU Ý) -->
+        <div class="slide flex flex-col items-center justify-center p-8 pt-24 h-full relative">
+            <div class="header-section-badge"><i class="fa-solid fa-layer-group"></i>PHẦN IV - VẬN HÀNH THỰC TẾ TẠI CỬA HÀNG</div>
+            <div class="w-full text-center mb-5">
+                <h3 class="text-3xl font-black gradient-text">4.2. Nhận Định & Kịch Bản Tư Vấn (Giá Trị 3 Miễn)</h3>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-kvblue to-kvcyan mx-auto mt-3 rounded-full"></div>
+            </div>
+            
+            <div class="glass-card p-8 max-w-4xl w-full text-left space-y-5">
+                <h4 class="text-2xl font-bold text-gray-800 text-center mb-2">Bộ Giải Pháp Toàn Diện KiotViet Dành Cho Hộ Kinh Doanh:</h4>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-blue-50 border border-blue-200 p-4 rounded-2xl text-center">
+                        <i class="fa-solid fa-circle-nodes text-3xl text-kvblue mb-2"></i>
+                        <h5 class="text-base font-bold text-gray-800 mb-1">Miễn Phí Tích Hợp</h5>
+                        <p class="text-xs text-gray-600 leading-relaxed">Phân hệ Kế toán - Thuế tích hợp sẵn 100% trên KiotViet.</p>
+                    </div>
+                    <div class="bg-cyan-50 border border-cyan-200 p-4 rounded-2xl text-center">
+                        <i class="fa-solid fa-signature text-3xl text-kvcyan mb-2"></i>
+                        <h5 class="text-base font-bold text-gray-800 mb-1">Miễn Phí Chữ Ký Số</h5>
+                        <p class="text-xs text-gray-600 leading-relaxed">Tặng kèm Chữ ký số từ xa KiotViet IntrustCA cao cấp.</p>
+                    </div>
+                    <div class="bg-green-50 border border-green-200 p-4 rounded-2xl text-center">
+                        <i class="fa-solid fa-shield-halved text-3xl text-green-600 mb-2"></i>
+                        <h5 class="text-base font-bold text-gray-800 mb-1">Miễn Lo Thủ Tục</h5>
+                        <p class="text-xs text-gray-600 leading-relaxed">Tự động hóa sổ sách & tờ khai, an tâm bán hàng.</p>
+                    </div>
+                </div>
+
+                <!-- Lời thoại tư vấn viết lại -->
+                <div class="p-5 bg-green-50/80 border-l-4 border-green-600 rounded-r-2xl">
+                    <h5 class="font-bold text-green-900 text-base mb-2"><i class="fa-solid fa-comment-dots mr-2"></i>Kịch bản chốt Sale nổi bật:</h5>
+                    <p class="text-base text-gray-800 font-medium leading-relaxed mb-2">
+                        "KiotViet không chỉ hỗ trợ phần mềm mà còn <span class="text-green-700 font-bold">tặng Hóa đơn điện tử miễn phí</span> cho Anh/Chị! Hệ thống được <span class="text-green-700 font-bold">thiết lập cực kỳ nhanh chóng</span>, giúp cửa hàng <span class="text-green-700 font-bold">vận hành chuẩn theo đúng quy định pháp luật</span>."
+                    </p>
+                    <p class="text-base text-green-900 font-bold leading-relaxed">
+                        Đặc biệt, toàn bộ dữ liệu Thuế và Kế toán luôn được đồng bộ tự động chính xác 100%, giúp Anh/Chị hoàn toàn yên tâm bán hàng!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 20: PHẦN IV - 4.3 THAO TÁC PHÁT HÀNH & GIỜ CUỐI NGÀY -->
+        <div class="slide flex flex-col items-center justify-center p-8 pt-24 h-full relative">
+            <div class="header-section-badge"><i class="fa-solid fa-layer-group"></i>PHẦN IV - VẬN HÀNH THỰC TẾ TẠI CỬA HÀNG</div>
+            <div class="w-full text-center mb-6">
+                <h3 class="text-3xl font-black gradient-text">4.3. Hướng Dẫn Thao Tác Chi Tiết Vận Hành</h3>
+            </div>
+            
+            <div class="max-w-4xl w-full space-y-4 text-left">
+                <!-- Khối 1 -->
+                <div class="glass-card p-6 border-l-4 border-blue-600">
+                    <h4 class="font-bold text-gray-800 text-lg mb-2"><i class="fa-solid fa-cash-register text-kvblue mr-2"></i>Phát Hành Hóa Đơn Điện Tử</h4>
+                    <p class="text-base text-gray-700 leading-relaxed mb-3">
+                        • <strong>Tại Màn hình Bán hàng (Quầy):</strong> Bật tự động phát hành. Thu ngân thanh toán bình thường, hệ thống tự xuất HĐĐT & in bill có QR. Thu ngân không thay đổi thói quen.
+                    </p>
+                    <p class="text-base text-gray-700 leading-relaxed">
+                        • <strong>Tại Màn hình Quản lý:</strong> Tìm hóa đơn "Chưa phát hành" -&gt; Bấm Phát hành hàng loạt.
+                    </p>
+                </div>
+
+                <!-- Khối 2 -->
+                <div class="glass-card p-6 border-l-4 border-cyan-500">
+                    <h4 class="font-bold text-gray-800 text-lg mb-2"><i class="fa-solid fa-cloud-arrow-up text-kvcyan mr-2"></i>Quản Lý Dữ Liệu Cuối Ngày</h4>
+                    <p class="text-base text-gray-700 leading-relaxed mb-3">
+                        • Truy cập vào phân hệ <strong>KiotViet Invoice</strong> -&gt; Mục <strong>Hóa đơn bán hàng từ máy tính tiền</strong>.
+                    </p>
+                    <p class="text-base text-gray-700 leading-relaxed">
+                        • Lọc trạng thái <strong>"Chưa gửi Cơ quan Thuế"</strong> -&gt; Bấm <strong>"Gửi cơ quan thuế hàng loạt"</strong> để hoàn tất.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 21: PHẦN IV - 4.4 LUYỆN TẬP THỰC HÀNH -->
+        <div class="slide flex flex-col items-center justify-center p-8 pt-24 h-full relative">
+            <div class="header-section-badge"><i class="fa-solid fa-layer-group"></i>PHẦN IV - VẬN HÀNH THỰC TẾ TẠI CỬA HÀNG</div>
+            <div class="w-full text-center mb-6">
+                <h3 class="text-3xl font-black gradient-text">4.4. Kịch Bản Luyện Tập Thực Hành</h3>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-kvblue to-kvcyan mx-auto mt-3 rounded-full"></div>
+            </div>
+            <div class="glass-card p-8 max-w-4xl w-full text-left">
+                <div class="space-y-3.5 text-gray-800 text-base">
+                    <div class="flex items-center gap-4 bg-white/80 p-3.5 rounded-xl border border-gray-200">
+                        <span class="w-8 h-8 rounded-full bg-kvblue text-white flex items-center justify-center font-bold shrink-0">1</span>
+                        <span>Sử dụng gian hàng demo của bộ phận Đào tạo (Learning & Development) được cấp.</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/80 p-3.5 rounded-xl border border-gray-200">
+                        <span class="w-8 h-8 rounded-full bg-kvblue text-white flex items-center justify-center font-bold shrink-0">2</span>
+                        <span>Thực hành phát hành Hóa đơn điện tử trực tiếp từ Màn hình bán hàng.</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/80 p-3.5 rounded-xl border border-gray-200">
+                        <span class="w-8 h-8 rounded-full bg-kvblue text-white flex items-center justify-center font-bold shrink-0">3</span>
+                        <span>Thực hành thao tác phát hành Hóa đơn điện tử từ Màn hình Quản lý.</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/80 p-3.5 rounded-xl border border-gray-200">
+                        <span class="w-8 h-8 rounded-full bg-kvblue text-white flex items-center justify-center font-bold shrink-0">4</span>
+                        <span>Truy cập phân hệ KiotViet eInvoice để thao tác gửi Hóa đơn lên Cơ quan Thuế.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 22: SLIDE CUỐI - CẢM ƠN -->
+        <div class="slide flex items-center justify-center p-8">
+            <div class="glass-card p-16 max-w-4xl w-full text-center">
+                <i class="fa-solid fa-circle-check text-[5rem] text-kvblue mb-8"></i>
+                <h1 class="text-4xl md:text-5xl font-extrabold gradient-text mb-6">Cảm ơn bạn đã theo dõi!</h1>
+                <p class="text-xl md:text-2xl text-gray-700 font-medium mb-8">Chúc bạn kinh doanh hiệu quả và bùng nổ doanh số!</p>
+                <div class="bg-blue-50 py-4 px-8 rounded-full inline-block border border-blue-100">
+                    <p class="text-base md:text-lg text-gray-700"><i class="fa-solid fa-book-open mr-2 text-kvblue"></i> Tham khảo thêm Tài liệu HDSD chi tiết tại <a href="https://kiotviet.vn/ho-tro/" target="_blank" class="text-kvblue font-bold hover:underline">https://kiotviet.vn/ho-tro/</a></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // BỘ ĐIỀU KHIỂN TRÌNH CHIẾU VÒNG LẶP VÔ TẬN
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function updateUI(newIndex) {
+            let targetIndex = newIndex;
+            if (newIndex >= slides.length) {
+                targetIndex = 0;
+            } else if (newIndex < 0) {
+                targetIndex = slides.length - 1;
+            }
+            
+            slides[currentSlide].classList.remove('active');
+            slides[targetIndex].classList.add('active');
+            currentSlide = targetIndex;
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === ' ' || e.key === 'ArrowRight') { 
+                e.preventDefault(); 
+                updateUI(currentSlide + 1); 
+            } else if (e.key === 'ArrowLeft') { 
+                e.preventDefault(); 
+                updateUI(currentSlide - 1); 
+            }
+        });
+    </script>
+</body>
+</html>
