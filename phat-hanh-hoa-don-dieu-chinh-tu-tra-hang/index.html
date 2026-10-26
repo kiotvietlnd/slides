@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        * { box-sizing: border-box; user-select: none; }
+        /* CHO PHÉP BÔI ĐEN COPY TEXT TOÀN BỘ TRANG */
+        * { box-sizing: border-box; user-select: text; }
         
         /* THEME RETAIL: CYAN */
         :root {
@@ -28,6 +29,7 @@
             overflow: hidden; background: #e2e8f0;
             font-family: 'Plus Jakarta Sans', sans-serif;
             color: #0f172a;
+            user-select: text;
         }
 
         h1, h2, h3, .balance-text { text-wrap: balance; }
@@ -377,8 +379,9 @@
             text-wrap: balance; white-space: normal;
             display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
             overflow: hidden; text-overflow: ellipsis;
+            user-select: text;
         }
-        .print-subtitle { display: none; text-align: center !important; }
+        .print-subtitle { display: none; text-align: center !important; user-select: text; }
 
         @media print {
             @page { size: 1280px 720px; margin: 0mm !important; }
@@ -466,9 +469,9 @@
                                 <i class="fa-solid fa-copy text-cyan-600"></i>
                             </div>
                             <h3 class="text-base font-extrabold text-slate-900">Copy toàn bộ phụ đề</h3>
-                            <p class="text-xs font-semibold text-slate-500 leading-relaxed">Sao chép kịch bản gốc chuẩn chính tả (không phiên âm, không pause) kèm câu đếm ngược mở đầu:</p>
-                            <div class="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-[11px] font-mono font-bold text-amber-900 leading-snug">
-                                Chuẩn bị ghi hình 10 9 8 7 6 5 4 3 2 1
+                            <p class="text-xs font-semibold text-slate-500 leading-relaxed">Sao chép kịch bản gốc chuẩn chính tả (không phiên âm, không pause) kèm câu mở đầu:</p>
+                            <div class="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-[10.5px] font-mono font-bold text-amber-900 leading-snug">
+                                Chuẩn bị ghi hình, lưu ý bạn hãy nghe kỹ lời dẫn và bấm phím mũi tên để chuyển slides, 5 4 3 2 1 &lt;pause&gt;
                             </div>
                         </div>
                         <button onclick="copyAllSubtitlesWithPrefix()" id="btn-copy-sub" class="studio-btn studio-btn-primary w-full">
@@ -547,7 +550,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-5 gap-3">
+                <div class="grid grid-cols-6 gap-3">
                     <div class="shortcut-item" onclick="toggleFullScreen()">
                         <span class="kbd-light">F</span>
                         <div>
@@ -558,21 +561,28 @@
                     <div class="shortcut-item" onclick="activateModeByKey(false)">
                         <span class="kbd-light">1</span>
                         <div>
-                            <div class="text-xs font-extrabold text-slate-900">Không thuyết minh</div>
-                            <div class="text-[11px] font-semibold text-slate-500">Present im lặng / Tắt tiếng</div>
+                            <div class="text-xs font-extrabold text-slate-900">Không lời</div>
+                            <div class="text-[11px] font-semibold text-slate-500">Tắt tiếng audio</div>
                         </div>
                     </div>
                     <div class="shortcut-item" onclick="activateModeByKey(true)">
                         <span class="kbd-light">2</span>
                         <div>
-                            <div class="text-xs font-extrabold" style="color: var(--theme-dark);">Bật Thuyết minh</div>
-                            <div class="text-[11px] font-semibold text-slate-500">Phát mc.wav hoặc TTS</div>
+                            <div class="text-xs font-extrabold" style="color: var(--theme-dark);">Thuyết minh</div>
+                            <div class="text-[11px] font-semibold text-slate-500">Phát mc.wav / TTS</div>
+                        </div>
+                    </div>
+                    <div class="shortcut-item" onclick="togglePauseAudio()">
+                        <span class="kbd-light">3</span>
+                        <div>
+                            <div class="text-xs font-extrabold text-indigo-900">Pause / Play</div>
+                            <div class="text-[11px] font-semibold text-slate-500">Tạm dừng audio</div>
                         </div>
                     </div>
                     <div class="shortcut-item" onclick="returnToSettings()">
                         <span class="kbd-light">0</span>
                         <div>
-                            <div class="text-xs font-extrabold text-slate-900">Về trang Settings</div>
+                            <div class="text-xs font-extrabold text-slate-900">Settings</div>
                             <div class="text-[11px] font-semibold text-slate-500">Thiết lập ban đầu</div>
                         </div>
                     </div>
@@ -1123,7 +1133,13 @@
     <section class="scene scene-content" data-scene="22"
         data-caption="Nếu tắt tính năng tự động, phiếu trả sẽ được lưu với trạng thái Chưa phát hành. Sau đó bạn vào Quản lý trả hàng để chủ động bấm Lập hóa đơn điều chỉnh bất cứ lúc nào."
         data-vo="Nếu tắt tính năng tự động, phiếu trả sẽ được lưu với trạng thái Chưa phát hành. Sau đó bạn vào Quản lý trả hàng để chủ động bấm Lập hóa đơn điều chỉnh bất cứ lúc nào.">
-        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="Chế độ vận hành thủ công">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-user-gear"></i> Các tính năng nâng cao</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-hand"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">2. Vận hành ở chế độ thủ công hoàn toàn</h1>
                 </div>
             </div>
             <div class="screenshot-stage">
@@ -1280,6 +1296,7 @@
     let voiceEnabled = false;
     let hasCustomAudio = false;
     let isAnimating = false;
+    let isUserPaused = false; // Trạng thái phím 3 Pause/Resume
 
     function initPrintSubtitles() {
         scenes.forEach((scene) => {
@@ -1293,6 +1310,7 @@
 
     function selectAudioMode(enableVoice) {
         voiceEnabled = enableVoice;
+        isUserPaused = false;
         const radio1 = document.getElementById('radio-mode-1');
         const radio2 = document.getElementById('radio-mode-2');
         const label1 = document.getElementById('label-mode-1');
@@ -1317,11 +1335,45 @@
         }
     }
 
+    // BẬT / TẮT TẠM DỪNG BẰNG PHÍM 3
+    function togglePauseAudio() {
+        if (!voiceEnabled || currentIndex <= 0) return;
+
+        if (hasCustomAudio && customAudioPlayer.src) {
+            if (customAudioPlayer.paused) {
+                customAudioPlayer.play().catch(() => {});
+                isUserPaused = false;
+            } else {
+                customAudioPlayer.pause();
+                isUserPaused = true;
+            }
+            return;
+        }
+
+        // Với TTS dự phòng
+        if ('speechSynthesis' in window) {
+            if (window.speechSynthesis.speaking) {
+                if (window.speechSynthesis.paused) {
+                    window.speechSynthesis.resume();
+                    isUserPaused = false;
+                } else {
+                    window.speechSynthesis.pause();
+                    isUserPaused = true;
+                }
+            } else if (isUserPaused) {
+                isUserPaused = false;
+                triggerSlideVoice(currentIndex);
+            }
+        }
+    }
+
     function triggerSlideVoice(index) {
         if (!voiceEnabled || index <= 0) {
             stopAllAudio();
             return;
         }
+
+        if (isUserPaused) return;
 
         if (hasCustomAudio && customAudioPlayer.src) {
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
@@ -1360,11 +1412,13 @@
     }
 
     function startPresentation() {
+        isUserPaused = false;
         goToScene(1);
     }
 
     function returnToSettings() {
         stopAllAudio();
+        isUserPaused = false;
         if (customAudioPlayer) customAudioPlayer.currentTime = 0;
         goToScene(0, true);
     }
@@ -1427,8 +1481,9 @@
         }, 670);
     }
 
+    // CÂU MỞ ĐẦU CHUẨN KHI COPY PHỤ ĐỀ SANG GOOGLE AI STUDIO
     function copyAllSubtitlesWithPrefix() {
-        const prefix = 'Chuẩn bị ghi hình 10 9 8 7 6 5 4 3 2 1';
+        const prefix = 'Chuẩn bị ghi hình, lưu ý bạn hãy nghe kỹ lời dẫn và bấm phím mũi tên để chuyển slides, 5 4 3 2 1 <pause>';
         const lines = [prefix];
         scenes.forEach((s, idx) => {
             if (idx >= 2) {
@@ -1463,20 +1518,18 @@
         const badge = document.getElementById('audio-loaded-Badge');
         document.getElementById('audio-filename').innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> ${fileName} ${isAuto ? '(Tự động)' : ''}`;
         badge.classList.remove('hidden');
-        selectAudioMode(true); // Tự động bật chế độ 2 - Thuyết minh
+        selectAudioMode(true);
     }
 
-    // Tự động kiểm tra file mc.wav trực tiếp qua thẻ Audio (CÁCH 1)
+    // Tự động kiểm tra file mc.wav trực tiếp qua thẻ Audio (Cách 1)
     function autoDetectByAudioTag() {
         customAudioPlayer.preload = "metadata";
         
-        // Sự kiện khi tìm thấy file mc.wav và đọc được metadata
         customAudioPlayer.onloadedmetadata = function() {
             setAudioSuccessUI('mc.wav', true);
             console.log('[Auto-Detect] Đã tự nhận diện thành công file mc.wav cùng folder!');
         };
 
-        // Sự kiện khi trong folder chưa có file mc.wav
         customAudioPlayer.onerror = function() {
             hasCustomAudio = false;
             customAudioPlayer.removeAttribute('src');
@@ -1486,7 +1539,6 @@
             console.log('[Auto-Detect] Không tìm thấy file mc.wav, chuyển sang chế độ thủ công.');
         };
 
-        // Gán trực tiếp file mc.wav cùng folder
         customAudioPlayer.src = 'mc.wav';
     }
 
@@ -1507,6 +1559,7 @@
         stopAllAudio();
         customAudioPlayer.removeAttribute('src');
         hasCustomAudio = false;
+        isUserPaused = false;
         document.getElementById('audio-file-input').value = '';
         dropzoneIcon.className = 'fa-solid fa-cloud-arrow-up text-2xl mb-1 text-cyan-600';
         document.getElementById('audio-status-title').textContent = 'Up file .wav hoặc .mp3 tại đây';
@@ -1525,7 +1578,7 @@
         });
         dropzone.addEventListener('drop', (e) => {
             e.preventDefault();
-            dropzone.classList.remove('dragover');
+            dropzone.classList.add('dragover');
             if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
                 loadAudioFile(e.dataTransfer.files[0]);
             }
@@ -1555,6 +1608,10 @@
         } else if (e.key === '2') {
             e.preventDefault();
             activateModeByKey(true);
+        } else if (e.key === '3') {
+            // PHÍM TẮT 3: PAUSE / RESUME AUDIO
+            e.preventDefault();
+            togglePauseAudio();
         } else if (e.key === '0' || e.code === 'Home') {
             e.preventDefault();
             returnToSettings();
@@ -1567,9 +1624,16 @@
         }
     });
 
+    // Tránh click chuyển slide khi người dùng đang bôi đen chọn văn bản
     document.getElementById('video-stage').addEventListener('click', (e) => {
         if (currentIndex === 0) return;
         if (e.target.closest('a, button, input, label')) return;
+
+        const selection = window.getSelection();
+        if (selection && selection.toString().trim().length > 0) {
+            return; // Đang chọn bôi đen text -> không chuyển slide
+        }
+
         goToScene(currentIndex + 1);
     });
 
