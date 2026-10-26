@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HDSD MC - Phát hành hóa đơn điều chỉnh từ trả hàng - KiotViet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * { box-sizing: border-box; user-select: none; }
+        
+        /* THEME RETAIL: CYAN */
+        :root {
+            --theme-primary: #0891b2;
+            --theme-dark: #0e7490;
+            --theme-light: #ecfeff;
+            --theme-border: #67e8f9;
+            --theme-rgb: 8, 145, 178;
+            --kv-blue: #166def;
+            --kv-blue-dark: #0f54be;
+        }
+
+        html, body {
+            margin: 0; padding: 0; width: 100vw; height: 100vh;
+            overflow: hidden; background: #e2e8f0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #0f172a;
+        }
+
+        h1, h2, h3, .balance-text { text-wrap: balance; }
+
+        #video-stage {
+            position: fixed; inset: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at 12% 15%, rgba(var(--theme-rgb), 0.08) 0%, transparent 45%),
+                        radial-gradient(circle at 88% 85%, rgba(22, 109, 239, 0.07) 0%, transparent 45%),
+                        linear-gradient(135deg, #f8fafc 0%, var(--theme-light) 100%);
+            overflow: hidden;
+        }
+
+        .tech-grid {
+            position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(var(--theme-rgb), 0.045) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(var(--theme-rgb), 0.045) 1px, transparent 1px);
+            background-size: 38px 38px; pointer-events: none; z-index: 1;
+        }
+
+        @keyframes wipeDownActive {
+            from { clip-path: inset(0 0 100% 0); }
+            to { clip-path: inset(0 0 0 0); }
+        }
+        @keyframes wipeUpPrevious {
+            from { clip-path: inset(0 0 0 0); }
+            to { clip-path: inset(100% 0 0 0); }
+        }
+
+        .scene {
+            position: absolute; inset: 0;
+            padding: 1.15rem 2.6rem 7.2rem 2.6rem;
+            display: none !important;
+            flex-direction: column; align-items: center; justify-content: flex-start;
+            background: radial-gradient(circle at 12% 15%, rgba(var(--theme-rgb), 0.08) 0%, transparent 45%),
+                        radial-gradient(circle at 88% 85%, rgba(22, 109, 239, 0.07) 0%, transparent 45%),
+                        linear-gradient(135deg, #f8fafc 0%, var(--theme-light) 100%);
+            z-index: 10;
+        }
+        .scene.previous {
+            display: flex !important; z-index: 15;
+            animation: wipeUpPrevious 0.65s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+        .scene.active {
+            display: flex !important; z-index: 20;
+            animation: wipeDownActive 0.65s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+        .scene.no-wipe { animation: none !important; }
+
+        /* SLIDE 0 & 1 */
+        .scene-standby {
+            padding: 1.25rem 2rem !important;
+            justify-content: center;
+            background: #e2e8f0 !important;
+        }
+
+        .scene-blank {
+            padding: 0 !important;
+            background: #ffffff !important;
+        }
+
+        .setup-card {
+            width: 100%; max-width: 1320px;
+            background: #ffffff;
+            border-radius: 26px;
+            border: 2px solid #cbd5e1;
+            box-shadow: 0 24px 48px -12px rgba(15, 23, 42, 0.12);
+            padding: 1.4rem 1.8rem;
+            display: flex; flex-direction: column; gap: 1.1rem;
+        }
+
+        .steps-wrapper {
+            background: var(--theme-light);
+            border: 1.5px solid var(--theme-border);
+            border-radius: 20px;
+            padding: 1rem 1.1rem;
+        }
+
+        .step-box {
+            background: #ffffff;
+            border: 1.5px solid #dbeafe;
+            border-radius: 16px;
+            padding: 1rem 1.15rem;
+            display: flex; flex-direction: column; justify-content: space-between;
+            gap: 0.7rem;
+            box-shadow: 0 4px 12px -2px rgba(30, 64, 175, 0.06);
+            transition: all 0.2s ease;
+        }
+        .step-box:hover {
+            border-color: var(--theme-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -6px rgba(var(--theme-rgb), 0.15);
+        }
+
+        .shortcut-panel {
+            background: #fffbeb;
+            border: 1.5px solid #fcd34d;
+            border-radius: 20px;
+            padding: 0.95rem 1.2rem;
+            display: flex; flex-direction: column; gap: 0.7rem;
+        }
+
+        .shortcut-item {
+            background: #ffffff;
+            border: 1.5px solid #fde68a;
+            border-radius: 14px;
+            padding: 0.65rem 0.85rem;
+            display: flex; align-items: center; gap: 0.7rem;
+            box-shadow: 0 2px 8px -2px rgba(217, 119, 6, 0.08);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .shortcut-item:hover {
+            border-color: #f59e0b;
+            transform: translateY(-1px);
+        }
+
+        .kbd-light {
+            display: inline-flex; align-items: center; justify-content: center;
+            min-width: 30px; height: 28px; padding: 0 0.55rem;
+            background: #fef3c7; color: #b45309;
+            border: 1.5px solid #f59e0b; border-radius: 8px;
+            font-size: 0.78rem; font-weight: 900;
+            box-shadow: 0 2px 0 #f59e0b;
+        }
+
+        .mode-radio-group {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: #f8fafc; border: 1.5px solid #cbd5e1;
+            padding: 0.35rem; border-radius: 999px;
+        }
+        .mode-radio-label {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.45rem 1rem; border-radius: 999px;
+            font-size: 0.8rem; font-weight: 800; color: #475569;
+            cursor: pointer; transition: all 0.15s ease;
+            border: 1.5px solid transparent;
+        }
+        .mode-radio-label input[type="radio"] {
+            accent-color: var(--theme-primary);
+            width: 15px; height: 15px; cursor: pointer;
+        }
+        .mode-radio-label.active-mode {
+            background: #ffffff; color: #0f172a;
+            border-color: var(--theme-border);
+            box-shadow: 0 2px 8px rgba(var(--theme-rgb), 0.15);
+        }
+
+        .dropzone-area {
+            border: 2px dashed var(--theme-primary);
+            background: var(--theme-light);
+            border-radius: 14px;
+            padding: 0.85rem 0.8rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .dropzone-area:hover, .dropzone-area.dragover {
+            filter: brightness(0.97);
+            border-color: var(--theme-dark);
+        }
+
+        .studio-btn {
+            height: 38px; padding: 0 1.05rem; border-radius: 11px;
+            font-size: 0.78rem; font-weight: 800; display: inline-flex; align-items: center;
+            justify-content: center; gap: 0.5rem; transition: all 0.15s ease; cursor: pointer;
+            text-decoration: none;
+        }
+        .studio-btn-primary {
+            background: var(--theme-primary); color: #ffffff; border: 1px solid var(--theme-primary);
+            box-shadow: 0 4px 10px -2px rgba(var(--theme-rgb), 0.25);
+        }
+        .studio-btn-primary:hover { background: var(--theme-dark); }
+        .studio-btn-start {
+            height: 44px; padding: 0 1.4rem; border-radius: 999px;
+            background: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-dark) 100%);
+            color: #ffffff; border: none;
+            box-shadow: 0 8px 18px -4px rgba(var(--theme-rgb), 0.4);
+            font-size: 0.85rem; font-weight: 800;
+        }
+        .studio-btn-start:hover { filter: brightness(1.06); transform: translateY(-1px); }
+        .studio-btn-outline { background: #ffffff; color: #1e293b; border: 1.5px solid #cbd5e1; }
+        .studio-btn-outline:hover { background: #eff6ff; color: #166def; border-color: #93c5fd; }
+
+        .scene-logo {
+            position: absolute; top: 2.2rem; right: 2.6rem; z-index: 30;
+            display: flex; align-items: center;
+        }
+        .scene-logo img {
+            height: 36px; width: auto;
+            filter: drop-shadow(0 2px 4px rgba(var(--theme-rgb), 0.08));
+        }
+
+        .slide-inner {
+            width: 100%; max-width: 1400px; height: 100%;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+
+        .slide-header {
+            width: 100%; display: flex; flex-direction: column; align-items: flex-start;
+            justify-content: center; gap: 0.35rem; padding-left: 0.2rem;
+            padding-right: 12.5rem; flex-shrink: 0;
+        }
+
+        .header-title-row { display: flex; align-items: center; gap: 0.85rem; text-align: left; }
+        .header-icon-box {
+            width: 44px; height: 44px; border-radius: 14px;
+            background: linear-gradient(135deg, var(--theme-primary) 0%, var(--kv-blue) 100%);
+            color: #ffffff; display: flex; align-items: center; justify-content: center;
+            font-size: 1.25rem; flex-shrink: 0;
+            box-shadow: 0 6px 14px -3px rgba(var(--theme-rgb), 0.35);
+        }
+
+        .section-badge {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.32rem 0.95rem; border-radius: 999px;
+            background: var(--theme-light);
+            border: 1.5px solid var(--theme-border); color: var(--theme-dark); font-weight: 800;
+            font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.05em;
+            box-shadow: 0 2px 8px -2px rgba(var(--theme-rgb), 0.12); flex-shrink: 0;
+        }
+
+        /* KHUNG CHỨA ẢNH SCREENSHOT CHUẨN */
+        .screenshot-stage {
+            flex: 1; min-height: 0; width: 100%;
+            padding: 0.3rem 0.5rem 0.4rem 0.5rem;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .screenshot-card {
+            width: fit-content; height: fit-content;
+            max-width: 100%; max-height: 100%;
+            background: #ffffff; border: 1.5px solid var(--theme-border);
+            border-radius: 14px; padding: 0;
+            box-shadow: 0 20px 44px -12px rgba(15, 23, 42, 0.22),
+                        0 4px 16px -2px rgba(var(--theme-rgb), 0.14);
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
+        }
+        .screenshot-card img {
+            display: block;
+            max-width: min(92vw, 1280px);
+            max-height: calc(100vh - 13.8rem);
+            width: auto; height: auto;
+            object-fit: contain; border-radius: 13px;
+        }
+
+        .text-stage {
+            flex: 1; min-height: 0; width: 100%; padding: 0.6rem 0.5rem;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .bento-card {
+            background: #ffffff; border: 2px solid var(--theme-border);
+            box-shadow: 0 20px 44px -12px rgba(var(--theme-rgb), 0.15);
+            border-radius: 26px;
+        }
+
+        /* THẺ MỤC LỤC CĂN THẲNG HÀNG TIÊU ĐỀ */
+        .toc-card {
+            padding: 1.6rem 1.4rem;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+            position: relative;
+            overflow: hidden;
+        }
+        .toc-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.15rem;
+            flex-shrink: 0;
+        }
+        .toc-card-title {
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: #0f172a;
+            line-height: 1.35;
+            min-height: 2.8rem;
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .toc-card-desc {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #475569;
+            line-height: 1.55;
+        }
+
+        .inner-card-theme {
+            background: var(--theme-light);
+            border: 1.5px solid var(--theme-border); border-left: 5px solid var(--theme-primary);
+            box-shadow: 0 6px 16px -4px rgba(var(--theme-rgb), 0.12);
+            border-radius: 20px; padding: 1.35rem 1.6rem;
+        }
+        .inner-card-blue {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border: 1.5px solid #93c5fd; border-left: 5px solid #166def;
+            box-shadow: 0 6px 16px -4px rgba(22, 109, 239, 0.1);
+            border-radius: 20px; padding: 1.35rem 1.6rem;
+        }
+        .inner-card-emerald {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 1.5px solid #6ee7b7; border-left: 5px solid #059669;
+            box-shadow: 0 6px 16px -4px rgba(5, 150, 105, 0.12);
+            border-radius: 20px; padding: 1.35rem 1.6rem;
+        }
+        .inner-card-amber {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border: 1.5px solid #fde68a; border-left: 5px solid #d97706;
+            box-shadow: 0 6px 16px -4px rgba(217, 119, 6, 0.12);
+            border-radius: 20px; padding: 1.35rem 1.6rem;
+        }
+
+        .support-card-blue {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border: 2px solid #93c5fd; box-shadow: 0 8px 20px -4px rgba(22, 109, 239, 0.14);
+            border-radius: 20px; padding: 1.25rem 1.6rem; transition: all 0.2s ease;
+        }
+        .support-card-blue:hover { border-color: #2563eb; transform: translateY(-2px); }
+
+        .youtube-card-red {
+            background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+            border: 2px solid #fda4af; box-shadow: 0 8px 20px -4px rgba(225, 29, 72, 0.14);
+            border-radius: 20px; padding: 1.25rem 1.6rem; transition: all 0.2s ease;
+        }
+        .youtube-card-red:hover { border-color: #e11d48; transform: translateY(-2px); }
+
+        /* PRESENTER HUD & PHỤ ĐỀ */
+        #presenter-hud {
+            position: absolute; bottom: 0.85rem; left: 50%; transform: translateX(-50%);
+            width: calc(100vw - 4.4rem); max-width: 1380px;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 40; opacity: 1; transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        #presenter-hud.hud-hidden { opacity: 0 !important; pointer-events: none; transform: translate(-50%, 20px); }
+
+        #subtitle-box {
+            width: 100%; min-height: 48px; max-height: 5.8rem;
+            background: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-dark) 100%);
+            color: #ffffff; padding: 0.65rem 2.2rem; border-radius: 18px;
+            font-size: 1.15rem; font-weight: 700; text-align: center !important; line-height: 1.45;
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            box-shadow: 0 14px 32px -6px rgba(var(--theme-rgb), 0.45);
+            text-wrap: balance; white-space: normal;
+            display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+            overflow: hidden; text-overflow: ellipsis;
+        }
+        .print-subtitle { display: none; text-align: center !important; }
+
+        @media print {
+            @page { size: 1280px 720px; margin: 0mm !important; }
+            html, body {
+                width: 1280px !important; height: 720px !important; margin: 0 !important;
+                padding: 0 !important; overflow: visible !important; background: #f8fafc !important;
+                -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+            }
+            #presenter-hud, .tech-grid, .scene-standby, .scene-blank { display: none !important; }
+            #video-stage { position: static !important; width: 1280px !important; height: auto !important; margin: 0 !important; padding: 0 !important; }
+            .scene.scene-content {
+                position: relative !important; inset: auto !important; width: 1280px !important; height: 720px !important;
+                margin: 0 !important; padding: 1.15rem 2.4rem 6.6rem 2.4rem !important; display: flex !important;
+                page-break-after: always !important; break-after: page !important;
+            }
+            .scene.scene-content:last-of-type { page-break-after: avoid !important; break-after: avoid !important; }
+            .scene-logo {
+                display: flex !important; position: absolute !important; top: 2.2rem !important; right: 2.6rem !important;
+            }
+
+            .print-subtitle {
+                display: -webkit-box !important; -webkit-line-clamp: 3 !important; -webkit-box-orient: vertical !important;
+                position: absolute !important; bottom: 0.9rem !important; left: 50% !important; transform: translateX(-50%) !important;
+                width: 92% !important; max-width: 1220px !important; background: var(--theme-primary) !important; color: #fff !important;
+                padding: 0.65rem 1.6rem !important; border-radius: 16px !important; font-size: 1.05rem !important; font-weight: 700 !important;
+                line-height: 1.4 !important; max-height: 5.4rem !important; overflow: hidden !important;
+                text-align: center !important; text-wrap: balance !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="video-stage">
+    <div class="tech-grid"></div>
+    <audio id="custom-audio-player" preload="auto"></audio>
+
+    <!-- SLIDE 0: THIẾT LẬP BAN ĐẦU -->
+    <section class="scene scene-standby active no-wipe" data-scene="0" data-caption="" data-vo="">
+        <div class="setup-card" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between gap-4 pb-3 border-b border-slate-200">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-2xl text-white flex items-center justify-center text-xl font-black shadow-lg" style="background: linear-gradient(135deg, var(--theme-primary), var(--theme-dark));">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2.5">
+                            <h1 class="text-2xl font-black text-slate-900 tracking-tight">HDSD MC – Thiết lập ban đầu</h1>
+                            <span class="px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider" style="background: var(--theme-light); color: var(--theme-dark); border: 1.5px solid var(--theme-border);">
+                                THEME RETAIL: CYAN
+                            </span>
+                        </div>
+                        <p class="text-xs font-semibold text-slate-500 mt-0.5">Tự động nhận diện file mc.wav cùng thư mục (hỗ trợ Windows và Web)</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <div class="mode-radio-group">
+                        <label id="label-mode-1" class="mode-radio-label active-mode" onclick="selectAudioMode(false)">
+                            <input type="radio" name="audioMode" id="radio-mode-1" value="silent" checked onchange="selectAudioMode(false)">
+                            <span>1 - Không thuyết minh</span>
+                        </label>
+                        <label id="label-mode-2" class="mode-radio-label" onclick="selectAudioMode(true)">
+                            <input type="radio" name="audioMode" id="radio-mode-2" value="voice" onchange="selectAudioMode(true)">
+                            <span>2 - Thuyết minh</span>
+                        </label>
+                    </div>
+
+                    <button onclick="startPresentation()" class="studio-btn studio-btn-start">
+                        <i class="fa-solid fa-play"></i> Bắt đầu (Vào Slide trắng)
+                    </button>
+                </div>
+            </div>
+
+            <div class="steps-wrapper">
+                <div class="text-xs font-black uppercase tracking-wider mb-3 flex items-center gap-2" style="color: var(--theme-dark);">
+                    <i class="fa-solid fa-list-ol" style="color: var(--theme-primary);"></i> QUY TRÌNH 4 BƯỚC CHUẨN BỊ KỊCH BẢN & GIỌNG ĐỌC AI
+                </div>
+
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="step-box">
+                        <div class="space-y-2.5">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2.5 py-1 rounded-full bg-cyan-50 text-cyan-700 font-extrabold text-[11px] uppercase">BƯỚC 1</span>
+                                <i class="fa-solid fa-copy text-cyan-600"></i>
+                            </div>
+                            <h3 class="text-base font-extrabold text-slate-900">Copy toàn bộ phụ đề</h3>
+                            <p class="text-xs font-semibold text-slate-500 leading-relaxed">Sao chép kịch bản gốc chuẩn chính tả (không phiên âm, không pause) kèm câu đếm ngược mở đầu:</p>
+                            <div class="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-[11px] font-mono font-bold text-amber-900 leading-snug">
+                                Chuẩn bị ghi hình 10 9 8 7 6 5 4 3 2 1
+                            </div>
+                        </div>
+                        <button onclick="copyAllSubtitlesWithPrefix()" id="btn-copy-sub" class="studio-btn studio-btn-primary w-full">
+                            <i class="fa-solid fa-clipboard-check"></i> Copy toàn bộ phụ đề
+                        </button>
+                    </div>
+
+                    <div class="step-box">
+                        <div class="space-y-2.5">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 font-extrabold text-[11px] uppercase">BƯỚC 2</span>
+                                <i class="fa-solid fa-wand-magic-sparkles text-indigo-600"></i>
+                            </div>
+                            <h3 class="text-base font-extrabold text-slate-900">Mở Google AI Studio</h3>
+                            <p class="text-xs font-semibold text-slate-500 leading-relaxed">Chọn giọng <strong class="text-slate-800">Leda</strong> với Prompt tư vấn nhiệt tình:</p>
+                            <div class="p-2.5 rounded-xl bg-indigo-50/70 border border-indigo-200 text-[11px] font-bold text-indigo-950 leading-snug">
+                                "Chuyên viên tư vấn người Hà Nội kể chuyện sôi nổi, nhiệt tình"
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <button onclick="copyLedaPrompt()" id="btn-copy-prompt" class="studio-btn studio-btn-outline w-full">
+                                <i class="fa-solid fa-quote-left"></i> Copy Prompt giọng Leda
+                            </button>
+                            <a href="https://aistudio.google.com/generate-speech?model=gemini-3.8-flash-tts" target="_blank" rel="noopener" class="studio-btn studio-btn-primary w-full">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Mở Google AI Studio
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <div class="space-y-2.5">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 font-extrabold text-[11px] uppercase">BƯỚC 3</span>
+                                <i class="fa-solid fa-cloud-arrow-down text-amber-600"></i>
+                            </div>
+                            <h3 class="text-base font-extrabold text-slate-900">Promote & Đổi tên file</h3>
+                            <p class="text-xs font-semibold text-slate-500 leading-relaxed">
+                                Đổi tên file tải về thành <strong class="text-slate-800 font-mono">mc.wav</strong> và lưu cùng thư mục với file HTML này trên máy tính của bạn.
+                            </p>
+                        </div>
+                        <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs font-semibold text-amber-900 flex items-start gap-2">
+                            <i class="fa-solid fa-circle-info text-amber-600 mt-0.5"></i>
+                            <span>Hệ thống nạp trực tiếp file <code>mc.wav</code> ngay cả khi mở qua file:/// mà không bị chặn.</span>
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <div class="space-y-2.5">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2.5 py-1 rounded-full font-extrabold text-[11px] uppercase" style="background: var(--theme-light); color: var(--theme-dark);">BƯỚC 4</span>
+                                <i class="fa-solid fa-file-audio" style="color: var(--theme-primary);"></i>
+                            </div>
+                            <h3 class="text-base font-extrabold text-slate-900">Trạng thái nhận diện</h3>
+                            <input type="file" id="audio-file-input" accept=".mp3,.wav,audio/*" class="hidden" onchange="handleAudioFileSelect(event)">
+                            <div id="audio-dropzone" class="dropzone-area" onclick="document.getElementById('audio-file-input').click()">
+                                <i id="dropzone-icon" class="fa-solid fa-spinner fa-spin text-2xl mb-1" style="color: var(--theme-primary);"></i>
+                                <div id="audio-status-title" class="text-xs font-extrabold text-slate-800">Đang dò tìm file mc.wav...</div>
+                                <div id="audio-status-desc" class="text-[11px] font-semibold mt-0.5" style="color: var(--theme-dark);">Chờ một chút hoặc kéo thả file vào đây</div>
+                            </div>
+                        </div>
+                        <div id="audio-loaded-Badge" class="hidden px-3 py-2 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-800 flex items-center justify-between">
+                            <span id="audio-filename" class="truncate font-semibold"><i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> Đã kết nối file mc.wav</span>
+                            <button onclick="clearLoadedAudio(event)" class="text-rose-600 hover:underline text-[11px] ml-2">Gỡ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shortcut-panel">
+                <div class="flex items-center justify-between">
+                    <div class="text-xs font-black text-amber-950 uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-keyboard text-amber-600"></i> BẢNG PHÍM TẮT ĐIỀU KHIỂN NHANH
+                    </div>
+                    <div class="text-xs font-bold text-slate-600">
+                        Chuyển Slide: <span class="px-2 py-0.5 rounded bg-white border border-slate-300 text-slate-800 font-extrabold">Mũi tên Phải / Space</span> (Tiếp) • <span class="px-2 py-0.5 rounded bg-white border border-slate-300 text-slate-800 font-extrabold">Mũi tên Trái / Backspace</span> (Lùi)
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-5 gap-3">
+                    <div class="shortcut-item" onclick="toggleFullScreen()">
+                        <span class="kbd-light">F</span>
+                        <div>
+                            <div class="text-xs font-extrabold text-slate-900">Fullscreen</div>
+                            <div class="text-[11px] font-semibold text-slate-500">Toàn màn hình</div>
+                        </div>
+                    </div>
+                    <div class="shortcut-item" onclick="activateModeByKey(false)">
+                        <span class="kbd-light">1</span>
+                        <div>
+                            <div class="text-xs font-extrabold text-slate-900">Không thuyết minh</div>
+                            <div class="text-[11px] font-semibold text-slate-500">Present im lặng / Tắt tiếng</div>
+                        </div>
+                    </div>
+                    <div class="shortcut-item" onclick="activateModeByKey(true)">
+                        <span class="kbd-light">2</span>
+                        <div>
+                            <div class="text-xs font-extrabold" style="color: var(--theme-dark);">Bật Thuyết minh</div>
+                            <div class="text-[11px] font-semibold text-slate-500">Phát mc.wav hoặc TTS</div>
+                        </div>
+                    </div>
+                    <div class="shortcut-item" onclick="returnToSettings()">
+                        <span class="kbd-light">0</span>
+                        <div>
+                            <div class="text-xs font-extrabold text-slate-900">Về trang Settings</div>
+                            <div class="text-[11px] font-semibold text-slate-500">Thiết lập ban đầu</div>
+                        </div>
+                    </div>
+                    <div class="shortcut-item" onclick="window.print()">
+                        <span class="kbd-light">P</span>
+                        <div>
+                            <div class="text-xs font-extrabold text-slate-900">Xuất PDF</div>
+                            <div class="text-[11px] font-semibold text-slate-500">Chuẩn 16:9 Native</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 1: TRANG TRẮNG CHUẨN BỊ -->
+    <section class="scene scene-blank" data-scene="1" data-caption="" data-vo=""></section>
+
+    <!-- SLIDE 2: BÌA HERO TITLE -->
+    <section class="scene scene-content" data-scene="2"
+        data-caption="Chào mừng các bạn đến với tài liệu hướng dẫn nghiệp vụ Phát hành hóa đơn điều chỉnh từ trả hàng dành riêng cho Ngành Bán buôn, Bán lẻ trên KiotViet."
+        data-vo="Chào mừng các bạn đến với tài liệu hướng dẫn nghiệp vụ Phát hành hóa đơn điều chỉnh từ trả hàng dành riêng cho Ngành Bán buôn, Bán lẻ trên KiotViet.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner justify-center items-center text-center">
+            <div class="max-w-4xl flex flex-col items-center">
+                <div class="w-20 h-20 rounded-3xl text-4xl text-white flex items-center justify-center shadow-2xl mb-6" style="background: linear-gradient(135deg, var(--theme-primary) 0%, var(--kv-blue) 100%);">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                </div>
+                <h1 class="text-5xl font-black text-slate-900 tracking-tight leading-tight mb-4">
+                    PHÁT HÀNH HÓA ĐƠN ĐIỀU CHỈNH TỪ TRẢ HÀNG
+                </h1>
+                <div class="text-2xl font-extrabold mb-4" style="color: var(--theme-dark);">
+                    Ngành Bán buôn, Bán lẻ
+                </div>
+                <p class="text-sm text-slate-500 font-medium leading-relaxed balance-text max-w-2xl">
+                    Giải pháp tối ưu hóa thao tác lập hóa đơn điều chỉnh tự động và bán tự động khi phát sinh trả hàng, đảm bảo tuân thủ nghiêm ngặt theo Nghị định 254/2026/NĐ-CP và Thông tư 91/2026/TT-BTC.
+                </p>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <!-- SLIDE 3: MỤC LỤC NỘI DUNG (CĂN THẲNG HÀNG TUYỆT ĐỐI) -->
+    <section class="scene scene-content" data-scene="3"
+        data-caption="Trong bài hướng dẫn hôm nay, KiotViet sẽ đồng hành cùng các bạn qua 3 nội dung trọng tâm: Phần 1 Giới thiệu chung và lợi ích; Phần 2 Các thao tác cơ bản; và Phần 3 Các tính năng nâng cao khi xử lý phiếu trả hàng."
+        data-vo="Trong bài hướng dẫn hôm nay, KiotViet sẽ đồng hành cùng các bạn qua 3 nội dung trọng tâm: Phần 1 Giới thiệu chung và lợi ích; Phần 2 Các thao tác cơ bản; và Phần 3 Các tính năng nâng cao khi xử lý phiếu trả hàng.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-map"></i> Mục lục nội dung</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-list-check"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">LỘ TRÌNH NỘI DUNG HƯỚNG DẪN</h1>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="bento-card w-full max-w-[1300px] p-8 grid grid-cols-3 gap-6">
+                    <div class="toc-card bg-cyan-50/80 border-2 border-cyan-200">
+                        <div class="toc-card-top">
+                            <span class="px-2.5 py-1 rounded-full bg-cyan-600 text-white font-black text-[11px]">PHẦN 01</span>
+                            <div class="w-9 h-9 rounded-xl bg-white text-cyan-600 flex items-center justify-center text-lg shadow-sm"><i class="fa-solid fa-star"></i></div>
+                        </div>
+                        <h3 class="toc-card-title">Giới thiệu chung & Lợi ích</h3>
+                        <p class="toc-card-desc balance-text">Tuân thủ pháp lý theo thông tư mới, rút ngắn quy trình và tự động hóa nghĩa vụ thuế.</p>
+                    </div>
+
+                    <div class="toc-card bg-blue-50/80 border-2 border-blue-200">
+                        <div class="toc-card-top">
+                            <span class="px-2.5 py-1 rounded-full bg-blue-600 text-white font-black text-[11px]">PHẦN 02</span>
+                            <div class="w-9 h-9 rounded-xl bg-white text-blue-600 flex items-center justify-center text-lg shadow-sm"><i class="fa-solid fa-desktop"></i></div>
+                        </div>
+                        <h3 class="toc-card-title">Các thao tác Cơ bản</h3>
+                        <p class="toc-card-desc balance-text">Bật cấu hình chi nhánh, tạo phiếu trả theo hóa đơn gốc và phát hành điều chỉnh hàng loạt.</p>
+                    </div>
+
+                    <div class="toc-card bg-indigo-50/80 border-2 border-indigo-200">
+                        <div class="toc-card-top">
+                            <span class="px-2.5 py-1 rounded-full bg-indigo-600 text-white font-black text-[11px]">PHẦN 03</span>
+                            <div class="w-9 h-9 rounded-xl bg-white text-indigo-600 flex items-center justify-center text-lg shadow-sm"><i class="fa-solid fa-sliders"></i></div>
+                        </div>
+                        <h3 class="toc-card-title">Các tính năng Nâng cao</h3>
+                        <p class="toc-card-desc balance-text">Vận hành bán tự động, thủ công, xử lý hàng tặng kèm và hủy phiếu trả đã xuất hóa đơn.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 4: GIỚI THIỆU CHUNG & LỢI ÍCH -->
+    <section class="scene scene-content" data-scene="4"
+        data-caption="Tính năng mới cho phép bạn lập hóa đơn điều chỉnh tự động hoặc bán tự động ngay khi phát sinh phiếu trả hàng có liên kết với hóa đơn điện tử KV Einvoice, giúp đảm bảo chuẩn hóa pháp lý và tiết kiệm thời gian vận hành."
+        data-vo="Tính năng mới cho phép bạn lập hóa đơn điều chỉnh tự động hoặc bán tự động ngay khi phát sinh phiếu trả hàng có liên kết với hóa đơn điện tử KV Einvoice, giúp đảm bảo chuẩn hóa pháp lý và tiết kiệm thời gian vận hành.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-circle-info"></i> Giới thiệu chung</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">TỔNG QUAN & LỢI ÍCH NỔI BẬT</h1>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="bento-card w-full max-w-[1300px] p-8 grid grid-cols-3 gap-6">
+                    <div class="inner-card-theme flex flex-col gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-cyan-600 text-white flex items-center justify-center text-2xl shadow-md">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                        </div>
+                        <h3 class="text-lg font-black text-slate-900">Tuân thủ pháp lý tự động</h3>
+                        <p class="text-sm text-slate-600 leading-snug font-semibold balance-text">
+                            Hệ thống tự động phát hành hóa đơn điều chỉnh ngay khi lưu phiếu trả, không lo bỏ sót nghĩa vụ thuế theo Nghị định 254 và Thông tư 91.
+                        </p>
+                    </div>
+                    <div class="inner-card-blue flex flex-col gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-2xl shadow-md">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <h3 class="text-lg font-black text-slate-900">Vận hành linh hoạt 3 chế độ</h3>
+                        <p class="text-sm text-slate-600 leading-snug font-semibold balance-text">
+                            Chủ động chọn chế độ tự động hoàn toàn, bán tự động có hỏi xác nhận, hoặc lập thủ công sau tùy thuộc quy trình của gian hàng.
+                        </p>
+                    </div>
+                    <div class="inner-card-emerald flex flex-col gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-2xl shadow-md">
+                            <i class="fa-solid fa-table-list"></i>
+                        </div>
+                        <h3 class="text-lg font-black text-slate-900">Theo dõi tập trung & chính xác</h3>
+                        <p class="text-sm text-slate-600 leading-snug font-semibold balance-text">
+                            Cột trạng thái mới trên danh sách Quản lý trả hàng giúp bạn kiểm tra tức thì phiếu nào đã lập hoặc lỗi để xử lý bổ sung kịp thời.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 5: TIÊU ĐỀ CHƯƠNG - CÁC THAO TÁC CƠ BẢN -->
+    <section class="scene scene-content" data-scene="5"
+        data-caption="Sau đây, KiotViet sẽ hướng dẫn các bạn chi tiết 6 thao tác cơ bản: từ bật thiết lập trên Quản lý, cài đặt trên Bán hàng, tạo giao dịch trả hàng, xử lý đơn từ sàn, kiểm tra trạng thái và phát hành hàng loạt."
+        data-vo="Sau đây, KiotViet sẽ hướng dẫn các bạn chi tiết 6 thao tác cơ bản: từ bật thiết lập trên Quản lý, cài đặt trên Bán hàng, tạo giao dịch trả hàng, xử lý đơn từ sàn, kiểm tra trạng thái và phát hành hàng loạt.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner justify-center items-center text-center">
+            <div class="max-w-4xl flex flex-col items-center">
+                <div class="w-16 h-16 rounded-2xl text-3xl text-white flex items-center justify-center shadow-xl mb-4" style="background: linear-gradient(135deg, var(--theme-primary) 0%, var(--kv-blue) 100%);">
+                    <i class="fa-solid fa-laptop-code"></i>
+                </div>
+                <h1 class="text-4xl font-black text-slate-900 tracking-tight mb-2">PHẦN 02: CÁC THAO TÁC CƠ BẢN</h1>
+                <p class="text-sm text-slate-500 font-medium mb-8">Nắm vững các bước thiết lập và luồng thao tác phát hành chuẩn hóa trên KiotViet</p>
+                <div class="grid grid-cols-3 gap-4 w-full">
+                    <div class="p-3.5 bg-white border border-slate-200 rounded-xl shadow-sm text-xs font-bold text-slate-700">1. Thiết lập chi nhánh trên Quản lý</div>
+                    <div class="p-3.5 bg-white border border-slate-200 rounded-xl shadow-sm text-xs font-bold text-slate-700">2. Thiết lập trên màn hình Bán hàng</div>
+                    <div class="p-3.5 bg-white border border-slate-200 rounded-xl shadow-sm text-xs font-bold text-slate-700">3. Tạo phiếu trả theo hóa đơn gốc</div>
+                    <div class="p-3.5 bg-white border border-slate-200 rounded-xl shadow-sm text-xs font-bold text-slate-700">4. Xử lý trả hàng từ sàn TMĐT</div>
+                    <div class="p-3.5 bg-white border border-slate-200 rounded-xl shadow-sm text-xs font-bold text-slate-700">5. Kiểm tra & xử lý tồn đọng</div>
+                    <div class="p-3.5 bg-white border border-slate-200 rounded-xl shadow-sm text-xs font-bold text-slate-700">6. Phát hành điều chỉnh hàng loạt</div>
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <!-- SLIDE 6: BẬT THIẾT LẬP QUẢN LÝ -->
+    <section class="scene scene-content" data-scene="6"
+        data-caption="Tại màn hình Quản lý, tài khoản admin vào Thiết lập, chọn chi nhánh kết nối KV Einvoice và tích chọn Tự động lập hóa đơn điều chỉnh khi phát sinh phiếu trả hàng rồi nhấn Lưu."
+        data-vo="Tại màn hình Quản lý, tài khoản admin vào Thiết lập, chọn chi nhánh kết nối KV Einvoice và tích chọn Tự động lập hóa đơn điều chỉnh khi phát sinh phiếu trả hàng rồi nhấn Lưu.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-gear"></i> Các thao tác cơ bản</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-sliders"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">1. Bật thiết lập tự động tại màn hình Quản lý</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/10/04160735/HDDCR_041026-1.png" alt="Bật thiết lập tự động trên Quản lý">
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 7: TRUY CẬP THIẾT LẬP TRÊN BÁN HÀNG -->
+    <section class="scene scene-content" data-scene="7"
+        data-caption="Trên giao diện Bán hàng, các bạn nhấn vào biểu tượng tùy chọn 3 gạch ở góc trên bên phải màn hình và chọn mục Thiết lập và Hiển thị."
+        data-vo="Trên giao diện Bán hàng, các bạn nhấn vào biểu tượng tùy chọn 3 gạch ở góc trên bên phải màn hình và chọn mục Thiết lập và Hiển thị.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-cash-register"></i> Các thao tác cơ bản</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-bars"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">2. Mở Thiết lập & Hiển thị trên màn hình Bán hàng</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/10/04160731/HDDCR_041026-2.png" alt="Mở thiết lập trên màn hình bán hàng">
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 8: CÀI ĐẶT MẪU VÀ MẶC ĐỊNH PHÁT HÀNH HĐĐT -->
+    <section class="scene scene-content" data-scene="8"
+        data-caption="Tại mục Hóa đơn điện tử, bạn chọn mẫu phát hành mặc định, bật xanh tùy chọn Mặc định phát hành hóa đơn điện tử và chọn In hóa đơn kèm mã tra cứu nếu có nhu cầu."
+        data-vo="Tại mục Hóa đơn điện tử, bạn chọn mẫu phát hành mặc định, bật xanh tùy chọn Mặc định phát hành hóa đơn điện tử và chọn In hóa đơn kèm mã tra cứu nếu có nhu cầu.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-cash-register"></i> Các thao tác cơ bản</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-receipt"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">2. Cài đặt phát hành hóa đơn điện tử mặc định</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/10/04160726/HDDCR_041026-3.png" alt="Cài đặt mẫu và mặc định phát hành HĐĐT">
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 9: TỰ ĐỘNG TÍCH PHÁT HÀNH HĐ ĐIỀU CHỈNH -->
+    <section class="scene scene-content" data-scene="9"
+        data-caption="Hệ thống mặc định tích sẵn Phát hành hóa đơn điều chỉnh khi trả hàng theo hóa đơn. Khi hoàn tất phiếu trả, thông tin sẽ được tự động chuyển ngay sang KV Einvoice để phát hành."
+        data-vo="Hệ thống mặc định tích sẵn Phát hành hóa đơn điều chỉnh khi trả hàng theo hóa đơn. Khi hoàn tất phiếu trả, thông tin sẽ được tự động chuyển ngay sang KV Einvoice để phát hành.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-cash-register"></i> Các thao tác cơ bản</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-check-double"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">2. Xác nhận tùy chọn phát hành hóa đơn điều chỉnh</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/10/04160722/HDDCR_041026-4.png" alt="Xác nhận tùy chọn phát hành hóa đơn điều chỉnh">
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 10: TẠO PHIẾU TRẢ THEO HÓA ĐƠN GỐC -->
+    <section class="scene scene-content" data-scene="10"
+        data-caption="Khi khách trả hàng, bạn vào mục Trả hàng trên màn hình Bán hàng và chọn đúng hóa đơn gốc đã xuất hóa đơn điện tử có trạng thái Cơ quan thuế chấp nhận."
+        data-vo="Khi khách trả hàng, bạn vào mục Trả hàng trên màn hình Bán hàng và chọn đúng hóa đơn gốc đã xuất hóa đơn điện tử có trạng thái Cơ quan thuế chấp nhận.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-cart-arrow-down"></i> Các thao tác cơ bản</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">3. Chọn hóa đơn gốc đã được Cơ quan thuế chấp nhận</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/10/04160718/HDDCR_041026-5.png" alt="Chọn hóa đơn gốc đã được CQT chấp nhận">
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 11: TIẾP NHẬN VÀ PHÁT HÀNH TRÊN KV EINVOICE -->
+    <section class="scene scene-content" data-scene="11"
+        data-caption="Sau khi nhấn Trả hàng, dữ liệu tự động gửi sang KV Einvoice để phát hành hóa đơn điều chỉnh và gửi sang Cơ quan thuế theo đúng thiết lập tự động của gian hàng."
+        data-vo="Sau khi nhấn Trả hàng, dữ liệu tự động gửi sang KV Einvoice để phát hành hóa đơn điều chỉnh và gửi sang Cơ quan thuế theo đúng thiết lập tự động của gian hàng.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-cloud-arrow-up"></i> Các thao tác cơ bản</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-paper-plane"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">3. Tiếp nhận và gửi hóa đơn điều chỉnh sang Cơ quan thuế</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/10/04160714/HDDCR_041026-6.png" alt="Tiếp nhận và phát hành hóa đơn điều chỉnh">
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 12: CẬP NHẬT TRẠNG THÁI VÀ MÃ SỐ HĐĐC -->
+    <section class="scene scene-content" data-scene="12"
+        data-caption="Tại màn hình Quản lý phiếu trả hàng, KiotViet tự động cập nhật Trạng thái hóa đơn điều chỉnh và Mã số hóa đơn điện tử tương ứng ngay trên từng giao dịch."
+        data-vo="Tại màn hình Quản lý phiếu trả hàng, KiotViet tự động cập nhật Trạng thái hóa đơn điều chỉnh và Mã số hóa đơn điện tử tương ứng ngay trên từng giao dịch.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-list-check"></i> Các thao tác cơ bản</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-barcode"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">3. Tự động đồng bộ Trạng thái và Mã số HĐĐC</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/10/04160710/HDDCR_041026-7.png" alt="Cập nhật trạng thái và mã số HĐĐC">
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 13: LƯU Ý TRẢ THEO HÓA ĐƠN VS TRẢ NHANH -->
+    <section class="scene scene-content" data-scene="13"
+        data-caption="Bạn lưu ý bắt buộc phải trả hàng theo hóa đơn. Nếu chọn Trả nhanh, phiếu sẽ không gắn với hóa đơn điện tử cụ thể nên hệ thống không thể tự động lập hóa đơn điều chỉnh."
+        data-vo="Bạn lưu ý bắt buộc phải trả hàng theo hóa đơn. Nếu chọn Trả nhanh, phiếu sẽ không gắn với hóa đơn điện tử cụ thể nên hệ thống không thể tự động lập hóa đơn điều chỉnh.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-triangle-exclamation"></i> Lưu ý nghiệp vụ</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-bolt"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">Lưu ý: Bắt buộc chọn trả theo hóa đơn gốc</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/10/04160706/HDDCR_041026-8.png" alt="Cảnh báo khi dùng tính năng trả nhanh">
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 14: PHÁT HÀNH CHO PHIẾU TRẢ TỪ SÀN TMĐT -->
+    <section class="scene scene-content" data-scene="14"
+        data-caption="Đối với đơn trả hàng từ sàn thương mại điện tử, chỉ cần hóa đơn gốc đã được Cơ quan thuế chấp nhận và phiếu trả ở trạng thái Đã trả, hệ thống sẽ tự động hoặc hỗ trợ lập hóa đơn điều chỉnh kịp thời."
+        data-vo="Đối với đơn trả hàng từ sàn thương mại điện tử, chỉ cần hóa đơn gốc đã được Cơ quan thuế chấp nhận và phiếu trả ở trạng thái Đã trả, hệ thống sẽ tự động hoặc hỗ trợ lập hóa đơn điều chỉnh kịp thời.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-store"></i> Nghiệp vụ đa kênh</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-truck-ramp-box"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">4. Phát hành hóa đơn điều chỉnh cho phiếu trả từ sàn TMĐT</h1>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="bento-card w-full max-w-[1240px] p-8 grid grid-cols-2 gap-8">
+                    <div class="inner-card-theme flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2 text-cyan-800 font-black text-sm uppercase mb-3">
+                                <i class="fa-solid fa-circle-check"></i> ĐIỀU KIỆN ÁP DỤNG
+                            </div>
+                            <h3 class="text-xl font-black text-slate-900 mb-2">Đơn gốc hợp lệ & Đã trả</h3>
+                            <p class="text-sm text-slate-600 font-semibold leading-relaxed mb-4">
+                                1. Hóa đơn gốc từ kênh sàn có trạng thái HĐĐT là <strong>CQT chấp nhận</strong>.<br>
+                                2. Phiếu trả hàng đồng bộ từ sàn về KiotViet đã chuyển sang trạng thái <strong>Đã trả</strong>.
+                            </p>
+                        </div>
+                        <div class="p-3 bg-white/80 rounded-xl border border-cyan-200 text-xs font-bold text-cyan-900">
+                            Áp dụng cho mọi kênh bán TikTok Shop, Shopee, Lazada...
+                        </div>
+                    </div>
+                    <div class="inner-card-blue flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2 text-blue-800 font-black text-sm uppercase mb-3">
+                                <i class="fa-solid fa-bolt"></i> CƠ CHẾ XỬ LÝ
+                            </div>
+                            <h3 class="text-xl font-black text-slate-900 mb-2">Tự động hoặc Thao tác tay</h3>
+                            <p class="text-sm text-slate-600 font-semibold leading-relaxed mb-4">
+                                • <strong>Nếu bật tự động:</strong> Hệ thống tự lập HĐ điều chỉnh ngay khi phiếu trả chuyển "Đã trả".<br>
+                                • <strong>Nếu không bật:</strong> Vào chi tiết phiếu trả nhấn "Lập HĐ điều chỉnh" hoặc dùng tính năng phát hành hàng loạt.
+                            </p>
+                        </div>
+                        <div class="p-3 bg-white/80 rounded-xl border border-blue-200 text-xs font-bold text-blue-900">
+                            Kiểm soát hoàn toàn luồng dữ liệu theo nhu cầu cửa hàng
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 15: KIỂM TRA TRẠNG THÁI HĐĐC -->
+    <section class="scene scene-content" data-scene="15"
+        data-caption="Tại menu Đơn hàng, Trả hàng, bạn có thể dễ dàng theo dõi 8 trạng thái chi tiết của hóa đơn điều chỉnh và bật hiển thị thêm cột Mã số để tra cứu nhanh chóng."
+        data-vo="Tại menu Đơn hàng, Trả hàng, bạn có thể dễ dàng theo dõi 8 trạng thái chi tiết của hóa đơn điều chỉnh và bật hiển thị thêm cột Mã số để tra cứu nhanh chóng.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-list-check"></i> Các thao tác cơ bản</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-table-cells"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">5. Kiểm tra 8 trạng thái hóa đơn điều chỉnh trên danh sách</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/10/04160702/HDDCR_041026-9.png" alt="Kiểm tra trạng thái hóa đơn điều chỉnh">
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 16: LỌC PHIẾU CHƯA PHÁT HÀNH HOẶC LỖI -->
+    <section class="scene scene-content" data-scene="16"
+        data-caption="Sử dụng bộ lọc Trạng thái hóa đơn điều chỉnh ở cột bên trái màn hình để lọc ra các phiếu Chưa phát hành hoặc Phát hành lỗi cần xử lý bù."
+        data-vo="Sử dụng bộ lọc Trạng thái hóa đơn điều chỉnh ở cột bên trái màn hình để lọc ra các phiếu Chưa phát hành hoặc Phát hành lỗi cần xử lý bù.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-filter"></i> Các thao tác cơ bản</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-arrow-down-wide-short"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">5. Lọc nhanh các phiếu tồn đọng Chưa phát hành hoặc Lỗi</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/10/04160658/HDDCR_041026-10.png" alt="Lọc phiếu chưa phát hành hoặc lỗi">
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 17: PHÁT HÀNH BÙ CHO TỪNG PHIẾU TỒN ĐỌNG -->
+    <section class="scene scene-content" data-scene="17"
+        data-caption="Mở chi tiết phiếu trả hàng chưa phát hành hoặc phát hành lỗi, bạn nhấn nút Lập hóa đơn điều chỉnh và xác nhận Đồng ý để hệ thống gửi lại dữ liệu."
+        data-vo="Mở chi tiết phiếu trả hàng chưa phát hành hoặc phát hành lỗi, bạn nhấn nút Lập hóa đơn điều chỉnh và xác nhận Đồng ý để hệ thống gửi lại dữ liệu.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-wrench"></i> Các thao tác cơ bản</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-file-circle-plus"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">5. Thao tác lập bù hóa đơn điều chỉnh cho từng phiếu</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/10/04160654/HDDCR_041026-11.png" alt="Lập hóa đơn điều chỉnh cho từng phiếu tồn đọng">
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 18: CHỌN PHIẾU PHÁT HÀNH HÀNG LOẠT -->
+    <section class="scene scene-content" data-scene="18"
+        data-caption="Khi có nhiều phiếu tồn đọng, bạn tích chọn các phiếu trả hàng theo đơn gốc đã được Cơ quan thuế chấp nhận, nhấn nút ba chấm và chọn Phát hành hóa đơn điều chỉnh."
+        data-vo="Khi có nhiều phiếu tồn đọng, bạn tích chọn các phiếu trả hàng theo đơn gốc đã được Cơ quan thuế chấp nhận, nhấn nút ba chấm và chọn Phát hành hóa đơn điều chỉnh.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-layer-group"></i> Các thao tác cơ bản</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-list-check"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">6. Tích chọn các phiếu trả để phát hành hàng loạt</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/10/04160650/HDDCR_041026-12.png" alt="Tích chọn phiếu trả phát hành hàng loạt">
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 19: XÁC NHẬN PHÁT HÀNH HÀNG LOẠT -->
+    <section class="scene scene-content" data-scene="19"
+        data-caption="Hệ thống hiển thị popup tổng hợp số lượng phiếu được chọn, bạn chỉ cần nhấn Phát hành để tiến hành phát hành đồng loạt trong tích tắc."
+        data-vo="Hệ thống hiển thị popup tổng hợp số lượng phiếu được chọn, bạn chỉ cần nhấn Phát hành để tiến hành phát hành đồng loạt trong tích tắc.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-layer-group"></i> Các thao tác cơ bản</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-circle-check"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">6. Xác nhận phát hành hóa đơn điều chỉnh hàng loạt</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/10/04160645/HDDCR_041026-13.png" alt="Xác nhận phát hành hàng loạt">
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 20: TIÊU ĐỀ CHƯƠNG - CÁC TÍNH NĂNG NÂNG CAO -->
+    <section class="scene scene-content" data-scene="20"
+        data-caption="Tiếp theo, KiotViet sẽ hướng dẫn các bạn các tính năng nâng cao bao gồm: chế độ bán tự động, thủ công, xử lý đơn nhiều lần trả, hàng khuyến mãi tặng kèm và cách hủy phiếu trả an toàn."
+        data-vo="Tiếp theo, KiotViet sẽ hướng dẫn các bạn các tính năng nâng cao bao gồm: chế độ bán tự động, thủ công, xử lý đơn nhiều lần trả, hàng khuyến mãi tặng kèm và cách hủy phiếu trả an toàn.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner justify-center items-center text-center">
+            <div class="max-w-4xl flex flex-col items-center">
+                <div class="w-16 h-16 rounded-2xl text-3xl text-white flex items-center justify-center shadow-xl mb-4" style="background: linear-gradient(135deg, var(--theme-primary) 0%, var(--kv-blue) 100%);">
+                    <i class="fa-solid fa-sliders"></i>
+                </div>
+                <h1 class="text-4xl font-black text-slate-900 tracking-tight mb-2">PHẦN 03: CÁC TÍNH NĂNG NÂNG CAO</h1>
+                <p class="text-sm text-slate-500 font-medium mb-8">Linh hoạt xử lý các tình huống nghiệp vụ thực tế và tình huống phát sinh đặc thù</p>
+                <div class="grid grid-cols-3 gap-4 w-full">
+                    <div class="p-3.5 bg-white border border-slate-200 rounded-xl shadow-sm text-xs font-bold text-slate-700">1. Chế độ bán tự động (Popup)</div>
+                    <div class="p-3.5 bg-white border border-slate-200 rounded-xl shadow-sm text-xs font-bold text-slate-700">2. Chế độ thủ công hoàn toàn</div>
+                    <div class="p-3.5 bg-white border border-slate-200 rounded-xl shadow-sm text-xs font-bold text-slate-700">3. Đơn gốc có nhiều phiếu trả</div>
+                    <div class="p-3.5 bg-white border border-slate-200 rounded-xl shadow-sm text-xs font-bold text-slate-700">4. Phiếu trả có hàng tặng (=0)</div>
+                    <div class="p-3.5 bg-white border border-slate-200 rounded-xl shadow-sm text-xs font-bold text-slate-700">5. Xử lý khi phát hành thất bại</div>
+                    <div class="p-3.5 bg-white border border-slate-200 rounded-xl shadow-sm text-xs font-bold text-slate-700">6. Hủy phiếu trả đã lập HĐĐC</div>
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <!-- SLIDE 21: VẬN HÀNH BÁN TỰ ĐỘNG -->
+    <section class="scene scene-content" data-scene="21"
+        data-caption="Ở chế độ bán tự động, popup hỏi xác nhận sẽ xuất hiện khi bạn bấm Trả hàng, cho phép bạn quyết định phát hành ngay hoặc để trạng thái Chưa phát hành và xử lý sau."
+        data-vo="Ở chế độ bán tự động, popup hỏi xác nhận sẽ xuất hiện khi bạn bấm Trả hàng, cho phép bạn quyết định phát hành ngay hoặc để trạng thái Chưa phát hành và xử lý sau.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-hand-pointer"></i> Các tính năng nâng cao</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-window-restore"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">1. Vận hành ở chế độ bán tự động (Popup xác nhận)</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/10/04160640/HDDCR_041026-14.png" alt="Chế độ bán tự động trên màn hình bán hàng">
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 22: VẬN HÀNH THỦ CÔNG HOÀN TOÀN -->
+    <section class="scene scene-content" data-scene="22"
+        data-caption="Nếu tắt tính năng tự động, phiếu trả sẽ được lưu với trạng thái Chưa phát hành. Sau đó bạn vào Quản lý trả hàng để chủ động bấm Lập hóa đơn điều chỉnh bất cứ lúc nào."
+        data-vo="Nếu tắt tính năng tự động, phiếu trả sẽ được lưu với trạng thái Chưa phát hành. Sau đó bạn vào Quản lý trả hàng để chủ động bấm Lập hóa đơn điều chỉnh bất cứ lúc nào.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="Chế độ vận hành thủ công">
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/10/04160636/HDDCR_041026-15.png" alt="Chế độ vận hành thủ công">
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 23: XỬ LÝ ĐƠN GỐC CÓ NHIỀU PHIẾU TRẢ -->
+    <section class="scene scene-content" data-scene="23"
+        data-caption="Khi khách hàng phát sinh trả nhiều lần trên cùng một hóa đơn gốc, KiotViet tự động lập từng hóa đơn điều chỉnh tương ứng riêng biệt cho mỗi lần trả, đảm bảo số liệu luôn chính xác."
+        data-vo="Khi khách hàng phát sinh trả nhiều lần trên cùng một hóa đơn gốc, KiotViet tự động lập từng hóa đơn điều chỉnh tương ứng riêng biệt cho mỗi lần trả, đảm bảo số liệu luôn chính xác.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-arrows-split-up-and-left"></i> Các tính năng nâng cao</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-folder-tree"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">3. Xử lý linh hoạt đơn gốc có nhiều lần trả hàng</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/10/04160632/HDDCR_041026-16.png" alt="Xử lý đơn gốc có nhiều phiếu trả">
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 24: QUY TẮC XỬ LÝ PHIẾU CÓ HÀNG TẶNG -->
+    <section class="scene scene-content" data-scene="24"
+        data-caption="Nếu phiếu trả có bao gồm sản phẩm khuyến mãi hàng tặng có giá trị bằng 0, hóa đơn điều chỉnh vẫn được tạo đầy đủ với dòng hàng thông thường đúng giá và dòng hàng tặng bằng 0."
+        data-vo="Nếu phiếu trả có bao gồm sản phẩm khuyến mãi hàng tặng có giá trị bằng 0, hóa đơn điều chỉnh vẫn được tạo đầy đủ với dòng hàng thông thường đúng giá và dòng hàng tặng bằng 0.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-gift"></i> Các tính năng nâng cao</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-boxes-packing"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">4. Xử lý phiếu trả có chứa sản phẩm khuyến mãi (Hàng tặng)</h1>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="bento-card w-full max-w-[1240px] p-8 grid grid-cols-2 gap-8">
+                    <div class="inner-card-theme flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2 text-cyan-800 font-black text-sm uppercase mb-3">
+                                <i class="fa-solid fa-box-open"></i> PHIẾU CÓ CẢ HÀNG THƯỜNG & HÀNG TẶNG
+                            </div>
+                            <h3 class="text-xl font-black text-slate-900 mb-2">Ghi nhận tách bạch từng dòng</h3>
+                            <p class="text-sm text-slate-600 font-semibold leading-relaxed mb-4">
+                                • Dòng hàng hóa bán thông thường: Ghi nhận giảm trừ giá trị bình thường.<br>
+                                • Dòng hàng tặng khuyến mãi: Thể hiện trên HĐ điều chỉnh với <strong>giá trị = 0</strong>.
+                            </p>
+                        </div>
+                        <div class="p-3 bg-white/80 rounded-xl border border-cyan-200 text-xs font-bold text-cyan-900">
+                            Đảm bảo cân đối đúng thuế suất và tổng tiền thanh toán
+                        </div>
+                    </div>
+                    <div class="inner-card-amber flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2 text-amber-800 font-black text-sm uppercase mb-3">
+                                <i class="fa-solid fa-triangle-exclamation"></i> PHIẾU CHỈ CHỨA DUY NHẤT HÀNG TẶNG
+                            </div>
+                            <h3 class="text-xl font-black text-slate-900 mb-2">Vẫn lập HĐ điều chỉnh đầy đủ</h3>
+                            <p class="text-sm text-slate-600 font-semibold leading-relaxed mb-4">
+                                Ngay cả khi khách chỉ trả lại duy nhất sản phẩm tặng kèm (giá = 0), hệ thống vẫn hỗ trợ lập Hóa đơn điều chỉnh với giá trị trả lại bằng 0 để đảm bảo tính pháp lý.
+                            </p>
+                        </div>
+                        <div class="p-3 bg-white/80 rounded-xl border border-amber-200 text-xs font-bold text-amber-900">
+                            Tuân thủ nghiêm ngặt theo quy định thuế điện tử
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 25: HỦY PHIẾU TRẢ HÀNG ĐÃ CÓ HĐĐC -->
+    <section class="scene scene-content" data-scene="25"
+        data-caption="Khi cần hủy phiếu trả đã lập hóa đơn điều chỉnh, bạn hủy phiếu trên KiotViet trước, sau đó đăng nhập KV Einvoice để xóa hóa đơn nháp hoặc lập hóa đơn bù trừ nếu đã phát hành."
+        data-vo="Khi cần hủy phiếu trả đã lập hóa đơn điều chỉnh, bạn hủy phiếu trên KiotViet trước, sau đó đăng nhập KV Einvoice để xóa hóa đơn nháp hoặc lập hóa đơn bù trừ nếu đã phát hành.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge"><i class="fa-solid fa-ban"></i> Các tính năng nâng cao</span>
+                <div class="header-title-row">
+                    <div class="header-icon-box"><i class="fa-solid fa-trash-can"></i></div>
+                    <h1 class="text-2xl font-black text-slate-900 tracking-tight">6. Quy trình xử lý khi hủy phiếu trả hàng đã lập HĐĐC</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/10/04160628/HDDCR_041026-17.png" alt="Hủy phiếu trả trên KiotViet">
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 26: LỜI CẢM ƠN & KÊNH HỖ TRỢ -->
+    <section class="scene scene-content" data-scene="26"
+        data-caption="Cảm ơn các bạn đã theo dõi! Chúc các bạn kinh doanh hiệu quả cùng KiotViet."
+        data-vo="Cảm ơn các bạn đã theo dõi! Chúc các bạn kinh doanh hiệu quả cùng KiotViet.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner justify-center items-center text-center">
+            <div class="max-w-3xl flex flex-col items-center">
+                <div class="w-20 h-20 rounded-3xl bg-emerald-500 text-white flex items-center justify-center text-4xl shadow-xl mb-6">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <h1 class="text-4xl font-black text-slate-900 tracking-tight mb-2">CẢM ƠN CÁC BẠN ĐÃ THEO DÕI!</h1>
+                <p class="text-lg font-bold text-slate-600 mb-8">Chúc các bạn kinh doanh thật hiệu quả cùng KiotViet</p>
+                <div class="grid grid-cols-2 gap-6 w-full text-left">
+                    <a href="https://kiotviet.vn/ho-tro" target="_blank" rel="noopener" class="support-card-blue block no-underline">
+                        <div class="flex items-center gap-3 mb-1">
+                            <i class="fa-solid fa-book-open text-blue-600 text-lg"></i>
+                            <div class="text-sm font-extrabold text-blue-950">Tham khảo HDSD KiotViet</div>
+                        </div>
+                        <div class="text-xs font-semibold text-blue-700 truncate">https://kiotviet.vn/ho-tro</div>
+                    </a>
+                    <a href="https://www.youtube.com/@HDSDPhanmemKiotViet" target="_blank" rel="noopener" class="youtube-card-red block no-underline">
+                        <div class="flex items-center gap-3 mb-1">
+                            <i class="fa-brands fa-youtube text-red-600 text-lg"></i>
+                            <div class="text-sm font-extrabold text-red-950">Tham khảo Video HDSD KiotViet</div>
+                        </div>
+                        <div class="text-xs font-semibold text-red-700 truncate">https://www.youtube.com/@HDSDPhanmemKiotViet</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <!-- PRESENTER HUD (PHỤ ĐỀ TRÌNH CHIẾU CĂN GIỮA TUYỆT ĐỐI) -->
+    <div id="presenter-hud" class="hud-hidden">
+        <div id="subtitle-box"></div>
+    </div>
+</div>
+
+<script>
+    const scenes = Array.from(document.querySelectorAll('.scene'));
+    const subtitleBox = document.getElementById('subtitle-box');
+    const presenterHud = document.getElementById('presenter-hud');
+    const customAudioPlayer = document.getElementById('custom-audio-player');
+    const dropzone = document.getElementById('audio-dropzone');
+    const dropzoneIcon = document.getElementById('dropzone-icon');
+
+    let currentIndex = 0;
+    let voiceEnabled = false;
+    let hasCustomAudio = false;
+    let isAnimating = false;
+
+    function initPrintSubtitles() {
+        scenes.forEach((scene) => {
+            const printSub = scene.querySelector('.print-subtitle');
+            const cap = scene.getAttribute('data-caption') || '';
+            if (printSub) {
+                printSub.textContent = cap;
+            }
+        });
+    }
+
+    function selectAudioMode(enableVoice) {
+        voiceEnabled = enableVoice;
+        const radio1 = document.getElementById('radio-mode-1');
+        const radio2 = document.getElementById('radio-mode-2');
+        const label1 = document.getElementById('label-mode-1');
+        const label2 = document.getElementById('label-mode-2');
+
+        if (radio1 && radio2) {
+            radio1.checked = !enableVoice;
+            radio2.checked = enableVoice;
+        }
+        if (label1 && label2) {
+            label1.classList.toggle('active-mode', !enableVoice);
+            label2.classList.toggle('active-mode', enableVoice);
+        }
+    }
+
+    function stopAllAudio() {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+        }
+        if (customAudioPlayer && !customAudioPlayer.paused) {
+            customAudioPlayer.pause();
+        }
+    }
+
+    function triggerSlideVoice(index) {
+        if (!voiceEnabled || index <= 0) {
+            stopAllAudio();
+            return;
+        }
+
+        if (hasCustomAudio && customAudioPlayer.src) {
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            if (index === 1) {
+                customAudioPlayer.currentTime = 0;
+                customAudioPlayer.play().catch(() => {});
+            } else if (customAudioPlayer.paused) {
+                customAudioPlayer.play().catch(() => {});
+            }
+            return;
+        }
+
+        if (index >= 2) {
+            const text = scenes[index].getAttribute('data-caption') || scenes[index].getAttribute('data-vo') || '';
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                if (text.trim()) {
+                    const utter = new SpeechSynthesisUtterance(text);
+                    utter.lang = 'vi-VN';
+                    utter.rate = 1.02;
+                    window.speechSynthesis.speak(utter);
+                }
+            }
+        }
+    }
+
+    function activateModeByKey(enableVoice) {
+        selectAudioMode(enableVoice);
+        if (currentIndex === 0) return;
+
+        if (!enableVoice) {
+            stopAllAudio();
+        } else {
+            triggerSlideVoice(currentIndex);
+        }
+    }
+
+    function startPresentation() {
+        goToScene(1);
+    }
+
+    function returnToSettings() {
+        stopAllAudio();
+        if (customAudioPlayer) customAudioPlayer.currentTime = 0;
+        goToScene(0, true);
+    }
+
+    function applyDynamicSubtitle(caption) {
+        if (!caption || !caption.trim()) {
+            presenterHud.classList.add('hud-hidden');
+            subtitleBox.textContent = '';
+            return;
+        }
+
+        subtitleBox.style.fontSize = '1.15rem';
+        subtitleBox.style.lineHeight = '1.45';
+        subtitleBox.style.padding = '0.65rem 2.2rem';
+        subtitleBox.style.textAlign = 'center';
+        subtitleBox.textContent = caption;
+        presenterHud.classList.remove('hud-hidden');
+    }
+
+    function updateChromeVisibility(index) {
+        if (index <= 1) {
+            presenterHud.classList.add('hud-hidden');
+            subtitleBox.textContent = '';
+        } else {
+            const currentScene = scenes[index];
+            const caption = currentScene.getAttribute('data-caption') || '';
+            applyDynamicSubtitle(caption);
+        }
+    }
+
+    function goToScene(targetIndex, skipWipe = false) {
+        if (targetIndex < 0 || targetIndex >= scenes.length || targetIndex === currentIndex || isAnimating) return;
+
+        const prevScene = scenes[currentIndex];
+        const nextScene = scenes[targetIndex];
+
+        if (skipWipe) {
+            scenes.forEach(s => s.classList.remove('active', 'previous', 'no-wipe'));
+            nextScene.classList.add('active', 'no-wipe');
+            currentIndex = targetIndex;
+            updateChromeVisibility(currentIndex);
+            triggerSlideVoice(currentIndex);
+            return;
+        }
+
+        isAnimating = true;
+        scenes.forEach(s => s.classList.remove('previous', 'no-wipe'));
+
+        prevScene.classList.remove('active');
+        prevScene.classList.add('previous');
+        nextScene.classList.add('active');
+
+        currentIndex = targetIndex;
+        updateChromeVisibility(currentIndex);
+        triggerSlideVoice(currentIndex);
+
+        setTimeout(() => {
+            prevScene.classList.remove('previous');
+            isAnimating = false;
+        }, 670);
+    }
+
+    function copyAllSubtitlesWithPrefix() {
+        const prefix = 'Chuẩn bị ghi hình 10 9 8 7 6 5 4 3 2 1';
+        const lines = [prefix];
+        scenes.forEach((s, idx) => {
+            if (idx >= 2) {
+                const capText = s.getAttribute('data-caption') || s.getAttribute('data-vo') || '';
+                if (capText.trim()) {
+                    lines.push(capText.trim());
+                }
+            }
+        });
+        navigator.clipboard.writeText(lines.join('\n\n'));
+        const btn = document.getElementById('btn-copy-sub');
+        const oldHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Đã copy kịch bản gốc!';
+        setTimeout(() => btn.innerHTML = oldHtml, 2000);
+    }
+
+    function copyLedaPrompt() {
+        const promptText = 'Chuyên viên tư vấn người Hà Nội kể chuyện sôi nổi, nhiệt tình';
+        navigator.clipboard.writeText(promptText);
+        const btn = document.getElementById('btn-copy-prompt');
+        const oldHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check text-emerald-600"></i> Đã copy Prompt Leda!';
+        setTimeout(() => btn.innerHTML = oldHtml, 2000);
+    }
+
+    // Cập nhật giao diện khi nạp audio thành công
+    function setAudioSuccessUI(fileName, isAuto = false) {
+        hasCustomAudio = true;
+        dropzoneIcon.className = 'fa-solid fa-circle-check text-2xl mb-1 text-emerald-600';
+        document.getElementById('audio-status-title').textContent = isAuto ? 'Đã tự nhận diện file mc.wav!' : 'Đã nạp file Audio!';
+        document.getElementById('audio-status-desc').textContent = fileName;
+        const badge = document.getElementById('audio-loaded-Badge');
+        document.getElementById('audio-filename').innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> ${fileName} ${isAuto ? '(Tự động)' : ''}`;
+        badge.classList.remove('hidden');
+        selectAudioMode(true); // Tự động bật chế độ 2 - Thuyết minh
+    }
+
+    // Tự động kiểm tra file mc.wav trực tiếp qua thẻ Audio (CÁCH 1)
+    function autoDetectByAudioTag() {
+        customAudioPlayer.preload = "metadata";
+        
+        // Sự kiện khi tìm thấy file mc.wav và đọc được metadata
+        customAudioPlayer.onloadedmetadata = function() {
+            setAudioSuccessUI('mc.wav', true);
+            console.log('[Auto-Detect] Đã tự nhận diện thành công file mc.wav cùng folder!');
+        };
+
+        // Sự kiện khi trong folder chưa có file mc.wav
+        customAudioPlayer.onerror = function() {
+            hasCustomAudio = false;
+            customAudioPlayer.removeAttribute('src');
+            dropzoneIcon.className = 'fa-solid fa-cloud-arrow-up text-2xl mb-1 text-cyan-600';
+            document.getElementById('audio-status-title').textContent = 'Chưa phát hiện file mc.wav';
+            document.getElementById('audio-status-desc').textContent = 'Đặt file mc.wav cùng folder hoặc kéo thả vào đây';
+            console.log('[Auto-Detect] Không tìm thấy file mc.wav, chuyển sang chế độ thủ công.');
+        };
+
+        // Gán trực tiếp file mc.wav cùng folder
+        customAudioPlayer.src = 'mc.wav';
+    }
+
+    function loadAudioFile(file) {
+        if (!file) return;
+        const url = URL.createObjectURL(file);
+        customAudioPlayer.src = url;
+        setAudioSuccessUI(file.name, false);
+    }
+
+    function handleAudioFileSelect(event) {
+        const file = event.target.files[0];
+        if (file) loadAudioFile(file);
+    }
+
+    function clearLoadedAudio(event) {
+        event.stopPropagation();
+        stopAllAudio();
+        customAudioPlayer.removeAttribute('src');
+        hasCustomAudio = false;
+        document.getElementById('audio-file-input').value = '';
+        dropzoneIcon.className = 'fa-solid fa-cloud-arrow-up text-2xl mb-1 text-cyan-600';
+        document.getElementById('audio-status-title').textContent = 'Up file .wav hoặc .mp3 tại đây';
+        document.getElementById('audio-status-desc').textContent = 'Nếu chưa có file, mục 2 sẽ dùng TTS hệ thống';
+        document.getElementById('audio-loaded-Badge').classList.add('hidden');
+        selectAudioMode(false);
+    }
+
+    if (dropzone) {
+        dropzone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropzone.classList.add('dragover');
+        });
+        dropzone.addEventListener('dragleave', () => {
+            dropzone.classList.remove('dragover');
+        });
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('dragover');
+            if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                loadAudioFile(e.dataTransfer.files[0]);
+            }
+        });
+    }
+
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+            document.exitFullscreen().catch(() => {});
+        }
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+        if (e.code === 'Space' || e.code === 'ArrowRight' || e.code === 'PageDown') {
+            e.preventDefault();
+            goToScene(currentIndex + 1);
+        } else if (e.code === 'Backspace' || e.code === 'ArrowLeft' || e.code === 'PageUp') {
+            e.preventDefault();
+            goToScene(currentIndex - 1);
+        } else if (e.key === '1') {
+            e.preventDefault();
+            activateModeByKey(false);
+        } else if (e.key === '2') {
+            e.preventDefault();
+            activateModeByKey(true);
+        } else if (e.key === '0' || e.code === 'Home') {
+            e.preventDefault();
+            returnToSettings();
+        } else if (e.key === 'f' || e.key === 'F') {
+            e.preventDefault();
+            toggleFullScreen();
+        } else if (e.key === 'p' || e.key === 'P') {
+            e.preventDefault();
+            window.print();
+        }
+    });
+
+    document.getElementById('video-stage').addEventListener('click', (e) => {
+        if (currentIndex === 0) return;
+        if (e.target.closest('a, button, input, label')) return;
+        goToScene(currentIndex + 1);
+    });
+
+    initPrintSubtitles();
+    updateChromeVisibility(0);
+    autoDetectByAudioTag();
+</script>
+</body>
+</html>
