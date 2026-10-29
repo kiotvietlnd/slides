@@ -214,33 +214,6 @@
             50% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
         }
         .alert-pulse { animation: pulseAlert 2.2s infinite; }
-
-        /* CSS THẺ LẬT TẠP HÓA AN NHIÊN */
-        .flip-card {
-            perspective: 1200px;
-            width: 100%;
-            height: 330px;
-        }
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-style: preserve-3d;
-        }
-        .flip-card.flipped .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            inset: 0;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            border-radius: 1.25rem;
-        }
-        .flip-card-back {
-            transform: rotateY(180deg);
-        }
     </style>
 </head>
 <body class="text-slate-800 relative select-none font-sans">
@@ -311,7 +284,7 @@
                         </div>
                         <h3 class="text-lg font-bold text-blue-950 mb-2">1. Nắm vững giá trị cốt lõi KiotViet Retail</h3>
                         <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
-                            Nằm lòng <b>4 nhận định cốt lõi</b> để trả lời đúng nhu cầu: <i>KiotViet giải quyết bài toán gì cho chủ cửa hàng?</i>.
+                            Để trả lời <b>4 đúng câu hỏi:</b> <i>KiotViet giải quyết bài toán gì cho chủ cửa hàng?</i>.
                         </p>
                     </div>
                 </div>
@@ -323,7 +296,7 @@
                         </div>
                         <h3 class="text-lg font-bold text-blue-950 mb-2">2. Thao tác thành thạo 06 bước demo cơ bản</h3>
                         <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
-                            Thao tác trơn tru quy trình bán hàng khép kín trên cả <b>Máy tính (Web) &amp; Điện thoại (App)</b>.
+                            Thao tác đầy đủ quy trình bán hàng khép kín trên cả <b>Máy tính (Web) &amp; Điện thoại (App)</b>.
                         </p>
                     </div>
                 </div>
@@ -333,7 +306,7 @@
                         <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-black text-2xl mb-4 shadow-sm">
                             <i class="fa-solid fa-handshake"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-blue-950 mb-2">3. Tư vấn đúng tính năng đáp ứng Nhu cầu</h3>
+                        <h3 class="text-lg font-bold text-blue-950 mb-2">3. Tư vấn đúng tính năng, đáp ứng đúng nhu cầu</h3>
                         <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
                             Nhận diện đúng nỗi đau, tư vấn hướng dẫn tính năng phù hợp đặc thù và nhu cầu khách hàng.
                         </p>
@@ -445,129 +418,243 @@
             </div>
         </div>
 
-        <!-- ================= SLIDE 5: CÂU HỎI QUAN SÁT TRƯỚC VIDEO ================= -->
-        <div class="slide flex items-center justify-center p-8">
-            <div class="glass-card px-12 py-14 max-w-4xl w-full text-center border-2 border-blue-200 bg-blue-50/20">
-                <div class="w-16 h-16 bg-blue-100 text-blue-700 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm">
-                    <i class="fa-solid fa-magnifying-glass text-3xl"></i>
-                </div>
-                <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-[11px] font-black uppercase tracking-wider mb-2 inline-block">
-                    CÂU HỎI QUAN SÁT
+        <!-- ================= SLIDE 5: 3 CÂU HỎI QUAN SÁT & VIDEO (TINH GỌN, KHÔNG DÍNH FLUFF) ================= -->
+        <div class="slide flex flex-col items-center justify-center p-6 pt-16 h-full relative">
+            <div class="w-full text-center mb-4 flex items-center justify-center gap-3">
+                <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-black uppercase tracking-wider border border-blue-200">
+                    NHẬN ĐỊNH 1 &bull; GIẢI PHÁP TOÀN DIỆN
                 </span>
-                <h2 class="text-2xl md:text-3xl font-extrabold text-blue-950 mb-6">
-                    Trước khi xem video, hãy mang theo 3 câu hỏi định hướng sau:
-                </h2>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto text-left">
-                    <div class="p-4 rounded-xl bg-white border border-blue-200 shadow-sm">
-                        <span class="w-7 h-7 rounded-lg bg-blue-600 text-white font-black text-xs flex items-center justify-center mb-2">1</span>
-                        <h3 class="text-xs font-bold text-slate-900 mb-1">Mô hình bán lẻ</h3>
-                        <p class="text-[11px] text-slate-600">Những ngành bán lẻ nào xuất hiện trong video?</p>
-                    </div>
-                    <div class="p-4 rounded-xl bg-white border border-blue-200 shadow-sm">
-                        <span class="w-7 h-7 rounded-lg bg-cyan-600 text-white font-black text-xs flex items-center justify-center mb-2">2</span>
-                        <h3 class="text-xs font-bold text-slate-900 mb-1">Nỗi đau lớn nhất</h3>
-                        <p class="text-[11px] text-slate-600">Khó khăn lớn nhất mà các chủ quán đang gặp phải là gì?</p>
-                    </div>
-                    <div class="p-4 rounded-xl bg-white border border-blue-200 shadow-sm">
-                        <span class="w-7 h-7 rounded-lg bg-indigo-600 text-white font-black text-xs flex items-center justify-center mb-2">3</span>
-                        <h3 class="text-xs font-bold text-slate-900 mb-1">Giải pháp KiotViet</h3>
-                        <p class="text-[11px] text-slate-600">KiotViet đã giải quyết khó khăn đó cho họ bằng cách nào?</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= SLIDE 6: VIDEO 01 ================= -->
-        <div class="slide flex flex-col items-center justify-center p-4 pt-14 h-full relative">
-            <div class="w-full text-center mb-3 flex items-center justify-center gap-3">
-                <span class="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider border border-blue-200">
-                    VIDEO TÌNH HUỐNG
-                </span>
-                <h2 class="text-2xl md:text-3xl font-extrabold text-blue-950">Giải pháp toàn diện ngành Bán lẻ - KiotViet Retail</h2>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-blue-950">KiotViet giải quyết bài toán gì?</h2>
                 <a href="https://www.youtube.com/watch?v=TyCBFfHzMJc" target="_blank" class="w-9 h-9 rounded-xl bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shadow-md transition-all hover:scale-105 active:scale-95 shrink-0" title="Mở tab mới trên YouTube">
                     <i class="fa-brands fa-youtube text-lg"></i>
                 </a>
             </div>
-            
-            <div class="relative w-full max-w-5xl h-[74vh] rounded-2xl overflow-hidden glass-card p-1.5 shadow-2xl flex items-center justify-center bg-black/5">
-                <div id="video-cover-6" class="absolute inset-0 z-10 bg-cover bg-center flex flex-col items-center justify-center cursor-pointer group" style="background-image: url('https://img.youtube.com/vi/TyCBFfHzMJc/maxresdefault.jpg');" onclick="playVideo('iframe-6', 'video-cover-6', 'https://www.youtube-nocookie.com/embed/TyCBFfHzMJc?autoplay=1&rel=0&modestbranding=1&playsinline=1')">
-                    <div class="absolute inset-0 bg-black/35 group-hover:bg-black/20 transition-all"></div>
-                    <div class="relative z-20 w-20 h-20 bg-red-600 rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-play text-white text-2xl ml-1"></i>
+
+            <div class="max-w-6xl w-full grid grid-cols-12 gap-5 items-center">
+                <!-- CỘT TRÁI: 3 CÂU HỎI QUAN SÁT BỐ CỤC ĐẸP MẮT -->
+                <div class="col-span-5 glass-card p-6 border-2 border-blue-500 bg-blue-50/20 flex flex-col justify-between shadow-md h-full">
+                    <div>
+                        <h3 class="text-base font-extrabold text-blue-950 mb-4 flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse"></span>
+                            XEM VIDEO VÀ TRẢ LỜI 03 CÂU HỎI SAU:
+                        </h3>
+                        <div class="space-y-3 text-xs text-slate-800 font-medium">
+                            <div class="p-3.5 bg-white rounded-xl border border-blue-200 shadow-sm flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-lg bg-blue-600 text-white font-black text-xs flex items-center justify-center shrink-0">1</span>
+                                <span class="leading-relaxed font-semibold">Những ngành bán lẻ nào xuất hiện trong video?</span>
+                            </div>
+                            <div class="p-3.5 bg-white rounded-xl border border-blue-200 shadow-sm flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-lg bg-cyan-600 text-white font-black text-xs flex items-center justify-center shrink-0">2</span>
+                                <span class="leading-relaxed font-semibold">Nỗi đau / khó khăn lớn nhất của các chủ shop là gì?</span>
+                            </div>
+                            <div class="p-3.5 bg-white rounded-xl border border-blue-200 shadow-sm flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-lg bg-indigo-600 text-white font-black text-xs flex items-center justify-center shrink-0">3</span>
+                                <span class="leading-relaxed font-semibold">KiotViet giải quyết các vấn đề đó bằng cách nào?</span>
+                            </div>
+                        </div>
                     </div>
-                    <span class="relative z-20 mt-3 text-white text-xs font-semibold bg-black/60 px-3.5 py-1 rounded-full backdrop-blur-sm">Click để phát video</span>
                 </div>
-                <iframe id="iframe-6" class="w-full h-full rounded-xl border-0" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+                <!-- CỘT PHẢI: VIDEO PLAYER SANG TRỌNG -->
+                <div class="col-span-7 relative w-full h-[54vh] rounded-2xl overflow-hidden glass-card p-1.5 shadow-2xl flex items-center justify-center bg-black/5">
+                    <div id="video-cover-5" class="absolute inset-0 z-10 bg-cover bg-center flex flex-col items-center justify-center cursor-pointer group" style="background-image: url('https://img.youtube.com/vi/TyCBFfHzMJc/maxresdefault.jpg');" onclick="playVideo('iframe-5', 'video-cover-5', 'https://www.youtube-nocookie.com/embed/TyCBFfHzMJc?autoplay=1&rel=0&modestbranding=1&playsinline=1')">
+                        <div class="absolute inset-0 bg-black/35 group-hover:bg-black/20 transition-all"></div>
+                        <div class="relative z-20 w-18 h-18 bg-red-600 rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-play text-white text-2xl ml-1"></i>
+                        </div>
+                        <span class="relative z-20 mt-3 text-white text-xs font-semibold bg-black/60 px-3.5 py-1 rounded-full backdrop-blur-sm">Click để phát video</span>
+                    </div>
+                    <iframe id="iframe-5" class="w-full h-full rounded-xl border-0" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
 
-        <!-- ================= SLIDE 7: NHẬN DIỆN 1 – GIẢI PHÁP TOÀN DIỆN ================= -->
+        <!-- ================= SLIDE 6: NHẬN ĐỊNH 1 – ĐA NGÀNH HÀNG (12 BOXES) ================= -->
         <div class="slide flex flex-col items-center justify-center p-6 pt-16 h-full relative">
             <div class="w-full text-center mb-5">
                 <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider mb-1 inline-block border border-blue-200">
                     NHẬN ĐỊNH 1 &bull; GIẢI PHÁP TOÀN DIỆN
                 </span>
-                <h2 class="text-2xl md:text-3xl font-extrabold text-blue-950">Đa ngành hàng &amp; Hệ thống nhóm giải pháp cốt lõi</h2>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-blue-950">Phục vụ chuyên sâu cho 12+ ngành hàng bán lẻ</h2>
                 <div class="h-1 w-20 bg-gradient-to-r from-kvprimary to-kvsecondary mx-auto mt-1.5 rounded-full"></div>
             </div>
             
-            <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
-                <div class="glass-card p-5 border-t-4 border-t-blue-600">
-                    <h3 class="font-bold text-sm text-blue-950 mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-store text-blue-600"></i> Phục vụ 12+ ngành hàng
-                    </h3>
-                    <ul class="space-y-1.5 text-xs text-slate-600">
-                        <li>&bull; <b>Thời trang:</b> Size &amp; Màu sắc</li>
-                        <li>&bull; <b>Tạp hóa, Siêu thị:</b> Date, Lô, Barcode</li>
-                        <li>&bull; <b>Điện máy:</b> Serial / IMEI bảo hành</li>
-                        <li>&bull; <b>Mỹ phẩm:</b> Hạn dùng, Tích điểm CRM</li>
-                        <li>&bull; <b>Nhà thuốc:</b> Liên thông Dược QG</li>
-                        <li>&bull; <b>Nông sản, VLXD, Xe máy...</b></li>
-                    </ul>
-                </div>
-
-                <div class="glass-card p-5 border-t-4 border-t-cyan-600">
-                    <h3 class="font-bold text-sm text-blue-950 mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-layer-group text-cyan-600"></i> 3 Nhóm giải pháp Bán hàng
-                    </h3>
-                    <div class="space-y-2 text-xs text-slate-600">
-                        <div class="p-2 bg-blue-50/50 rounded-lg">
-                            <b class="text-blue-950 block">1. Vận hành bán hàng:</b>
-                            Thu ngân, tít mã, in bill, đổi trả linh hoạt.
-                        </div>
-                        <div class="p-2 bg-cyan-50/50 rounded-lg">
-                            <b class="text-blue-950 block">2. Quản lý kinh doanh:</b>
-                            Trừ tồn kho tự động, giá vốn, sổ quỹ, công nợ.
-                        </div>
-                        <div class="p-2 bg-indigo-50/50 rounded-lg">
-                            <b class="text-blue-950 block">3. Phát triển doanh thu:</b>
-                            Lưu data khách, tích điểm CRM, khuyến mãi.
-                        </div>
+            <div class="max-w-6xl w-full grid grid-cols-2 md:grid-cols-4 gap-3 text-left">
+                <div class="glass-card p-3.5 border-l-4 border-l-blue-600 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-shirt"></i></div>
+                    <div>
+                        <h4 class="font-bold text-xs md:text-sm text-blue-950">Thời trang &amp; Phụ kiện</h4>
+                        <span class="text-[11px] text-slate-500">Size số &amp; Màu sắc</span>
                     </div>
                 </div>
 
-                <div class="glass-card p-5 border-t-4 border-t-emerald-600 bg-emerald-50/20">
-                    <h3 class="font-bold text-sm text-emerald-950 mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-stamp text-emerald-600"></i> 2 Nhóm giải pháp Tuân thủ pháp lý
-                    </h3>
-                    <p class="text-xs text-slate-700 leading-relaxed mb-3">
-                        Tích hợp sẵn <b>Hóa đơn điện tử khởi tạo từ máy tính tiền</b> (TT78/NĐ123) và <b>Chữ ký số tập trung</b> (Cloud CA/HSM) chuẩn cơ quan Thuế.
-                    </p>
-                    <div class="p-2 bg-white rounded-lg border border-emerald-200 text-[11px] font-bold text-emerald-800">
-                        Quản trị chuẩn mực &bull; An tâm trước cơ quan Thuế
+                <div class="glass-card p-3.5 border-l-4 border-l-blue-600 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-basket-shopping"></i></div>
+                    <div>
+                        <h4 class="font-bold text-xs md:text-sm text-blue-950">Tạp hóa &amp; Siêu thị mini</h4>
+                        <span class="text-[11px] text-slate-500">Mã vạch, Lô &amp; Hạn dùng</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-3.5 border-l-4 border-l-blue-600 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-mobile-screen"></i></div>
+                    <div>
+                        <h4 class="font-bold text-xs md:text-sm text-blue-950">Điện thoại &amp; Điện máy</h4>
+                        <span class="text-[11px] text-slate-500">Số Serial / IMEI bảo hành</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-3.5 border-l-4 border-l-blue-600 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-pump-soap"></i></div>
+                    <div>
+                        <h4 class="font-bold text-xs md:text-sm text-blue-950">Mỹ phẩm &amp; Làm đẹp</h4>
+                        <span class="text-[11px] text-slate-500">Hạn dùng, Tích điểm CRM</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-3.5 border-l-4 border-l-blue-600 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-pills"></i></div>
+                    <div>
+                        <h4 class="font-bold text-xs md:text-sm text-blue-950">Nhà thuốc &amp; Dược phẩm</h4>
+                        <span class="text-[11px] text-slate-500">Liên thông Dược Quốc Gia</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-3.5 border-l-4 border-l-blue-600 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-baby-carriage"></i></div>
+                    <div>
+                        <h4 class="font-bold text-xs md:text-sm text-blue-950">Mẹ &amp; Bé</h4>
+                        <span class="text-[11px] text-slate-500">Đóng gói combo, quà tặng</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-3.5 border-l-4 border-l-blue-600 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-carrot"></i></div>
+                    <div>
+                        <h4 class="font-bold text-xs md:text-sm text-blue-950">Nông sản &amp; Thực phẩm</h4>
+                        <span class="text-[11px] text-slate-500">Cân điện tử in mã vạch</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-3.5 border-l-4 border-l-blue-600 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-couch"></i></div>
+                    <div>
+                        <h4 class="font-bold text-xs md:text-sm text-blue-950">Nội thất &amp; Gia dụng</h4>
+                        <span class="text-[11px] text-slate-500">Đặt cọc, giao lắp tận nhà</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-3.5 border-l-4 border-l-blue-600 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-helmet-safety"></i></div>
+                    <div>
+                        <h4 class="font-bold text-xs md:text-sm text-blue-950">Vật liệu xây dựng</h4>
+                        <span class="text-[11px] text-slate-500">Nhiều ĐVT (Bao/Tấn/Khối)</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-3.5 border-l-4 border-l-blue-600 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-motorcycle"></i></div>
+                    <div>
+                        <h4 class="font-bold text-xs md:text-sm text-blue-950">Xe &amp; Phụ tùng máy</h4>
+                        <span class="text-[11px] text-slate-500">Lịch bảo dưỡng, sửa chữa</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-3.5 border-l-4 border-l-blue-600 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-book"></i></div>
+                    <div>
+                        <h4 class="font-bold text-xs md:text-sm text-blue-950">Sách &amp; Văn phòng phẩm</h4>
+                        <span class="text-[11px] text-slate-500">Tra cứu nhanh mã ISBN</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-3.5 border-l-4 border-l-blue-600 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-gift"></i></div>
+                    <div>
+                        <h4 class="font-bold text-xs md:text-sm text-blue-950">Hoa &amp; Quà tặng</h4>
+                        <span class="text-[11px] text-slate-500">Đơn đặt hẹn trước, giỏ quà</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ================= SLIDE 8: NHẬN DIỆN 2 – ĐA NỀN TẢNG LINH HOẠT ================= -->
+        <!-- ================= SLIDE 7: NHẬN ĐỊNH 1 – HỆ THỐNG NHÓM GIẢI PHÁP (CHUẨN THUẾ & HĐĐT) ================= -->
+        <div class="slide flex flex-col items-center justify-center p-6 pt-16 h-full relative">
+            <div class="w-full text-center mb-5">
+                <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider mb-1 inline-block border border-blue-200">
+                    NHẬN ĐỊNH 1 &bull; GIẢI PHÁP TOÀN DIỆN
+                </span>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-blue-950">Hệ thống nhóm giải pháp Bán hàng &amp; Tuân thủ pháp lý</h2>
+                <div class="h-1 w-20 bg-gradient-to-r from-kvprimary to-kvsecondary mx-auto mt-1.5 rounded-full"></div>
+            </div>
+            
+            <div class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-5 text-left mb-3">
+                <!-- BOX 1: 3 NHÓM GIẢI PHÁP BÁN HÀNG -->
+                <div class="glass-card p-6 border-t-4 border-t-blue-600 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-extrabold text-base text-blue-950 mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-layer-group text-blue-600 text-lg"></i>
+                            3 Nhóm giải pháp Bán hàng
+                        </h3>
+                        <div class="space-y-2.5 text-xs text-slate-700 font-medium">
+                            <div class="p-3 bg-blue-50/60 rounded-xl border border-blue-100">
+                                <b class="text-blue-950 block mb-0.5 text-xs">1. Vận hành bán hàng:</b>
+                                Thu ngân, tít mã vạch siêu tốc, in bill nhiệt, đổi trả hàng hoàn kho linh hoạt.
+                            </div>
+                            <div class="p-3 bg-blue-50/60 rounded-xl border border-blue-100">
+                                <b class="text-blue-950 block mb-0.5 text-xs">2. Quản lý kinh doanh:</b>
+                                Trừ tồn kho tự động theo thời gian thực, quản lý giá vốn, sổ quỹ tiền mặt, công nợ.
+                            </div>
+                            <div class="p-3 bg-blue-50/60 rounded-xl border border-blue-100">
+                                <b class="text-blue-950 block mb-0.5 text-xs">3. Phát triển doanh thu:</b>
+                                Lưu data khách hàng, tích điểm nâng hạng CRM, tung khuyến mãi đa tầng.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BOX 2: 2 NHÓM GIẢI PHÁP TUÂN THỦ PHÁP LÝ (THUẾ & HĐĐT) -->
+                <div class="glass-card p-6 border-t-4 border-t-emerald-600 bg-emerald-50/20 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-extrabold text-base text-emerald-950 mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-stamp text-emerald-600 text-lg"></i>
+                            2 Nhóm giải pháp Tuân thủ pháp lý
+                        </h3>
+                        <div class="space-y-2.5 text-xs text-slate-700 font-medium">
+                            <div class="p-3 bg-white rounded-xl border border-emerald-200 shadow-sm">
+                                <b class="text-emerald-950 block mb-1 text-xs flex items-center gap-1.5">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                                    Thuế - Kế toán:
+                                </b>
+                                Thiết lập ban đầu Thuế - Kế toán, Tờ khai Thuế HKD, Sổ kế toán HKD, Hạch toán giao dịch đầy đủ.
+                            </div>
+                            <div class="p-3 bg-white rounded-xl border border-emerald-200 shadow-sm">
+                                <b class="text-emerald-950 block mb-1 text-xs flex items-center gap-1.5">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                                    Hóa đơn điện tử - Chữ ký số:
+                                </b>
+                                Đăng ký Chữ ký số, Thiết lập ban đầu HĐĐT, Phát hành HĐĐT từ máy tính tiền, Xử lý sai sót, Chứng từ điện tử &amp; Phiếu xuất kho.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTNOTE -->
+            <div class="max-w-5xl w-full text-center">
+                <p class="text-xs text-slate-500 italic bg-slate-100 py-1.5 px-4 rounded-full inline-block border border-slate-200">
+                    *Lưu ý: Các mô hình dịch vụ (F&amp;B, Nhà hàng, Spa/Salon, Khách sạn) có quy trình đặc thù và sẽ được tìm hiểu riêng trong các khóa học sau.
+                </p>
+            </div>
+        </div>
+
+        <!-- ================= SLIDE 8: NHẬN ĐỊNH 2 – ĐỔI TIÊU ĐỀ ================= -->
         <div class="slide flex flex-col items-center justify-center p-8 pt-20 h-full relative">
             <div class="w-full text-center mb-8">
                 <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider mb-1 inline-block border border-blue-200">
-                    NHẬN DIỆN 2 &bull; ĐA NỀN TẢNG LINH HOẠT
+                    NHẬN ĐỊNH 2 &bull; ĐA NỀN TẢNG LINH HOẠT
                 </span>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-blue-950">Khách hàng sử dụng ở đâu và trên thiết bị nào?</h2>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-blue-950">Khách hàng có thể sử dụng KiotViet trên thiết bị nào?</h2>
                 <div class="h-1 w-20 bg-gradient-to-r from-kvprimary to-kvsecondary mx-auto mt-2 rounded-full"></div>
             </div>
             
@@ -628,11 +715,11 @@
             </div>
         </div>
 
-        <!-- ================= SLIDE 10: NHẬN DIỆN 3 – THIẾT BỊ PHẦN CỨNG ================= -->
+        <!-- ================= SLIDE 10: NHẬN ĐỊNH 3 – THIẾT BỊ PHẦN CỨNG (ĐÃ BỎ BOX CHUẨN PLUG) ================= -->
         <div class="slide flex flex-col items-center justify-center p-6 pt-16 h-full relative">
             <div class="w-full text-center mb-6">
                 <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider mb-1 inline-block border border-blue-200">
-                    NHẬN DIỆN 3 &bull; KẾT NỐI MỞ RỘNG - THIẾT BỊ PHẦN CỨNG
+                    NHẬN ĐỊNH 3 &bull; KẾT NỐI MỞ RỘNG - THIẾT BỊ PHẦN CỨNG
                 </span>
                 <h2 class="text-3xl md:text-4xl font-extrabold text-blue-950 mt-1">Hệ sinh thái thiết bị phần cứng chuẩn hóa</h2>
                 <div class="h-1 w-20 bg-gradient-to-r from-kvprimary to-kvsecondary mx-auto mt-2 rounded-full"></div>
@@ -699,20 +786,13 @@
                     </div>
                 </div>
             </div>
-
-            <div class="max-w-5xl w-full mt-4 text-center">
-                <span class="px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-bold inline-block">
-                    <i class="fa-solid fa-shield-halved text-emerald-600 mr-1.5"></i>
-                    Chuẩn Plug &amp; Play: Cắm là chạy &bull; Bảo hành chính hãng &amp; Hỗ trợ tận nơi.
-                </span>
-            </div>
         </div>
 
-        <!-- ================= SLIDE 11: NHẬN DIỆN 3 – ĐỐI TÁC LIÊN KẾT ================= -->
+        <!-- ================= SLIDE 11: NHẬN ĐỊNH 3 – ĐỐI TÁC LIÊN KẾT ================= -->
         <div class="slide flex flex-col items-center justify-center p-6 pt-16 h-full relative">
             <div class="w-full text-center mb-6">
                 <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider mb-1 inline-block border border-blue-200">
-                    NHẬN DIỆN 3 &bull; KẾT NỐI MỞ RỘNG - ĐỐI TÁC LIÊN KẾT
+                    NHẬN ĐỊNH 3 &bull; KẾT NỐI MỞ RỘNG - ĐỐI TÁC LIÊN KẾT
                 </span>
                 <h2 class="text-3xl md:text-4xl font-extrabold text-blue-950">Hệ sinh thái đối tác công nghệ và số hóa toàn diện</h2>
                 <div class="h-1 w-20 bg-gradient-to-r from-kvprimary to-kvsecondary mx-auto mt-2 rounded-full"></div>
@@ -769,17 +849,17 @@
             </div>
         </div>
 
-        <!-- ================= SLIDE 12: NHẬN DIỆN 4 – TRẢI NGHIỆM TỐI ƯU ================= -->
+        <!-- ================= SLIDE 12: NHẬN ĐỊNH 4 – TRẢI NGHIỆM TỐI ƯU ================= -->
         <div class="slide flex flex-col items-center justify-center p-8 pt-20 h-full relative">
-            <div class="w-full text-center mb-8">
+            <div class="w-full text-center mb-6">
                 <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider mb-1 inline-block border border-blue-200">
-                    NHẬN DIỆN 4 &bull; TRẢI NGHIỆM TỐI ƯU
+                    NHẬN ĐỊNH 4 &bull; TRẢI NGHIỆM TỐI ƯU
                 </span>
                 <h2 class="text-3xl md:text-4xl font-extrabold text-blue-950">Điều gì khiến khách dễ dàng sử dụng KiotViet?</h2>
                 <div class="h-1 w-20 bg-gradient-to-r from-kvprimary to-kvsecondary mx-auto mt-2 rounded-full"></div>
             </div>
             
-            <div class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-3 gap-5 text-left">
+            <div class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-3 gap-5 text-left mb-6">
                 <div class="glass-card p-6 flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl mb-4 shadow-sm">
@@ -816,27 +896,30 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- ================= SLIDE 13: CÂU HỎI THẢO LUẬN GÓI CƯỚC ================= -->
-        <div class="slide flex items-center justify-center p-8">
-            <div class="glass-card px-12 py-14 max-w-4xl w-full text-center border-2 border-amber-200 bg-amber-50/20 flex flex-col items-center justify-center">
-                <div class="w-16 h-16 bg-amber-100 text-amber-700 rounded-2xl flex items-center justify-center mb-4 shadow-sm">
-                    <i class="fa-solid fa-mug-hot text-3xl"></i>
-                </div>
-                <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-[11px] font-black uppercase tracking-wider mb-3 inline-block">
-                    CÂU HỎI THẢO LUẬN
-                </span>
-                <h2 class="text-2xl md:text-3xl font-extrabold text-blue-950 mb-6 leading-relaxed max-w-3xl">
-                    Lý do phổ biến khiến Khách hàng chọn gói Chuyên nghiệp là gì?
-                </h2>
+            <div class="max-w-5xl w-full text-center">
                 <a href="https://www.kiotviet.vn/phi-dich-vu" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-md transition-all hover:scale-105 active:scale-95">
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Tra cứu bảng giá tại kiotviet.vn/phi-dich-vu
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Tra cứu chi tiết bảng giá dịch vụ tại kiotviet.vn/phi-dich-vu
                 </a>
             </div>
         </div>
 
-        <!-- ================= SLIDE 14: BẢNG PHÍ DỊCH VỤ ================= -->
+        <!-- ================= SLIDE 13: CÂU HỎI THẢO LUẬN GÓI CƯỚC ================= -->
+        <div class="slide flex items-center justify-center p-8">
+            <div class="glass-card px-12 py-16 max-w-4xl w-full text-center border-2 border-amber-200 bg-amber-50/20 flex flex-col items-center justify-center">
+                <div class="w-18 h-18 bg-amber-100 text-amber-700 rounded-3xl flex items-center justify-center mb-5 shadow-sm">
+                    <i class="fa-solid fa-mug-hot text-4xl"></i>
+                </div>
+                <span class="px-3.5 py-1.5 rounded-full bg-amber-100 text-amber-800 text-xs font-black uppercase tracking-wider mb-4 inline-block">
+                    CÂU HỎI THẢO LUẬN
+                </span>
+                <h2 class="text-2xl md:text-4xl font-extrabold text-blue-950 leading-relaxed max-w-3xl">
+                    Lý do phổ biến khiến Khách hàng chọn gói Chuyên nghiệp là gì?
+                </h2>
+            </div>
+        </div>
+
+        <!-- ================= SLIDE 14: BẢNG PHÍ DỊCH VỤ (FOOTER CÂN ĐỐI CHÍNH GIỮA) ================= -->
         <div class="slide flex flex-col items-center justify-center p-4 pt-14 h-full relative">
             <div class="w-full text-center mb-3">
                 <span class="px-3 py-0.5 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider mb-1 inline-block border border-blue-200">
@@ -890,16 +973,31 @@
                 </div>
             </div>
 
-            <!-- CHÍNH SÁCH MIỄN PHÍ DÙNG CHUNG -->
-            <div class="max-w-5xl w-full p-2 bg-emerald-50 border border-emerald-300 rounded-xl flex items-center justify-between text-xs font-bold text-emerald-900">
-                <span><i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i>Cả 2 gói: Miễn phí khởi tạo &bull; Hỗ trợ tổng đài &bull; Napas VietQR/Visa/Master</span>
-                <span class="bg-emerald-600 text-white px-2 py-0.5 rounded text-[11px]">Chữ ký số &amp; PM Kế toán HKD: MIỄN PHÍ</span>
+            <!-- CHÍNH SÁCH ÁP DỤNG CHUNG (CÂN ĐỐI TOÀN BỘ CHÍNH GIỮA) -->
+            <div class="max-w-5xl w-full p-3 bg-emerald-50/90 border border-emerald-300 rounded-2xl shadow-sm text-center">
+                <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-bold text-emerald-950">
+                    <span class="flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-check text-emerald-600"></i> Miễn phí khởi tạo
+                    </span>
+                    <span class="text-emerald-300">•</span>
+                    <span class="flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-check text-emerald-600"></i> Hỗ trợ tổng đài 1900 6522
+                    </span>
+                    <span class="text-emerald-300">•</span>
+                    <span class="flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-check text-emerald-600"></i> Thanh toán Napas VietQR / Thẻ
+                    </span>
+                    <span class="text-emerald-300">•</span>
+                    <span class="px-3 py-0.5 rounded-full bg-emerald-600 text-white text-xs font-extrabold">
+                        <i class="fa-solid fa-gift mr-1"></i> Chữ ký số &amp; PM Kế toán HKD: MIỄN PHÍ
+                    </span>
+                </div>
             </div>
         </div>
 
-        <!-- ================= SLIDE 15: CASE TẠP HÓA AN NHIÊN ================= -->
+        <!-- ================= SLIDE 15: CASE TẠP HÓA AN NHIÊN (BỐ CỤC 3 CỘT: VẤN ĐỀ -> MŨI TÊN -> GIẢI PHÁP) ================= -->
         <div class="slide flex flex-col items-center justify-center p-6 pt-16 h-full relative">
-            <div class="w-full text-center mb-5">
+            <div class="w-full text-center mb-6">
                 <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider mb-1 inline-block border border-blue-200">
                     TÌNH HUỐNG THỰC TẾ
                 </span>
@@ -907,57 +1005,98 @@
                 <div class="h-1 w-20 bg-gradient-to-r from-kvprimary to-kvsecondary mx-auto mt-1 rounded-full"></div>
             </div>
             
-            <!-- THẺ LẬT CONTAINER CAO HƠN, FONT TO RÕ RÀNG -->
-            <div class="max-w-4xl w-full mb-4">
-                <div id="an-nhien-flip-card" class="flip-card mx-auto">
-                    <div class="flip-card-inner">
-                        <!-- MẶT 1: BÀI TOÁN CÔ AN -->
-                        <div class="flip-card-front glass-card p-7 border-l-4 border-l-amber-500 bg-amber-50/20 text-left flex flex-col justify-between shadow-md">
-                            <div>
-                                <h3 class="font-black text-lg text-slate-900 flex items-center gap-2 mb-4 border-b border-amber-200/70 pb-2">
-                                    <i class="fa-solid fa-shop text-amber-600 text-xl"></i>
-                                    Bài toán của cô An (Chủ quán Tạp hóa)
-                                </h3>
-                                <ul class="text-sm md:text-base text-slate-800 space-y-3 font-medium leading-relaxed">
-                                    <li class="flex items-start gap-2.5">
-                                        <i class="fa-solid fa-circle-exclamation text-amber-500 mt-1 shrink-0"></i>
-                                        <span><b>Hơn 1.500 mặt hàng:</b> Không nhớ nổi giá, giờ tan tầm đông khách hay tính nhầm tiền.</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i class="fa-solid fa-circle-exclamation text-amber-500 mt-1 shrink-0"></i>
-                                        <span><b>Hàng cận date:</b> Bánh kẹo, sữa chua bị quên trong góc kệ, hỏng hóc phải vứt bỏ.</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5">
-                                        <i class="fa-solid fa-circle-exclamation text-amber-500 mt-1 shrink-0"></i>
-                                        <span><b>Sổ nợ ghi tay:</b> Khách mua thiếu ghi sổ nhăn nhúm, hay quên đòi dẫn đến mất tiền.</span>
-                                    </li>
-                                </ul>
-                            </div>
+            <!-- 3 CỘT VẤN ĐỀ -> MŨI TÊN -> GIẢI PHÁP -->
+            <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-3 gap-5 text-left items-stretch">
+                <!-- CỘT 1 -->
+                <div class="flex flex-col justify-between gap-3">
+                    <div class="glass-card p-5 border-l-4 border-l-amber-500 bg-amber-50/20 shadow-sm flex-1">
+                        <div class="flex items-center gap-2 mb-2 text-amber-900 font-extrabold text-sm">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-600"></i>
+                            VẤN ĐỀ 1:
                         </div>
+                        <h4 class="font-bold text-sm text-slate-900 mb-1">&gt; 1.500 Mặt hàng, hay nhầm giá</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                            Chủ quán tự bán, giờ tan tầm đông khách hay tính nhầm tiền, thối tiền sai gây thất thoát.
+                        </p>
+                    </div>
 
-                        <!-- MẶT 2: LỜI GIỚI THIỆU TỔNG QUAN -->
-                        <div class="flip-card-back glass-card p-7 border-l-4 border-l-blue-600 bg-blue-50/30 text-left flex flex-col justify-between shadow-xl">
-                            <div>
-                                <h3 class="font-black text-lg text-blue-950 flex items-center gap-2 mb-3 border-b border-blue-200 pb-2">
-                                    <i class="fa-solid fa-bullseye text-blue-600 text-xl"></i>
-                                    Lời giới thiệu tổng quan
-                                </h3>
-                                <p class="text-sm md:text-base text-slate-800 leading-relaxed italic bg-white p-5 rounded-2xl border border-blue-100 shadow-sm font-normal">
-                                    "Dạ cô An ơi, con bên giải pháp quản lý bán hàng KiotViet. Hiểu đơn giản thì KiotViet là trợ lý toàn diện giúp cô rút ngắn thời gian bán hàng: tính tiền siêu tốc, in bill chuẩn, tự kiểm soát kho, hạn dùng và ghi nhớ sổ nợ thay cô (<b>Toàn diện</b>); lúc bận trông cháu cô vẫn mở điện thoại xem được hôm nay bán bao nhiêu (<b>Đa nền tảng</b>); lắp máy quét và màn hình VietQR khách quét tiền về thẳng tài khoản (<b>Kết nối</b>); giao diện thuần Việt con qua hướng dẫn 15 phút là cô tự bán được ngay ạ (<b>Dễ dùng</b>)!"
-                                </p>
-                            </div>
+                    <div class="flex justify-center text-blue-600 text-xl font-bold py-1">
+                        <i class="fa-solid fa-arrow-down animate-bounce"></i>
+                    </div>
+
+                    <div class="glass-card p-5 border-l-4 border-l-blue-600 bg-blue-50/30 shadow-sm flex-1">
+                        <div class="flex items-center gap-2 mb-2 text-blue-900 font-extrabold text-sm">
+                            <i class="fa-solid fa-wand-magic-sparkles text-blue-600"></i>
+                            GIẢI PHÁP KIOTVIET:
                         </div>
+                        <h4 class="font-bold text-sm text-blue-950 mb-1">Tít mã vạch siêu tốc 0.1s</h4>
+                        <p class="text-xs text-slate-700 leading-relaxed font-medium">
+                            Quét mã barcode kêu bíp ra giá chuẩn từng nghìn, in bill nhiệt nhanh, chính xác 100%.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- CỘT 2 -->
+                <div class="flex flex-col justify-between gap-3">
+                    <div class="glass-card p-5 border-l-4 border-l-amber-500 bg-amber-50/20 shadow-sm flex-1">
+                        <div class="flex items-center gap-2 mb-2 text-amber-900 font-extrabold text-sm">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-600"></i>
+                            VẤN ĐỀ 2:
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-900 mb-1">Hàng cận date bị quên hỏng</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                            Bánh kẹo, sữa chua bị bỏ quên trong góc kệ, hết hạn phải vứt bỏ gây lỗ vốn nặng.
+                        </p>
+                    </div>
+
+                    <div class="flex justify-center text-blue-600 text-xl font-bold py-1">
+                        <i class="fa-solid fa-arrow-down animate-bounce"></i>
+                    </div>
+
+                    <div class="glass-card p-5 border-l-4 border-l-blue-600 bg-blue-50/30 shadow-sm flex-1">
+                        <div class="flex items-center gap-2 mb-2 text-blue-900 font-extrabold text-sm">
+                            <i class="fa-solid fa-wand-magic-sparkles text-blue-600"></i>
+                            GIẢI PHÁP KIOTVIET:
+                        </div>
+                        <h4 class="font-bold text-sm text-blue-950 mb-1">Cảnh báo Lô &amp; Hạn sử dụng</h4>
+                        <p class="text-xs text-slate-700 leading-relaxed font-medium">
+                            Hệ thống tự động thông báo hàng sắp hết date để chủ shop kịp xả hàng, kiểm kho chuẩn.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- CỘT 3 -->
+                <div class="flex flex-col justify-between gap-3">
+                    <div class="glass-card p-5 border-l-4 border-l-amber-500 bg-amber-50/20 shadow-sm flex-1">
+                        <div class="flex items-center gap-2 mb-2 text-amber-900 font-extrabold text-sm">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-600"></i>
+                            VẤN ĐỀ 3:
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-900 mb-1">Sổ nợ ghi tay nhăn nhúm</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                            Khách mua thiếu ghi sổ tay rách nát, khách nợ dai dẳng hay quên đòi dẫn đến mất tiền.
+                        </p>
+                    </div>
+
+                    <div class="flex justify-center text-blue-600 text-xl font-bold py-1">
+                        <i class="fa-solid fa-arrow-down animate-bounce"></i>
+                    </div>
+
+                    <div class="glass-card p-5 border-l-4 border-l-blue-600 bg-blue-50/30 shadow-sm flex-1">
+                        <div class="flex items-center gap-2 mb-2 text-blue-900 font-extrabold text-sm">
+                            <i class="fa-solid fa-wand-magic-sparkles text-blue-600"></i>
+                            GIẢI PHÁP KIOTVIET:
+                        </div>
+                        <h4 class="font-bold text-sm text-blue-950 mb-1">Sổ nợ điện tử tự động</h4>
+                        <p class="text-xs text-slate-700 leading-relaxed font-medium">
+                            Lưu lịch sử nợ chi tiết theo từng khách, tự động gạch nợ khi trả tiền, không sót một ai.
+                        </p>
                     </div>
                 </div>
             </div>
-
-            <!-- Nút điều khiển lật thẻ -->
-            <button onclick="toggleFlipCard()" class="px-6 py-2.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-md transition-all flex items-center gap-2 hover:scale-105 active:scale-95">
-                <i class="fa-solid fa-arrows-rotate"></i> Lật thẻ xem gợi ý tư vấn
-            </button>
         </div>
 
-        <!-- ================= SLIDE 16: QUY TRÌNH VẬN HÀNH QUẢN LÝ CỬA HÀNG QUA 06 BƯỚC DEMO CƠ BẢN ================= -->
+        <!-- ================= SLIDE 16: QUY TRÌNH VẬN HÀNH 6 BƯỚC DEMO ================= -->
         <div class="slide flex flex-col items-center justify-center p-6 pt-16 h-full relative">
             <div class="w-full text-center mb-6">
                 <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider mb-1 inline-block border border-blue-200">
@@ -1006,103 +1145,82 @@
             </div>
         </div>
 
-        <!-- ================= SLIDE 17: LỊCH TRÌNH ĐÀO TẠO ================= -->
+        <!-- ================= SLIDE 17: LỊCH TRÌNH ĐÀO TẠO (THỜI KHÓA BIỂU MATRIX CHUẨN ĐẸP) ================= -->
         <div class="slide flex flex-col items-center justify-center p-6 pt-16 h-full relative">
-            <div class="w-full text-center mb-6">
+            <div class="w-full text-center mb-5">
                 <h2 class="text-2xl md:text-3xl font-extrabold text-blue-950">Lịch trình đào tạo</h2>
                 <div class="h-1 w-20 bg-gradient-to-r from-kvprimary to-kvsecondary mx-auto mt-1 rounded-full"></div>
             </div>
             
-            <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-3 gap-5 text-left">
-                <!-- BUỔI 1 -->
-                <div class="glass-card p-5 flex flex-col justify-between border-slate-200">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="font-extrabold text-base text-blue-950 flex items-center gap-2">
-                                <i class="fa-solid fa-calendar-days text-blue-600"></i> Buổi 1
-                            </h3>
-                            <span class="text-xs bg-blue-50 text-blue-700 font-bold px-3 py-1 rounded-full border border-blue-200">
-                                Tổng quan &amp; Demo
-                            </span>
-                        </div>
-                        <div class="space-y-3 text-xs">
-                            <div class="p-2.5 bg-slate-50 rounded-xl">
-                                <span class="font-bold text-blue-950 block mb-0.5">Sáng 08:30 - 10:30:</span>
-                                <span class="text-slate-600">Đào tạo qua Google Meets - Tổng quan khóa học &amp; nhận định cốt lõi.</span>
-                            </div>
-                            <div class="p-2.5 bg-slate-50 rounded-xl">
-                                <span class="font-bold text-blue-950 block mb-0.5">Sáng 10:30 - 12:00:</span>
-                                <span class="text-slate-600">Tự học LMS - Luồng demo 06 bước cơ bản (Web và Mobile App).</span>
-                            </div>
-                            <div class="py-1 text-center text-slate-400 text-[11px] font-medium bg-white rounded-lg border border-slate-100">
-                                12:00 - 13:30 : Nghỉ trưa
-                            </div>
-                            <div class="p-2.5 bg-blue-50/60 border border-blue-100 rounded-xl">
-                                <span class="font-bold text-blue-900 block mb-0.5">Chiều 13:30 - 16:00:</span>
-                                <span class="text-blue-800 font-semibold">Làm bài tập thực hành + Tự ôn tập tại team.</span>
-                            </div>
-                        </div>
-                    </div>
+            <!-- THỜI KHÓA BIỂU MATRIX -->
+            <div class="max-w-6xl w-full glass-card p-5 border-2 border-blue-200 overflow-hidden shadow-md">
+                <div class="grid grid-cols-12 gap-3 pb-3 border-b-2 border-slate-200 text-center font-black text-xs md:text-sm text-blue-950 uppercase">
+                    <div class="col-span-3 text-left pl-3 text-slate-600">Khung giờ</div>
+                    <div class="col-span-3 text-blue-700 bg-blue-50 py-1.5 rounded-lg border border-blue-200">Buổi 1 (Tổng quan &amp; Demo)</div>
+                    <div class="col-span-3 text-cyan-700 bg-cyan-50 py-1.5 rounded-lg border border-cyan-200">Buổi 2 (Nhu cầu &amp; Hỏi đáp)</div>
+                    <div class="col-span-3 text-indigo-700 bg-indigo-50 py-1.5 rounded-lg border border-indigo-200">Buổi 3 (Phần cứng &amp; Thực hành)</div>
                 </div>
 
-                <!-- BUỔI 2 -->
-                <div class="glass-card p-5 flex flex-col justify-between border-slate-200">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="font-extrabold text-base text-blue-950 flex items-center gap-2">
-                                <i class="fa-solid fa-calendar-days text-blue-600"></i> Buổi 2
-                            </h3>
-                            <span class="text-xs bg-blue-50 text-blue-700 font-bold px-3 py-1 rounded-full border border-blue-200">
-                                Nhu cầu &amp; Hỏi đáp
-                            </span>
+                <div class="divide-y divide-slate-100 text-xs">
+                    <!-- HÀNG 1: SÁNG MEET -->
+                    <div class="grid grid-cols-12 gap-3 py-3 items-center">
+                        <div class="col-span-3 font-bold text-blue-950 pl-3">
+                            <i class="fa-solid fa-video text-blue-600 mr-1.5"></i>
+                            Sáng: 08:30 - 10:30
+                            <span class="block text-[11px] font-normal text-slate-500">Google Meet trực tuyến</span>
                         </div>
-                        <div class="space-y-3 text-xs">
-                            <div class="p-2.5 bg-slate-50 rounded-xl">
-                                <span class="font-bold text-blue-950 block mb-0.5">Sáng 08:30 - 10:30:</span>
-                                <span class="text-slate-600">Đào tạo qua Google Meets - Sửa bài tập &amp; Hướng dẫn demo nâng cao.</span>
-                            </div>
-                            <div class="p-2.5 bg-slate-50 rounded-xl">
-                                <span class="font-bold text-blue-950 block mb-0.5">Sáng 10:30 - 12:00:</span>
-                                <span class="text-slate-600">Tự học LMS - Tư vấn 1 số nhu cầu phổ biến thường gặp.</span>
-                            </div>
-                            <div class="py-1 text-center text-slate-400 text-[11px] font-medium bg-white rounded-lg border border-slate-100">
-                                12:00 - 13:30 : Nghỉ trưa
-                            </div>
-                            <div class="p-2.5 bg-blue-50/60 border border-blue-100 rounded-xl">
-                                <span class="font-bold text-blue-900 block mb-0.5">Chiều 13:30 - 16:00:</span>
-                                <span class="text-blue-800 font-semibold">Làm bài tập thực hành + Tự ôn tập tại team.</span>
-                            </div>
+                        <div class="col-span-3 p-2.5 rounded-xl bg-slate-50 font-medium text-slate-700">
+                            Đào tạo qua Google Meets - Tổng quan khóa học &amp; nhận định cốt lõi.
+                        </div>
+                        <div class="col-span-3 p-2.5 rounded-xl bg-slate-50 font-medium text-slate-700">
+                            Đào tạo qua Google Meets - Sửa bài tập &amp; Hướng dẫn demo nâng cao.
+                        </div>
+                        <div class="col-span-3 p-2.5 rounded-xl bg-slate-50 font-medium text-slate-700">
+                            Đào tạo qua Google Meets - Thực hành demo chuyên sâu từng học viên.
                         </div>
                     </div>
-                </div>
 
-                <!-- BUỔI 3 -->
-                <div class="glass-card p-5 flex flex-col justify-between border-slate-200">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="font-extrabold text-base text-blue-950 flex items-center gap-2">
-                                <i class="fa-solid fa-calendar-days text-blue-600"></i> Buổi 3
-                            </h3>
-                            <span class="text-xs bg-blue-50 text-blue-700 font-bold px-3 py-1 rounded-full border border-blue-200">
-                                Phần cứng &amp; Thực hành
-                            </span>
+                    <!-- HÀNG 2: TRƯA LMS -->
+                    <div class="grid grid-cols-12 gap-3 py-3 items-center">
+                        <div class="col-span-3 font-bold text-blue-950 pl-3">
+                            <i class="fa-solid fa-graduation-cap text-cyan-600 mr-1.5"></i>
+                            Trưa: 10:30 - 12:00
+                            <span class="block text-[11px] font-normal text-slate-500">Tự học LMS</span>
                         </div>
-                        <div class="space-y-3 text-xs">
-                            <div class="p-2.5 bg-slate-50 rounded-xl">
-                                <span class="font-bold text-blue-950 block mb-0.5">Sáng 08:30 - 10:30:</span>
-                                <span class="text-slate-600">Đào tạo qua Google Meets - Thực hành demo chuyên sâu từng học viên.</span>
-                            </div>
-                            <div class="p-2.5 bg-slate-50 rounded-xl">
-                                <span class="font-bold text-blue-950 block mb-0.5">Sáng 10:30 - 12:00:</span>
-                                <span class="text-slate-600">Tự học LMS - Tìm hiểu 06 thiết bị phần cứng cơ bản.</span>
-                            </div>
-                            <div class="py-1 text-center text-slate-400 text-[11px] font-medium bg-white rounded-lg border border-slate-100">
-                                12:00 - 13:30 : Nghỉ trưa
-                            </div>
-                            <div class="p-2.5 bg-blue-50/60 border border-blue-100 rounded-xl">
-                                <span class="font-bold text-blue-900 block mb-0.5">Chiều 13:30 - 16:00:</span>
-                                <span class="text-blue-800 font-semibold">Làm bài tập thực hành + Tự ôn tập tại team.</span>
-                            </div>
+                        <div class="col-span-3 p-2.5 rounded-xl bg-cyan-50/50 border border-cyan-100 font-medium text-slate-800">
+                            Tự học LMS Buổi 1 - Luồng demo 06 bước cơ bản (Web và Mobile App).
+                        </div>
+                        <div class="col-span-3 p-2.5 rounded-xl bg-cyan-50/50 border border-cyan-100 font-medium text-slate-800">
+                            Tự học LMS Buổi 2 - Tư vấn 1 số nhu cầu phổ biến thường gặp.
+                        </div>
+                        <div class="col-span-3 p-2.5 rounded-xl bg-cyan-50/50 border border-cyan-100 font-medium text-slate-800">
+                            Tự học LMS Buổi 3 - Tìm hiểu 06 thiết bị phần cứng cơ bản.
+                        </div>
+                    </div>
+
+                    <!-- HÀNG 3: NGHỈ TRƯA -->
+                    <div class="grid grid-cols-12 gap-3 py-1.5 items-center bg-slate-50/80 rounded-lg">
+                        <div class="col-span-12 text-center text-[11px] font-bold text-slate-500">
+                            <i class="fa-solid fa-utensils mr-1.5 text-amber-500"></i>
+                            12:00 - 13:30 : Nghỉ trưa nạp năng lượng
+                        </div>
+                    </div>
+
+                    <!-- HÀNG 4: CHIỀU THỰC HÀNH -->
+                    <div class="grid grid-cols-12 gap-3 py-3 items-center">
+                        <div class="col-span-3 font-bold text-blue-950 pl-3">
+                            <i class="fa-solid fa-laptop-code text-indigo-600 mr-1.5"></i>
+                            Chiều: 13:30 - 16:00
+                            <span class="block text-[11px] font-normal text-slate-500">Thực hành &amp; Ôn tập</span>
+                        </div>
+                        <div class="col-span-3 p-2.5 rounded-xl bg-blue-50 border border-blue-100 font-bold text-blue-900">
+                            Làm bài tập thực hành Buổi 1 + Tự ôn tập tại team.
+                        </div>
+                        <div class="col-span-3 p-2.5 rounded-xl bg-blue-50 border border-blue-100 font-bold text-blue-900">
+                            Làm bài tập thực hành Buổi 2 + Tự ôn tập tại team.
+                        </div>
+                        <div class="col-span-3 p-2.5 rounded-xl bg-blue-50 border border-blue-100 font-bold text-blue-900">
+                            Làm bài tập thực hành Buổi 3 + Tự ôn tập tại team.
                         </div>
                     </div>
                 </div>
@@ -1211,7 +1329,7 @@
 
     </div>
 
-    <!-- SCRIPT ĐIỀU KHIỂN SLIDE, LẬT THẺ & TIẾN TRÌNH TUẦN TỰ -->
+    <!-- SCRIPT ĐIỀU KHIỂN SLIDE & TIẾN TRÌNH TUẦN TỰ -->
     <script>
         const slides = document.querySelectorAll('.slide');
         const progressBar = document.getElementById('progress-bar');
@@ -1262,14 +1380,6 @@
             if (iframe && cover) {
                 iframe.src = videoSrc;
                 cover.style.display = 'none';
-            }
-        }
-
-        // HÀM LẬT THẺ TẠP HÓA AN NHIÊN
-        function toggleFlipCard() {
-            const flipCard = document.getElementById('an-nhien-flip-card');
-            if (flipCard) {
-                flipCard.classList.toggle('flipped');
             }
         }
 
