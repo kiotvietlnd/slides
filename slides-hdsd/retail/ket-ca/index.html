@@ -156,14 +156,14 @@
         .scene.no-wipe { animation: none !important; }
 
         /* ---------- Staggered Micro-Animations & Ambient Motion ---------- */
-        .scene.active .pop { animation: popIn 0.55s cubic-bezier(0.2, 0.9, 0.3, 1.3) both; animation-delay: var(--d, 0s); }
+        .scene.active .pop { animation: popIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: var(--d, 0s); }
         .scene.active .up { animation: fadeUp 0.55s ease-out both; animation-delay: var(--d, 0s); }
         .scene.active .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: drawLine 1.05s ease forwards; animation-delay: var(--d, 0s); }
         .scene.active .reveal { animation: revealRight 1.1s ease-out both; animation-delay: var(--d, 0s); }
         .scene.active .rise { transform-origin: bottom; animation: riseUp 0.9s ease-out both; animation-delay: var(--d, 0s); }
         svg .pop, svg .rise { transform-box: fill-box; transform-origin: center; }
 
-        .float { animation: floatY 3.5s ease-in-out infinite; animation-delay: var(--f, 0s); }
+        .float { animation: floatY 2.2s ease-in-out infinite; animation-delay: var(--f, 0s); will-change: transform; }
         .pulse { animation: pulseScale 2.2s ease-in-out infinite; }
 
         @keyframes popIn { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: scale(1); } }
@@ -171,7 +171,7 @@
         @keyframes drawLine { to { stroke-dashoffset: 0; } }
         @keyframes revealRight { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
         @keyframes riseUp { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-        @keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        @keyframes floatY { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -6px, 0); } }
         @keyframes pulseScale { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
         @keyframes travel { from { left: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } to { left: calc(100% - 14px); opacity: 0; } }
 
@@ -911,8 +911,9 @@
                     <span class="section-badge up" style="--d:.05s; background: rgba(0, 200, 175, 0.16); border-color: var(--kv-turquoise); color: #3AE3FF !important;">
                         <i class="fa-solid fa-cash-register text-teal-300"></i> Quản lý Bán hàng • Ngành Bán buôn, Bán lẻ
                     </span>
-                    <h1 class="display-font text-5xl sm:text-6xl font-black text-white leading-[1.08] tracking-tight up" style="--d:.12s">
-                        TÍNH NĂNG<br><span style="color: #3AE3FF;">KẾT CA BÁN HÀNG</span>
+                    <h1 class="display-font text-5xl sm:text-6xl font-black text-white tracking-tight up flex flex-col gap-2" style="--d:.12s; line-height: 1.25 !important;">
+                        <span class="block">TÍNH NĂNG</span>
+                        <span class="block" style="color: #3AE3FF;">KẾT CA BÁN HÀNG</span>
                     </h1>
                     <p class="text-base sm:text-lg text-slate-200 font-semibold leading-relaxed max-w-xl up" style="--d:.2s">
                         Tự động gắn giao dịch vào ca làm việc, đối soát thừa thiếu tiền mặt tức thì và lưu trữ phiếu bàn giao ca bất biến.
@@ -930,9 +931,9 @@
                     </div>
                 </div>
 
-                <!-- Cột phải: 1 Biểu tượng Chủ đề 3D Glass Hero Emblem lớn, sinh động, không chữ -->
+                <!-- Cột phải: 1 Biểu tượng Chủ đề 3D Glass Hero Emblem lớn, chuyển động đồng bộ 2.2s mượt mà -->
                 <div class="col-span-5 flex items-center justify-center">
-                    <div class="relative w-[21rem] h-[21rem] flex items-center justify-center pop" style="--d:.18s">
+                    <div class="relative w-[21rem] h-[21rem] flex items-center justify-center up" style="--d:.14s">
                         <!-- Hào quang đồng tâm -->
                         <div class="absolute inset-0 rounded-full pulse" style="background: radial-gradient(circle, rgba(58, 227, 255, 0.22) 0%, rgba(0, 112, 244, 0.08) 55%, transparent 75%);"></div>
                         <div class="absolute inset-5 rounded-full border border-cyan-300/25"></div>
@@ -940,9 +941,9 @@
 
                         <!-- Khối kính trung tâm chứa 1 Icon Máy Thu Ngân Kết Ca lớn -->
                         <div class="relative z-10 w-52 h-52 rounded-[2.5rem] flex flex-col items-center justify-center float"
-                             style="--f:.2s; background: linear-gradient(145deg, rgba(255, 255, 255, 0.18) 0%, rgba(0, 200, 175, 0.14) 52%, rgba(0, 112, 244, 0.28) 100%); border: 2px solid rgba(58, 227, 255, 0.55); box-shadow: 0 28px 60px -12px rgba(0, 15, 40, 0.65), inset 0 2px 14px rgba(255, 255, 255, 0.35); backdrop-filter: blur(16px);">
+                             style="--f:0s; background: linear-gradient(145deg, rgba(22, 78, 158, 0.88) 0%, rgba(10, 118, 148, 0.85) 52%, rgba(0, 90, 192, 0.92) 100%); border: 2px solid rgba(58, 227, 255, 0.6); box-shadow: 0 28px 60px -12px rgba(0, 15, 40, 0.65), inset 0 2px 14px rgba(255, 255, 255, 0.3);">
                             <div class="w-28 h-28 rounded-3xl flex items-center justify-center shadow-2xl"
-                                 style="background: linear-gradient(135deg, #0070F4 0%, #00C8AF 100%); border: 2px solid rgba(255, 255, 255, 0.7);">
+                                 style="background: linear-gradient(135deg, #0070F4 0%, #00C8AF 100%); border: 2px solid rgba(255, 255, 255, 0.75);">
                                 <i class="fa-solid fa-cash-register text-6xl text-white"></i>
                             </div>
                             <div class="mt-4 flex items-center gap-2">
@@ -952,17 +953,17 @@
                             </div>
                         </div>
 
-                        <!-- 3 Huy hiệu Icon vệ tinh tạo chiều sâu sinh động (Không chữ) -->
-                        <div class="absolute top-4 right-5 z-20 w-14 h-14 rounded-2xl flex items-center justify-center shadow-2xl pop float"
-                             style="--d:.38s; --f:.6s; background: linear-gradient(135deg, #00B63E 0%, #5BE92A 100%); border: 2px solid #ffffff;">
+                        <!-- 3 Huy hiệu Icon vệ tinh tạo chiều sâu sinh động (Không gắn chung .pop.float để tránh xung đột CSS) -->
+                        <div class="absolute top-4 right-5 z-20 w-14 h-14 rounded-2xl flex items-center justify-center shadow-2xl float"
+                             style="--f:.55s; background: linear-gradient(135deg, #00B63E 0%, #5BE92A 100%); border: 2px solid #ffffff;">
                             <i class="fa-solid fa-circle-check text-2xl text-white"></i>
                         </div>
-                        <div class="absolute bottom-6 left-4 z-20 w-14 h-14 rounded-2xl flex items-center justify-center shadow-2xl pop float"
-                             style="--d:.46s; --f:1.1s; background: linear-gradient(135deg, #FFAB3A 0%, #F59E0B 100%); border: 2px solid #ffffff;">
+                        <div class="absolute bottom-6 left-4 z-20 w-14 h-14 rounded-2xl flex items-center justify-center shadow-2xl float"
+                             style="--f:1.1s; background: linear-gradient(135deg, #FFAB3A 0%, #F59E0B 100%); border: 2px solid #ffffff;">
                             <i class="fa-solid fa-coins text-2xl" style="color: #002957;"></i>
                         </div>
-                        <div class="absolute bottom-4 right-7 z-20 w-12 h-12 rounded-2xl flex items-center justify-center shadow-xl pop float"
-                             style="--d:.54s; --f:1.5s; background: rgba(255, 255, 255, 0.16); border: 1.5px solid rgba(58, 227, 255, 0.65); backdrop-filter: blur(10px);">
+                        <div class="absolute bottom-4 right-7 z-20 w-12 h-12 rounded-2xl flex items-center justify-center shadow-xl float"
+                             style="--f:1.65s; background: linear-gradient(135deg, rgba(14, 65, 138, 0.92), rgba(0, 112, 244, 0.85)); border: 1.5px solid rgba(58, 227, 255, 0.7);">
                             <i class="fa-solid fa-receipt text-xl" style="color: #3AE3FF;"></i>
                         </div>
                     </div>
@@ -1216,7 +1217,7 @@
         <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
         <div class="slide-inner flex flex-col justify-center items-center text-center w-full max-w-[85rem] mx-auto gap-6 sm:gap-8 my-auto">
             <div class="flex flex-col items-center">
-                <div class="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl mb-5 shadow-2xl pop float" style="background: var(--kv-orange); color: var(--navy-dark);">
+                <div class="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl mb-5 shadow-2xl float" style="background: var(--kv-orange); color: var(--navy-dark);">
                     <i class="fa-solid fa-desktop"></i>
                 </div>
                 <span class="px-4 py-1.5 rounded-full text-sm font-black uppercase tracking-wider text-amber-300 bg-amber-400/20 border border-amber-400/40 mb-2.5 up" style="--d:.08s">
@@ -1360,7 +1361,7 @@
     </section>
 
     <!-- SLIDE 12: 3. XEM CHI TIẾT TỪNG NHÓM PHÁT SINH TRONG CA -->
-    <section class="scene scene-content" data-scene="12" data-caption="• 4 Nhóm giao dịch trong ca: Hệ thống thống kê tách biệt các dòng Bán hàng, Phiếu thu, Phiếu chi và Trả hàng.&#10;• Mở xem chi tiết: Nhấn vào biểu tượng mũi tên (>) ở từng nhóm để kiểm tra danh sách chứng từ phát sinh cụ thể trong ca." data-vo="Tại màn hình Phiếu bàn giao ca, hệ thống thống kê rõ 4 nhóm giao dịch gồm Bán hàng, Phiếu thu, Phiếu chi và Trả hàng; bạn có thể nhấn vào mũi tên ở từng dòng để mở xem danh sách chứng từ chi tiết.">
+    <section class="scene scene-content" data-scene="12" data-caption="• 4 Nhóm giao dịch trong ca: Hệ thống thống kê tách biệt các dòng Bán hàng, Phiếu thu, Phiếu chi và Trả hàng.&#10;• Mở xem chi tiết: Nhấn vào biểu tượng mũi tên (&gt;) ở từng nhóm để kiểm tra danh sách chứng từ phát sinh cụ thể trong ca." data-vo="Tại màn hình Phiếu bàn giao ca, hệ thống thống kê rõ 4 nhóm giao dịch gồm Bán hàng, Phiếu thu, Phiếu chi và Trả hàng; bạn có thể nhấn vào mũi tên ở từng dòng để mở xem danh sách chứng từ chi tiết.">
         <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
         <div class="slide-inner">
             <div class="slide-header">
@@ -1624,7 +1625,7 @@
         <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
         <div class="slide-inner flex flex-col justify-center items-center text-center w-full max-w-[85rem] mx-auto gap-6 sm:gap-8 my-auto">
             <div class="flex flex-col items-center">
-                <div class="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl mb-5 shadow-2xl pop float" style="background: var(--kv-orange); color: var(--navy-dark);">
+                <div class="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl mb-5 shadow-2xl float" style="background: var(--kv-orange); color: var(--navy-dark);">
                     <i class="fa-solid fa-shield-halved"></i>
                 </div>
                 <span class="px-4 py-1.5 rounded-full text-sm font-black uppercase tracking-wider text-amber-300 bg-amber-400/20 border border-amber-400/40 mb-2.5 up" style="--d:.08s">
@@ -2157,7 +2158,7 @@
         <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
         <div class="slide-inner flex flex-col justify-center items-center text-center w-full max-w-[85rem] mx-auto gap-6 sm:gap-8 my-auto">
             <div class="flex flex-col items-center">
-                <div class="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl mb-5 shadow-2xl pop float" style="background: var(--kv-orange); color: var(--navy-dark);">
+                <div class="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl mb-5 shadow-2xl float" style="background: var(--kv-orange); color: var(--navy-dark);">
                     <i class="fa-solid fa-mobile-screen-button"></i>
                 </div>
                 <span class="px-4 py-1.5 rounded-full text-sm font-black uppercase tracking-wider text-amber-300 bg-amber-400/20 border border-amber-400/40 mb-2.5 up" style="--d:.08s">
@@ -2373,7 +2374,7 @@
         <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
         <div class="slide-inner flex flex-col justify-center items-center text-center w-full max-w-[85rem] mx-auto gap-6 sm:gap-8 my-auto">
             <div class="flex flex-col items-center">
-                <div class="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl mb-5 shadow-2xl pop float" style="background: var(--kv-orange); color: var(--navy-dark);">
+                <div class="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl mb-5 shadow-2xl float" style="background: var(--kv-orange); color: var(--navy-dark);">
                     <i class="fa-solid fa-receipt"></i>
                 </div>
                 <span class="px-4 py-1.5 rounded-full text-sm font-black uppercase tracking-wider text-amber-300 bg-amber-400/20 border border-amber-400/40 mb-2.5 up" style="--d:.08s">
@@ -2601,7 +2602,7 @@
         <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
         <div class="slide-inner flex items-center justify-center">
             <div class="hero-card max-w-[82rem] w-full p-10 sm:p-14 up" style="--d:.05s">
-                <div class="w-20 h-20 rounded-full flex items-center justify-center text-4xl mb-8 sm:mb-9 shadow-xl pop float" style="background: linear-gradient(135deg, var(--kv-primary-green) 0%, var(--kv-accent-green) 100%); color: #ffffff;">
+                <div class="w-20 h-20 rounded-full flex items-center justify-center text-4xl mb-8 sm:mb-9 shadow-xl float" style="background: linear-gradient(135deg, var(--kv-primary-green) 0%, var(--kv-accent-green) 100%); color: #ffffff;">
                     <i class="fa-solid fa-heart"></i>
                 </div>
                 <h1 class="text-4xl sm:text-5xl font-black mb-3 up mt-1" style="--d:.1s; color: var(--navy-dark); letter-spacing: -0.02em;">
