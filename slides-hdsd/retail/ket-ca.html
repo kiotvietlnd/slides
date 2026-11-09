@@ -442,6 +442,40 @@
         .print-subtitle { display: none; text-align: center !important; user-select: text; }
 
         /* IN PDF 16:9 NATIVE CHUẨN HOÀN THIỆN */
+        
+        /* ==========================================================================
+           WIDESCREEN & BALANCED RATIO FOR THEORY / NON-SCREENSHOT SLIDES (16:9 FULL HD)
+           Đảm bảo các slide lý thuyết, bento grid, chapter bridge dàn trải đầy đặn,
+           chữ to rõ nét, không bị co cụm vào giữa như một hòn đảo nhỏ.
+           ========================================================================== */
+        .scene-content .hero-card {
+            max-width: 82rem !important;
+            width: 100% !important;
+            box-sizing: border-box;
+        }
+        .scene-content .text-stage {
+            width: 100% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 0.2rem 0 !important;
+        }
+        .scene-content .text-stage .bento-card {
+            width: 100% !important;
+            max-width: 85rem !important;
+            min-height: 640px !important;
+            box-sizing: border-box;
+        }
+        .scene.scene-dark .slide-inner {
+            max-width: 85rem !important;
+            width: 100% !important;
+            box-sizing: border-box;
+        }
+        .scene.scene-dark .toc-sub-item {
+            padding: 1.15rem 1.4rem !important;
+            border-radius: 1.25rem !important;
+        }
+
         @media print {
             @page {
                 size: 1280px 720px;
@@ -835,28 +869,28 @@
     <section class="scene scene-content" data-scene="2" data-caption="Chào mừng các bạn đến với video hướng dẫn tính năng Kết ca trên phần mềm KiotViet dành cho ngành Bán buôn, Bán lẻ." data-vo="Chào mừng các bạn đến với video hướng dẫn tính năng Kết ca trên phần mềm KiotViet dành cho ngành Bán buôn, Bán lẻ.">
         <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
         <div class="slide-inner flex items-center justify-center">
-            <div class="hero-card up" style="--d:.05s">
-                <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-3 shadow-lg pop float" style="background: linear-gradient(135deg, var(--kv-primary-blue) 0%, var(--kv-ocean-blue) 100%); color: #ffffff;">
+            <div class="hero-card max-w-[82rem] w-full p-10 sm:p-14 up" style="--d:.05s">
+                <div class="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl mb-4 shadow-xl pop float" style="background: linear-gradient(135deg, var(--kv-primary-blue) 0%, var(--kv-ocean-blue) 100%); color: #ffffff;">
                     <i class="fa-solid fa-cash-register"></i>
                 </div>
-                <div class="section-badge mb-2 up" style="--d:.1s">
+                <div class="section-badge mb-3 px-4 py-1.5 text-sm up" style="--d:.1s">
                     <i class="fa-solid fa-star"></i> Quản lý Bán hàng • Ngành Bán buôn, Bán lẻ
                 </div>
-                <h1 class="text-4xl font-black tracking-tight mb-2 up" style="--d:.15s; color: var(--navy-dark);">
+                <h1 class="text-5xl font-black tracking-tight mb-3 up" style="--d:.15s; color: var(--navy-dark); letter-spacing: -0.02em;">
                     TÍNH NĂNG KẾT CA
                 </h1>
-                <p class="text-base font-bold mb-5 max-w-2xl leading-relaxed up" style="--d:.2s; color: var(--navy-muted);">
+                <p class="text-lg sm:text-xl font-bold mb-8 max-w-4xl leading-relaxed up" style="--d:.2s; color: var(--navy-muted);">
                     Tự động gắn giao dịch vào ca làm việc • Đối soát chênh lệch tiền mặt cuối ca tức thì • Phát hành phiếu bàn giao ca bất biến
                 </p>
-                <div class="flex items-center gap-3 flex-wrap justify-center">
-                    <span class="hero-badge-pill pop" style="--d:.25s; background: #EFF6FF; border: 1.5px solid #93C5FD; color: var(--kv-primary-blue);">
-                        <i class="fa-solid fa-bolt"></i> Gắn giao dịch tự động
+                <div class="flex items-center gap-4 flex-wrap justify-center">
+                    <span class="hero-badge-pill text-base px-6 py-3 pop" style="--d:.25s; background: #EFF6FF; border: 1.5px solid #93C5FD; color: var(--kv-primary-blue);">
+                        <i class="fa-solid fa-bolt text-lg"></i> Gắn giao dịch tự động
                     </span>
-                    <span class="hero-badge-pill pop" style="--d:.32s; background: #F0FDFB; border: 1.5px solid #99E9DF; color: #008775;">
-                        <i class="fa-solid fa-scale-balanced"></i> Đối soát thừa thiếu tức thì
+                    <span class="hero-badge-pill text-base px-6 py-3 pop" style="--d:.32s; background: #F0FDFB; border: 1.5px solid #99E9DF; color: #008775;">
+                        <i class="fa-solid fa-scale-balanced text-lg"></i> Đối soát thừa thiếu tức thì
                     </span>
-                    <span class="hero-badge-pill pop" style="--d:.4s; background: #E5FFE9; border: 1.5px solid #6EE7B7; color: var(--kv-primary-green);">
-                        <i class="fa-solid fa-file-shield"></i> Phiếu bàn giao bất biến
+                    <span class="hero-badge-pill text-base px-6 py-3 pop" style="--d:.4s; background: #E5FFE9; border: 1.5px solid #6EE7B7; color: var(--kv-primary-green);">
+                        <i class="fa-solid fa-file-shield text-lg"></i> Phiếu bàn giao bất biến
                     </span>
                 </div>
             </div>
@@ -876,34 +910,42 @@
                 </div>
             </div>
             <div class="text-stage">
-                <div class="bento-card w-full max-w-[81.25rem] p-6 flex flex-col justify-between gap-6">
-                    <div class="tl-row grid-cols-4">
-                        <div class="tl-line reveal" style="--d:.1s"></div>
-                        <div class="tl-item"><div class="w-11 h-11 rounded-full bg-blue-600 text-white font-black flex items-center justify-center text-sm shadow-md mb-2 pop" style="--d:.15s">01</div><span class="text-xs font-black uppercase text-blue-800">Tổng quan</span></div>
-                        <div class="tl-item"><div class="w-11 h-11 rounded-full bg-cyan-600 text-white font-black flex items-center justify-center text-sm shadow-md mb-2 pop" style="--d:.25s">02</div><span class="text-xs font-black uppercase text-cyan-800">Thao tác Web</span></div>
-                        <div class="tl-item"><div class="w-11 h-11 rounded-full bg-teal-600 text-white font-black flex items-center justify-center text-sm shadow-md mb-2 pop" style="--d:.35s">03</div><span class="text-xs font-black uppercase text-teal-800">Tính năng nâng cao</span></div>
-                        <div class="tl-item"><div class="w-11 h-11 rounded-full bg-emerald-600 text-white font-black flex items-center justify-center text-sm shadow-md mb-2 pop" style="--d:.45s">04</div><span class="text-xs font-black uppercase text-emerald-800">Mobile & POS</span></div>
+                <div class="bento-card w-full max-w-[85rem] p-8 sm:p-9 flex flex-col justify-center gap-7 sm:gap-8 my-auto">
+                    <div class="tl-row grid-cols-4 pt-1">
+                        <div class="tl-line reveal" style="--d:.1s; top: 1.85rem;"></div>
+                        <div class="tl-item"><div class="w-13 h-13 rounded-full bg-blue-600 text-white font-black flex items-center justify-center text-base shadow-lg mb-2 pop" style="--d:.15s; width: 3.4rem; height: 3.4rem;">01</div><span class="text-sm font-black uppercase text-blue-900 tracking-wide">Tổng quan</span></div>
+                        <div class="tl-item"><div class="w-13 h-13 rounded-full bg-cyan-600 text-white font-black flex items-center justify-center text-base shadow-lg mb-2 pop" style="--d:.25s; width: 3.4rem; height: 3.4rem;">02</div><span class="text-sm font-black uppercase text-cyan-900 tracking-wide">Thao tác Web</span></div>
+                        <div class="tl-item"><div class="w-13 h-13 rounded-full bg-teal-600 text-white font-black flex items-center justify-center text-base shadow-lg mb-2 pop" style="--d:.35s; width: 3.4rem; height: 3.4rem;">03</div><span class="text-sm font-black uppercase text-teal-900 tracking-wide">Tính năng nâng cao</span></div>
+                        <div class="tl-item"><div class="w-13 h-13 rounded-full bg-emerald-600 text-white font-black flex items-center justify-center text-base shadow-lg mb-2 pop" style="--d:.45s; width: 3.4rem; height: 3.4rem;">04</div><span class="text-sm font-black uppercase text-emerald-900 tracking-wide">Mobile &amp; POS</span></div>
                     </div>
-                    <div class="grid grid-cols-4 gap-4">
-                        <div class="toc-card pop" style="--d:.18s">
-                            <div class="toc-card-top"><span class="px-2.5 py-0.5 rounded-full text-[11px] font-black text-blue-700 bg-blue-100 border border-blue-300">PHẦN 1</span><i class="fa-solid fa-circle-info text-blue-600"></i></div>
-                            <div class="toc-card-title">Tổng quan &amp; Lợi ích</div>
-                            <div class="toc-card-desc">Bản chất quy trình mở - đóng ca, 2 nhóm đối tượng áp dụng và 3 giá trị kiểm soát vượt trội.</div>
+                    <div class="grid grid-cols-4 gap-5">
+                        <div class="toc-card p-6 flex flex-col justify-between pop" style="--d:.18s">
+                            <div>
+                                <div class="toc-card-top mb-3"><span class="px-3 py-1 rounded-full text-xs font-black text-blue-700 bg-blue-100 border border-blue-300">PHẦN 1</span><i class="fa-solid fa-circle-info text-blue-600 text-lg"></i></div>
+                                <div class="toc-card-title text-lg font-black text-blue-950 mb-2">Tổng quan &amp; Lợi ích</div>
+                                <div class="toc-card-desc text-sm font-semibold leading-relaxed text-slate-700">Bản chất quy trình mở - đóng ca, 2 nhóm đối tượng áp dụng và 3 giá trị kiểm soát vượt trội.</div>
+                            </div>
                         </div>
-                        <div class="toc-card pop" style="--d:.28s">
-                            <div class="toc-card-top"><span class="px-2.5 py-0.5 rounded-full text-[11px] font-black text-cyan-700 bg-cyan-100 border border-cyan-300">PHẦN 2</span><i class="fa-solid fa-desktop text-cyan-600"></i></div>
-                            <div class="toc-card-title">Thao tác cơ bản trên Web</div>
-                            <div class="toc-card-desc">6 bước: Thiết lập, Mở ca, Ghi nhận giao dịch, Đóng ca, In phiếu bàn giao và Tra cứu lịch sử.</div>
+                        <div class="toc-card p-6 flex flex-col justify-between pop" style="--d:.28s">
+                            <div>
+                                <div class="toc-card-top mb-3"><span class="px-3 py-1 rounded-full text-xs font-black text-cyan-700 bg-cyan-100 border border-cyan-300">PHẦN 2</span><i class="fa-solid fa-desktop text-cyan-600 text-lg"></i></div>
+                                <div class="toc-card-title text-lg font-black text-cyan-950 mb-2">Thao tác cơ bản Web</div>
+                                <div class="toc-card-desc text-sm font-semibold leading-relaxed text-slate-700">6 bước: Thiết lập, Mở ca, Ghi nhận giao dịch, Đóng ca, In phiếu bàn giao và Tra cứu lịch sử.</div>
+                            </div>
                         </div>
-                        <div class="toc-card pop" style="--d:.38s">
-                            <div class="toc-card-top"><span class="px-2.5 py-0.5 rounded-full text-[11px] font-black text-teal-700 bg-teal-100 border border-teal-300">PHẦN 3</span><i class="fa-solid fa-shield-halved text-teal-600"></i></div>
-                            <div class="toc-card-title">Tính năng nâng cao &amp; Đối soát</div>
-                            <div class="toc-card-desc">Xử lý 4 ca đặc biệt, phân quyền chi tiết, công thức tính tiền mặt đối soát và xử lý 6 sự cố.</div>
+                        <div class="toc-card p-6 flex flex-col justify-between pop" style="--d:.38s">
+                            <div>
+                                <div class="toc-card-top mb-3"><span class="px-3 py-1 rounded-full text-xs font-black text-teal-700 bg-teal-100 border border-teal-300">PHẦN 3</span><i class="fa-solid fa-shield-halved text-teal-600 text-lg"></i></div>
+                                <div class="toc-card-title text-lg font-black text-teal-950 mb-2">Tính năng nâng cao</div>
+                                <div class="toc-card-desc text-sm font-semibold leading-relaxed text-slate-700">Xử lý 4 ca đặc biệt, phân quyền chi tiết, công thức tính tiền mặt đối soát và xử lý 6 sự cố.</div>
+                            </div>
                         </div>
-                        <div class="toc-card pop" style="--d:.48s">
-                            <div class="toc-card-top"><span class="px-2.5 py-0.5 rounded-full text-[11px] font-black text-emerald-700 bg-emerald-100 border border-emerald-300">PHẦN 4</span><i class="fa-solid fa-mobile-screen-button text-emerald-600"></i></div>
-                            <div class="toc-card-title">Thao tác trên Mobile &amp; POS</div>
-                            <div class="toc-card-desc">Quy trình mở ca, đóng ca và in phiếu bàn giao trực tiếp trên app di động và máy POS cảm ứng.</div>
+                        <div class="toc-card p-6 flex flex-col justify-between pop" style="--d:.48s">
+                            <div>
+                                <div class="toc-card-top mb-3"><span class="px-3 py-1 rounded-full text-xs font-black text-emerald-700 bg-emerald-100 border border-emerald-300">PHẦN 4</span><i class="fa-solid fa-mobile-screen-button text-emerald-600 text-lg"></i></div>
+                                <div class="toc-card-title text-lg font-black text-emerald-950 mb-2">Mobile &amp; Máy POS</div>
+                                <div class="toc-card-desc text-sm font-semibold leading-relaxed text-slate-700">Quy trình mở ca, đóng ca và in phiếu bàn giao trực tiếp trên app di động và máy POS cảm ứng.</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -924,66 +966,66 @@
                 </div>
             </div>
             <div class="text-stage">
-                <div class="bento-card w-full max-w-[81.25rem] p-6 grid grid-cols-2 gap-6">
-                    <div class="flex flex-col justify-between gap-3">
-                        <div class="flex items-center gap-2">
-                            <span class="px-2.5 py-1 rounded-full text-xs font-black text-blue-800 bg-blue-100 border border-blue-300 uppercase">Quy trình cốt lõi</span>
-                            <span class="text-sm font-bold text-slate-700">Chu trình khép kín trong từng ca</span>
+                <div class="bento-card w-full max-w-[85rem] p-8 grid grid-cols-2 gap-8">
+                    <div class="flex flex-col justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <span class="px-3.5 py-1 rounded-full text-xs font-black text-blue-800 bg-blue-100 border border-blue-300 uppercase">Quy trình cốt lõi</span>
+                            <span class="text-base font-bold text-slate-700">Chu trình khép kín trong từng ca</span>
                         </div>
-                        <div class="inner-card-blue p-3.5 pop" style="--d:.15s">
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="w-6 h-6 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center">1</span>
-                                <h3 class="font-extrabold text-sm">Mở ca làm việc</h3>
+                        <div class="inner-card-blue p-5 pop flex flex-col justify-center" style="--d:.15s">
+                            <div class="flex items-center gap-3 mb-1.5">
+                                <span class="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-sm flex items-center justify-center shadow">1</span>
+                                <h3 class="font-extrabold text-base text-blue-950">Mở ca làm việc</h3>
                             </div>
-                            <p class="text-xs font-semibold leading-relaxed">Thu ngân khai báo tiền mặt đầu ca để bắt đầu ca bán hàng.</p>
+                            <p class="text-sm font-semibold leading-relaxed text-slate-700 pl-10">Thu ngân khai báo tiền mặt đầu ca để bắt đầu ca bán hàng.</p>
                         </div>
-                        <div class="inner-card-theme p-3.5 pop" style="--d:.25s">
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="w-6 h-6 rounded-full bg-teal-600 text-white font-black text-xs flex items-center justify-center">2</span>
-                                <h3 class="font-extrabold text-sm">Giao dịch tự động gắn ca</h3>
+                        <div class="inner-card-theme p-5 pop flex flex-col justify-center" style="--d:.25s">
+                            <div class="flex items-center gap-3 mb-1.5">
+                                <span class="w-7 h-7 rounded-full bg-teal-600 text-white font-black text-sm flex items-center justify-center shadow">2</span>
+                                <h3 class="font-extrabold text-base text-teal-950">Giao dịch tự động gắn ca</h3>
                             </div>
-                            <p class="text-xs font-semibold leading-relaxed">Toàn bộ hóa đơn bán hàng, thu, chi, trả hàng tự động gắn vào ca tương ứng.</p>
+                            <p class="text-sm font-semibold leading-relaxed text-slate-700 pl-10">Toàn bộ hóa đơn bán hàng, thu, chi, trả hàng tự động gắn vào ca tương ứng.</p>
                         </div>
-                        <div class="inner-card-emerald p-3.5 pop" style="--d:.35s">
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-black text-xs flex items-center justify-center">3</span>
-                                <h3 class="font-extrabold text-sm">Đóng ca &amp; Đối soát chênh lệch</h3>
+                        <div class="inner-card-emerald p-5 pop flex flex-col justify-center" style="--d:.35s">
+                            <div class="flex items-center gap-3 mb-1.5">
+                                <span class="w-7 h-7 rounded-full bg-emerald-600 text-white font-black text-sm flex items-center justify-center shadow">3</span>
+                                <h3 class="font-extrabold text-base text-emerald-950">Đóng ca &amp; Đối soát chênh lệch</h3>
                             </div>
-                            <p class="text-xs font-semibold leading-relaxed">Kiểm đếm tiền mặt thực tế, tự động đối soát thừa/thiếu và sinh phiếu bàn giao ca bất biến.</p>
+                            <p class="text-sm font-semibold leading-relaxed text-slate-700 pl-10">Kiểm đếm tiền mặt thực tế, tự động đối soát thừa/thiếu và sinh phiếu bàn giao ca bất biến.</p>
                         </div>
                     </div>
 
                     <div class="flex flex-col justify-between gap-4">
-                        <div class="flex items-center gap-2">
-                            <span class="px-2.5 py-1 rounded-full text-xs font-black text-emerald-800 bg-emerald-100 border border-emerald-300 uppercase">Phân định vai trò</span>
-                            <span class="text-sm font-bold text-slate-700">2 Nhóm người dùng tham gia</span>
+                        <div class="flex items-center gap-3">
+                            <span class="px-3.5 py-1 rounded-full text-xs font-black text-emerald-800 bg-emerald-100 border border-emerald-300 uppercase">Phân định vai trò</span>
+                            <span class="text-base font-bold text-slate-700">2 Nhóm người dùng tham gia</span>
                         </div>
-                        <div class="inner-card-amber p-4 pop h-full flex flex-col justify-center" style="--d:.2s">
-                            <div class="flex items-center gap-3 mb-2">
-                                <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center text-lg shadow-md"><i class="fa-solid fa-user-gear"></i></div>
+                        <div class="inner-card-amber p-6 pop h-full flex flex-col justify-center" style="--d:.2s">
+                            <div class="flex items-center gap-3.5 mb-3">
+                                <div class="w-12 h-12 rounded-2xl bg-amber-500 text-white flex items-center justify-center text-xl shadow-md"><i class="fa-solid fa-user-gear"></i></div>
                                 <div>
-                                    <h3 class="font-black text-sm text-amber-950">Quản trị viên / Admin</h3>
-                                    <span class="text-[11px] font-bold text-amber-800">Cấu hình &amp; Giám sát toàn hệ thống</span>
+                                    <h3 class="font-black text-base text-amber-950">Quản trị viên / Admin</h3>
+                                    <span class="text-xs font-bold text-amber-800">Cấu hình &amp; Giám sát toàn hệ thống</span>
                                 </div>
                             </div>
-                            <ul class="text-xs font-semibold leading-relaxed space-y-1 list-disc pl-4 text-slate-700">
+                            <ul class="text-sm font-semibold leading-relaxed space-y-2 list-disc pl-5 text-slate-700">
                                 <li>Bật/tắt tính năng theo từng chi nhánh cụ thể hoặc toàn gian hàng.</li>
                                 <li>Cấu hình cho phép sửa đổi thời gian mở ca làm việc.</li>
                                 <li>Phân quyền xem và quản lý phiếu bàn giao ca cho từng nhân viên.</li>
                             </ul>
                         </div>
-                        <div class="inner-card-blue p-4 pop h-full flex flex-col justify-center" style="--d:.3s">
-                            <div class="flex items-center gap-3 mb-2">
-                                <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center text-lg shadow-md"><i class="fa-solid fa-user-tag"></i></div>
+                        <div class="inner-card-blue p-6 pop h-full flex flex-col justify-center" style="--d:.3s">
+                            <div class="flex items-center gap-3.5 mb-3">
+                                <div class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-xl shadow-md"><i class="fa-solid fa-user-tag"></i></div>
                                 <div>
-                                    <h3 class="font-black text-sm text-blue-950">Thu ngân / Nhân viên bán hàng</h3>
-                                    <span class="text-[11px] font-bold text-blue-800">Người trực tiếp thao tác tại điểm bán</span>
+                                    <h3 class="font-black text-base text-blue-950">Thu ngân / Nhân viên bán hàng</h3>
+                                    <span class="text-xs font-bold text-blue-800">Người trực tiếp thao tác tại điểm bán</span>
                                 </div>
                             </div>
-                            <ul class="text-xs font-semibold leading-relaxed space-y-1 list-disc pl-4 text-slate-700">
+                            <ul class="text-sm font-semibold leading-relaxed space-y-2 list-disc pl-5 text-slate-700">
                                 <li>Thực hiện Mở ca trước khi bắt đầu bán hàng tại chi nhánh.</li>
                                 <li>Thực hiện bán hàng, trả hàng, thu chi bình thường trong ca.</li>
-                                <li>Đóng ca, kiểm đếm tiền mặt và in phiếu bàn giao đối soát cuối ca.</li>
+                                <li>Đóng ca, kiểm đếm tiền mặt thực tế và in phiếu bàn giao.</li>
                             </ul>
                         </div>
                     </div>
@@ -1005,52 +1047,52 @@
                 </div>
             </div>
             <div class="text-stage">
-                <div class="bento-card w-full max-w-[81.25rem] p-6 grid grid-cols-3 gap-5">
-                    <div class="inner-card-blue p-5 flex flex-col justify-between pop" style="--d:.15s">
+                <div class="bento-card w-full max-w-[85rem] p-8 grid grid-cols-3 gap-6">
+                    <div class="inner-card-blue p-7 flex flex-col justify-between pop" style="--d:.15s">
                         <div>
-                            <div class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-xl mb-3 shadow-md">
+                            <div class="w-14 h-14 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-2xl mb-4 shadow-md">
                                 <i class="fa-solid fa-users-viewfinder"></i>
                             </div>
-                            <span class="px-2.5 py-0.5 rounded-full text-[10.5px] font-black uppercase text-blue-800 bg-blue-100 border border-blue-300 mb-2 inline-block">Lợi ích 01</span>
-                            <h3 class="text-base font-black text-blue-950 mb-2">Kiểm soát giao dịch đa ca, đa nhân viên</h3>
-                            <p class="text-xs font-semibold leading-relaxed text-slate-700">
+                            <span class="px-3 py-1 rounded-full text-xs font-black uppercase text-blue-800 bg-blue-100 border border-blue-300 mb-3 inline-block">Lợi ích 01</span>
+                            <h3 class="text-lg font-black text-blue-950 mb-3">Kiểm soát giao dịch đa ca, đa nhân viên</h3>
+                            <p class="text-sm font-semibold leading-relaxed text-slate-700">
                                 Mọi hóa đơn bán hàng, phiếu thu, phiếu chi, trả hàng tự động gắn vào ca hiện tại. Cửa hàng luôn biết chính xác giao dịch nào thuộc ca nào của nhân viên nào kể cả khi mở ca song song.
                             </p>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-blue-200 text-[11.5px] font-bold text-blue-800 flex items-center gap-1.5">
-                            <i class="fa-solid fa-circle-check text-blue-600"></i> Không sợ nhầm lẫn doanh số
+                        <div class="mt-5 pt-3.5 border-t border-blue-200 text-sm font-bold text-blue-800 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-blue-600 text-base"></i> Không sợ nhầm lẫn doanh số
                         </div>
                     </div>
 
-                    <div class="inner-card-theme p-5 flex flex-col justify-between pop" style="--d:.25s">
+                    <div class="inner-card-theme p-7 flex flex-col justify-between pop" style="--d:.25s">
                         <div>
-                            <div class="w-12 h-12 rounded-2xl bg-teal-600 text-white flex items-center justify-center text-xl mb-3 shadow-md">
+                            <div class="w-14 h-14 rounded-2xl bg-teal-600 text-white flex items-center justify-center text-2xl mb-4 shadow-md">
                                 <i class="fa-solid fa-scale-balanced"></i>
                             </div>
-                            <span class="px-2.5 py-0.5 rounded-full text-[10.5px] font-black uppercase text-teal-800 bg-teal-100 border border-teal-300 mb-2 inline-block">Lợi ích 02</span>
-                            <h3 class="text-base font-black text-teal-950 mb-2">Tự động đối soát tiền mặt tức thì</h3>
-                            <p class="text-xs font-semibold leading-relaxed text-slate-700">
+                            <span class="px-3 py-1 rounded-full text-xs font-black uppercase text-teal-800 bg-teal-100 border border-teal-300 mb-3 inline-block">Lợi ích 02</span>
+                            <h3 class="text-lg font-black text-teal-950 mb-3">Tự động đối soát tiền mặt tức thì</h3>
+                            <p class="text-sm font-semibold leading-relaxed text-slate-700">
                                 Hệ thống tự cộng tiền đầu ca với tiền mặt phát sinh trong ca, so sánh tức thì với số tiền kiểm đếm thực tế. Giúp phát hiện thừa hoặc thiếu ngay tại thời điểm giao ca thay vì dồn đến cuối ngày.
                             </p>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-teal-200 text-[11.5px] font-bold text-teal-800 flex items-center gap-1.5">
-                            <i class="fa-solid fa-circle-check text-teal-600"></i> Phát hiện sớm chênh lệch két
+                        <div class="mt-5 pt-3.5 border-t border-teal-200 text-sm font-bold text-teal-800 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-teal-600 text-base"></i> Phát hiện sớm chênh lệch két
                         </div>
                     </div>
 
-                    <div class="inner-card-emerald p-5 flex flex-col justify-between pop" style="--d:.35s">
+                    <div class="inner-card-emerald p-7 flex flex-col justify-between pop" style="--d:.35s">
                         <div>
-                            <div class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-xl mb-3 shadow-md">
+                            <div class="w-14 h-14 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-2xl mb-4 shadow-md">
                                 <i class="fa-solid fa-file-invoice-dollar"></i>
                             </div>
-                            <span class="px-2.5 py-0.5 rounded-full text-[10.5px] font-black uppercase text-emerald-800 bg-emerald-100 border border-emerald-300 mb-2 inline-block">Lợi ích 03</span>
-                            <h3 class="text-base font-black text-emerald-950 mb-2">Chứng từ bàn giao ca bất biến</h3>
-                            <p class="text-xs font-semibold leading-relaxed text-slate-700">
+                            <span class="px-3 py-1 rounded-full text-xs font-black uppercase text-emerald-800 bg-emerald-100 border border-emerald-300 mb-3 inline-block">Lợi ích 03</span>
+                            <h3 class="text-lg font-black text-emerald-950 mb-3">Chứng từ bàn giao ca bất biến</h3>
+                            <p class="text-sm font-semibold leading-relaxed text-slate-700">
                                 Mỗi lần đóng ca sinh ra một Phiếu bàn giao ca cố định không thể sửa đổi sau khi tạo. Có thể in ngay hoặc in lại bất kỳ lúc nào từ lịch sử làm căn cứ đối chiếu minh bạch giữa nhân viên và quản lý.
                             </p>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-emerald-200 text-[11.5px] font-bold text-emerald-800 flex items-center gap-1.5">
-                            <i class="fa-solid fa-circle-check text-emerald-600"></i> Lưu trữ đối chiếu trọn đời
+                        <div class="mt-5 pt-3.5 border-t border-emerald-200 text-sm font-bold text-emerald-800 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-emerald-600 text-base"></i> Lưu trữ đối chiếu trọn đời
                         </div>
                     </div>
                 </div>
@@ -1062,45 +1104,45 @@
     <!-- SLIDE 6: CHAPTER BRIDGE I -->
     <section class="scene scene-content scene-dark" data-scene="6" data-caption="Trong phần một, chúng ta sẽ cùng tìm hiểu quy trình thiết lập hệ thống và 6 thao tác cơ bản của tính năng Kết ca trên giao diện Web KiotViet." data-vo="Trong phần một, chúng ta sẽ cùng tìm hiểu quy trình thiết lập hệ thống và 6 thao tác cơ bản của tính năng Kết ca trên giao diện Web KiotViet.">
         <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
-        <div class="slide-inner flex flex-col justify-center items-center text-center max-w-5xl mx-auto gap-6 sm:gap-7 my-auto">
+        <div class="slide-inner flex flex-col justify-center items-center text-center w-full max-w-[85rem] mx-auto gap-6 sm:gap-8 my-auto">
             <div class="flex flex-col items-center">
-                <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-3 shadow-xl pop float" style="background: var(--kv-orange); color: var(--navy-dark);">
+                <div class="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl mb-3.5 shadow-2xl pop float" style="background: var(--kv-orange); color: var(--navy-dark);">
                     <i class="fa-solid fa-desktop"></i>
                 </div>
-                <span class="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider text-amber-300 bg-amber-400/20 border border-amber-400/40 mb-2 up" style="--d:.08s">
+                <span class="px-4 py-1.5 rounded-full text-sm font-black uppercase tracking-wider text-amber-300 bg-amber-400/20 border border-amber-400/40 mb-2.5 up" style="--d:.08s">
                     Phần I: Giao diện Web Quản lý &amp; Bán hàng
                 </span>
-                <h1 class="text-3xl font-black text-white tracking-tight mb-2 up" style="--d:.12s">
+                <h1 class="text-4xl sm:text-[2.65rem] font-black text-white tracking-tight mb-2.5 up" style="--d:.12s; letter-spacing: -0.02em;">
                     THIẾT LẬP &amp; CÁC THAO TÁC CƠ BẢN TRÊN WEB
                 </h1>
-                <p class="text-sm font-semibold text-slate-300 max-w-2xl up text-balance" style="--d:.16s; text-wrap: balance;">
+                <p class="text-base sm:text-lg font-semibold text-slate-200 max-w-6xl w-full up" style="--d:.16s; text-wrap: balance;">
                     Hướng dẫn trọn gói 6 thao tác từ cấu hình phân hệ đến quy trình mở, theo dõi và đóng ca làm việc
                 </p>
             </div>
-            <div class="w-full grid grid-cols-3 gap-3 text-left">
-                <div class="toc-sub-item up" style="--d:.18s">
-                    <div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-blue-500 text-white font-black text-[10px] flex items-center justify-center">01</span><span class="text-xs font-black uppercase text-cyan-300">Bật thiết lập</span></div>
-                    <div class="text-xs font-semibold leading-relaxed text-slate-200">Kích hoạt Kết ca tại menu Thiết lập Đơn hàng.</div>
+            <div class="w-full grid grid-cols-3 gap-4.5 sm:gap-5 text-left">
+                <div class="toc-sub-item p-5 sm:p-6 up" style="--d:.18s">
+                    <div class="flex items-center gap-2.5 mb-2"><span class="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow">01</span><span class="text-base font-black uppercase text-cyan-300">Bật thiết lập</span></div>
+                    <div class="text-sm font-semibold leading-relaxed text-slate-100">Kích hoạt Kết ca tại menu Thiết lập Đơn hàng.</div>
                 </div>
-                <div class="toc-sub-item up" style="--d:.25s">
-                    <div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-blue-500 text-white font-black text-[10px] flex items-center justify-center">02</span><span class="text-xs font-black uppercase text-cyan-300">Mở ca làm việc</span></div>
-                    <div class="text-xs font-semibold leading-relaxed text-slate-200">Khai báo tiền mặt đầu ca trước khi bán hàng.</div>
+                <div class="toc-sub-item p-5 sm:p-6 up" style="--d:.25s">
+                    <div class="flex items-center gap-2.5 mb-2"><span class="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow">02</span><span class="text-base font-black uppercase text-cyan-300">Mở ca làm việc</span></div>
+                    <div class="text-sm font-semibold leading-relaxed text-slate-100">Khai báo tiền mặt đầu ca trước khi bán hàng.</div>
                 </div>
-                <div class="toc-sub-item up" style="--d:.32s">
-                    <div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-blue-500 text-white font-black text-[10px] flex items-center justify-center">03</span><span class="text-xs font-black uppercase text-cyan-300">Xem giao dịch</span></div>
-                    <div class="text-xs font-semibold leading-relaxed text-slate-200">Theo dõi doanh thu, thu chi theo hình thức thanh toán.</div>
+                <div class="toc-sub-item p-5 sm:p-6 up" style="--d:.32s">
+                    <div class="flex items-center gap-2.5 mb-2"><span class="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow">03</span><span class="text-base font-black uppercase text-cyan-300">Xem giao dịch</span></div>
+                    <div class="text-sm font-semibold leading-relaxed text-slate-100">Theo dõi doanh thu, thu chi theo hình thức thanh toán.</div>
                 </div>
-                <div class="toc-sub-item up" style="--d:.39s">
-                    <div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-blue-500 text-white font-black text-[10px] flex items-center justify-center">04</span><span class="text-xs font-black uppercase text-cyan-300">Đóng ca làm việc</span></div>
-                    <div class="text-xs font-semibold leading-relaxed text-slate-200">Đối soát tiền mặt thực tế kiểm đếm và chốt ca.</div>
+                <div class="toc-sub-item p-5 sm:p-6 up" style="--d:.39s">
+                    <div class="flex items-center gap-2.5 mb-2"><span class="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow">04</span><span class="text-base font-black uppercase text-cyan-300">Đóng ca làm việc</span></div>
+                    <div class="text-sm font-semibold leading-relaxed text-slate-100">Đối soát tiền mặt thực tế kiểm đếm và chốt ca.</div>
                 </div>
-                <div class="toc-sub-item up" style="--d:.46s">
-                    <div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-blue-500 text-white font-black text-[10px] flex items-center justify-center">05</span><span class="text-xs font-black uppercase text-cyan-300">In phiếu bàn giao</span></div>
-                    <div class="text-xs font-semibold leading-relaxed text-slate-200">Xuất chứng từ bàn giao ca ngay hoặc in lại sau.</div>
+                <div class="toc-sub-item p-5 sm:p-6 up" style="--d:.46s">
+                    <div class="flex items-center gap-2.5 mb-2"><span class="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow">05</span><span class="text-base font-black uppercase text-cyan-300">In phiếu bàn giao</span></div>
+                    <div class="text-sm font-semibold leading-relaxed text-slate-100">Xuất chứng từ bàn giao ca ngay hoặc in lại sau.</div>
                 </div>
-                <div class="toc-sub-item up" style="--d:.53s">
-                    <div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-blue-500 text-white font-black text-[10px] flex items-center justify-center">06</span><span class="text-xs font-black uppercase text-cyan-300">Tra cứu lịch sử</span></div>
-                    <div class="text-xs font-semibold leading-relaxed text-slate-200">Lọc và kiểm tra các ca làm việc cũ trong 7 ngày.</div>
+                <div class="toc-sub-item p-5 sm:p-6 up" style="--d:.53s">
+                    <div class="flex items-center gap-2.5 mb-2"><span class="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow">06</span><span class="text-base font-black uppercase text-cyan-300">Tra cứu lịch sử</span></div>
+                    <div class="text-sm font-semibold leading-relaxed text-slate-100">Lọc và kiểm tra các ca làm việc cũ trong 7 ngày.</div>
                 </div>
             </div>
         </div>
@@ -1470,37 +1512,37 @@
     <!-- SLIDE 25: CHAPTER BRIDGE II -->
     <section class="scene scene-content scene-dark" data-scene="25" data-caption="Tiếp theo tại phần hai, chúng ta sẽ tìm hiểu các cơ chế xử lý đặc biệt khi mở ca, cấu hình phân quyền nhân viên, công thức đối soát tiền mặt và cách khắc phục sự cố." data-vo="Tiếp theo tại phần hai, chúng ta sẽ tìm hiểu các cơ chế xử lý đặc biệt khi mở ca, cấu hình phân quyền nhân viên, công thức đối soát tiền mặt và cách khắc phục sự cố.">
         <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
-        <div class="slide-inner flex flex-col justify-center items-center text-center max-w-5xl mx-auto gap-6 sm:gap-7 my-auto">
+        <div class="slide-inner flex flex-col justify-center items-center text-center w-full max-w-[85rem] mx-auto gap-6 sm:gap-8 my-auto">
             <div class="flex flex-col items-center">
-                <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-3 shadow-xl pop float" style="background: var(--kv-orange); color: var(--navy-dark);">
+                <div class="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl mb-3.5 shadow-2xl pop float" style="background: var(--kv-orange); color: var(--navy-dark);">
                     <i class="fa-solid fa-shield-halved"></i>
                 </div>
-                <span class="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider text-amber-300 bg-amber-400/20 border border-amber-400/40 mb-2 up" style="--d:.08s">
+                <span class="px-4 py-1.5 rounded-full text-sm font-black uppercase tracking-wider text-amber-300 bg-amber-400/20 border border-amber-400/40 mb-2.5 up" style="--d:.08s">
                     Phần II: Quản trị &amp; Kiểm soát
                 </span>
-                <h1 class="text-3xl font-black text-white tracking-tight mb-2 up" style="--d:.12s">
+                <h1 class="text-4xl sm:text-[2.65rem] font-black text-white tracking-tight mb-2.5 up" style="--d:.12s; letter-spacing: -0.02em;">
                     TÍNH NĂNG NÂNG CAO &amp; CƠ CHẾ ĐỐI SOÁT
                 </h1>
-                <p class="text-sm font-semibold text-slate-300 max-w-2xl up text-balance" style="--d:.16s; text-wrap: balance;">
+                <p class="text-base sm:text-lg font-semibold text-slate-200 max-w-6xl w-full up" style="--d:.16s; text-wrap: balance;">
                     Nắm vững các kịch bản thực tế, phân quyền bảo mật, giải mã công thức tiền mặt và kỹ năng xử lý sự cố mạng
                 </p>
             </div>
-            <div class="w-full grid grid-cols-2 gap-4 text-left">
-                <div class="toc-sub-item up" style="--d:.18s">
-                    <div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-blue-500 text-white font-black text-[10px] flex items-center justify-center">01</span><span class="text-xs font-black uppercase text-cyan-300">4 Tình huống mở ca</span></div>
-                    <div class="text-xs font-semibold leading-relaxed text-slate-200">Xử lý tài khoản đã có ca, mất mạng offline, nhân viên làm nhiều chi nhánh và một chi nhánh nhiều ca.</div>
+            <div class="w-full grid grid-cols-4 gap-4.5 sm:gap-5 text-left">
+                <div class="toc-sub-item p-5 sm:p-6 up" style="--d:.18s">
+                    <div class="flex items-center gap-2.5 mb-2"><span class="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow">01</span><span class="text-base font-black uppercase text-cyan-300">4 Tình huống mở ca</span></div>
+                    <div class="text-sm font-semibold leading-relaxed text-slate-100">Đã mở ca, mất mạng offline, mở nhiều chi nhánh, mở ca song song.</div>
                 </div>
-                <div class="toc-sub-item up" style="--d:.25s">
-                    <div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-blue-500 text-white font-black text-[10px] flex items-center justify-center">02</span><span class="text-xs font-black uppercase text-cyan-300">Phân quyền Kết ca</span></div>
-                    <div class="text-xs font-semibold leading-relaxed text-slate-200">Cấu hình quyền xem phiếu bàn giao ca cá nhân hoặc mở rộng xem toàn bộ ca của chi nhánh.</div>
+                <div class="toc-sub-item p-5 sm:p-6 up" style="--d:.26s">
+                    <div class="flex items-center gap-2.5 mb-2"><span class="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow">02</span><span class="text-base font-black uppercase text-cyan-300">Phân quyền nhân viên</span></div>
+                    <div class="text-sm font-semibold leading-relaxed text-slate-100">Kiểm soát quyền mở ca, đóng ca và xem phiếu bàn giao theo vai trò.</div>
                 </div>
-                <div class="toc-sub-item up" style="--d:.32s">
-                    <div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-blue-500 text-white font-black text-[10px] flex items-center justify-center">03</span><span class="text-xs font-black uppercase text-cyan-300">Công thức đối soát tiền mặt</span></div>
-                    <div class="text-xs font-semibold leading-relaxed text-slate-200">Giải mã công thức tính tiền mặt trong ca, tiền cuối ca theo hệ thống và xác định chênh lệch thừa thiếu.</div>
+                <div class="toc-sub-item p-5 sm:p-6 up" style="--d:.34s">
+                    <div class="flex items-center gap-2.5 mb-2"><span class="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow">03</span><span class="text-base font-black uppercase text-cyan-300">Công thức tiền mặt</span></div>
+                    <div class="text-sm font-semibold leading-relaxed text-slate-100">Giải mã công thức tiền trong ca, tiền cuối ca và số tiền chênh lệch két.</div>
                 </div>
-                <div class="toc-sub-item up" style="--d:.39s">
-                    <div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-blue-500 text-white font-black text-[10px] flex items-center justify-center">04</span><span class="text-xs font-black uppercase text-cyan-300">Xử lý 6 sự cố kỹ thuật</span></div>
-                    <div class="text-xs font-semibold leading-relaxed text-slate-200">Hướng dẫn khắc phục khi mất mạng, máy in lỗi, quên đóng ca, và nguyên tắc bảo toàn dữ liệu.</div>
+                <div class="toc-sub-item p-5 sm:p-6 up" style="--d:.42s">
+                    <div class="flex items-center gap-2.5 mb-2"><span class="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow">04</span><span class="text-base font-black uppercase text-cyan-300">Xử lý 6 sự cố mạng</span></div>
+                    <div class="text-sm font-semibold leading-relaxed text-slate-100">Mất mạng đóng ca, kẹt giấy máy in, không mở được ca, hóa đơn offline.</div>
                 </div>
             </div>
         </div>
@@ -1519,47 +1561,47 @@
                 </div>
             </div>
             <div class="text-stage">
-                <div class="bento-card w-full max-w-[81.25rem] p-6 grid grid-cols-2 gap-4">
-                    <div class="inner-card-blue p-4 pop" style="--d:.15s">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="px-2.5 py-0.5 rounded text-white font-black text-[11px] bg-blue-600">TÌNH HUỐNG 1</span>
-                            <i class="fa-solid fa-user-check text-blue-600"></i>
+                <div class="bento-card w-full max-w-[85rem] p-8 grid grid-cols-2 gap-6">
+                    <div class="inner-card-blue p-6 sm:p-7 pop flex flex-col justify-center" style="--d:.15s">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-3 py-1 rounded text-white font-black text-xs bg-blue-600">TÌNH HUỐNG 1</span>
+                            <i class="fa-solid fa-user-check text-blue-600 text-xl"></i>
                         </div>
-                        <h3 class="font-extrabold text-sm mb-1">Đã có ca mở tại chi nhánh</h3>
-                        <p class="text-xs font-semibold leading-relaxed text-slate-700">
+                        <h3 class="font-extrabold text-base mb-2 text-blue-950">Đã có ca mở tại chi nhánh</h3>
+                        <p class="text-sm font-semibold leading-relaxed text-slate-700">
                             Hệ thống tự động bỏ qua popup mở ca, cho phép nhân viên tiếp tục bán hàng trên ca hiện tại. Mọi giao dịch phát sinh tiếp tục gắn vào ca đang mở.
                         </p>
                     </div>
 
-                    <div class="inner-card-amber p-4 pop" style="--d:.25s">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="px-2.5 py-0.5 rounded text-white font-black text-[11px] bg-amber-500">TÌNH HUỐNG 2</span>
-                            <i class="fa-solid fa-wifi-slash text-amber-600"></i>
+                    <div class="inner-card-amber p-6 sm:p-7 pop flex flex-col justify-center" style="--d:.25s">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-3 py-1 rounded text-white font-black text-xs bg-amber-500">TÌNH HUỐNG 2</span>
+                            <i class="fa-solid fa-wifi-slash text-amber-600 text-xl"></i>
                         </div>
-                        <h3 class="font-extrabold text-sm mb-1">Thiết bị mất mạng (Offline)</h3>
-                        <p class="text-xs font-semibold leading-relaxed text-slate-700">
+                        <h3 class="font-extrabold text-base mb-2 text-amber-950">Thiết bị mất mạng (Offline)</h3>
+                        <p class="text-sm font-semibold leading-relaxed text-slate-700">
                             Hệ thống bỏ qua yêu cầu mở ca để nhân viên bán hàng bình thường. Hóa đơn tạo ra tạm thời chưa có mã ca; khi có mạng trở lại hệ thống tự gắn ca theo thời gian tạo đơn.
                         </p>
                     </div>
 
-                    <div class="inner-card-theme p-4 pop" style="--d:.35s">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="px-2.5 py-0.5 rounded text-white font-black text-[11px] bg-teal-600">TÌNH HUỐNG 3</span>
-                            <i class="fa-solid fa-code-branch text-teal-600"></i>
+                    <div class="inner-card-theme p-6 sm:p-7 pop flex flex-col justify-center" style="--d:.35s">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-3 py-1 rounded text-white font-black text-xs bg-teal-600">TÌNH HUỐNG 3</span>
+                            <i class="fa-solid fa-code-branch text-teal-600 text-xl"></i>
                         </div>
-                        <h3 class="font-extrabold text-sm mb-1">1 Nhân viên làm nhiều chi nhánh</h3>
-                        <p class="text-xs font-semibold leading-relaxed text-slate-700">
+                        <h3 class="font-extrabold text-base mb-2 text-teal-950">1 Nhân viên làm nhiều chi nhánh</h3>
+                        <p class="text-sm font-semibold leading-relaxed text-slate-700">
                             Nhân viên có thể mở nhiều ca đồng thời ở các chi nhánh khác nhau. Tuy nhiên, tại cùng 1 chi nhánh trong cùng thời điểm chỉ được phép mở duy nhất 1 ca.
                         </p>
                     </div>
 
-                    <div class="inner-card-emerald p-4 pop" style="--d:.45s">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="px-2.5 py-0.5 rounded text-white font-black text-[11px] bg-emerald-600">TÌNH HUỐNG 4</span>
-                            <i class="fa-solid fa-users text-emerald-600"></i>
+                    <div class="inner-card-emerald p-6 sm:p-7 pop flex flex-col justify-center" style="--d:.45s">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-3 py-1 rounded text-white font-black text-xs bg-emerald-600">TÌNH HUỐNG 4</span>
+                            <i class="fa-solid fa-users text-emerald-600 text-xl"></i>
                         </div>
-                        <h3 class="font-extrabold text-sm mb-1">1 Chi nhánh có nhiều nhân viên</h3>
-                        <p class="text-xs font-semibold leading-relaxed text-slate-700">
+                        <h3 class="font-extrabold text-base mb-2 text-emerald-950">1 Chi nhánh có nhiều nhân viên</h3>
+                        <p class="text-sm font-semibold leading-relaxed text-slate-700">
                             Một chi nhánh cho phép nhiều nhân viên cùng mở các ca làm việc song song độc lập. Giao dịch của nhân viên nào sẽ tự động hạch toán vào đúng ca của người đó.
                         </p>
                     </div>
@@ -1641,40 +1683,40 @@
                 </div>
             </div>
             <div class="text-stage">
-                <div class="bento-card w-full max-w-[81.25rem] p-6 flex flex-col justify-between gap-5">
-                    <div class="inner-card-blue p-4 pop" style="--d:.15s">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="px-2.5 py-0.5 rounded text-white font-black text-xs bg-blue-600">CÔNG THỨC 1</span>
-                            <h3 class="font-black text-sm text-blue-950">TIỀN MẶT PHÁT SINH TRONG CA</h3>
+                <div class="bento-card w-full max-w-[85rem] p-8 flex flex-col justify-between gap-6">
+                    <div class="inner-card-blue p-5 pop" style="--d:.15s">
+                        <div class="flex items-center gap-3 mb-2.5">
+                            <span class="px-3 py-1 rounded text-white font-black text-xs bg-blue-600">CÔNG THỨC 1</span>
+                            <h3 class="font-black text-base text-blue-950">TIỀN MẶT PHÁT SINH TRONG CA</h3>
                         </div>
-                        <div class="p-3 bg-white border border-blue-200 rounded-xl font-bold text-sm text-slate-800 flex items-center justify-center gap-2">
+                        <div class="p-3.5 bg-white border border-blue-200 rounded-xl font-black text-base sm:text-lg text-slate-800 flex items-center justify-center gap-2.5 shadow-sm">
                             <span class="text-blue-700">Tiền mặt trong ca</span> = (<span class="text-emerald-700">Bán hàng TM</span> + <span class="text-emerald-700">Phiếu thu TM</span>) − (<span class="text-rose-700">Phiếu chi TM</span> + <span class="text-rose-700">Trả hàng TM</span>)
                         </div>
-                        <p class="text-[11.5px] font-semibold text-slate-600 mt-2">Dòng tiền mặt thuần phát sinh từ mọi hoạt động bán hàng và thu chi thực tế của thu ngân trong phiên làm việc.</p>
+                        <p class="text-sm font-semibold text-slate-600 mt-2.5">Dòng tiền mặt thuần phát sinh từ mọi hoạt động bán hàng và thu chi thực tế của thu ngân trong phiên làm việc.</p>
                     </div>
 
-                    <div class="inner-card-theme p-4 pop" style="--d:.25s">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="px-2.5 py-0.5 rounded text-white font-black text-xs bg-teal-600">CÔNG THỨC 2</span>
-                            <h3 class="font-black text-sm text-teal-950">TIỀN MẶT CUỐI CA (HỆ THỐNG TỰ TÍNH)</h3>
+                    <div class="inner-card-theme p-5 pop" style="--d:.25s">
+                        <div class="flex items-center gap-3 mb-2.5">
+                            <span class="px-3 py-1 rounded text-white font-black text-xs bg-teal-600">CÔNG THỨC 2</span>
+                            <h3 class="font-black text-base text-teal-950">TIỀN MẶT CUỐI CA (HỆ THỐNG TỰ TÍNH)</h3>
                         </div>
-                        <div class="p-3 bg-white border border-teal-200 rounded-xl font-bold text-sm text-slate-800 flex items-center justify-center gap-2">
+                        <div class="p-3.5 bg-white border border-teal-200 rounded-xl font-black text-base sm:text-lg text-slate-800 flex items-center justify-center gap-2.5 shadow-sm">
                             <span class="text-teal-700">Tiền mặt cuối ca</span> = <span class="text-blue-700">Tiền mặt đầu ca</span> + <span class="text-teal-700">Tiền mặt trong ca</span>
                         </div>
-                        <p class="text-[11.5px] font-semibold text-slate-600 mt-2">Số dư tiền mặt lý thuyết phải có trong két theo ghi nhận tự động của hệ thống phần mềm (Chỉ đọc, không chỉnh sửa).</p>
+                        <p class="text-sm font-semibold text-slate-600 mt-2.5">Số dư tiền mặt lý thuyết phải có trong két theo ghi nhận tự động của hệ thống phần mềm (Chỉ đọc, không chỉnh sửa).</p>
                     </div>
 
-                    <div class="inner-card-emerald p-4 pop" style="--d:.35s">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="px-2.5 py-0.5 rounded text-white font-black text-xs bg-emerald-600">CÔNG THỨC 3</span>
-                            <h3 class="font-black text-sm text-emerald-950">SỐ TIỀN CHÊNH LỆCH BÀN GIAO THỰC TẾ</h3>
+                    <div class="inner-card-emerald p-5 pop" style="--d:.35s">
+                        <div class="flex items-center gap-3 mb-2.5">
+                            <span class="px-3 py-1 rounded text-white font-black text-xs bg-emerald-600">CÔNG THỨC 3</span>
+                            <h3 class="font-black text-base text-emerald-950">SỐ TIỀN CHÊNH LỆCH BÀN GIAO THỰC TẾ</h3>
                         </div>
-                        <div class="p-3 bg-white border border-emerald-200 rounded-xl font-bold text-sm text-slate-800 flex items-center justify-center gap-2">
+                        <div class="p-3.5 bg-white border border-emerald-200 rounded-xl font-black text-base sm:text-lg text-slate-800 flex items-center justify-center gap-2.5 shadow-sm">
                             <span class="text-emerald-700">Số tiền chênh lệch</span> = <span class="text-purple-700">Tiền mặt bàn giao thực tế</span> − <span class="text-teal-700">Tiền mặt cuối ca (Hệ thống)</span>
                         </div>
-                        <div class="flex items-center justify-between mt-2 text-xs font-bold">
-                            <span class="text-emerald-700 flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Chênh lệch &gt; 0: Tiền thực tế Thừa so với phần mềm</span>
-                            <span class="text-rose-700 flex items-center gap-1"><i class="fa-solid fa-triangle-exclamation"></i> Chênh lệch &lt; 0: Tiền thực tế Thiếu hụt so với phần mềm</span>
+                        <div class="flex items-center justify-between mt-2.5 text-sm font-bold">
+                            <span class="text-emerald-700 flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-base"></i> Chênh lệch &gt; 0: Tiền thực tế Thừa so với phần mềm</span>
+                            <span class="text-rose-700 flex items-center gap-1.5"><i class="fa-solid fa-triangle-exclamation text-base"></i> Chênh lệch &lt; 0: Tiền thực tế Thiếu hụt so với phần mềm</span>
                         </div>
                     </div>
                 </div>
@@ -1735,53 +1777,53 @@
                 </div>
             </div>
             <div class="text-stage">
-                <div class="bento-card w-full max-w-[81.25rem] p-5 grid grid-cols-3 gap-3">
-                    <div class="inner-card-amber p-3.5 pop" style="--d:.12s">
-                        <div class="flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-wifi text-amber-600 text-sm"></i>
-                            <h3 class="font-black text-xs text-amber-950">Mất mạng khi đóng ca</h3>
+                <div class="bento-card w-full max-w-[85rem] p-8 grid grid-cols-3 gap-5">
+                    <div class="inner-card-amber p-6 pop flex flex-col justify-center" style="--d:.12s">
+                        <div class="flex items-center gap-2.5 mb-2">
+                            <i class="fa-solid fa-wifi text-amber-600 text-lg"></i>
+                            <h3 class="font-black text-sm sm:text-base text-amber-950">Mất mạng khi đóng ca</h3>
                         </div>
-                        <p class="text-[11.5px] font-semibold text-slate-700 leading-relaxed">Hệ thống báo lỗi và giữ nguyên trạng thái Đang mở. Dữ liệu an toàn tuyệt đối, đóng ca khi online lại.</p>
+                        <p class="text-sm font-semibold text-slate-700 leading-relaxed">Hệ thống báo lỗi và giữ nguyên trạng thái Đang mở. Dữ liệu an toàn tuyệt đối, đóng ca khi online lại.</p>
                     </div>
 
-                    <div class="inner-card-blue p-3.5 pop" style="--d:.18s">
-                        <div class="flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-print text-blue-600 text-sm"></i>
-                            <h3 class="font-black text-xs text-blue-950">Máy in bị lỗi / kẹt giấy</h3>
+                    <div class="inner-card-blue p-6 pop flex flex-col justify-center" style="--d:.18s">
+                        <div class="flex items-center gap-2.5 mb-2">
+                            <i class="fa-solid fa-print text-blue-600 text-lg"></i>
+                            <h3 class="font-black text-sm sm:text-base text-blue-950">Máy in bị lỗi / kẹt giấy</h3>
                         </div>
-                        <p class="text-[11.5px] font-semibold text-slate-700 leading-relaxed">Ca vẫn đóng thành công và phiếu đã lưu. Bạn có thể in lại bất kỳ lúc nào từ menu Phiếu giao ca.</p>
+                        <p class="text-sm font-semibold text-slate-700 leading-relaxed">Ca vẫn đóng thành công và phiếu đã lưu. Bạn có thể in lại bất kỳ lúc nào từ menu Phiếu giao ca.</p>
                     </div>
 
-                    <div class="inner-card-theme p-3.5 pop" style="--d:.24s">
-                        <div class="flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-lock text-teal-600 text-sm"></i>
-                            <h3 class="font-black text-xs text-teal-950">Không mở được ca làm việc</h3>
+                    <div class="inner-card-theme p-6 pop flex flex-col justify-center" style="--d:.24s">
+                        <div class="flex items-center gap-2.5 mb-2">
+                            <i class="fa-solid fa-lock text-teal-600 text-lg"></i>
+                            <h3 class="font-black text-sm sm:text-base text-teal-950">Không mở được ca làm việc</h3>
                         </div>
-                        <p class="text-[11.5px] font-semibold text-slate-700 leading-relaxed">Kiểm tra kết nối Internet vì thao tác mở ca bắt buộc thiết bị phải đang có kết nối mạng (online).</p>
+                        <p class="text-sm font-semibold text-slate-700 leading-relaxed">Kiểm tra kết nối Internet vì thao tác mở ca bắt buộc thiết bị phải đang có kết nối mạng (online).</p>
                     </div>
 
-                    <div class="inner-card-emerald p-3.5 pop" style="--d:.30s">
-                        <div class="flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-chevron-right text-emerald-600 text-sm"></i>
-                            <h3 class="font-black text-xs text-emerald-950">Không thấy icon &gt; chi tiết</h3>
+                    <div class="inner-card-emerald p-6 pop flex flex-col justify-center" style="--d:.30s">
+                        <div class="flex items-center gap-2.5 mb-2">
+                            <i class="fa-solid fa-chevron-right text-emerald-600 text-lg"></i>
+                            <h3 class="font-black text-sm sm:text-base text-emerald-950">Không thấy icon &gt; chi tiết</h3>
                         </div>
-                        <p class="text-[11.5px] font-semibold text-slate-700 leading-relaxed">Biểu tượng chỉ hiển thị nếu tài khoản được phân quyền Xem hóa đơn, Xem phiếu thu chi hoặc Xem trả hàng.</p>
+                        <p class="text-sm font-semibold text-slate-700 leading-relaxed">Biểu tượng chỉ hiển thị nếu tài khoản được phân quyền Xem hóa đơn, Xem phiếu thu chi hoặc Xem trả hàng.</p>
                     </div>
 
-                    <div class="inner-card-amber p-3.5 pop" style="--d:.36s">
-                        <div class="flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-clock text-amber-600 text-sm"></i>
-                            <h3 class="font-black text-xs text-amber-950">Quên đóng ca khi hết giờ</h3>
+                    <div class="inner-card-amber p-6 pop flex flex-col justify-center" style="--d:.36s">
+                        <div class="flex items-center gap-2.5 mb-2">
+                            <i class="fa-solid fa-clock text-amber-600 text-lg"></i>
+                            <h3 class="font-black text-sm sm:text-base text-amber-950">Quên đóng ca khi hết giờ</h3>
                         </div>
-                        <p class="text-[11.5px] font-semibold text-slate-700 leading-relaxed">Ca làm việc vẫn ở trạng thái Đang mở. Hệ thống không tự động đóng ca theo thời gian nếu chưa có lệnh.</p>
+                        <p class="text-sm font-semibold text-slate-700 leading-relaxed">Ca làm việc vẫn ở trạng thái Đang mở. Hệ thống không tự động đóng ca theo thời gian nếu chưa có lệnh.</p>
                     </div>
 
-                    <div class="inner-card-blue p-3.5 pop" style="--d:.42s">
-                        <div class="flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-cloud-arrow-up text-blue-600 text-sm"></i>
-                            <h3 class="font-black text-xs text-blue-950">Hóa đơn tạo lúc mất mạng</h3>
+                    <div class="inner-card-blue p-6 pop flex flex-col justify-center" style="--d:.42s">
+                        <div class="flex items-center gap-2.5 mb-2">
+                            <i class="fa-solid fa-cloud-arrow-up text-blue-600 text-lg"></i>
+                            <h3 class="font-black text-sm sm:text-base text-blue-950">Hóa đơn tạo lúc mất mạng</h3>
                         </div>
-                        <p class="text-[11.5px] font-semibold text-slate-700 leading-relaxed">Hóa đơn offline tạm thời chưa gắn mã ca. Khi online trở lại, hệ thống tự gắn ca theo giờ tạo đơn.</p>
+                        <p class="text-sm font-semibold text-slate-700 leading-relaxed">Hóa đơn offline tạm thời chưa gắn mã ca. Khi online trở lại, hệ thống tự gắn ca theo giờ tạo đơn.</p>
                     </div>
                 </div>
             </div>
@@ -1792,33 +1834,33 @@
     <!-- SLIDE 34: CHAPTER BRIDGE III (MOBILE) -->
     <section class="scene scene-content scene-dark" data-scene="34" data-caption="Ở phần ba, chúng ta sẽ cùng theo dõi các thao tác Mở ca, Đóng ca và In phiếu bàn giao ngay trên ứng dụng di động KiotViet." data-vo="Ở phần ba, chúng ta sẽ cùng theo dõi các thao tác Mở ca, Đóng ca và In phiếu bàn giao ngay trên ứng dụng di động KiotViet.">
         <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
-        <div class="slide-inner flex flex-col justify-center items-center text-center max-w-5xl mx-auto gap-6 sm:gap-7 my-auto">
+        <div class="slide-inner flex flex-col justify-center items-center text-center w-full max-w-[85rem] mx-auto gap-6 sm:gap-8 my-auto">
             <div class="flex flex-col items-center">
-                <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-3 shadow-xl pop float" style="background: var(--kv-orange); color: var(--navy-dark);">
+                <div class="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl mb-3.5 shadow-2xl pop float" style="background: var(--kv-orange); color: var(--navy-dark);">
                     <i class="fa-solid fa-mobile-screen-button"></i>
                 </div>
-                <span class="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider text-amber-300 bg-amber-400/20 border border-amber-400/40 mb-2 up" style="--d:.08s">
+                <span class="px-4 py-1.5 rounded-full text-sm font-black uppercase tracking-wider text-amber-300 bg-amber-400/20 border border-amber-400/40 mb-2.5 up" style="--d:.08s">
                     Phần III: Ứng dụng Di động
                 </span>
-                <h1 class="text-3xl font-black text-white tracking-tight mb-2 up" style="--d:.12s">
+                <h1 class="text-4xl sm:text-[2.65rem] font-black text-white tracking-tight mb-2.5 up" style="--d:.12s; letter-spacing: -0.02em;">
                     THAO TÁC KẾT CA TRÊN ĐIỆN THOẠI
                 </h1>
-                <p class="text-sm font-semibold text-slate-300 max-w-2xl up text-balance" style="--d:.16s; text-wrap: balance;">
+                <p class="text-base sm:text-lg font-semibold text-slate-200 max-w-6xl w-full up" style="--d:.16s; text-wrap: balance;">
                     Thực hiện trọn vẹn quy trình mở ca, đóng ca và in phiếu bàn giao trực tiếp trên điện thoại thông minh
                 </p>
             </div>
-            <div class="w-full grid grid-cols-3 gap-3 text-left">
-                <div class="toc-sub-item up" style="--d:.18s">
-                    <div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-blue-500 text-white font-black text-[10px] flex items-center justify-center">01</span><span class="text-xs font-black uppercase text-cyan-300">Mở ca Mobile</span></div>
-                    <div class="text-xs font-semibold leading-relaxed text-slate-200">Đăng nhập app, vào menu Bán hàng và nhập tiền mặt đầu ca.</div>
+            <div class="w-full grid grid-cols-3 gap-4.5 sm:gap-5 text-left">
+                <div class="toc-sub-item p-5 sm:p-6 up" style="--d:.18s">
+                    <div class="flex items-center gap-2.5 mb-2"><span class="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow">01</span><span class="text-base font-black uppercase text-cyan-300">Mở ca di động</span></div>
+                    <div class="text-sm font-semibold leading-relaxed text-slate-100">Tự động gợi ý popup mở ca ngay khi vào ứng dụng.</div>
                 </div>
-                <div class="toc-sub-item up" style="--d:.25s">
-                    <div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-blue-500 text-white font-black text-[10px] flex items-center justify-center">02</span><span class="text-xs font-black uppercase text-cyan-300">Đóng ca Mobile</span></div>
-                    <div class="text-xs font-semibold leading-relaxed text-slate-200">Chốt tiền thực tế từ menu Nhiều hơn hoặc menu Bán hàng.</div>
+                <div class="toc-sub-item p-5 sm:p-6 up" style="--d:.28s">
+                    <div class="flex items-center gap-2.5 mb-2"><span class="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow">02</span><span class="text-base font-black uppercase text-cyan-300">Đóng ca di động</span></div>
+                    <div class="text-sm font-semibold leading-relaxed text-slate-100">Kiểm đếm tiền thực tế và đối soát chênh lệch ngay trên điện thoại.</div>
                 </div>
-                <div class="toc-sub-item up" style="--d:.32s">
-                    <div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-blue-500 text-white font-black text-[10px] flex items-center justify-center">03</span><span class="text-xs font-black uppercase text-cyan-300">Tra cứu &amp; In lại</span></div>
-                    <div class="text-xs font-semibold leading-relaxed text-slate-200">Xem lịch sử các ca và in phiếu qua máy in Bluetooth/LAN.</div>
+                <div class="toc-sub-item p-5 sm:p-6 up" style="--d:.38s">
+                    <div class="flex items-center gap-2.5 mb-2"><span class="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow">03</span><span class="text-base font-black uppercase text-cyan-300">In phiếu Bluetooth</span></div>
+                    <div class="text-sm font-semibold leading-relaxed text-slate-100">Kết nối máy in di động Bluetooth hoặc chia sẻ file phiếu nhanh chóng.</div>
                 </div>
             </div>
         </div>
@@ -2008,33 +2050,33 @@
     <!-- SLIDE 44: CHAPTER BRIDGE IV (POS) -->
     <section class="scene scene-content scene-dark" data-scene="44" data-caption="Trong phần bốn, chúng ta sẽ tìm hiểu các bước Mở ca, Đóng ca và In phiếu đối soát chuyên dụng trên Máy bán hàng POS KiotViet." data-vo="Trong phần bốn, chúng ta sẽ tìm hiểu các bước Mở ca, Đóng ca và In phiếu đối soát chuyên dụng trên Máy bán hàng POS KiotViet.">
         <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
-        <div class="slide-inner flex flex-col justify-center items-center text-center max-w-5xl mx-auto gap-6 sm:gap-7 my-auto">
+        <div class="slide-inner flex flex-col justify-center items-center text-center w-full max-w-[85rem] mx-auto gap-6 sm:gap-8 my-auto">
             <div class="flex flex-col items-center">
-                <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-3 shadow-xl pop float" style="background: var(--kv-orange); color: var(--navy-dark);">
+                <div class="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl mb-3.5 shadow-2xl pop float" style="background: var(--kv-orange); color: var(--navy-dark);">
                     <i class="fa-solid fa-receipt"></i>
                 </div>
-                <span class="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider text-amber-300 bg-amber-400/20 border border-amber-400/40 mb-2 up" style="--d:.08s">
+                <span class="px-4 py-1.5 rounded-full text-sm font-black uppercase tracking-wider text-amber-300 bg-amber-400/20 border border-amber-400/40 mb-2.5 up" style="--d:.08s">
                     Phần IV: Máy bán hàng POS
                 </span>
-                <h1 class="text-3xl font-black text-white tracking-tight mb-2 up" style="--d:.12s">
+                <h1 class="text-4xl sm:text-[2.65rem] font-black text-white tracking-tight mb-2.5 up" style="--d:.12s; letter-spacing: -0.02em;">
                     THAO TÁC KẾT CA TRÊN MÁY BÁN HÀNG POS
                 </h1>
-                <p class="text-sm font-semibold text-slate-300 max-w-2xl up text-balance" style="--d:.16s; text-wrap: balance;">
+                <p class="text-base sm:text-lg font-semibold text-slate-200 max-w-6xl w-full up" style="--d:.16s; text-wrap: balance;">
                     Thiết kế tối ưu cho màn hình cảm ứng POS chuyên dụng và máy in hóa đơn nhiệt tích hợp
                 </p>
             </div>
-            <div class="w-full grid grid-cols-3 gap-3 text-left">
-                <div class="toc-sub-item up" style="--d:.18s">
-                    <div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-blue-500 text-white font-black text-[10px] flex items-center justify-center">01</span><span class="text-xs font-black uppercase text-cyan-300">Mở ca POS</span></div>
-                    <div class="text-xs font-semibold leading-relaxed text-slate-200">Popup tự động hiển thị sau khi đăng nhập máy POS.</div>
+            <div class="w-full grid grid-cols-3 gap-4.5 sm:gap-5 text-left">
+                <div class="toc-sub-item p-5 sm:p-6 up" style="--d:.18s">
+                    <div class="flex items-center gap-2.5 mb-2"><span class="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow">01</span><span class="text-base font-black uppercase text-cyan-300">Mở ca màn POS</span></div>
+                    <div class="text-sm font-semibold leading-relaxed text-slate-100">Giao diện bàn phím số cảm ứng lớn dễ dàng nhập tiền đầu ca.</div>
                 </div>
-                <div class="toc-sub-item up" style="--d:.25s">
-                    <div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-blue-500 text-white font-black text-[10px] flex items-center justify-center">02</span><span class="text-xs font-black uppercase text-cyan-300">Đóng ca POS</span></div>
-                    <div class="text-xs font-semibold leading-relaxed text-slate-200">Nhập tiền kiểm đếm trong két và đối soát số liệu nhanh.</div>
+                <div class="toc-sub-item p-5 sm:p-6 up" style="--d:.28s">
+                    <div class="flex items-center gap-2.5 mb-2"><span class="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow">02</span><span class="text-base font-black uppercase text-cyan-300">Đóng ca &amp; Chốt két</span></div>
+                    <div class="text-sm font-semibold leading-relaxed text-slate-100">Màn hình kiểm đếm tiền mặt trực quan, tự động tính chênh lệch két.</div>
                 </div>
-                <div class="toc-sub-item up" style="--d:.32s">
-                    <div class="flex items-center gap-2 mb-1"><span class="w-5 h-5 rounded-full bg-blue-500 text-white font-black text-[10px] flex items-center justify-center">03</span><span class="text-xs font-black uppercase text-cyan-300">In phiếu nhiệt</span></div>
-                    <div class="text-xs font-semibold leading-relaxed text-slate-200">Xuất phiếu bàn giao trực tiếp từ máy in nhiệt gắn liền POS.</div>
+                <div class="toc-sub-item p-5 sm:p-6 up" style="--d:.38s">
+                    <div class="flex items-center gap-2.5 mb-2"><span class="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow">03</span><span class="text-base font-black uppercase text-cyan-300">In phiếu nhiệt tức thì</span></div>
+                    <div class="text-sm font-semibold leading-relaxed text-slate-100">Lệnh in tự động đẩy thẳng ra máy in nhiệt tích hợp khổ K80 chuẩn xác.</div>
                 </div>
             </div>
         </div>
@@ -2237,20 +2279,20 @@
     <section class="scene scene-content" data-scene="55" data-caption="Cảm ơn các bạn đã theo dõi! Chúc các bạn kinh doanh hiệu quả cùng KiotViet." data-vo="Cảm ơn các bạn đã theo dõi! Chúc các bạn kinh doanh hiệu quả cùng KiotViet.">
         <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
         <div class="slide-inner flex items-center justify-center">
-            <div class="hero-card max-w-4xl p-8 up" style="--d:.05s">
-                <div class="w-16 h-16 rounded-full flex items-center justify-center text-3xl mb-3 shadow-lg pop float" style="background: linear-gradient(135deg, var(--kv-primary-green) 0%, var(--kv-accent-green) 100%); color: #ffffff;">
+            <div class="hero-card max-w-[82rem] w-full p-10 sm:p-14 up" style="--d:.05s">
+                <div class="w-20 h-20 rounded-full flex items-center justify-center text-4xl mb-8 sm:mb-9 shadow-xl pop float" style="background: linear-gradient(135deg, var(--kv-primary-green) 0%, var(--kv-accent-green) 100%); color: #ffffff;">
                     <i class="fa-solid fa-heart"></i>
                 </div>
-                <h1 class="text-3xl font-black mb-2 up" style="--d:.1s; color: var(--navy-dark);">
+                <h1 class="text-4xl sm:text-5xl font-black mb-3 up mt-1" style="--d:.1s; color: var(--navy-dark); letter-spacing: -0.02em;">
                     CẢM ƠN BẠN ĐÃ THEO DÕI BÀI HỌC!
                 </h1>
-                <p class="text-base font-bold mb-6 up" style="--d:.15s; color: var(--navy-muted);">
+                <p class="text-lg sm:text-xl font-bold mb-8 up" style="--d:.15s; color: var(--navy-muted);">
                     Chúc bạn kinh doanh hiệu quả và quản trị dòng tiền vượt trội cùng KiotViet!
                 </p>
-                <div class="grid grid-cols-2 gap-4 w-full text-left">
-                    <a href="https://www.kiotviet.vn/huong-dan-su-dung-kiotviet/" target="_blank" rel="noopener noreferrer" class="support-card-blue flex items-center gap-3.5 pop" style="--d:.2s">
-                        <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background: #EFF6FF; border: 1.5px solid #93C5FD;">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0070F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <div class="grid grid-cols-2 gap-6 w-full text-left max-w-4xl">
+                    <a href="https://www.kiotviet.vn/huong-dan-su-dung-kiotviet/" target="_blank" rel="noopener noreferrer" class="support-card-blue p-6 flex items-center gap-4.5 pop" style="--d:.2s">
+                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md" style="background: #EFF6FF; border: 1.5px solid #93C5FD;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0070F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="10"></circle>
                                 <line x1="2" y1="12" x2="22" y2="12"></line>
                                 <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
@@ -2258,22 +2300,22 @@
                         </div>
                         <div>
                             <div class="text-xs font-black text-slate-500 uppercase tracking-wider">Hỗ trợ nghiệp vụ</div>
-                            <div class="text-sm font-extrabold text-blue-700">Trung tâm Trợ giúp KiotViet</div>
-                            <div class="text-[11.5px] font-semibold text-slate-500 mt-0.5">Kho tài liệu HDSD chính thức</div>
+                            <div class="text-base font-extrabold text-blue-700">Trung tâm Trợ giúp KiotViet</div>
+                            <div class="text-xs font-semibold text-slate-500 mt-1">Kho tài liệu HDSD chính thức</div>
                         </div>
                     </a>
 
-                    <a href="https://www.youtube.com/@HDSDPhanmemKiotViet" target="_blank" rel="noopener noreferrer" class="youtube-card-red flex items-center gap-3.5 pop" style="--d:.28s">
-                        <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background: #FEF2F2; border: 1.5px solid #FECACA;">
-                            <svg width="34" height="24" viewBox="0 0 68 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <a href="https://www.youtube.com/@HDSDPhanmemKiotViet" target="_blank" rel="noopener noreferrer" class="youtube-card-red p-6 flex items-center gap-4.5 pop" style="--d:.28s">
+                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md" style="background: #FEF2F2; border: 1.5px solid #FECACA;">
+                            <svg width="38" height="26" viewBox="0 0 68 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M66.52 7.74C65.74 4.87 63.45 2.58 60.58 1.8 55.33 0.4 34 0.4 34 0.4C34 0.4 12.67 0.4 7.42 1.8C4.55 2.58 2.26 4.87 1.48 7.74C0.08 12.99 0.08 24 0.08 24C0.08 24 0.08 35.01 1.48 40.26C2.26 43.13 4.55 45.42 7.42 46.2C12.67 47.6 34 47.6 34 47.6C34 47.6 55.33 47.6 60.58 46.2C63.45 45.42 65.74 43.13 66.52 40.26C67.92 35.01 67.92 24 67.92 24C67.92 24 67.92 12.99 66.52 7.74Z" fill="#FF0000"/>
                                 <path d="M45 24L27 13.5V34.5L45 24Z" fill="#FFFFFF"/>
                             </svg>
                         </div>
                         <div>
                             <div class="text-xs font-black text-slate-500 uppercase tracking-wider">Video Hướng dẫn</div>
-                            <div class="text-sm font-extrabold text-rose-600">HDSD - Phần mềm KiotViet</div>
-                            <div class="text-[11.5px] font-semibold text-slate-500 mt-0.5">Kênh YouTube chính thức</div>
+                            <div class="text-base font-extrabold text-rose-600">HDSD - Phần mềm KiotViet</div>
+                            <div class="text-xs font-semibold text-slate-500 mt-1">Kênh YouTube chính thức</div>
                         </div>
                     </a>
                 </div>
