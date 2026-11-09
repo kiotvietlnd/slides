@@ -2171,89 +2171,21 @@
         </div>
     </section>
 
-    <!-- SLIDE 48: INFOGRAPHIC TỔNG QUAN HỆ SINH THÁI (.hub-architecture) -->
+    <!-- SLIDE 48: INFOGRAPHIC TỔNG QUAN (ẢNH GỐC TỪ SOURCE INPUT BÀI VIẾT) -->
     <section class="scene scene-content" data-scene="48" data-type="infographic"
-        data-caption="Tổng quan hệ sinh thái Channel Manager KiotViet Hotel là giải pháp đồng bộ hai chiều toàn diện:&#10;• Kiến trúc đồng bộ hai chiều: Kết nối trực tiếp KiotViet Hotel PMS với mạng lưới OTAs thông qua cổng điều phối trung tâm Channel Manager.&#10;• Bốn chỉ số hiệu quả cốt lõi: Tự động hóa 100% quy trình nhận đơn, triệt tiêu 0% rủi ro Overbooking, quản lý giá bán 365 ngày và đối soát tiền cọc chuẩn xác 24/7."
-        data-vo="Tổng quan hệ sinh thái Channel Manager KiotViet Hotel là giải pháp đồng bộ hai chiều toàn diện:&#10;• Kiến trúc đồng bộ hai chiều: Kết nối trực tiếp KiotViet Hotel PMS với mạng lưới OTAs thông qua cổng điều phối trung tâm Channel Manager.&#10;• Bốn chỉ số hiệu quả cốt lõi: Tự động hóa 100% quy trình nhận đơn, triệt tiêu 0% rủi ro Overbooking, quản lý giá bán 365 ngày và đối soát tiền cọc chuẩn xác 24/7.">
-        <div class="slide-inner justify-center items-center">
-            <div class="bento-card p-6 flex flex-col justify-center gap-5 w-full max-w-[85rem] my-auto">
-                <div class="text-center">
-                    <span class="px-3 py-1 rounded-full text-white font-black text-xs uppercase" style="background: var(--kv-primary-green);">TỔNG KẾT HỆ SINH THÁI</span>
-                    <h2 class="text-2xl font-black text-slate-900 mt-1.5">KIẾN TRÚC ĐỒNG BỘ 2 CHIỀU CHANNEL MANAGER KIOTVIET HOTEL</h2>
-                </div>
-
-                <!-- Tầng 1: Sơ đồ Kiến trúc 2 chiều (.bi-sync-flow) -->
-                <div class="bi-sync-flow">
-                    <div class="sync-node-card pop" style="--d:.15s; background: #F0FDF4; border-color: var(--kv-primary-green);">
-                        <div class="w-11 h-11 rounded-xl text-white flex items-center justify-center text-xl shadow" style="background: var(--kv-primary-green);"><i class="fa-solid fa-hotel"></i></div>
-                        <div class="text-sm font-black text-emerald-950">KiotViet Hotel PMS</div>
-                        <span class="text-[11px] font-bold text-emerald-700">Quản lý Phòng • Lễ tân</span>
-                    </div>
-
-                    <div class="dual-track">
-                        <div class="track-lane">
-                            <span class="track-label" style="background: #E5FFE9; color: #036A2F;">Tồn phòng &amp; Giá gốc ➔</span>
-                            <div class="track-forward"><i></i><i style="--t:.7s"></i><i style="--t:1.4s"></i></div>
-                        </div>
-                        <div class="track-lane">
-                            <div class="track-reverse"><i></i><i style="--t:.7s"></i><i style="--t:1.4s"></i></div>
-                            <span class="track-label" style="background: #FFF9F0; color: #9A3412;">🠔 Đơn đặt &amp; Tiền cọc</span>
-                        </div>
-                    </div>
-
-                    <div class="brain-box pop pulse" style="--d:.3s; height: 8.5rem;">
-                        <i class="fa-solid fa-network-wired text-2xl mb-1 text-emerald-400"></i>
-                        <div class="display-font text-sm font-black leading-tight">Channel Manager</div>
-                        <span class="text-[11px] font-bold mt-1 text-emerald-300">Gateway Đồng bộ 2 chiều</span>
-                    </div>
-
-                    <div class="dual-track">
-                        <div class="track-lane">
-                            <span class="track-label" style="background: #E5FFE9; color: #036A2F;">Phân bổ phòng &amp; Giá ➔</span>
-                            <div class="track-forward"><i style="--t:.35s"></i><i style="--t:1.05s"></i><i style="--t:1.75s"></i></div>
-                        </div>
-                        <div class="track-lane">
-                            <div class="track-reverse"><i style="--t:.35s"></i><i style="--t:1.05s"></i><i style="--t:1.75s"></i></div>
-                            <span class="track-label" style="background: #FFF9F0; color: #9A3412;">🠔 Khách đặt phòng OTA</span>
-                        </div>
-                    </div>
-
-                    <div class="sync-node-card pop" style="--d:.45s; background: #EFF6FF; border-color: #60A5FA;">
-                        <div class="w-11 h-11 rounded-xl text-white flex items-center justify-center text-xl shadow" style="background: var(--kv-primary-blue);"><i class="fa-solid fa-earth-americas"></i></div>
-                        <div class="text-sm font-black text-blue-950">Kênh OTAs Toàn cầu</div>
-                        <span class="text-[11px] font-bold text-blue-700">Booking • Agoda • Airbnb</span>
-                    </div>
-                </div>
-
-                <!-- Tầng 2: 4 Chỉ số KPI lớn trực quan -->
-                <div class="grid grid-cols-4 gap-4 pt-3 border-t border-slate-100 text-center">
-                    <div class="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 pop" style="--d:.55s">
-                        <div class="text-2xl font-black text-emerald-700">100%</div>
-                        <div class="text-xs font-extrabold text-slate-800 mt-0.5">Tự động nhận đơn</div>
-                        <p class="text-[11px] font-semibold text-slate-600 mt-0.5">Không cần nhập tay lễ tân.</p>
-                    </div>
-                    <div class="p-3.5 rounded-2xl bg-blue-50 border border-blue-200 pop" style="--d:.65s">
-                        <div class="text-2xl font-black text-blue-700">0%</div>
-                        <div class="text-xs font-extrabold text-slate-800 mt-0.5">Rủi ro Overbooking</div>
-                        <p class="text-[11px] font-semibold text-slate-600 mt-0.5">Khóa phòng trống tức thời.</p>
-                    </div>
-                    <div class="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 pop" style="--d:.75s">
-                        <div class="text-2xl font-black text-amber-700">365 Ngày</div>
-                        <div class="text-xs font-extrabold text-slate-800 mt-0.5">Quản lý giá tập trung</div>
-                        <p class="text-[11px] font-semibold text-slate-600 mt-0.5">Linh hoạt chỉnh giá theo ngày.</p>
-                    </div>
-                    <div class="p-3.5 rounded-2xl bg-teal-50 border border-teal-200 pop" style="--d:.85s">
-                        <div class="text-2xl font-black text-teal-700">24/7</div>
-                        <div class="text-xs font-extrabold text-slate-800 mt-0.5">Chuẩn đối soát cọc</div>
-                        <p class="text-[11px] font-semibold text-slate-600 mt-0.5">Tự động trừ tiền trả qua OTA.</p>
-                    </div>
+        data-caption="Tổng quan tính năng Channel Manager - Tích hợp kênh OTAs trên KiotViet Hotel:&#10;• Hệ thống kết nối và đồng bộ tự động 2 chiều toàn diện giữa KiotViet Hotel PMS và các kênh OTAs hàng đầu như Booking.com, Agoda, Traveloka.&#10;• Khóa phòng trống thời gian thực triệt tiêu 100% rủi ro Overbooking, cài đặt giá bán tập trung cho 365 ngày và tự động đối soát tiền cọc minh bạch."
+        data-vo="Tổng quan tính năng Channel Manager - Tích hợp kênh OTAs trên KiotViet Hotel:&#10;• Hệ thống kết nối và đồng bộ tự động 2 chiều toàn diện giữa KiotViet Hotel PMS và các kênh OTAs hàng đầu như Booking.com, Agoda, Traveloka.&#10;• Khóa phòng trống thời gian thực triệt tiêu 100% rủi ro Overbooking, cài đặt giá bán tập trung cho 365 ngày và tự động đối soát tiền cọc minh bạch.">
+        <div class="slide-inner flex items-center justify-center p-0">
+            <div class="screenshot-stage w-full h-full p-2 flex items-center justify-center">
+                <div class="screenshot-card shadow-2xl up" style="--d:.1s; border: none; max-height: calc(100vh - 8rem);">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/07/27072759/HNM_270726-5.jpg" alt="Infographic Tổng quan Channel Manager KiotViet Hotel" style="max-height: calc(100vh - 8.5rem); width: auto; height: auto;">
                 </div>
             </div>
         </div>
         <div class="print-subtitle"></div>
     </section>
 
-    <!-- SLIDE 49: SLIDE KẾT THÚC -->
+    <!-- SLIDE 49: SLIDE KẾT THÚC (NỀN TỐI .scene-dark) -->
     <section class="scene scene-content scene-dark" data-scene="49"
         data-caption="Cảm ơn các bạn đã theo dõi! Chúc các bạn kinh doanh hiệu quả cùng KiotViet."
         data-vo="Cảm ơn các bạn đã theo dõi! Chúc các bạn kinh doanh hiệu quả cùng KiotViet.">
@@ -2277,7 +2209,7 @@
                         </div>
                         <div class="min-w-0">
                             <div class="text-sm font-extrabold text-slate-800 whitespace-nowrap">Trang hỗ trợ KiotViet</div>
-                            <div class="text-xs font-bold text-blue-600 mt-0.5 whitespace-nowrap">kiotviet.vn/ho-tro</div>
+                            <div class="text-xs font-bold text-blue-600 mt-0.5 whitespace-nowrap">https://kiotviet.vn/ho-tro</div>
                         </div>
                     </a>
 
