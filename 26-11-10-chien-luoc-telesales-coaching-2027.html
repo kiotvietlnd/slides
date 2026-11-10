@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiến Lược Đào Tạo &amp; Coaching Telesales 2027 - KiotViet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Font chữ Inter chính thức theo KiotViet Brand Guideline (Trang 52-54) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * { box-sizing: border-box; }
+
+        /* HỆ MÀU CHUẨN KIOTVIET BRAND GUIDELINE (TRANG 45 - 50) */
+        :root {
+            --kv-primary-blue: #0070F4;
+            --kv-accent-blue: #3AE3FF;
+            --kv-primary-green: #00B63E;
+            --kv-accent-green: #5BE92A;
+            --kv-navy: #002957;
+            --kv-dark-blue: #00418C;
+            --kv-ocean-blue: #005AC0;
+            --kv-coral: #FF5564;
+            --kv-coral-light: #FFDDE0;
+            --kv-orange: #FFAB3A;
+            --kv-orange-light: #FFEED8;
+            --kv-turquoise: #00C8AF;
+            --kv-turquoise-light: #CCF4EF;
+            --kv-violet: #CB68FF;
+            --kv-violet-light: #F5E1FF;
+
+            /* Bộ biến chủ đạo cho Sales & Đào tạo L&D KiotViet */
+            --theme-primary: #0070F4;
+            --theme-dark: #005AC0;
+            --theme-accent: #00C8AF;
+            --theme-light: #E6F2FF;
+            --theme-border: #93C5FD;
+            --theme-rgb: 0, 112, 244;
+
+            /* Màu nền tối chuẩn Brand Guideline */
+            --gradient-dark: linear-gradient(135deg, #002957 0%, #00418C 52%, #005AC0 100%);
+            --gradient-kv-blue: linear-gradient(135deg, #0070F4 0%, #3AE3FF 100%);
+            --gradient-kv-green: linear-gradient(135deg, #00B63E 0%, #5BE92A 100%);
+
+            --amber: #FFAB3A;
+            --amber-500: #B45309;
+            --amber-50: #FFEED8;
+            --success: #00B63E;
+            --success-text: #036A2F;
+            --success-bg: #E5FFE9;
+            --error: #FF5564;
+            --error-text: #B91C1C;
+            --error-bg: #FFDDE0;
+            --shadow: 0 10px 30px -6px rgba(0, 41, 87, 0.12);
+        }
+
+        /* TỶ LỆ HIỂN THỊ NATIVE TRÊN TRÌNH DUYỆT */
+        html { font-size: clamp(10px, min(1.0416vw, 1.8518vh), 20px); }
+
+        html, body {
+            margin: 0; padding: 0; width: 100vw; height: 100vh;
+            overflow: hidden; background: #E6EEF8;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: var(--kv-navy);
+            user-select: text;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, p, span, div, table, td, th, text { user-select: text; font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .balance-text, .toc-card-desc { text-wrap: balance; }
+        .display-font, .scene-dark h1 { font-family: 'Inter', sans-serif; letter-spacing: -0.02em; line-height: 1.28 !important; }
+
+        #progressBar {
+            position: fixed; top: 0; left: 0; height: 4px;
+            background: linear-gradient(90deg, var(--kv-primary-blue), var(--kv-turquoise), var(--kv-primary-green));
+            transition: width 0.35s ease;
+            z-index: 1000; width: 0%;
+        }
+
+        #video-stage {
+            position: fixed; inset: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at 12% 15%, rgba(0, 112, 244, 0.07) 0%, transparent 45%),
+                        radial-gradient(circle at 88% 85%, rgba(0, 200, 175, 0.07) 0%, transparent 45%),
+                        linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
+            overflow: hidden;
+        }
+
+        .tech-grid {
+            position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(0, 41, 87, 0.04) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 41, 87, 0.04) 1px, transparent 1px);
+            background-size: 38px 38px; pointer-events: none; z-index: 1;
+        }
+
+        /* ---------- Scene Transitions ---------- */
+        @keyframes wipeDownActive {
+            from { clip-path: inset(0 0 100% 0); }
+            to { clip-path: inset(0 0 0 0); }
+        }
+        @keyframes wipeUpPrevious {
+            from { clip-path: inset(0 0 0 0); }
+            to { clip-path: inset(100% 0 0 0); }
+        }
+
+        .scene {
+            position: absolute; inset: 0;
+            padding: 1.15rem 2.8rem 7.6rem 2.8rem;
+            display: none !important;
+            flex-direction: column; align-items: center; justify-content: flex-start;
+            background: radial-gradient(circle at 12% 15%, rgba(0, 112, 244, 0.07) 0%, transparent 45%),
+                        radial-gradient(circle at 88% 85%, rgba(0, 200, 175, 0.07) 0%, transparent 45%),
+                        linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
+            z-index: 10;
+        }
+        .scene.scene-dark {
+            background: var(--gradient-dark) !important;
+            color: #ffffff;
+        }
+        .scene.scene-dark .slide-inner {
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 1.75rem !important;
+        }
+        .scene.previous {
+            display: flex !important; z-index: 15;
+            animation: wipeUpPrevious 0.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+        .scene.active {
+            display: flex !important; z-index: 20;
+            animation: wipeDownActive 0.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+        .scene.no-wipe { animation: none !important; }
+        .scene-standby { padding: 1.25rem 2rem !important; justify-content: center; background: #E6EEF8 !important; }
+        .scene-blank { padding: 0 !important; background: #ffffff !important; }
+
+        /* ---------- Staggered Micro-Animations & Ambient Motion ---------- */
+        .scene.active .pop { animation: popIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: var(--d, 0s); }
+        .scene.active .up { animation: fadeUp 0.55s ease-out both; animation-delay: var(--d, 0s); }
+        .scene.active .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: drawLine 1.05s ease forwards; animation-delay: var(--d, 0s); }
+        .scene.active .reveal { animation: revealRight 1.1s ease-out both; animation-delay: var(--d, 0s); }
+        .scene.active .rise { transform-origin: bottom; animation: riseUp 0.9s ease-out both; animation-delay: var(--d, 0s); }
+        svg .pop, svg .rise { transform-box: fill-box; transform-origin: center; }
+
+        .float { animation: floatY 2.4s ease-in-out infinite; animation-delay: var(--f, 0s); will-change: transform; }
+        .pulse { animation: pulseScale 2.4s ease-in-out infinite; }
+
+        @keyframes popIn { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+        @keyframes drawLine { to { stroke-dashoffset: 0; } }
+        @keyframes revealRight { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+        @keyframes riseUp { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+        @keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+        @keyframes pulseScale { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @keyframes travel { from { left: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } to { left: calc(100% - 14px); opacity: 0; } }
+
+        /* ---------- Visual Graphic Components ---------- */
+        .bento-card {
+            background: #ffffff; border: 2px solid #BFDBFE;
+            box-shadow: 0 18px 40px -10px rgba(0, 41, 87, 0.1);
+            border-radius: 24px;
+        }
+        .scene-dark .bento-card, .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1.5px solid rgba(255, 255, 255, 0.22);
+            box-shadow: 0 20px 44px -12px rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(12px);
+            border-radius: 24px; color: #ffffff;
+        }
+
+        /* Sơ đồ IO Flow */
+        .io-flow { display: flex; align-items: center; justify-content: center; width: 100%; gap: 0.4rem; }
+        .io-col { display: flex; flex-direction: column; gap: 0.6rem; align-items: stretch; min-width: 14rem; flex-shrink: 0; }
+        .io-chip {
+            background: #ffffff; border: 1.5px solid #93C5FD;
+            border-radius: 0.9rem; padding: 0.6rem 1rem;
+            box-shadow: var(--shadow); font-weight: 800; font-size: 0.8rem;
+            display: flex; align-items: center; gap: 0.6rem; color: var(--kv-navy);
+            white-space: nowrap;
+        }
+        .track { position: relative; flex: 1; height: 14px; margin: 0 0.5rem; min-width: 2.8rem; }
+        .track::before { content: ''; position: absolute; top: 5.5px; left: 0; right: 0; border-top: 3px dashed var(--kv-primary-blue); opacity: 0.6; }
+        .scene-dark .track::before { border-top-color: rgba(255, 255, 255, 0.45); }
+        .track i {
+            position: absolute; top: 0; width: 14px; height: 14px; border-radius: 50%;
+            background: var(--kv-orange); box-shadow: 0 0 10px var(--kv-orange);
+            animation: travel 2.2s linear infinite; animation-delay: var(--t, 0s);
+        }
+        .brain-box {
+            min-width: 12.5rem; width: auto; height: 9.6rem; border-radius: 1.6rem;
+            background: var(--gradient-dark); color: #ffffff !important;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 0.8rem 1.2rem;
+            box-shadow: 0 16px 36px -8px rgba(0, 41, 87, 0.45);
+            border: 2px solid rgba(58, 227, 255, 0.35); flex-shrink: 0;
+        }
+        .brain-box span { white-space: nowrap; }
+        .out-circle {
+            width: 9.6rem; height: 9.6rem; border-radius: 50%;
+            background: var(--success-bg); border: 4px solid var(--kv-primary-green);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 0.75rem; font-weight: 800; color: var(--success-text) !important;
+            box-shadow: 0 12px 28px -6px rgba(0, 182, 62, 0.22); flex-shrink: 0;
+        }
+        .out-circle div, .out-circle span { white-space: nowrap; }
+
+        /* VS Board */
+        .vs-board { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.35rem; align-items: stretch; width: 100%; }
+        .vs-mid {
+            display: grid; place-items: center;
+            font-weight: 900; font-size: 1.4rem; color: var(--kv-navy);
+            width: 54px; height: 54px; border-radius: 50%;
+            background: var(--kv-orange); border: 3px solid #ffffff;
+            box-shadow: 0 8px 20px rgba(255, 171, 58, 0.35); align-self: center;
+        }
+
+        /* 4-Column Rows (.chg-row) */
+        .chg-row {
+            display: grid; grid-template-columns: 36px 1.4fr 1.6fr 1.1fr; gap: 0.9rem;
+            align-items: center; background: #ffffff; border: 1.5px solid #DBEAFE;
+            border-radius: 15px; padding: 0.6rem 0.95rem; box-shadow: 0 4px 12px rgba(0, 41, 87, 0.04);
+            font-size: 0.82rem;
+        }
+        .chg-row .no {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: var(--kv-orange); color: var(--kv-navy);
+            display: grid; place-items: center; font-weight: 900; font-size: 0.76rem;
+        }
+        .chg-row .num {
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 0.76rem; font-weight: 800; color: var(--kv-ocean-blue);
+            background: #EFF6FF; border: 1px solid #93C5FD;
+            padding: 0.3rem 0.6rem; border-radius: 9px; text-align: center;
+        }
+
+        /* Timeline Row (.tl-row) */
+        .tl-row { position: relative; display: grid; width: 100%; gap: 1rem; }
+        .tl-line { position: absolute; left: 8%; right: 8%; top: 30px; height: 5px; border-radius: 3px; background: linear-gradient(90deg, var(--kv-primary-blue), var(--kv-turquoise), var(--kv-primary-green)); z-index: 0; }
+        .tl-item { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+        /* TOC Card */
+        .toc-card {
+            padding: 1.15rem 1.05rem; border-radius: 20px;
+            display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch;
+            position: relative; overflow: hidden; background: #ffffff;
+        }
+        .toc-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem; flex-shrink: 0; }
+        .toc-card-title { font-size: 0.94rem; font-weight: 800; color: var(--kv-navy); line-height: 1.32; min-height: 2.4rem; display: flex; align-items: center; margin-bottom: 0.35rem; }
+        .toc-card-desc { font-size: 0.76rem; font-weight: 600; color: #334E68; line-height: 1.48; }
+
+        /* Setup Slide 0 & Controls */
+        .setup-card {
+            width: 100%; max-width: 1320px; background: #ffffff;
+            border-radius: 26px; border: 2px solid #CBD5E1;
+            box-shadow: 0 24px 48px -12px rgba(0, 41, 87, 0.14);
+            padding: 1.3rem 1.7rem; display: flex; flex-direction: column; gap: 1rem;
+        }
+        .steps-wrapper { background: #EFF6FF; border: 1.5px solid #93C5FD; border-radius: 20px; padding: 0.9rem 1.1rem; }
+        .step-box {
+            background: #ffffff; border: 1.5px solid #DBEAFE; border-radius: 16px;
+            padding: 0.9rem 1.05rem; display: flex; flex-direction: column; justify-content: space-between;
+            gap: 0.6rem; box-shadow: 0 4px 12px -2px rgba(0, 41, 87, 0.06); transition: all 0.2s ease;
+        }
+        .step-box:hover { border-color: var(--kv-primary-blue); transform: translateY(-2px); }
+        .shortcut-panel { background: #FFF9F0; border: 1.5px solid #FFCD89; border-radius: 20px; padding: 0.85rem 1.1rem; display: flex; flex-direction: column; gap: 0.6rem; }
+        .shortcut-item {
+            background: #ffffff; border: 1.5px solid #FFDDB0; border-radius: 14px;
+            padding: 0.55rem 0.75rem; display: flex; align-items: center; gap: 0.6rem;
+            cursor: pointer; transition: all 0.15s ease;
+        }
+        .shortcut-item:hover { border-color: var(--kv-orange); transform: translateY(-1px); }
+        .kbd-light {
+            display: inline-flex; align-items: center; justify-content: center;
+            min-width: 28px; height: 26px; padding: 0 0.5rem;
+            background: var(--kv-orange-light); color: #9A3412; border: 1.5px solid var(--kv-orange); border-radius: 7px;
+            font-size: 0.76rem; font-weight: 900; box-shadow: 0 2px 0 var(--kv-orange);
+        }
+        .mode-radio-group { display: inline-flex; align-items: center; gap: 0.45rem; background: #F8FAFC; border: 1.5px solid #CBD5E1; padding: 0.3rem; border-radius: 999px; }
+        .mode-radio-label {
+            display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.38rem 0.9rem;
+            border-radius: 999px; font-size: 0.78rem; font-weight: 800; color: #334E68;
+            cursor: pointer; transition: all 0.15s ease; border: 1.5px solid transparent;
+        }
+        .mode-radio-label.active-mode { background: #ffffff; color: var(--kv-navy); border-color: #93C5FD; box-shadow: 0 2px 8px rgba(0, 112, 244, 0.15); }
+        .dropzone-area { border: 2px dashed var(--kv-primary-blue); background: #EFF6FF; border-radius: 14px; padding: 0.8rem 0.7rem; text-align: center; cursor: pointer; transition: all 0.2s ease; }
+        .studio-btn { height: 36px; padding: 0 1rem; border-radius: 10px; font-size: 0.76rem; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; cursor: pointer; text-decoration: none; transition: all 0.15s ease; }
+        .studio-btn-primary { background: var(--kv-primary-blue); color: #ffffff; border: 1px solid var(--kv-primary-blue); }
+        .studio-btn-primary:hover { background: var(--kv-ocean-blue); }
+        .studio-btn-start { height: 42px; padding: 0 1.35rem; border-radius: 999px; background: linear-gradient(135deg, var(--kv-primary-blue) 0%, var(--kv-ocean-blue) 100%); color: #ffffff; border: none; font-size: 0.82rem; font-weight: 800; box-shadow: 0 8px 18px -4px rgba(0, 112, 244, 0.4); }
+        .studio-btn-outline { background: #ffffff; color: var(--kv-navy); border: 1.5px solid #CBD5E1; }
+
+        /* Header & Master Logo Protection */
+        .scene-logo { position: absolute; top: 1.8rem; right: 2.8rem; z-index: 30; display: flex; align-items: center; }
+        .scene-logo img { height: 34px; width: auto; }
+        .scene-dark .scene-logo { background: #FFFFFF; padding: 0.38rem 0.9rem; border-radius: 999px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22); }
+        .slide-inner { width: 100%; max-width: 1380px; height: 100%; display: flex; flex-direction: column; justify-content: space-between; position: relative; z-index: 5; }
+        .slide-header { width: 100%; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 0.25rem; padding-right: 12rem; flex-shrink: 0; }
+        .header-title-row { display: flex; align-items: center; gap: 0.75rem; }
+        .header-icon-box {
+            width: 40px; height: 40px; border-radius: 12px;
+            background: linear-gradient(135deg, var(--theme-primary) 0%, var(--kv-ocean-blue) 100%);
+            color: #ffffff; display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; flex-shrink: 0; box-shadow: 0 6px 14px -3px rgba(var(--theme-rgb), 0.35);
+        }
+        .scene-dark .header-icon-box { background: var(--kv-orange); color: var(--kv-navy); }
+        .section-badge {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.25rem 0.85rem; border-radius: 999px;
+            background: var(--theme-light); border: 1.5px solid var(--theme-border);
+            color: var(--theme-dark); font-weight: 800; font-size: 0.72rem;
+            text-transform: uppercase; letter-spacing: 0.06em;
+        }
+        .scene-dark .section-badge { background: var(--kv-orange); border-color: var(--kv-orange); color: var(--kv-navy); }
+        .text-stage { flex: 1; min-height: 0; width: 100%; padding: 0.35rem 0; display: flex; align-items: center; justify-content: center; }
+
+        /* Subtitle HUD */
+        #presenter-hud {
+            position: absolute; bottom: 0.85rem; left: 50%; transform: translateX(-50%);
+            width: calc(100vw - 4.4rem); max-width: 86.25rem;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 40; opacity: 1; transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        #presenter-hud.hud-hidden { opacity: 0 !important; pointer-events: none; transform: translate(-50%, 20px); }
+        #subtitle-box {
+            width: 100%; min-height: 3.1rem; max-height: 7.35rem;
+            background: linear-gradient(135deg, var(--kv-ocean-blue) 0%, var(--kv-navy) 100%);
+            color: #ffffff !important; padding: 0.55rem 2.0rem; border-radius: 1.125rem;
+            font-size: 1.05rem; font-weight: 700; text-align: center; line-height: 1.42;
+            border: 1.5px solid rgba(58, 227, 255, 0.38);
+            box-shadow: 0 16px 36px -8px rgba(0, 41, 87, 0.5);
+            text-wrap: balance; display: flex; align-items: center; justify-content: center;
+            overflow: hidden; user-select: text;
+        }
+        #subtitle-box.is-multiline {
+            padding: 0.42rem 1.6rem;
+            font-size: 0.84rem;
+            line-height: 1.32;
+            text-align: left !important;
+            text-wrap: pretty;
+        }
+        #subtitle-box.is-two-center {
+            padding: 0.48rem 1.8rem;
+            font-size: 0.92rem;
+            line-height: 1.36;
+            text-align: center !important;
+        }
+        .sub-lines-wrap { display: flex; flex-direction: column; gap: 0.22rem; width: 100%; }
+        .sub-line-item { display: flex; align-items: flex-start; gap: 0.45rem; line-height: 1.32; }
+        .sub-dot { color: var(--kv-accent-green); font-weight: 900; }
+        .sub-label { color: #7DD3FC; font-weight: 800; }
+        .sub-arrow { color: #5BE92A; margin: 0 0.25rem; }
+        .sub-center-row { text-align: center; }
+        .print-subtitle { display: none; text-align: center !important; }
+
+        /* End Slide Support & YouTube Cards */
+        .support-card-blue, .youtube-card-red {
+            background: #FFFFFF !important;
+            border: 1.5px solid #CBD5E1 !important;
+            border-radius: 1.25rem !important;
+            padding: 1.1rem 1.4rem !important;
+            box-shadow: 0 4px 14px rgba(0, 41, 87, 0.06) !important;
+            transition: all 0.2s ease; text-decoration: none;
+            display: flex; align-items: center; gap: 0.9rem;
+        }
+        .support-card-blue:hover {
+            border-color: #0070F4 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 112, 244, 0.12) !important;
+        }
+        .youtube-card-red:hover {
+            border-color: #FF0000 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 0, 0, 0.12) !important;
+        }
+
+        /* Native 16:9 PDF Print Support */
+        @media print {
+            @page { size: 1280px 720px; margin: 0mm !important; }
+            * {
+                animation: none !important; transition: none !important;
+                opacity: 1 !important; visibility: visible !important;
+                transform: none !important; clip-path: none !important;
+                stroke-dashoffset: 0 !important;
+                -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+            }
+            html, body { width: 1280px !important; height: 720px !important; margin: 0 !important; padding: 0 !important; overflow: visible !important; }
+            #presenter-hud, #progressBar, .tech-grid, .scene-standby, .scene-blank { display: none !important; }
+            #video-stage { position: static !important; width: 1280px !important; height: auto !important; }
+            .scene.scene-content {
+                position: relative !important; inset: auto !important;
+                width: 1280px !important; height: 720px !important;
+                margin: 0 !important; padding: 1.15rem 2.4rem 6.5rem 2.4rem !important;
+                display: flex !important; page-break-after: always !important; break-after: page !important;
+            }
+            .scene.scene-content:last-of-type { page-break-after: avoid !important; break-after: avoid !important; }
+            .print-subtitle {
+                display: flex !important; align-items: center !important; justify-content: center !important;
+                position: absolute !important; bottom: 0.9rem !important; left: 50% !important; transform: translateX(-50%) !important;
+                width: 92% !important; max-width: 1220px !important; background: var(--kv-ocean-blue) !important; color: #fff !important;
+                padding: 0.55rem 1.4rem !important; border-radius: 16px !important; font-size: 0.92rem !important; font-weight: 700 !important;
+                line-height: 1.35 !important; max-height: 5.4rem !important; text-align: center !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="progressBar"></div>
+
+<div id="video-stage">
+    <div class="tech-grid"></div>
+    <audio id="custom-audio-player" preload="auto"></audio>
+
+    <!-- SLIDE 0: SETTINGS BAN ĐẦU -->
+    <section class="scene scene-standby active no-wipe" data-scene="0" data-caption="" data-vo="">
+        <div class="setup-card" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between gap-4 pb-3 border-b border-slate-200">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-2xl text-white flex items-center justify-center text-xl font-black shadow-lg" style="background: linear-gradient(135deg, var(--kv-primary-blue), var(--kv-ocean-blue));">
+                        <i class="fa-solid fa-users-gear"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2.5">
+                            <h1 class="text-2xl font-black tracking-tight" style="color: var(--kv-navy);">Pro Presenter MC – Thiết lập ban đầu</h1>
+                            <span class="px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider" style="background: var(--kv-turquoise-light); color: #00665A; border: 1.5px solid var(--kv-turquoise);">
+                                THEME L&amp;D: TELESALES STRATEGY 2027
+                            </span>
+                        </div>
+                        <p class="text-xs font-semibold text-slate-600 mt-0.5">KiotViet Brand Guideline (Font Inter • KV Navy &amp; Blue) • Giọng đọc AI Studio (Leda)</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <div class="mode-radio-group">
+                        <label id="label-mode-1" class="mode-radio-label active-mode" onclick="selectAudioMode(false)">
+                            <input type="radio" name="audioMode" id="radio-mode-1" value="silent" checked onchange="selectAudioMode(false)">
+                            <span>1 – Không thuyết minh</span>
+                        </label>
+                        <label id="label-mode-2" class="mode-radio-label" onclick="selectAudioMode(true)">
+                            <input type="radio" name="audioMode" id="radio-mode-2" value="voice" onchange="selectAudioMode(true)">
+                            <span>2 – Thuyết minh</span>
+                        </label>
+                    </div>
+
+                    <button onclick="startPresentation()" class="studio-btn studio-btn-start">
+                        <i class="fa-solid fa-play"></i> Bắt đầu (Vào Slide trắng)
+                    </button>
+                </div>
+            </div>
+
+            <div class="steps-wrapper">
+                <div class="text-xs font-black uppercase tracking-wider mb-2.5 flex items-center gap-2" style="color: var(--kv-ocean-blue);">
+                    <i class="fa-solid fa-list-ol" style="color: var(--kv-primary-blue);"></i> QUY TRÌNH 4 BƯỚC CHUẨN BỊ KỊCH BẢN &amp; GIỌNG ĐỌC AI
+                </div>
+
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="step-box">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 font-extrabold text-[11px] uppercase">BƯỚC 1</span>
+                                <i class="fa-solid fa-copy text-blue-600"></i>
+                            </div>
+                            <h3 class="text-base font-extrabold" style="color: var(--kv-navy);">Copy toàn bộ phụ đề</h3>
+                            <p class="text-xs font-semibold text-slate-600 leading-relaxed">Sao chép kịch bản gốc kèm tiền tố đếm ngược chuẩn hóa:</p>
+                            <div class="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-[11px] font-mono font-bold text-amber-900 leading-snug">
+                                Chuẩn bị ghi hình, lưu ý bạn hãy nghe kỹ lời dẫn và bấm phím mũi tên để chuyển slides, 5 4 3 2 1 &lt;pause&gt;
+                            </div>
+                        </div>
+                        <button onclick="copyAllSubtitlesWithPrefix()" id="btn-copy-sub" class="studio-btn studio-btn-primary w-full">
+                            <i class="fa-solid fa-clipboard-check"></i> Copy toàn bộ phụ đề
+                        </button>
+                    </div>
+
+                    <div class="step-box">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 font-extrabold text-[11px] uppercase">BƯỚC 2</span>
+                                <i class="fa-solid fa-wand-magic-sparkles text-indigo-600"></i>
+                            </div>
+                            <h3 class="text-base font-extrabold" style="color: var(--kv-navy);">Mở Google AI Studio</h3>
+                            <p class="text-xs font-semibold text-slate-600 leading-relaxed">Chọn giọng <strong style="color: var(--kv-navy);">Leda</strong> với Prompt:</p>
+                            <div class="p-2.5 rounded-xl bg-indigo-50/70 border border-indigo-200 text-[11px] font-bold text-indigo-950 leading-snug">
+                                "Chuyên viên tư vấn người Hà Nội kể chuyện sôi nổi, nhiệt tình"
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <button onclick="copyLedaPrompt()" id="btn-copy-prompt" class="studio-btn studio-btn-outline w-full">
+                                <i class="fa-solid fa-quote-left"></i> Copy Prompt giọng Leda
+                            </button>
+                            <a href="https://aistudio.google.com/generate-speech?model=gemini-3.8-flash-tts" target="_blank" rel="noopener" class="studio-btn studio-btn-primary w-full">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Mở Google AI Studio
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 font-extrabold text-[11px] uppercase">BƯỚC 3</span>
+                                <i class="fa-solid fa-cloud-arrow-down text-amber-600"></i>
+                            </div>
+                            <h3 class="text-base font-extrabold" style="color: var(--kv-navy);">Promote &amp; Tải Audio</h3>
+                            <p class="text-xs font-semibold text-slate-600 leading-relaxed">
+                                Dán phụ đề vào AI Studio, tải file audio đổi tên thành <strong class="text-amber-700">mc.wav</strong> lưu cùng thư mục.
+                            </p>
+                        </div>
+                        <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs font-semibold text-amber-900 flex items-start gap-2">
+                            <i class="fa-solid fa-circle-info text-amber-600 mt-0.5"></i>
+                            <span>Tự động nhận diện file mc.wav cùng folder (Windows &amp; GitHub).</span>
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-extrabold text-[11px] uppercase">BƯỚC 4</span>
+                                <i class="fa-solid fa-file-audio text-emerald-600"></i>
+                            </div>
+                            <h3 class="text-base font-extrabold" style="color: var(--kv-navy);">Nhập Audio từ AI Studio</h3>
+                            <input type="file" id="audio-file-input" accept=".mp3,.wav,audio/*" class="hidden" onchange="handleAudioFileSelect(event)">
+                            <div id="audio-dropzone" class="dropzone-area" onclick="document.getElementById('audio-file-input').click()">
+                                <i id="audio-status-icon" class="fa-solid fa-cloud-arrow-up text-2xl mb-1" style="color: var(--kv-primary-blue);"></i>
+                                <div id="audio-status-title" class="text-xs font-extrabold" style="color: var(--kv-navy);">Đang quét tự động file mc.wav...</div>
+                                <div id="audio-status-desc" class="text-[11px] font-semibold mt-0.5" style="color: var(--kv-ocean-blue);">Hoặc click chọn / kéo thả file tại đây</div>
+                            </div>
+                        </div>
+                        <div id="audio-loaded-Badge" class="hidden px-3 py-2 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-800 flex items-center justify-between">
+                            <span id="audio-filename" class="truncate">Đã nạp file audio</span>
+                            <button onclick="clearLoadedAudio(event)" class="text-rose-600 hover:underline text-[11px] ml-2">Xóa</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shortcut-panel">
+                <div class="flex items-center justify-between">
+                    <div class="text-xs font-black text-amber-950 uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-keyboard text-amber-600"></i> BẢNG PHÍM TẮT ĐIỀU KHIỂN NHANH
+                    </div>
+                    <div class="text-xs font-bold text-slate-600">
+                        Chuyển Slide: <span class="px-2 py-0.5 rounded bg-white border border-slate-300 font-extrabold" style="color: var(--kv-navy);">Phím Phải / Space</span> (Tiếp) • <span class="px-2 py-0.5 rounded bg-white border border-slate-300 font-extrabold" style="color: var(--kv-navy);">Phím Trái / Backspace</span> (Lùi)
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-6 gap-3">
+                    <div class="shortcut-item" onclick="toggleFullScreen()">
+                        <span class="kbd-light">F</span>
+                        <div>
+                            <div class="text-xs font-extrabold" style="color: var(--kv-navy);">Fullscreen</div>
+                            <div class="text-[11px] font-semibold text-slate-500">Toàn màn hình</div>
+                        </div>
+                    </div>
+                    <div class="shortcut-item" onclick="activateModeByKey(false)">
+                        <span class="kbd-light">1</span>
+                        <div>
+                            <div class="text-xs font-extrabold" style="color: var(--kv-navy);">Không thuyết minh</div>
+                            <div class="text-[11px] font-semibold text-slate-500">Present im lặng</div>
+                        </div>
+                    </div>
+                    <div class="shortcut-item" onclick="activateModeByKey(true)">
+                        <span class="kbd-light">2</span>
+                        <div>
+                            <div class="text-xs font-extrabold" style="color: var(--kv-primary-blue);">Bật Thuyết minh</div>
+                            <div class="text-[11px] font-semibold text-slate-500">Phát mc.wav / Voice</div>
+                        </div>
+                    </div>
+                    <div class="shortcut-item" onclick="togglePauseResumeAudio()">
+                        <span class="kbd-light">3</span>
+                        <div>
+                            <div class="text-xs font-extrabold text-amber-700">Pause / Play</div>
+                            <div class="text-[11px] font-semibold text-slate-500">Tạm dừng audio</div>
+                        </div>
+                    </div>
+                    <div class="shortcut-item" onclick="returnToSettings()">
+                        <span class="kbd-light">0</span>
+                        <div>
+                            <div class="text-xs font-extrabold" style="color: var(--kv-navy);">Về Settings</div>
+                            <div class="text-[11px] font-semibold text-slate-500">Thiết lập ban đầu</div>
+                        </div>
+                    </div>
+                    <div class="shortcut-item" onclick="window.print()">
+                        <span class="kbd-light">P</span>
+                        <div>
+                            <div class="text-xs font-extrabold" style="color: var(--kv-navy);">Xuất PDF</div>
+                            <div class="text-[11px] font-semibold text-slate-500">Chuẩn 16:9 Native</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 1: BLANK STANDBY -->
+    <section class="scene scene-blank" data-scene="1" data-caption="" data-vo=""></section>
+
+    <!-- SLIDE 2: HERO DARK SPLIT 7:5 -->
+    <section class="scene scene-content scene-dark" data-scene="2"
+        data-caption="• Chiến lược 2027: Chuẩn hóa Chân dung Chuyên viên Tư vấn Giải pháp KiotViet mang lại giá trị vận hành thực tế.&#10;• Trọng tâm triển khai: Hoàn thiện Lộ trình New Sales 3 giai đoạn và thiết lập Khung Coaching 1-1 bứt phá doanh số."
+        data-vo="Chào các bạn! KiotViet trân trọng giới thiệu Chiến lược Chuyển dịch Đội ngũ Telesales năm 2027: Chuẩn hóa Chân dung Chuyên viên Tư vấn Giải pháp, hoàn thiện Lộ trình Đào tạo New Sales 3 giai đoạn và thiết lập cơ chế Coaching 1-1 chuyên sâu nhằm bứt phá hiệu suất kinh doanh toàn diện.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner justify-center">
+            <div class="text-stage">
+                <div class="w-full max-w-[1260px] grid grid-cols-12 gap-10 items-center">
+                    <div class="col-span-7 flex flex-col items-start text-left gap-4">
+                        <span class="section-badge up" style="--d:.05s"><i class="fa-solid fa-bullseye"></i> Chiến lược L&amp;D &amp; Kinh Doanh 2027</span>
+                        <h1 class="display-font text-5xl font-black text-white leading-[1.14] up" style="--d:.15s">
+                            Chân Dung Nhân Sự &amp;<br><span class="whitespace-nowrap" style="color: var(--kv-orange);">Chiến Lược Telesales 2027</span>
+                        </h1>
+                        <p class="text-base text-white/90 font-semibold leading-relaxed up whitespace-nowrap" style="--d:.25s">
+                            Chuyển sang Chuyên viên Tư vấn Giải pháp • Lộ trình New Sales &amp; Coaching 1-1.
+                        </p>
+                        <div class="flex flex-wrap items-center gap-3 mt-1 up" style="--d:.35s">
+                            <span class="px-3.5 py-1.5 rounded-full bg-white/15 border border-white/25 text-white text-xs font-extrabold flex items-center gap-2">
+                                <i class="fa-solid fa-lightbulb" style="color: var(--kv-accent-blue);"></i> Tư duy Giải pháp Win - Win
+                            </span>
+                            <span class="px-3.5 py-1.5 rounded-full bg-white/15 border border-white/25 text-white text-xs font-extrabold flex items-center gap-2">
+                                <i class="fa-solid fa-stairs" style="color: var(--kv-orange);"></i> Lộ trình New Sales 3 giai đoạn
+                            </span>
+                            <span class="px-3.5 py-1.5 rounded-full text-xs font-black flex items-center gap-2" style="background: var(--kv-primary-green); color: #ffffff;">
+                                <i class="fa-solid fa-handshake-angle"></i> Coaching 1-1 Cá nhân hóa
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-span-5 flex items-center justify-center">
+                        <div class="relative w-72 h-72 flex items-center justify-center">
+                            <div class="w-56 h-56 rounded-3xl glass-card flex flex-col items-center justify-center text-center p-6 border-2 border-white/30 shadow-2xl float" style="--f:.3s;">
+                                <div class="w-20 h-20 rounded-2xl flex items-center justify-center text-4xl mb-3 shadow-lg" style="background: linear-gradient(135deg, var(--kv-primary-blue), var(--kv-accent-blue)); color: #002957;">
+                                    <i class="fa-solid fa-headset"></i>
+                                </div>
+                                <div class="text-lg font-black text-white">Telesales Pro</div>
+                                <span class="text-xs font-bold text-sky-200 mt-1">Chuyên Viên Giải Pháp</span>
+                            </div>
+
+                            <div class="absolute -top-2 -right-2 px-3 py-1.5 rounded-xl bg-amber-400 text-slate-900 font-black text-xs shadow-lg pop" style="--d:.5s;">
+                                <i class="fa-solid fa-bolt mr-1"></i> Mục Tiêu 2027
+                            </div>
+                            <div class="absolute -bottom-2 -left-2 px-3 py-1.5 rounded-xl bg-emerald-500 text-white font-black text-xs shadow-lg pop" style="--d:.65s;">
+                                <i class="fa-solid fa-shield-halved mr-1"></i> Chuẩn L&amp;D
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 3: AGENDA TIMELINE (5 NỘI DUNG) -->
+    <section class="scene scene-content" data-scene="3"
+        data-caption="• Phần 1 &amp; 2: Đánh giá bối cảnh chuyển dịch 2027 và nhận diện 6 nhóm rào cản tác động đến hiệu suất kinh doanh.&#10;• Phần 3 &amp; 4: Chuẩn hóa Chân dung Chuyên viên Giải pháp và hoàn thiện Lộ trình đào tạo New Sales 3 giai đoạn tinh gọn.&#10;• Phần 5: Thiết lập cơ chế phối hợp triển khai quy trình Coaching 1-1 cá nhân hóa cho nhân sự thâm niên."
+        data-vo="Trong buổi chia sẻ hôm nay, chúng ta sẽ cùng đi qua 5 nội dung trọng tâm: Phần 1 Bối cảnh và định hướng chuyển dịch năm 2027; Phần 2 Nhận diện 6 rào cản hiệu suất thực tế; Phần 3 Chân dung Chuyên viên Tư vấn Giải pháp chuẩn mực; Phần 4 Lộ trình đào tạo New Sales tinh gọn; và Phần 5 Chiến lược Coaching 1-1 cho Sales thâm niên.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge up"><i class="fa-solid fa-map"></i> Lộ trình hội nghị</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-list-check"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight" style="color: var(--kv-navy);">HÀNH TRÌNH 5 NỘI DUNG TRỌNG TÂM CHIẾN LƯỢC</h1>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="w-full max-w-[1340px] flex flex-col gap-4">
+                    <div class="tl-row" style="grid-template-columns: repeat(5, 1fr);">
+                        <div class="tl-line reveal" style="--d:.15s"></div>
+                        <div class="tl-item pop" style="--d:.2s">
+                            <div class="w-14 h-14 rounded-full text-white flex items-center justify-center text-lg shadow-lg" style="background: var(--kv-primary-blue);"><i class="fa-solid fa-arrows-rotate"></i></div>
+                        </div>
+                        <div class="tl-item pop" style="--d:.32s">
+                            <div class="w-14 h-14 rounded-full text-white flex items-center justify-center text-lg shadow-lg" style="background: var(--kv-turquoise);"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        </div>
+                        <div class="tl-item pop" style="--d:.44s">
+                            <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl shadow-xl pulse" style="background: var(--kv-orange); color: var(--kv-navy);"><i class="fa-solid fa-user-tie"></i></div>
+                        </div>
+                        <div class="tl-item pop" style="--d:.56s">
+                            <div class="w-14 h-14 rounded-full text-white flex items-center justify-center text-lg shadow-lg" style="background: var(--kv-primary-green);"><i class="fa-solid fa-graduation-cap"></i></div>
+                        </div>
+                        <div class="tl-item pop" style="--d:.68s">
+                            <div class="w-14 h-14 rounded-full text-white flex items-center justify-center text-lg shadow-lg" style="background: var(--kv-ocean-blue);"><i class="fa-solid fa-handshake-angle"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-5 gap-3.5">
+                        <div class="toc-card border-2 border-blue-200 shadow-sm up" style="--d:.25s">
+                            <div class="toc-card-top">
+                                <span class="px-2.5 py-0.5 rounded-full text-white font-black text-[11px]" style="background: var(--kv-primary-blue);">PHẦN 01</span>
+                                <span class="text-xs font-extrabold" style="color: var(--kv-primary-blue);">Định hướng</span>
+                            </div>
+                            <h3 class="toc-card-title">Bối Cảnh &amp; Định Hướng</h3>
+                            <p class="toc-card-desc">Tư vấn giải pháp vận hành và định vị vai trò Coach nòng cốt.</p>
+                        </div>
+                        <div class="toc-card border-2 border-teal-200 shadow-sm up" style="--d:.37s">
+                            <div class="toc-card-top">
+                                <span class="px-2.5 py-0.5 rounded-full text-white font-black text-[11px]" style="background: var(--kv-turquoise);">PHẦN 02</span>
+                                <span class="text-xs font-extrabold text-teal-700">Đánh giá</span>
+                            </div>
+                            <h3 class="toc-card-title">Nhận Diện 6 Rào Cản</h3>
+                            <p class="toc-card-desc">Bóc tách 6 rào cản và chốt 2 điểm nghẽn hiệu suất lớn nhất.</p>
+                        </div>
+                        <div class="toc-card border-2 border-amber-300 bg-amber-50/40 shadow-md up" style="--d:.49s">
+                            <div class="toc-card-top">
+                                <span class="px-2.5 py-0.5 rounded-full font-black text-[11px]" style="background: var(--kv-orange); color: var(--kv-navy);">PHẦN 03</span>
+                                <span class="text-xs font-extrabold text-amber-700">Trọng tâm</span>
+                            </div>
+                            <h3 class="toc-card-title">Chân Dung Chuẩn Mực</h3>
+                            <p class="toc-card-desc">Chuẩn hóa năng lực toàn diện: Tư duy, Kỹ năng và Tác phong.</p>
+                        </div>
+                        <div class="toc-card border-2 border-emerald-200 shadow-sm up" style="--d:.61s">
+                            <div class="toc-card-top">
+                                <span class="px-2.5 py-0.5 rounded-full text-white font-black text-[11px]" style="background: var(--kv-primary-green);">PHẦN 04</span>
+                                <span class="text-xs font-extrabold text-emerald-700">Đào tạo</span>
+                            </div>
+                            <h3 class="toc-card-title">Lộ Trình New Sales</h3>
+                            <p class="toc-card-desc">Lộ trình 3 giai đoạn tinh gọn, giảm tải phần cứng thực chiến.</p>
+                        </div>
+                        <div class="toc-card border-2 border-blue-300 shadow-sm up" style="--d:.73s">
+                            <div class="toc-card-top">
+                                <span class="px-2.5 py-0.5 rounded-full text-white font-black text-[11px]" style="background: var(--kv-ocean-blue);">PHẦN 05</span>
+                                <span class="text-xs font-extrabold" style="color: var(--kv-ocean-blue);">Kèm cặp</span>
+                            </div>
+                            <h3 class="toc-card-title">Chiến Lược Coaching 1-1</h3>
+                            <p class="toc-card-desc">Quy trình 4 bước cá nhân hóa giúp nhân sự thâm niên bứt phá.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 4: PHẦN 01 - BỐI CẢNH & CHUYỂN DỊCH TƯ DUY (.vs-board) -->
+    <section class="scene scene-content" data-scene="4"
+        data-caption="• Bối cảnh: Thị trường chững lại và đối thủ cạnh tranh gay gắt đòi hỏi chuyển dịch toàn diện.&#10;• Định hướng mới: Telesales chuyển sang Chuyên viên Tư vấn Giải pháp vận hành thực tế.&#10;• Trọng tâm Coach: Trở thành lực lượng nòng cốt trực tiếp kèm cặp và đào tạo kỹ năng cho Sales."
+        data-vo="Trước bối cảnh thị trường chững lại và đối thủ cạnh tranh gay gắt, đội ngũ Telesales KiotViet chuyển dịch toàn diện từ việc bán tính năng phần mềm đơn thuần sang vai trò Chuyên viên Tư vấn Giải pháp. Đồng thời, lực lượng Coach sẽ trở thành hạt nhân trực tiếp kèm cặp, đào tạo kỹ năng thực chiến tại chỗ cho nhân viên.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge up"><i class="fa-solid fa-arrows-rotate"></i> Phần 01 • Bối cảnh &amp; Định hướng 2027</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-bullseye"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight" style="color: var(--kv-navy);">BƯỚC CHUYỂN DỊCH TƯ DUY: TỪ BÁN PHẦN MỀM SANG TƯ VẤN GIẢI PHÁP</h1>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="bento-card w-full max-w-[1340px] p-6 flex flex-col justify-between gap-4">
+                    <div class="vs-board">
+                        <div class="p-5 rounded-2xl border flex flex-col justify-between gap-3 up" style="--d:.15s; background: #FFF5F6; border-color: #FF99A2;">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl text-white flex items-center justify-center text-lg shrink-0" style="background: var(--kv-coral);">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-base font-black" style="color: var(--kv-navy);">Mô Hình Bán Tính Năng Cũ</h3>
+                                    <span class="text-xs font-bold text-rose-700">Tư duy bán phần mềm đơn thuần</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs font-semibold text-slate-700">
+                                <div class="p-2.5 rounded-xl bg-white border border-rose-200 flex items-center gap-2">
+                                    <i class="fa-solid fa-triangle-exclamation text-rose-500"></i>
+                                    <span>Chăm chăm giới thiệu tính năng phần mềm rời rạc</span>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-white border border-rose-200 flex items-center gap-2">
+                                    <i class="fa-solid fa-triangle-exclamation text-rose-500"></i>
+                                    <span>Dễ bị đối thủ ép giá và cạnh tranh trực tiếp</span>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-white border border-rose-200 flex items-center gap-2">
+                                    <i class="fa-solid fa-triangle-exclamation text-rose-500"></i>
+                                    <span>Khách hàng khó thấy giá trị vận hành thực tế</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="vs-mid pop" style="--d:.35s">VS</div>
+
+                        <div class="p-5 rounded-2xl border flex flex-col justify-between gap-3 up" style="--d:.25s; background: #F2FFF5; border-color: #6EE7B7;">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl text-white flex items-center justify-center text-lg shrink-0" style="background: var(--kv-primary-green);">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-base font-black" style="color: var(--kv-navy);">Chuyên Viên Tư Vấn Giải Pháp</h3>
+                                    <span class="text-xs font-bold text-emerald-700">Đồng hành bài toán kinh doanh</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs font-semibold text-slate-700">
+                                <div class="p-2.5 rounded-xl bg-white border border-emerald-200 flex items-center gap-2">
+                                    <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                                    <span>Thấu hiểu quy trình vận hành và nỗi đau cửa hàng</span>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-white border border-emerald-200 flex items-center gap-2">
+                                    <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                                    <span>Tư vấn trọn bộ giải pháp: Thuế, Thiết bị &amp; Hệ sinh thái</span>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-white border border-emerald-200 flex items-center gap-2">
+                                    <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                                    <span>Đem lại giá trị Win - Win và giữ chân khách hàng</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200 flex items-center justify-between gap-4 up" style="--d:.55s">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500 text-slate-900 flex items-center justify-center text-lg shrink-0 font-black">
+                                <i class="fa-solid fa-chalkboard-user"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm font-black" style="color: var(--kv-navy);">Định Vị Lại Vai Trò Của Coach Trong Năm 2027</div>
+                                <p class="text-xs font-semibold text-amber-900 mt-0.5">Coach là nòng cốt kèm cặp thực chiến; L&amp;D nâng cao năng lực và công cụ chuẩn.</p>
+                            </div>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-white border border-amber-300 text-xs font-extrabold text-amber-900 shrink-0">
+                            Chiến lược trọng tâm
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 5: PHẦN 02 - 6 RÀO CẢN HIỆU SUẤT & 2 ĐIỂM NGHẼN TRỌNG YẾU -->
+    <section class="scene scene-content" data-scene="5"
+        data-caption="• Khảo sát 2026: Nhận diện 6 rào cản chia làm 2 nhóm Môi trường và Cá nhân.&#10;• Thách thức bên ngoài: Chính sách thuế thay đổi liên tục và đối thủ phá giá mạnh mẽ.&#10;• Biểu quyết trọng yếu: Điểm nghẽn lớn nhất là Năng lực tư vấn và Kèm cặp trong giai đoạn đầu."
+        data-vo="Khảo sát năm 2026 nhận diện 6 nhóm rào cản thuộc yếu tố Môi trường và Cá nhân. Trong đó, 2 rào cản lớn nhất được các Coach biểu quyết là sự thiếu hụt kiến thức tư vấn giải pháp thực tế và thiếu thông tin, kỳ vọng kèm cặp sát sao của người hướng dẫn ngay trong giai đoạn đầu ra số.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge up"><i class="fa-solid fa-triangle-exclamation"></i> Phần 02 • Đánh giá hiệu suất 2026</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight" style="color: var(--kv-navy);">MÔ HÌNH 6 RÀO CẢN VÀ 2 ĐIỂM NGHẼN TRỌNG YẾU</h1>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="bento-card w-full max-w-[1340px] p-5 flex flex-col justify-between gap-3.5">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 rounded-2xl bg-blue-50/70 border border-blue-200 flex flex-col gap-2.5 up" style="--d:.15s">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-black uppercase text-blue-800 flex items-center gap-2">
+                                    <i class="fa-solid fa-building text-blue-600"></i> Nhóm Yếu Tố Môi Trường
+                                </span>
+                                <span class="text-[11px] font-bold text-blue-600">3 Rào cản</span>
+                            </div>
+                            <div class="space-y-1.5 text-xs font-semibold text-slate-700">
+                                <div class="p-2 rounded-xl bg-white border border-blue-100 flex items-center justify-between">
+                                    <span>1. Thông tin / Kỳ vọng / Phản hồi kèm cặp</span>
+                                    <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 font-extrabold text-[10px]">Trọng yếu</span>
+                                </div>
+                                <div class="p-2 rounded-xl bg-white border border-blue-100">2. Công cụ / Nguồn lực làm việc &amp; CRM</div>
+                                <div class="p-2 rounded-xl bg-white border border-blue-100">3. Cơ chế ghi nhận / Động viên / KPI thưởng</div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200 flex flex-col gap-2.5 up" style="--d:.25s">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-black uppercase text-emerald-800 flex items-center gap-2">
+                                    <i class="fa-solid fa-user-gear text-emerald-600"></i> Nhóm Yếu Tố Cá Nhân
+                                </span>
+                                <span class="text-[11px] font-bold text-emerald-600">3 Rào cản</span>
+                            </div>
+                            <div class="space-y-1.5 text-xs font-semibold text-slate-700">
+                                <div class="p-2 rounded-xl bg-white border border-emerald-100 flex items-center justify-between">
+                                    <span>1. Kiến thức &amp; Kỹ năng tư vấn giải pháp</span>
+                                    <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 font-extrabold text-[10px]">Trọng yếu</span>
+                                </div>
+                                <div class="p-2 rounded-xl bg-white border border-emerald-100">2. Năng lực &amp; Mức độ phù hợp công việc</div>
+                                <div class="p-2 rounded-xl bg-white border border-emerald-100">3. Động cơ &amp; Động lực cá nhân</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-300 flex items-center justify-between gap-4 up" style="--d:.4s">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500 text-slate-900 flex items-center justify-center text-lg font-black shrink-0">
+                                <i class="fa-solid fa-check-double"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm font-black text-amber-950">2 Rào Cản Tác Động Lớn Nhất Được Biểu Quyết Cần Giải Quyết Ngay</div>
+                                <p class="text-xs font-semibold text-amber-900 mt-0.5">Nâng cao năng lực giải pháp và tăng cường kèm cặp giai đoạn hội nhập.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <span class="px-3 py-1 rounded-full bg-white border border-amber-300 text-xs font-black text-amber-900">Ưu tiên số 1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 6: PHẦN 03 - CHÂN DUNG TƯ VẤN GIẢI PHÁP: TRỤ CỘT TƯ DUY -->
+    <section class="scene scene-content" data-scene="6"
+        data-caption="• Cố vấn đồng hành: Đóng vai trò chuyên gia giải quyết bài toán quản lý vì lợi ích Win - Win.&#10;• Thích ứng nhanh: Nắm bắt chính sách thuế mới, xông pha tìm hiểu thực tế mô hình cửa hàng.&#10;• Mở rộng giá trị: Tư vấn hệ sinh thái không giới hạn và nhận trách nhiệm trọn vẹn kết quả."
+        data-vo="Chân dung Chuyên viên Tư vấn Giải pháp được xây dựng trên nền tảng tư duy vững chắc: Luôn đóng vai trò cố vấn đồng hành giải quyết bài toán kinh doanh vì lợi ích Win - Win của khách hàng; chủ động thích ứng với biến động chính sách thuế; và tư duy mở rộng hệ sinh thái tích hợp không giới hạn.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge up"><i class="fa-solid fa-user-tie"></i> Phần 03 • Chân dung chuẩn mực</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-lightbulb"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight" style="color: var(--kv-navy);">TRỤ CỘT 1: TƯ DUY CHIẾN LƯỢC CỦA CHUYÊN VIÊN GIẢI PHÁP</h1>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="bento-card w-full max-w-[1340px] p-6 grid grid-cols-12 gap-6 items-center">
+                    <div class="col-span-4 p-5 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 flex flex-col justify-between h-full up" style="--d:.15s">
+                        <div class="space-y-3">
+                            <div class="w-12 h-12 rounded-2xl text-white flex items-center justify-center text-xl shadow-md" style="background: var(--kv-primary-blue);">
+                                <i class="fa-solid fa-compass"></i>
+                            </div>
+                            <h3 class="text-lg font-black" style="color: var(--kv-navy);">Tư Duy Cố Vấn &amp; Đồng Hành</h3>
+                            <p class="text-xs font-semibold text-slate-600 leading-relaxed">
+                                Đồng hành giải quyết bài toán kinh doanh,<br>xóa bỏ tâm thế chăm chăm chốt bán.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-blue-200 flex items-center gap-2 text-xs font-extrabold text-blue-700">
+                            <i class="fa-solid fa-handshake"></i> Đối tác Win - Win bền vững
+                        </div>
+                    </div>
+
+                    <div class="col-span-8 flex flex-col gap-3 up" style="--d:.3s">
+                        <div class="p-3.5 rounded-2xl bg-white border border-slate-200 flex items-center gap-4 shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center text-lg font-black shrink-0">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="text-sm font-extrabold" style="color: var(--kv-navy);">Thích Ứng Nhanh &amp; Xông Pha Thực Tế</div>
+                                <p class="text-xs font-semibold text-slate-600 mt-0.5">Chủ động cập nhật chính sách thuế, hóa đơn điện tử; tìm hiểu mô hình cửa hàng.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-3.5 rounded-2xl bg-white border border-slate-200 flex items-center gap-4 shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-lg font-black shrink-0">
+                                <i class="fa-solid fa-cubes"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="text-sm font-extrabold" style="color: var(--kv-navy);">Tư Duy Không Giới Hạn (Mở Rộng Hệ Sinh Thái)</div>
+                                <p class="text-xs font-semibold text-slate-600 mt-0.5">Tích hợp phần cứng, sàn thương mại điện tử, thanh toán và vận chuyển K-Ship.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-3.5 rounded-2xl bg-white border border-slate-200 flex items-center gap-4 shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg font-black shrink-0">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="text-sm font-extrabold" style="color: var(--kv-navy);">Trách Nhiệm Cá Nhân &amp; Học Hỏi Không Ngừng</div>
+                                <p class="text-xs font-semibold text-slate-600 mt-0.5">Xem khách hàng là người thầy thực tế; chịu trách nhiệm trọn vẹn với kết quả.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 7: PHẦN 03 - KỸ NĂNG 4 BƯỚC & TÁC PHONG CHUẨN MỰC -->
+    <section class="scene scene-content" data-scene="7"
+        data-caption="• Kỹ năng tư vấn 4 bước: Lắng nghe trọn vẹn, đặt câu hỏi mở, gọi tên vấn đề và chốt sales giải pháp.&#10;• Am hiểu đa ngành: Thành thạo giải pháp chuyên sâu Retail, FnB, Salon và quy định thuế.&#10;• Tác phong chuẩn mực: Đúng giờ, kiên nhẫn tận tâm, kiểm soát cảm xúc và xử lý dứt điểm sự cố."
+        data-vo="Về năng lực thực thi, Chuyên viên Giải pháp thành thạo chu trình 4 bước: Lắng nghe không phán xét, đặt câu hỏi khai mở vấn đề, tóm tắt bài toán bằng ngôn ngữ kinh doanh của khách hàng và bẻ gãy từ chối dựa trên giá trị giải pháp, kết hợp cùng tác phong chuyên nghiệp, kiên nhẫn và trách nhiệm đến cùng.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge up"><i class="fa-solid fa-user-check"></i> Phần 03 • Năng lực thực thi</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-comments"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight" style="color: var(--kv-navy);">TRỤ CỘT 2 &amp; 3: KỸ NĂNG TƯ VẤN 4 BƯỚC VÀ CHUẨN MỰC TÁC PHONG</h1>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="bento-card w-full max-w-[1340px] p-5 flex flex-col justify-between gap-3">
+                    <div class="text-xs font-black uppercase text-blue-800 flex items-center gap-2 up" style="--d:.1s">
+                        <i class="fa-solid fa-route text-blue-600"></i> Chu Trình 4 Bước Tư Vấn Giải Pháp Thực Chiến
+                    </div>
+
+                    <div class="grid grid-cols-4 gap-3 up" style="--d:.2s">
+                        <div class="p-3.5 rounded-2xl bg-blue-50/80 border border-blue-200 flex flex-col justify-between gap-2">
+                            <span class="w-7 h-7 rounded-lg bg-blue-600 text-white font-black text-xs flex items-center justify-center">01</span>
+                            <div>
+                                <h3 class="text-xs font-black" style="color: var(--kv-navy);">Lắng Nghe Trọn Vẹn</h3>
+                                <p class="text-[11px] font-semibold text-slate-600 mt-1">Lắng nghe không phán xét,<br>nắm bắt chính xác nỗi đau cốt lõi.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-3.5 rounded-2xl bg-teal-50/80 border border-teal-200 flex flex-col justify-between gap-2">
+                            <span class="w-7 h-7 rounded-lg bg-teal-600 text-white font-black text-xs flex items-center justify-center">02</span>
+                            <div>
+                                <h3 class="text-xs font-black" style="color: var(--kv-navy);">Đặt Câu Hỏi Mở</h3>
+                                <p class="text-[11px] font-semibold text-slate-600 mt-1">Khai mở vấn đề thực tế<br>và quy trình vận hành tại cửa hàng.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-3.5 rounded-2xl bg-amber-50/80 border border-amber-200 flex flex-col justify-between gap-2">
+                            <span class="w-7 h-7 rounded-lg bg-amber-500 text-slate-900 font-black text-xs flex items-center justify-center">03</span>
+                            <div>
+                                <h3 class="text-xs font-black" style="color: var(--kv-navy);">Gọi Tên Vấn Đề</h3>
+                                <p class="text-[11px] font-semibold text-slate-600 mt-1">Tái hiện bài toán bằng chính<br>ngôn ngữ kinh doanh của khách.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-3.5 rounded-2xl bg-emerald-50/80 border border-emerald-200 flex flex-col justify-between gap-2">
+                            <span class="w-7 h-7 rounded-lg bg-emerald-600 text-white font-black text-xs flex items-center justify-center">04</span>
+                            <div>
+                                <h3 class="text-xs font-black" style="color: var(--kv-navy);">Chốt Theo Giải Pháp</h3>
+                                <p class="text-[11px] font-semibold text-slate-600 mt-1">Bẻ gãy rào cản tâm lý<br>bằng bài toán chi phí hiệu quả.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 border-t border-slate-200">
+                        <div class="text-xs font-black uppercase text-slate-700 flex items-center gap-2 mb-2 up" style="--d:.35s">
+                            <i class="fa-solid fa-award text-amber-500"></i> Bộ 4 Chuẩn Mực Tác Phong Chuyên Nghiệp
+                        </div>
+                        <div class="grid grid-cols-4 gap-3 up" style="--d:.45s">
+                            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-clock text-blue-600"></i> Đúng giờ &amp; Chỉn chu
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-heart text-rose-500"></i> Kiên nhẫn &amp; Tận tâm
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-brain text-purple-600"></i> Ổn định cảm xúc
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-shield-halved text-emerald-600"></i> Xử lý triệt để
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 8: PHẦN 04 - LỘ TRÌNH ĐÀO TẠO NEW SALES 3 GIAI ĐOẠN -->
+    <section class="scene scene-content" data-scene="8"
+        data-caption="• Giai đoạn 1: 2 tuần đầu tập trung nắm ý nghĩa sản phẩm và quy trình demo 6 bước.&#10;• Giai đoạn 2: Tháng 1 đến 2 bồi dưỡng kỹ năng đặt câu hỏi, lắng nghe và chính sách thuế.&#10;• Giai đoạn 3: Dưới 1 năm nâng cao kỹ thuật chốt sales và hệ sinh thái liên kết KiotViet."
+        data-vo="Lộ trình đào tạo Sales mới được chuẩn hóa qua 3 giai đoạn rõ rệt: Hai tuần đầu tập trung nắm ý nghĩa sản phẩm và quy trình demo chuẩn 6 bước, tinh gọn phần cứng; Giai đoạn thử việc tháng 1 và 2 bồi dưỡng kỹ năng đặt câu hỏi, lắng nghe và cập nhật chính sách thuế; Giai đoạn dưới 1 năm nâng cao kỹ thuật chốt sales và khai thác khách hàng giới thiệu.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge up"><i class="fa-solid fa-graduation-cap"></i> Phần 04 • Lộ trình New Sales</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-stairs"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight" style="color: var(--kv-navy);">LỘ TRÌNH ĐÀO TẠO NEW SALES 3 GIAI ĐOẠN TINH GỌN THỰC CHIẾN</h1>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="bento-card w-full max-w-[1340px] p-5 flex flex-col justify-between gap-2.5">
+                    <div class="chg-row up" style="--d:.15s; background: #F8FAFC; box-shadow: none; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #475569;">
+                        <span>GĐ</span><span>Thời lượng &amp; Trọng tâm</span><span>Kỹ năng bán hàng giải pháp</span><span class="text-center">Nghiệp vụ bổ trợ</span>
+                    </div>
+
+                    <div class="chg-row up" style="--d:.25s">
+                        <span class="no">1</span>
+                        <div>
+                            <span class="font-extrabold" style="color: var(--kv-navy);">2 Tuần Đầu (Hội Nhập)</span>
+                            <div class="text-[11px] font-semibold text-slate-500">Xây nền tảng vững chắc</div>
+                        </div>
+                        <span class="text-slate-700 font-semibold">• Ý nghĩa sản phẩm theo ngành<br>• Quy trình Demo chuẩn (6 bước)</span>
+                        <span class="num">Phần cứng cơ bản &amp; LMS</span>
+                    </div>
+
+                    <div class="chg-row up" style="--d:.35s">
+                        <span class="no">2</span>
+                        <div>
+                            <span class="font-extrabold" style="color: var(--kv-navy);">Tháng 1 - 2 (Thử Việc)</span>
+                            <div class="text-[11px] font-semibold text-teal-600">Thực chiến &amp; Ra số</div>
+                        </div>
+                        <span class="text-slate-700 font-semibold">• Đặt câu hỏi sâu &amp; Khai thác nhu cầu<br>• Lắng nghe trọn vẹn, gọi tên vấn đề</span>
+                        <span class="num">Thuế &amp; HĐĐT chuyên sâu</span>
+                    </div>
+
+                    <div class="chg-row up" style="--d:.45s">
+                        <span class="no">3</span>
+                        <div>
+                            <span class="font-extrabold" style="color: var(--kv-navy);">Dưới 1 Năm (Chính Thức)</span>
+                            <div class="text-[11px] font-semibold text-amber-600">Nâng cao &amp; Bứt phá</div>
+                        </div>
+                        <span class="text-slate-700 font-semibold">• Xử lý từ chối chuyên sâu theo giải pháp<br>• Khai thác Referral &amp; Ứng dụng AI</span>
+                        <span class="num">Đối thủ &amp; Hệ sinh thái</span>
+                    </div>
+
+                    <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-between text-xs font-semibold text-amber-900 up" style="--d:.55s">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-exclamation text-amber-600"></i>
+                            <span>Lưu ý thống nhất: Tinh gọn phần đào tạo phần cứng quá tải trong 2 tuần đầu, chuyển trọng tâm sang quy trình demo chuẩn.</span>
+                        </div>
+                        <span class="px-2.5 py-0.5 rounded bg-amber-200 text-amber-950 font-extrabold text-[11px]">Đã chốt</span>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 9: PHẦN 05 - CHIẾN LƯỢC COACHING 1-1 (.io-flow) -->
+    <section class="scene scene-content" data-scene="9"
+        data-caption="• Bước 1 &amp; 2: Thu thập ghi âm, dữ liệu CRM và dùng Checklist Rubric chuẩn đoán nguyên nhân.&#10;• Bước 3: Coach ngồi lại 1-1, làm mẫu Role-play và yêu cầu nhân viên thực hành tại chỗ.&#10;• Bước 4: Giám sát sự chuyển hóa qua tỷ lệ chuyển đổi và tăng trưởng doanh số thực tế."
+        data-vo="Đối với nhân sự thâm niên trên một năm có hiệu suất chưa đạt, KiotViet áp dụng quy trình Coaching 1-1 chuyên sâu qua 4 bước: Thu thập dữ liệu thực tế từ ghi âm và CRM; chuẩn đoán chính xác nguyên nhân qua Checklist năng lực; ngồi lại làm mẫu Role-play chỉnh sửa hành vi tại chỗ; và theo dõi sát sao sự tiến bộ qua các chỉ số chuyển đổi thực tế.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge up"><i class="fa-solid fa-handshake-angle"></i> Phần 05 • Kèm cặp thâm niên</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-chalkboard-user"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight" style="color: var(--kv-navy);">QUY TRÌNH COACHING 1-1 CÁ NHÂN HÓA 4 BƯỚC KHÉP KÍN</h1>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="bento-card w-full max-w-[1340px] p-6 flex flex-col justify-between gap-5">
+                    <div class="io-flow">
+                        <div class="io-col">
+                            <div class="io-chip up" style="--d:.15s"><i class="fa-solid fa-microphone text-blue-600"></i> Nghe file ghi âm cuộc gọi</div>
+                            <div class="io-chip up" style="--d:.25s"><i class="fa-solid fa-chart-pie text-teal-600"></i> Kiểm tra nhật ký dữ liệu CRM</div>
+                            <div class="io-chip up" style="--d:.35s"><i class="fa-solid fa-person-walking text-amber-500"></i> Đi thực tế thị trường cùng Sales</div>
+                        </div>
+
+                        <div class="track"><i></i><i style="--t:.7s"></i><i style="--t:1.4s"></i></div>
+
+                        <div class="brain-box pop pulse" style="--d:.45s">
+                            <i class="fa-solid fa-clipboard-check text-3xl mb-2" style="color: var(--kv-orange);"></i>
+                            <div class="display-font text-lg font-black leading-tight">Checklist Rubric<br>Chuẩn Đoán Lỗ Hổng</div>
+                            <span class="text-[11px] font-bold mt-1" style="color: var(--kv-accent-blue);">Kỹ năng • Động lực • Phương pháp</span>
+                        </div>
+
+                        <div class="track"><i style="--t:.35s"></i><i style="--t:1.05s"></i><i style="--t:1.75s"></i></div>
+
+                        <div class="out-circle pop" style="--d:.65s">
+                            <i class="fa-solid fa-arrow-trend-up text-3xl mb-1" style="color: var(--kv-primary-green);"></i>
+                            <div class="text-sm font-black">Role-play 1-1</div>
+                            <span class="text-[11px] font-bold opacity-85">Chuyển hóa &amp; Bứt phá số</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 pt-2 border-t border-slate-100">
+                        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3 up" style="--d:.75s">
+                            <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-black text-sm shrink-0">
+                                03
+                            </div>
+                            <div>
+                                <div class="text-xs font-black" style="color: var(--kv-navy);">Thực hiện Coaching &amp; Chỉnh sửa hành vi</div>
+                                <p class="text-[11px] font-semibold text-slate-600 mt-0.5">Coach làm mẫu trực tiếp và yêu cầu nhân viên luyện tập lại tình huống tại chỗ.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center gap-3 up" style="--d:.85s">
+                            <div class="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-black text-sm shrink-0">
+                                04
+                            </div>
+                            <div>
+                                <div class="text-xs font-black text-emerald-950">Theo dõi &amp; Đánh giá sự chuyển hóa</div>
+                                <p class="text-[11px] font-semibold text-emerald-800 mt-0.5">Đo lường sự tiến bộ qua tỷ lệ chuyển đổi và doanh số sau coaching.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 10: KẾ HOẠCH HÀNH ĐỘNG & PHÂN CÔNG TRÁCH NHIỆM 2027 -->
+    <section class="scene scene-content" data-scene="10"
+        data-caption="• L&amp;D phụ trách: Hoàn thiện lộ trình New Sales, thiết kế khóa kỹ năng Coaching và xây dựng bộ Checklist.&#10;• Khối Kinh doanh: Đội ngũ Coach và Trưởng nhóm lập danh sách và triển khai Coaching 1-1 thực tế.&#10;• Họp Ban Lãnh đạo: Chốt chiến lược và thống nhất các chỉ tiêu đào tạo năm 2027."
+        data-vo="Kế hoạch hành động năm 2027 được phân công rõ ràng: Bộ phận L&D chịu trách nhiệm hoàn thiện khung tài liệu, đóng gói bộ Checklist đánh giá và tổ chức khóa đào tạo kỹ năng Coaching cho đội ngũ Coach; các Trưởng nhóm và Coach trực tiếp lên danh sách và triển khai Coaching 1-1 ngay tại cơ sở.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge up"><i class="fa-solid fa-list-check"></i> Kế hoạch triển khai</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-calendar-check"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight" style="color: var(--kv-navy);">KẾ HOẠCH HÀNH ĐỘNG &amp; PHÂN CÔNG TRÁCH NHIỆM 2027</h1>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="bento-card w-full max-w-[1340px] p-5 flex flex-col justify-between gap-2.5">
+                    <div class="chg-row up" style="--d:.15s; background: #F8FAFC; box-shadow: none; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #475569;">
+                        <span>STT</span><span>Hạng mục công việc</span><span>Đơn vị phụ trách</span><span class="text-center">Thời hạn &amp; Trọng tâm</span>
+                    </div>
+
+                    <div class="chg-row up" style="--d:.25s">
+                        <span class="no">1</span>
+                        <span class="font-extrabold" style="color: var(--kv-navy);">Hoàn thiện tài liệu Lộ trình Sale mới</span>
+                        <span class="text-slate-600 font-semibold">Trang &amp; Vi (Bộ phận L&amp;D)</span>
+                        <span class="num">Email nội bộ toàn Coach</span>
+                    </div>
+
+                    <div class="chg-row up" style="--d:.35s">
+                        <span class="no">2</span>
+                        <span class="font-extrabold" style="color: var(--kv-navy);">Khóa đào tạo "Kỹ năng Coaching 1-1"</span>
+                        <span class="text-slate-600 font-semibold">Bộ phận L&amp;D</span>
+                        <span class="num">Triển khai sớm theo lịch Khối</span>
+                    </div>
+
+                    <div class="chg-row up" style="--d:.45s">
+                        <span class="no">3</span>
+                        <span class="font-extrabold" style="color: var(--kv-navy);">Xây dựng Bộ Checklist chuẩn hóa Call/Demo</span>
+                        <span class="text-slate-600 font-semibold">Bộ phận L&amp;D</span>
+                        <span class="num">Cung cấp bộ công cụ mẫu</span>
+                    </div>
+
+                    <div class="chg-row up" style="--d:.55s">
+                        <span class="no">4</span>
+                        <span class="font-extrabold" style="color: var(--kv-navy);">Lên danh sách &amp; Kế hoạch Coaching 1-1</span>
+                        <span class="text-slate-600 font-semibold">Đội ngũ Coach / Quản lý nhóm</span>
+                        <span class="num">Bám sát quy trình 4 bước</span>
+                    </div>
+
+                    <div class="chg-row up" style="--d:.65s">
+                        <span class="no">5</span>
+                        <span class="font-extrabold" style="color: var(--kv-navy);">Họp chốt chiến lược cùng Ban Lãnh đạo</span>
+                        <span class="text-slate-600 font-semibold">Chị Hồng, L&amp;D &amp; Đội ngũ Coach</span>
+                        <span class="num">Sắp xếp lịch họp ngắn gọn</span>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 11: TỔNG KẾT 4 GIÁ TRỊ CỐT LÕI (SLIDE ÁP CHÓT) -->
+    <section class="scene scene-content" data-scene="11"
+        data-caption="• Tư duy giải pháp: Chuyển dịch từ bán phần mềm sang Chuyên viên Tư vấn Giải pháp đồng hành.&#10;• Bộ chuẩn mực: Đồng bộ vững chắc 3 trụ cột Tư duy, Kỹ năng và Tác phong chuyên nghiệp.&#10;• Lộ trình kép: Tinh gọn đào tạo New Sales thực chiến và Khung Coaching 1-1 cá nhân hóa bứt phá."
+        data-vo="Tổng kết lại, chiến lược đào tạo và coaching năm 2027 mang đến 4 giá trị bứt phá toàn diện: Thứ nhất, chuyển dịch tư duy bán phần mềm sang Chuyên viên Tư vấn Giải pháp; Thứ hai, chuẩn hóa vững chắc bộ năng lực Tư duy, Kỹ năng và Tác phong; Thứ ba, tinh gọn lộ trình New Sales bám sát thực chiến; và Thứ tư, giải quyết triệt để bài toán hiệu suất thông qua quy trình Coaching 1-1 cá nhân hóa bứt phá doanh số vượt bậc.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge up"><i class="fa-solid fa-award"></i> Tổng kết chiến lược</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-flag-checkered"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight" style="color: var(--kv-navy);">TỔNG KẾT 4 GIÁ TRỊ CHIẾN LƯỢC BỨT PHÁ NĂM 2027</h1>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="bento-card w-full max-w-[1340px] p-6 flex flex-col justify-between gap-3.5">
+                    <div class="p-4 rounded-2xl bg-blue-50/70 border border-blue-200 grid grid-cols-12 items-center gap-4 up" style="--d:.15s">
+                        <div class="col-span-4 flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl text-white font-black text-sm flex items-center justify-center shrink-0" style="background: var(--kv-primary-blue);">01</span>
+                            <div>
+                                <h3 class="text-sm font-extrabold" style="color: var(--kv-navy);">Chuyển Dịch Tư Duy Giải Pháp</h3>
+                                <span class="text-xs font-bold" style="color: var(--kv-ocean-blue);">Đồng hành bài toán kinh doanh</span>
+                            </div>
+                        </div>
+                        <div class="col-span-8 border-l-2 border-blue-200 pl-4">
+                            <p class="text-[13px] text-slate-700 font-semibold leading-relaxed">Chuyển từ tư duy bán phần mềm sang Chuyên viên Tư vấn Giải pháp đồng hành thực tế.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-2xl border grid grid-cols-12 items-center gap-4 up" style="--d:.28s; background: #F0FDFB; border-color: #99E9DF;">
+                        <div class="col-span-4 flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl text-white font-black text-sm flex items-center justify-center shrink-0" style="background: var(--kv-turquoise);">02</span>
+                            <div>
+                                <h3 class="text-sm font-extrabold" style="color: var(--kv-navy);">Chuẩn Hóa Chân Dung Năng Lực</h3>
+                                <span class="text-xs font-bold text-teal-800">Tư duy - Kỹ năng - Tác phong</span>
+                            </div>
+                        </div>
+                        <div class="col-span-8 border-l-2 border-teal-200 pl-4">
+                            <p class="text-[13px] text-slate-700 font-semibold leading-relaxed">Chuẩn hóa kỹ năng 4 bước, tư duy đồng hành và tác phong chuyên nghiệp.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-2xl border grid grid-cols-12 items-center gap-4 up" style="--d:.41s; background: #F2FFF5; border-color: #6EE7B7;">
+                        <div class="col-span-4 flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl text-white font-black text-sm flex items-center justify-center shrink-0" style="background: var(--kv-primary-green);">03</span>
+                            <div>
+                                <h3 class="text-sm font-extrabold" style="color: var(--kv-navy);">Lộ Trình New Sales Tinh Gọn</h3>
+                                <span class="text-xs font-bold text-emerald-800">Giảm tải phần cứng, bám thực chiến</span>
+                            </div>
+                        </div>
+                        <div class="col-span-8 border-l-2 border-emerald-200 pl-4">
+                            <p class="text-[13px] text-slate-700 font-semibold leading-relaxed">Lộ trình 3 giai đoạn bám sát thực chiến, tập trung demo chuẩn 6 bước.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-2xl border grid grid-cols-12 items-center gap-4 up" style="--d:.54s; background: #FFF9F0; border-color: #FFCD89;">
+                        <div class="col-span-4 flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl font-black text-sm flex items-center justify-center shrink-0" style="background: var(--kv-orange); color: var(--kv-navy);">04</span>
+                            <div>
+                                <h3 class="text-sm font-extrabold" style="color: var(--kv-navy);">Khung Coaching 1-1 Bứt Phá</h3>
+                                <span class="text-xs font-bold text-amber-800">Kèm cặp thực chiến theo dữ liệu</span>
+                            </div>
+                        </div>
+                        <div class="col-span-8 border-l-2 border-amber-200 pl-4">
+                            <p class="text-[13px] text-slate-700 font-semibold leading-relaxed">Chuẩn đoán qua recording CRM và làm mẫu Role-play giúp nhân sự bứt phá doanh số.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 12: END SLIDE (.scene-dark) -->
+    <section class="scene scene-content scene-dark" data-scene="12"
+        data-caption="• Cảm ơn: Trân trọng cảm ơn các bạn đã theo dõi và đồng hành cùng KiotViet.&#10;• Lời chúc: Chúc đội ngũ Telesales bứt phá hiệu suất và thành công vượt bậc năm 2027."
+        data-vo="Cảm ơn các bạn đã theo dõi! Chúc toàn thể đội ngũ Kinh doanh Telesales và các Coach KiotViet một năm 2027 bứt phá ngoạn mục, nâng tầm giá trị tư vấn và đồng hành cùng sự thành công vượt bậc của hàng triệu nhà kinh doanh.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner justify-center items-center">
+            <div class="text-stage">
+                <div class="glass-card w-full max-w-[1040px] py-10 px-12 flex flex-col items-center text-center">
+                    <div class="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl shadow-xl mb-5 float" style="--d:.1s; background: var(--gradient-kv-green); color: #ffffff;">
+                        <i class="fa-solid fa-handshake-angle"></i>
+                    </div>
+                    <h1 class="display-font text-5xl font-black text-white tracking-tight mb-2 pop" style="--d:.22s">
+                        CẢM ƠN <span style="color: var(--kv-orange);">CÁC BẠN</span> ĐÃ THEO DÕI!
+                    </h1>
+                    <p class="text-base font-bold text-white/90 max-w-2xl mb-8 up" style="--d:.35s">
+                        Chúc đội ngũ Telesales KiotViet bứt phá hiệu suất và đồng hành thành công năm 2027
+                    </p>
+                    <div class="grid grid-cols-2 gap-5 sm:gap-6 w-full max-w-4xl text-left up" style="--d:.45s">
+                        <a href="https://kiotviet.vn/ho-tro" target="_blank" rel="noopener" class="support-card-blue">
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl flex-shrink-0" style="background: #EFF6FF; color: var(--kv-primary-blue);">
+                                <i class="fa-solid fa-circle-question"></i>
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <div class="text-sm font-extrabold text-slate-800 whitespace-nowrap">Trang Hỗ trợ - HDSD KiotViet</div>
+                                <div class="text-[11.5px] font-bold text-blue-600 mt-1 whitespace-nowrap">https://kiotviet.vn/ho-tro</div>
+                            </div>
+                        </a>
+                        <a href="https://www.youtube.com/@HDSDPhanmemKiotViet" target="_blank" rel="noopener" class="youtube-card-red">
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl flex-shrink-0" style="background: #FEF2F2; color: #DC2626;">
+                                <i class="fa-brands fa-youtube text-2xl"></i>
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <div class="text-sm font-extrabold text-slate-800 whitespace-nowrap">Kênh YouTube - HDSD KiotViet</div>
+                                <div class="text-[11.5px] font-bold text-red-600 mt-1 whitespace-nowrap">https://www.youtube.com/@HDSDPhanmemKiotViet</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <div id="presenter-hud" class="hud-hidden">
+        <div id="subtitle-box"></div>
+    </div>
+</div>
+
+<script>
+    const scenes = Array.from(document.querySelectorAll('.scene'));
+    const subtitleBox = document.getElementById('subtitle-box');
+    const presenterHud = document.getElementById('presenter-hud');
+    const progressBar = document.getElementById('progressBar');
+    const customAudioPlayer = document.getElementById('custom-audio-player');
+    const dropzone = document.getElementById('audio-dropzone');
+
+    let currentIndex = 0;
+    let voiceEnabled = false;
+    let hasCustomAudio = false;
+    let isAnimating = false;
+
+    function formatSubSegment(str) {
+        if (!str) return '';
+        let safe = str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        safe = safe.replace(/➔/g, '<span class="sub-arrow">➔</span>');
+        const colonIdx = safe.indexOf(':');
+        if (colonIdx > 0 && colonIdx <= 72) {
+            const lead = safe.slice(0, colonIdx + 1);
+            const rest = safe.slice(colonIdx + 1);
+            return `<strong class="sub-label">${lead}</strong>${rest}`;
+        }
+        return safe;
+    }
+
+    function renderFormattedSubtitle(box, rawText) {
+        if (!box) return;
+        const cleaned = (rawText || '').trim();
+        if (!cleaned) {
+            box.classList.remove('is-multiline', 'is-two-center');
+            box.innerHTML = '';
+            return;
+        }
+        const lines = cleaned.split(/\r?\n|&#10;/).map(l => l.trim()).filter(Boolean);
+        if (lines.length >= 2) {
+            const hasBullets = lines.some(l => l.startsWith('•') || l.startsWith('▸') || /^\d+\./.test(l));
+            if (hasBullets) {
+                box.classList.add('is-multiline');
+                box.classList.remove('is-two-center');
+                const itemsHtml = lines.map(line => {
+                    const stripped = line.replace(/^[•▸]\s*/, '');
+                    return `<div class="sub-line-item"><span class="sub-dot">▸</span><span>${formatSubSegment(stripped)}</span></div>`;
+                }).join('');
+                box.innerHTML = `<div class="sub-lines-wrap">${itemsHtml}</div>`;
+            } else {
+                box.classList.add('is-two-center');
+                box.classList.remove('is-multiline');
+                const rowsHtml = lines.map(line => `<div class="sub-center-row">${formatSubSegment(line)}</div>`).join('');
+                box.innerHTML = `<div class="sub-lines-center">${rowsHtml}</div>`;
+            }
+        } else {
+            box.classList.remove('is-multiline', 'is-two-center');
+            box.innerHTML = `<span>${formatSubSegment(lines[0])}</span>`;
+        }
+    }
+
+    function initPrintSubtitles() {
+        scenes.forEach((scene) => {
+            const printSub = scene.querySelector('.print-subtitle');
+            if (printSub) {
+                const text = scene.getAttribute('data-caption') || scene.getAttribute('data-vo') || '';
+                renderFormattedSubtitle(printSub, text);
+            }
+        });
+    }
+
+    function selectAudioMode(enableVoice) {
+        voiceEnabled = enableVoice;
+        const radio1 = document.getElementById('radio-mode-1');
+        const radio2 = document.getElementById('radio-mode-2');
+        const label1 = document.getElementById('label-mode-1');
+        const label2 = document.getElementById('label-mode-2');
+        if (radio1 && radio2) {
+            radio1.checked = !enableVoice;
+            radio2.checked = enableVoice;
+        }
+        if (label1 && label2) {
+            label1.classList.toggle('active-mode', !enableVoice);
+            label2.classList.toggle('active-mode', enableVoice);
+        }
+    }
+
+    function stopAllAudio() {
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        if (customAudioPlayer && !customAudioPlayer.paused) customAudioPlayer.pause();
+    }
+
+    function togglePauseResumeAudio() {
+        if (hasCustomAudio && customAudioPlayer.src) {
+            if (customAudioPlayer.paused) customAudioPlayer.play().catch(() => {});
+            else customAudioPlayer.pause();
+            return;
+        }
+        if ('speechSynthesis' in window) {
+            if (window.speechSynthesis.speaking) {
+                if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+                else window.speechSynthesis.pause();
+            } else if (voiceEnabled && currentIndex >= 2) {
+                triggerSlideVoice(currentIndex);
+            }
+        }
+    }
+
+    function triggerSlideVoice(index) {
+        if (!voiceEnabled || index <= 0) {
+            stopAllAudio();
+            return;
+        }
+        if (hasCustomAudio && customAudioPlayer.src) {
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            if (index === 1) {
+                customAudioPlayer.currentTime = 0;
+                customAudioPlayer.play().catch(() => {});
+            } else if (customAudioPlayer.paused) {
+                customAudioPlayer.play().catch(() => {});
+            }
+            return;
+        }
+        if (index >= 2) {
+            const text = scenes[index].getAttribute('data-caption') || scenes[index].getAttribute('data-vo') || '';
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                if (text.trim()) {
+                    const utter = new SpeechSynthesisUtterance(text);
+                    utter.lang = 'vi-VN';
+                    utter.rate = 1.02;
+                    window.speechSynthesis.speak(utter);
+                }
+            }
+        }
+    }
+
+    function activateModeByKey(enableVoice) {
+        selectAudioMode(enableVoice);
+        if (currentIndex === 0) return;
+        if (!enableVoice) stopAllAudio();
+        else triggerSlideVoice(currentIndex);
+    }
+
+    function startPresentation() { goToScene(1); }
+
+    function returnToSettings() {
+        stopAllAudio();
+        if (customAudioPlayer) customAudioPlayer.currentTime = 0;
+        goToScene(0, true);
+    }
+
+    function updateChromeVisibility(index) {
+        if (progressBar) {
+            const pct = index <= 1 ? 0 : ((index - 1) / (scenes.length - 2)) * 100;
+            progressBar.style.width = Math.min(100, Math.max(0, pct)) + '%';
+        }
+        if (index <= 1) {
+            presenterHud.classList.add('hud-hidden');
+            subtitleBox.textContent = '';
+        } else {
+            const caption = scenes[index].getAttribute('data-caption') || '';
+            if (!caption.trim()) {
+                presenterHud.classList.add('hud-hidden');
+                subtitleBox.textContent = '';
+            } else {
+                renderFormattedSubtitle(subtitleBox, caption);
+                presenterHud.classList.remove('hud-hidden');
+            }
+        }
+    }
+
+    function goToScene(targetIndex, skipWipe = false) {
+        if (targetIndex < 0 || targetIndex >= scenes.length || targetIndex === currentIndex || isAnimating) return;
+        const prevScene = scenes[currentIndex];
+        const nextScene = scenes[targetIndex];
+
+        if (skipWipe) {
+            scenes.forEach(s => s.classList.remove('active', 'previous', 'no-wipe'));
+            nextScene.classList.add('active', 'no-wipe');
+            currentIndex = targetIndex;
+            updateChromeVisibility(currentIndex);
+            triggerSlideVoice(currentIndex);
+            return;
+        }
+
+        isAnimating = true;
+        scenes.forEach(s => s.classList.remove('previous', 'no-wipe'));
+        prevScene.classList.remove('active');
+        prevScene.classList.add('previous');
+        nextScene.classList.add('active');
+
+        currentIndex = targetIndex;
+        updateChromeVisibility(currentIndex);
+        triggerSlideVoice(currentIndex);
+
+        setTimeout(() => {
+            prevScene.classList.remove('previous');
+            isAnimating = false;
+        }, 620);
+    }
+
+    function copyAllSubtitlesWithPrefix() {
+        const prefix = 'Chuẩn bị ghi hình, lưu ý bạn hãy nghe kỹ lời dẫn và bấm phím mũi tên để chuyển slides, 5 4 3 2 1 <pause>';
+        const lines = [prefix];
+        scenes.forEach((s, idx) => {
+            if (idx >= 2) {
+                const capText = s.getAttribute('data-caption') || s.getAttribute('data-vo') || '';
+                if (capText.trim()) lines.push(capText.trim());
+            }
+        });
+        navigator.clipboard.writeText(lines.join('\n\n'));
+        const btn = document.getElementById('btn-copy-sub');
+        const oldHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Đã copy toàn bộ phụ đề!';
+        setTimeout(() => btn.innerHTML = oldHtml, 2000);
+    }
+
+    function copyLedaPrompt() {
+        const promptText = 'Chuyên viên tư vấn người Hà Nội kể chuyện sôi nổi, nhiệt tình';
+        navigator.clipboard.writeText(promptText);
+        const btn = document.getElementById('btn-copy-prompt');
+        const oldHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check text-emerald-600"></i> Đã copy Prompt Leda!';
+        setTimeout(() => btn.innerHTML = oldHtml, 2000);
+    }
+
+    function loadAudioFile(file) {
+        if (!file) return;
+        customAudioPlayer.src = URL.createObjectURL(file);
+        hasCustomAudio = true;
+        document.getElementById('audio-status-title').textContent = 'Đã nạp file Audio thủ công!';
+        document.getElementById('audio-status-desc').textContent = file.name;
+        const statusIcon = document.getElementById('audio-status-icon');
+        if (statusIcon) statusIcon.className = 'fa-solid fa-circle-check text-2xl mb-1 text-emerald-600';
+        const badge = document.getElementById('audio-loaded-Badge');
+        document.getElementById('audio-filename').textContent = file.name;
+        badge.classList.remove('hidden');
+        selectAudioMode(true);
+    }
+
+    function handleAudioFileSelect(event) {
+        const file = event.target.files[0];
+        if (file) loadAudioFile(file);
+    }
+
+    function clearLoadedAudio(event) {
+        if (event) event.stopPropagation();
+        stopAllAudio();
+        customAudioPlayer.removeAttribute('src');
+        hasCustomAudio = false;
+        document.getElementById('audio-file-input').value = '';
+        document.getElementById('audio-status-title').textContent = 'Up file .mp3 hoặc .wav hoặc kéo thả vào đây';
+        document.getElementById('audio-status-desc').textContent = 'Nếu chưa có file, mục 2 sẽ dùng TTS hệ thống';
+        const statusIcon = document.getElementById('audio-status-icon');
+        if (statusIcon) statusIcon.className = 'fa-solid fa-cloud-arrow-up text-2xl mb-1 text-blue-600';
+        document.getElementById('audio-loaded-Badge').classList.add('hidden');
+        selectAudioMode(false);
+    }
+
+    function checkAutoDetectAudio() {
+        customAudioPlayer.onloadedmetadata = () => {
+            hasCustomAudio = true;
+            document.getElementById('audio-status-title').textContent = 'Tự động nhận diện mc.wav thành công!';
+            document.getElementById('audio-status-desc').textContent = 'Đã nạp sẵn file âm thanh cùng folder';
+            const statusIcon = document.getElementById('audio-status-icon');
+            if (statusIcon) statusIcon.className = 'fa-solid fa-circle-check text-2xl mb-1 text-emerald-600';
+            const badge = document.getElementById('audio-loaded-Badge');
+            document.getElementById('audio-filename').textContent = 'mc.wav (Tự động nhận diện)';
+            badge.classList.remove('hidden');
+            selectAudioMode(true);
+        };
+        customAudioPlayer.onerror = () => {
+            customAudioPlayer.removeAttribute('src');
+            hasCustomAudio = false;
+            document.getElementById('audio-status-title').textContent = 'Chưa phát hiện file mc.wav cùng folder';
+            document.getElementById('audio-status-desc').textContent = 'Click chọn file hoặc để chế độ 2 dùng TTS';
+        };
+        customAudioPlayer.src = 'mc.wav';
+    }
+
+    if (dropzone) {
+        dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
+        dropzone.addEventListener('dragleave', () => { dropzone.classList.remove('dragover'); });
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('dragover');
+            if (e.dataTransfer.files && e.dataTransfer.files.length > 0) loadAudioFile(e.dataTransfer.files[0]);
+        });
+    }
+
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+        else document.exitFullscreen().catch(() => {});
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+        if (e.code === 'Space' || e.code === 'ArrowRight' || e.code === 'PageDown') { e.preventDefault(); goToScene(currentIndex + 1); }
+        else if (e.code === 'Backspace' || e.code === 'ArrowLeft' || e.code === 'PageUp') { e.preventDefault(); goToScene(currentIndex - 1); }
+        else if (e.key === '1') { e.preventDefault(); activateModeByKey(false); }
+        else if (e.key === '2') { e.preventDefault(); activateModeByKey(true); }
+        else if (e.key === '3') { e.preventDefault(); togglePauseResumeAudio(); }
+        else if (e.key === '0' || e.code === 'Home') { e.preventDefault(); returnToSettings(); }
+        else if (e.key === 'f' || e.key === 'F') { e.preventDefault(); toggleFullScreen(); }
+        else if (e.key === 'p' || e.key === 'P') { e.preventDefault(); window.print(); }
+    });
+
+    document.getElementById('video-stage').addEventListener('click', (e) => {
+        if (currentIndex === 0) return;
+        if (e.target.closest('a, button, input, label')) return;
+        const selection = window.getSelection();
+        if (selection && selection.toString().trim().length > 0) return;
+        goToScene(currentIndex + 1);
+    });
+
+    initPrintSubtitles();
+    updateChromeVisibility(0);
+    checkAutoDetectAudio();
+</script>
+</body>
+</html>
