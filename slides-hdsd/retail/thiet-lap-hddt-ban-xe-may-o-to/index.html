@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro HDSD MC - Thiết lập hóa đơn điện tử khi bán xe máy, ô tô - KiotViet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Font chữ Inter chính thức theo KiotViet Brand Guideline (Trang 52-54) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * { box-sizing: border-box; user-select: text; }
+
+        /* BẢNG MÀU CHỦ ĐẠO & PHỤ TRỢ CHUẨN KIOTVIET BRAND GUIDELINE (TRANG 45 - 50):
+           - KV Primary Blue: #0070F4 | KV Accent Blue: #3AE3FF
+           - KV Primary Green: #00B63E | KV Accent Green: #5BE92A
+           - KV Primary Navy: #002957 | KV BG Dark Blue: #00418C | KV BG Ocean Blue: #005AC0
+           - Secondary Palette (Chỉ dùng cho các yếu tố đồ họa theo ngành hàng, KHÔNG làm nền tràn trang):
+             1. Retail (KV Blue & Turquoise):
+                --theme-primary: #0070F4; --theme-dark: #005AC0; --theme-accent: #00C8AF; --theme-light: #CCF4EF; --theme-border: #66DECF; --theme-rgb: 0, 112, 244;
+             2. FNB (KV Orange):
+                --theme-primary: #FFAB3A; --theme-dark: #D97706; --theme-accent: #FFBC61; --theme-light: #FFEED8; --theme-border: #FFCD89; --theme-rgb: 255, 171, 58;
+             3. Salon (KV Coral & Violet):
+                --theme-primary: #FF5564; --theme-dark: #D12B3B; --theme-accent: #CB68FF; --theme-light: #FFDDE0; --theme-border: #FF99A2; --theme-rgb: 255, 85, 100;
+             4. Hotel (KV Green):
+                --theme-primary: #00B63E; --theme-dark: #008A2E; --theme-accent: #5BE92A; --theme-light: #E5FFE9; --theme-border: #6EE7B7; --theme-rgb: 0, 182, 62;
+        */
+        :root {
+            --kv-primary-blue: #0070F4;
+            --kv-accent-blue: #3AE3FF;
+            --kv-primary-green: #00B63E;
+            --kv-accent-green: #5BE92A;
+            --kv-navy: #002957;
+            --kv-dark-blue: #00418C;
+            --kv-ocean-blue: #005AC0;
+            --kv-coral: #FF5564;
+            --kv-coral-light: #FFDDE0;
+            --kv-orange: #FFAB3A;
+            --kv-orange-light: #FFEED8;
+            --kv-turquoise: #00C8AF;
+            --kv-turquoise-light: #CCF4EF;
+            --kv-violet: #CB68FF;
+            --kv-violet-light: #F5E1FF;
+
+            --theme-primary: #0070F4;
+            --theme-dark: #005AC0;
+            --theme-accent: #00C8AF;
+            --theme-light: #E6F2FF;
+            --theme-border: #66DECF;
+            --theme-rgb: 0, 112, 244;
+
+            /* Nền tối chuẩn Brand Guideline (Trang 46, 48) */
+            --gradient-dark: linear-gradient(135deg, #002957 0%, #00418C 52%, #005AC0 100%);
+            --gradient-kv-blue: linear-gradient(135deg, #0070F4 0%, #3AE3FF 100%);
+            --gradient-kv-green: linear-gradient(135deg, #00B63E 0%, #5BE92A 100%);
+
+            --navy-dark: #002957;
+            --navy-primary: #00418C;
+            --navy-muted: #1E40AF;
+            --amber: #FFAB3A;
+            --amber-500: #B45309;
+            --amber-50: #FFEED8;
+            --success: #00B63E;
+            --success-text: #036A2F;
+            --success-bg: #E5FFE9;
+            --error: #FF5564;
+            --error-text: #B91C1C;
+            --error-bg: #FFDDE0;
+            --toc-blue-bg: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            --toc-blue-border: #93C5FD;
+            --shadow: 0 10px 28px -6px rgba(0, 41, 87, 0.12);
+        }
+
+        /* TỶ LỆ HIỂN THỊ TRỰC TIẾP 125% NATIVE TRÊN TRÌNH DUYỆT (20px = 125% CỦA 16px) */
+        html { font-size: clamp(10px, min(1.0416vw, 1.8518vh), 20px); }
+
+        html, body {
+            margin: 0; padding: 0; width: 100vw; height: 100vh;
+            overflow: hidden; background: #E6EEF8;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: var(--navy-dark);
+            user-select: text;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, p, span, div, table, td, th, text { font-family: 'Inter', sans-serif; user-select: text; }
+        .display-font, .scene-dark h1 { font-family: 'Inter', sans-serif; letter-spacing: -0.02em; line-height: 1.26 !important; }
+
+        /* ĐỒNG BỘ MÀU CHỮ KV PRIMARY NAVY (#002957) TRÊN CÁC SLIDE NỀN SÁNG */
+        .scene-content:not(.scene-dark),
+        .scene-content:not(.scene-dark) h1,
+        .scene-content:not(.scene-dark) h2,
+        .scene-content:not(.scene-dark) h3,
+        .scene-content:not(.scene-dark) h4,
+        .scene-content:not(.scene-dark) .text-slate-900,
+        .scene-content:not(.scene-dark) .text-slate-800,
+        .scene-content:not(.scene-dark) .text-gray-900,
+        .scene-content:not(.scene-dark) .text-black {
+            color: var(--navy-dark) !important;
+        }
+
+        .scene-content:not(.scene-dark) .text-slate-700,
+        .scene-content:not(.scene-dark) .text-slate-600,
+        .scene-content:not(.scene-dark) .text-slate-500 {
+            color: var(--navy-muted) !important;
+        }
+
+        h1, h2, h3, .balance-text { text-wrap: balance; }
+
+        #progressBar {
+            position: fixed; top: 0; left: 0; height: 4px;
+            background: linear-gradient(90deg, var(--kv-primary-blue), var(--kv-turquoise), var(--kv-primary-green));
+            transition: width 0.35s ease;
+            z-index: 1000; width: 0%;
+        }
+
+        #video-stage {
+            position: fixed; inset: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at 12% 15%, rgba(0, 112, 244, 0.08) 0%, transparent 45%),
+                        radial-gradient(circle at 88% 85%, rgba(0, 200, 175, 0.07) 0%, transparent 45%),
+                        linear-gradient(135deg, #F0F9FF 0%, #E6F2FF 50%, #F8FAFC 100%);
+            overflow: hidden;
+        }
+
+        .tech-grid {
+            position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(0, 41, 87, 0.04) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 41, 87, 0.04) 1px, transparent 1px);
+            background-size: 38px 38px; pointer-events: none; z-index: 1;
+        }
+
+        /* ---------- Scene Transitions ---------- */
+        @keyframes wipeDownActive {
+            from { clip-path: inset(0 0 100% 0); }
+            to { clip-path: inset(0 0 0 0); }
+        }
+        @keyframes wipeUpPrevious {
+            from { clip-path: inset(0 0 0 0); }
+            to { clip-path: inset(100% 0 0 0); }
+        }
+
+        .scene {
+            position: absolute; inset: 0;
+            padding: 1.15rem 2.6rem 7.2rem 2.6rem;
+            display: none !important;
+            flex-direction: column; align-items: center; justify-content: flex-start;
+            background: radial-gradient(circle at 12% 15%, rgba(0, 112, 244, 0.08) 0%, transparent 45%),
+                        radial-gradient(circle at 88% 85%, rgba(0, 200, 175, 0.07) 0%, transparent 45%),
+                        linear-gradient(135deg, #F0F9FF 0%, #E6F2FF 50%, #F8FAFC 100%);
+            z-index: 10;
+        }
+        .scene.scene-dark {
+            background: var(--gradient-dark) !important;
+            color: #ffffff !important;
+        }
+        .scene.previous {
+            display: flex !important; z-index: 15;
+            animation: wipeUpPrevious 0.62s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+        .scene.active {
+            display: flex !important; z-index: 20;
+            animation: wipeDownActive 0.62s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+        .scene.no-wipe { animation: none !important; }
+
+        /* ---------- Staggered Micro-Animations & Ambient Motion ---------- */
+        .scene.active .pop { animation: popIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: var(--d, 0s); }
+        .scene.active .up { animation: fadeUp 0.55s ease-out both; animation-delay: var(--d, 0s); }
+        .scene.active .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: drawLine 1.05s ease forwards; animation-delay: var(--d, 0s); }
+        .scene.active .reveal { animation: revealRight 1.1s ease-out both; animation-delay: var(--d, 0s); }
+        .scene.active .rise { transform-origin: bottom; animation: riseUp 0.9s ease-out both; animation-delay: var(--d, 0s); }
+        .scene.active .typing > i { animation: revealRight 0.5s ease-out both; animation-delay: var(--d, 0s); }
+        svg .pop, svg .rise { transform-box: fill-box; transform-origin: center; }
+
+        .float { animation: floatY 2.2s ease-in-out infinite; animation-delay: var(--f, 0s); will-change: transform; }
+        .pulse { animation: pulseScale 2.2s ease-in-out infinite; }
+
+        @keyframes popIn { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+        @keyframes drawLine { to { stroke-dashoffset: 0; } }
+        @keyframes revealRight { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+        @keyframes riseUp { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+        @keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        @keyframes pulseScale { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+        @keyframes travel { from { left: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } to { left: calc(100% - 14px); opacity: 0; } }
+        @keyframes travelRight { from { left: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } to { left: calc(100% - 14px); opacity: 0; } }
+        @keyframes travelLeft { from { left: calc(100% - 14px); opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } to { left: 0; opacity: 0; } }
+        @keyframes sweep { from { left: 8%; } to { left: 92%; } }
+
+        /* ---------- Visual Graphic Components (1-Way & 2-Way Semantic Flows + 5 Diagram Archetypes) ---------- */
+        .bi-sync-flow { display: grid; grid-template-columns: 16.5rem 1fr 14.5rem 1fr 16.5rem; align-items: center; width: 100%; gap: 0.5rem; }
+        .sync-node-card {
+            background: #ffffff; border: 2px solid #93C5FD; border-radius: 1.35rem;
+            padding: 1rem 1.15rem; box-shadow: var(--shadow); display: flex;
+            flex-direction: column; align-items: center; text-align: center; gap: 0.45rem;
+        }
+        .dual-track { display: flex; flex-direction: column; gap: 0.85rem; width: 100%; padding: 0 0.35rem; }
+        .track-lane { display: flex; flex-direction: column; gap: 0.25rem; width: 100%; }
+        .track-label { font-size: 0.68rem; font-weight: 800; text-align: center; white-space: nowrap; padding: 0.15rem 0.55rem; border-radius: 999px; align-self: center; }
+        .track-forward, .track-reverse { position: relative; width: 100%; height: 14px; }
+        .track-forward::before { content: ''; position: absolute; top: 5.5px; left: 0; right: 0; border-top: 3px dashed var(--kv-primary-green); opacity: 0.7; }
+        .track-reverse::before { content: ''; position: absolute; top: 5.5px; left: 0; right: 0; border-top: 3px dashed var(--kv-orange); opacity: 0.75; }
+        .track-forward i {
+            position: absolute; top: 0; width: 14px; height: 14px; border-radius: 50%;
+            background: var(--kv-primary-green); box-shadow: 0 0 10px var(--kv-primary-green);
+            animation: travelRight 2.1s linear infinite; animation-delay: var(--t, 0s);
+        }
+        .track-reverse i {
+            position: absolute; top: 0; width: 14px; height: 14px; border-radius: 50%;
+            background: var(--kv-orange); box-shadow: 0 0 10px var(--kv-orange);
+            animation: travelLeft 2.1s linear infinite; animation-delay: var(--t, 0s);
+        }
+        .v-stack-rows { display: flex; flex-direction: column; gap: 0.75rem; width: 100%; }
+        .v-row-item {
+            display: grid; grid-template-columns: 2.8rem 14rem 1fr auto; align-items: center; gap: 1rem;
+            background: #ffffff; border: 1.5px solid #BFDBFE; border-left: 5px solid var(--theme-primary);
+            border-radius: 1rem; padding: 0.75rem 1.15rem; box-shadow: 0 4px 14px rgba(0, 41, 87, 0.05);
+        }
+        .logic-branch-diagram { display: grid; grid-template-columns: 15.5rem 2.5rem 1fr; align-items: center; gap: 0.75rem; width: 100%; }
+        .asymmetric-hub-flow { display: grid; grid-template-columns: 5fr 7fr; gap: 1.25rem; align-items: stretch; width: 100%; }
+        .anatomy-board { display: grid; grid-template-columns: 17.5rem 1fr; gap: 1.25rem; align-items: center; width: 100%; }
+        .io-flow { display: flex; align-items: center; justify-content: center; width: 100%; gap: 0.5rem; }
+        .io-col { display: flex; flex-direction: column; gap: 0.65rem; align-items: stretch; min-width: 14.5rem; flex-shrink: 0; }
+        .io-chip {
+            background: #ffffff; border: 1.5px solid #93C5FD;
+            border-radius: 0.9rem; padding: 0.65rem 1.05rem;
+            box-shadow: var(--shadow); font-weight: 800; font-size: 0.82rem;
+            display: flex; align-items: center; gap: 0.6rem; color: var(--navy-dark);
+            white-space: nowrap;
+        }
+        .track { position: relative; flex: 1; height: 14px; margin: 0 0.6rem; min-width: 3.2rem; }
+        .track::before { content: ''; position: absolute; top: 5.5px; left: 0; right: 0; border-top: 3px dashed var(--kv-primary-blue); opacity: 0.6; }
+        .scene-dark .track::before { border-top-color: rgba(255, 255, 255, 0.45); }
+        .track i {
+            position: absolute; top: 0; width: 14px; height: 14px; border-radius: 50%;
+            background: var(--kv-orange); box-shadow: 0 0 10px var(--kv-orange);
+            animation: travel 2.2s linear infinite; animation-delay: var(--t, 0s);
+        }
+        .brain-box {
+            min-width: 12.8rem; width: auto; height: 9.8rem; border-radius: 1.75rem;
+            background: var(--gradient-dark); color: #ffffff !important;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 0.85rem 1.35rem;
+            box-shadow: 0 16px 36px -8px rgba(0, 41, 87, 0.45);
+            border: 2px solid rgba(58, 227, 255, 0.35); flex-shrink: 0;
+        }
+        .brain-box span { white-space: nowrap; }
+        .out-circle {
+            width: 9.8rem; height: 9.8rem; border-radius: 50%;
+            background: var(--success-bg); border: 4px solid var(--kv-primary-green);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 0.75rem; font-weight: 800; color: var(--success-text) !important;
+            box-shadow: 0 12px 28px -6px rgba(0, 182, 62, 0.22); flex-shrink: 0;
+        }
+        .out-circle div, .out-circle span { white-space: nowrap; }
+
+        .vs-board { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.25rem; align-items: stretch; width: 100%; }
+        .vs-mid {
+            display: grid; place-items: center;
+            font-weight: 900; font-size: 1.35rem; color: var(--kv-navy);
+            width: 3rem; height: 3rem; border-radius: 50%;
+            background: var(--kv-orange); border: 2.5px solid #ffffff;
+            box-shadow: 0 8px 20px rgba(255, 171, 58, 0.32); align-self: center;
+        }
+
+        .hbar { display: grid; grid-template-columns: 9.5rem 1fr 5.5rem; align-items: center; gap: 0.85rem; width: 100%; }
+        .hbar .lbl { font-weight: 800; color: var(--navy-dark); text-align: right; font-size: 0.82rem; }
+        .hbar .val { font-weight: 900; font-size: 1.2rem; color: var(--kv-primary-blue); }
+        .stack-bar { display: flex; height: 2rem; border-radius: 0.65rem; overflow: hidden; background: #F1F5F9; }
+        .stack-bar > span { height: 100%; display: grid; place-items: center; color: #fff !important; font-size: 0.72rem; font-weight: 800; white-space: nowrap; padding: 0 6px; }
+
+        .chg-row {
+            display: grid; grid-template-columns: 2.1rem 1.25fr 1.55fr 1.15fr; gap: 0.85rem;
+            align-items: center; background: #ffffff; border: 1.5px solid #DBEAFE;
+            border-radius: 0.9rem; padding: 0.55rem 0.9rem; box-shadow: 0 4px 12px rgba(0, 41, 87, 0.04);
+            font-size: 0.78rem;
+        }
+        .chg-row .no {
+            width: 1.65rem; height: 1.65rem; border-radius: 50%;
+            background: var(--kv-orange); color: var(--navy-dark) !important;
+            display: grid; place-items: center; font-weight: 900;
+        }
+        .chg-row .num {
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 0.72rem; font-weight: 800; color: var(--kv-ocean-blue) !important;
+            background: #EFF6FF; border: 1px solid #93C5FD;
+            padding: 0.3rem 0.6rem; border-radius: 0.55rem; text-align: center;
+        }
+
+        .tl-row { position: relative; display: grid; width: 100%; gap: 1rem; }
+        .tl-line { position: absolute; left: 8%; right: 8%; top: 1.6rem; height: 5px; border-radius: 3px; background: linear-gradient(90deg, var(--kv-primary-blue), var(--kv-turquoise), var(--kv-primary-green)); z-index: 0; }
+        .tl-item { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+        /* SLIDE 0: TRANG SETTINGS TRẢI RỘNG CÂN ĐỐI (ĐƠN VỊ PX ĐỘC LẬP) */
+        .scene-standby {
+            padding: 20px 32px !important;
+            justify-content: center; align-items: center;
+            background: #E6EEF8 !important;
+        }
+        .scene-blank { padding: 0 !important; background: #ffffff !important; }
+
+        .setup-card {
+            width: 96vw; max-width: 1660px; background: #ffffff;
+            border-radius: 28px; border: 2px solid #CBD5E1;
+            box-shadow: 0 24px 48px -12px rgba(0, 41, 87, 0.14);
+            padding: 24px 32px; display: flex; flex-direction: column;
+            gap: 18px; color: var(--navy-dark); font-size: 16px;
+        }
+        .setup-header-row {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 20px; padding-bottom: 16px; border-bottom: 1.5px solid #E2E8F0; flex-wrap: nowrap;
+        }
+        .setup-brand-group { display: flex; align-items: center; gap: 16px; min-width: 0; }
+        .setup-brand-icon {
+            width: 52px; height: 52px; border-radius: 16px; color: #ffffff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; font-weight: 900; flex-shrink: 0;
+            box-shadow: 0 8px 18px -4px rgba(0, 112, 244, 0.35);
+            background: linear-gradient(135deg, var(--kv-primary-blue), var(--kv-ocean-blue));
+        }
+        .setup-title-line { display: flex; align-items: center; gap: 12px; flex-wrap: nowrap; }
+        .setup-title-text { font-size: 25px; font-weight: 900; color: var(--navy-dark); letter-spacing: -0.02em; margin: 0; white-space: nowrap; }
+        .setup-theme-badge {
+            padding: 4px 12px; border-radius: 999px; font-size: 11.5px; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 0.05em; background: var(--kv-turquoise-light);
+            color: #00665A; border: 1.5px solid var(--kv-turquoise); white-space: nowrap; flex-shrink: 0;
+        }
+        .setup-subtitle-text { font-size: 13.5px; font-weight: 600; color: var(--navy-muted); margin: 3px 0 0 0; white-space: nowrap; }
+        .setup-controls-group { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+        .mode-radio-group {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: #F1F5F9; border: 1.5px solid #CBD5E1;
+            padding: 5px; border-radius: 999px; flex-shrink: 0;
+        }
+        .mode-radio-label {
+            display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px;
+            border-radius: 999px; font-size: 13.5px; font-weight: 800; color: var(--navy-muted);
+            cursor: pointer; transition: all 0.15s ease; border: 1.5px solid transparent; white-space: nowrap;
+        }
+        .mode-radio-label input[type="radio"] { accent-color: var(--kv-primary-blue); width: 16px; height: 16px; cursor: pointer; margin: 0; }
+        .mode-radio-label.active-mode { background: #ffffff; color: var(--navy-dark); border-color: #93C5FD; box-shadow: 0 2px 8px rgba(0, 112, 244, 0.15); }
+        .steps-wrapper { background: #EFF6FF; border: 1.5px solid #93C5FD; border-radius: 20px; padding: 16px 20px; }
+        .steps-header-title { font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; color: var(--kv-ocean-blue); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .steps-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+        .step-box {
+            background: #ffffff; border: 1.5px solid #DBEAFE; border-radius: 16px;
+            padding: 16px 18px; display: flex; flex-direction: column; justify-content: space-between;
+            gap: 12px; box-shadow: 0 4px 12px -2px rgba(0, 41, 87, 0.06); transition: all 0.2s ease;
+        }
+        .step-box:hover { border-color: var(--kv-primary-blue); transform: translateY(-2px); box-shadow: 0 10px 20px -6px rgba(0, 112, 244, 0.15); }
+        .step-top-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+        .step-badge-pill { padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 800; text-transform: uppercase; white-space: nowrap; }
+        .step-title { font-size: 16px; font-weight: 800; color: var(--navy-dark); margin: 0 0 4px 0; }
+        .step-desc { font-size: 13px; font-weight: 600; color: var(--navy-muted); line-height: 1.45; margin: 0 0 8px 0; }
+        .step-code-box { padding: 8px 10px; border-radius: 10px; font-size: 11.5px; font-weight: 700; line-height: 1.4; }
+        .dropzone-area { border: 2px dashed var(--kv-primary-blue); background: #EFF6FF; border-radius: 12px; padding: 14px 10px; text-align: center; cursor: pointer; transition: all 0.2s ease; }
+        .studio-btn {
+            height: 40px; padding: 0 15px; border-radius: 11px; font-size: 13px; font-weight: 800;
+            display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+            transition: all 0.15s ease; cursor: pointer; text-decoration: none; white-space: nowrap; width: 100%;
+        }
+        .studio-btn-primary { background: var(--kv-primary-blue); color: #ffffff; border: 1px solid var(--kv-primary-blue); box-shadow: 0 4px 10px -2px rgba(0, 112, 244, 0.25); }
+        .studio-btn-primary:hover { background: var(--kv-ocean-blue); }
+        .studio-btn-start {
+            width: auto; height: 46px; padding: 0 22px; border-radius: 999px;
+            background: linear-gradient(135deg, var(--kv-primary-blue) 0%, var(--kv-ocean-blue) 100%);
+            color: #ffffff; border: none; box-shadow: 0 8px 18px -4px rgba(0, 112, 244, 0.4);
+            font-size: 14.5px; font-weight: 800; white-space: nowrap;
+        }
+        .studio-btn-outline { background: #ffffff; color: var(--navy-dark); border: 1.5px solid #CBD5E1; }
+        .shortcut-panel { background: #FFF9F0; border: 1.5px solid #FFCD89; border-radius: 20px; padding: 14px 20px; display: flex; flex-direction: column; gap: 10px; }
+        .shortcut-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
+        .shortcut-item {
+            background: #ffffff; border: 1.5px solid #FFDDB0; border-radius: 12px;
+            padding: 8px 12px; display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 2px 8px -2px rgba(217, 119, 6, 0.08); cursor: pointer; transition: all 0.15s ease;
+        }
+        .shortcut-item:hover { border-color: var(--kv-orange); transform: translateY(-1px); }
+        .kbd-light {
+            display: inline-flex; align-items: center; justify-content: center;
+            min-width: 32px; height: 30px; padding: 0 7px; background: var(--kv-orange-light); color: #9A3412;
+            border: 1.5px solid var(--kv-orange); border-radius: 8px; font-size: 13.5px; font-weight: 900;
+            box-shadow: 0 2px 0 var(--kv-orange); flex-shrink: 0;
+        }
+
+        /* LOGO & SLIDE INNER */
+        .scene-logo { position: absolute; top: 1.8rem; right: 2.4rem; z-index: 30; display: flex; align-items: center; }
+        .scene-logo img { height: 2.1rem; width: auto; filter: drop-shadow(0 2px 4px rgba(0, 41, 87, 0.08)); }
+        .scene-dark .scene-logo { background: #FFFFFF; padding: 0.32rem 0.8rem; border-radius: 999px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22); }
+        .slide-inner { width: 100%; max-width: 87.5rem; height: 100%; display: flex; flex-direction: column; justify-content: space-between; position: relative; z-index: 5; }
+
+        /* KHÓA CĂN GIỮA QUANG HỌC TUYỆT ĐỐI CHO TẤT CẢ SLIDE TIÊU ĐỀ CHƯƠNG (.scene-dark) TRÊN MÀN HÌNH */
+        .scene.scene-dark .slide-inner {
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 1.75rem !important;
+            height: 100% !important;
+            margin: 0 auto !important;
+        }
+
+        /* HERO CARD & GLASS CARD */
+        .hero-card {
+            width: 100%; max-width: 68rem; background: #ffffff;
+            border: 2.5px solid #93C5FD; border-radius: 2.25rem;
+            box-shadow: 0 25px 60px -15px rgba(0, 112, 244, 0.14), 0 10px 25px -5px rgba(0, 41, 87, 0.08);
+            padding: 2.8rem 3.4rem; display: flex; flex-direction: column; align-items: center; text-align: center;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1.5px solid rgba(255, 255, 255, 0.24);
+            box-shadow: 0 20px 44px -12px rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(12px);
+            border-radius: 1.75rem; color: #ffffff !important;
+        }
+        .hero-badge-pill {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.5rem 1.2rem; border-radius: 999px;
+            font-size: 0.8rem; font-weight: 800; white-space: nowrap;
+        }
+
+        .slide-header {
+            width: 100%; display: flex; flex-direction: column; align-items: flex-start;
+            justify-content: center; gap: 0.35rem; padding-left: 0.2rem; padding-right: 12.5rem; flex-shrink: 0;
+        }
+        .header-title-row { display: flex; align-items: center; gap: 0.85rem; text-align: left; }
+        .header-icon-box {
+            width: 2.75rem; height: 2.75rem; border-radius: 0.875rem;
+            background: linear-gradient(135deg, var(--kv-primary-blue) 0%, var(--kv-ocean-blue) 100%);
+            color: #ffffff !important; display: flex; align-items: center; justify-content: center;
+            font-size: 1.25rem; flex-shrink: 0; box-shadow: 0 6px 14px -3px rgba(0, 112, 244, 0.35);
+        }
+        .scene-dark .header-icon-box { background: var(--kv-orange); color: var(--navy-dark) !important; }
+        .section-badge {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.3rem 0.9rem; border-radius: 999px; background: #EFF6FF;
+            border: 1.5px solid #93C5FD; color: var(--kv-ocean-blue) !important;
+            font-weight: 800; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .scene-dark .section-badge { background: var(--kv-orange); border-color: var(--kv-orange); color: var(--navy-dark) !important; }
+
+        /* KHUNG CHỨA ẢNH SCREENSHOT */
+        .screenshot-stage {
+            flex: 1; min-height: 0; width: 100%;
+            padding: 0.3rem 0.5rem 0.4rem 0.5rem;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .screenshot-card {
+            width: fit-content; height: fit-content; max-width: 100%; max-height: 100%;
+            background: #ffffff; border: 1.5px solid #93C5FD; border-radius: 14px; padding: 0;
+            box-shadow: 0 20px 44px -12px rgba(0, 41, 87, 0.2), 0 4px 16px -2px rgba(0, 112, 244, 0.12);
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
+        }
+        .screenshot-card img {
+            display: block; max-width: min(92vw, 80rem); max-height: calc(100vh - 13.8rem);
+            width: auto; height: auto; object-fit: contain; border-radius: 13px;
+        }
+
+        .text-stage { flex: 1; min-height: 0; width: 100%; padding: 0.5rem 0.4rem; display: flex; align-items: center; justify-content: center; }
+        .bento-card { background: #ffffff; border: 2px solid #BFDBFE; box-shadow: 0 20px 44px -12px rgba(0, 41, 87, 0.14); border-radius: 1.625rem; }
+
+        /* THẺ MỤC LỤC NỀN XANH NHẠT & CĂN THẲNG HÀNG TIÊU ĐỀ */
+        .toc-card {
+            padding: 1.3rem 1.2rem; border-radius: 1.35rem;
+            background: var(--toc-blue-bg) !important; border: 2px solid var(--toc-blue-border) !important;
+            box-shadow: 0 8px 20px -4px rgba(0, 112, 244, 0.1) !important;
+            display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch;
+            position: relative; overflow: hidden;
+        }
+        .toc-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem; flex-shrink: 0; }
+        .toc-card-title { font-size: 1.02rem; font-weight: 900; color: var(--navy-dark) !important; line-height: 1.3; min-height: 2.7rem; display: flex; align-items: center; margin-bottom: 0.4rem; }
+        .toc-card-desc { font-size: 0.8rem; font-weight: 600; color: var(--navy-muted) !important; line-height: 1.48; }
+
+        .toc-sub-item {
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%) !important;
+            border: 1.5px solid #93C5FD !important; border-radius: 1.125rem;
+            padding: 0.95rem 1.2rem; color: var(--navy-dark) !important;
+            box-shadow: 0 4px 12px -2px rgba(0, 112, 244, 0.08);
+        }
+        .scene-dark .toc-sub-item {
+            background: rgba(255, 255, 255, 0.12) !important;
+            border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+            color: #ffffff !important;
+        }
+
+        .inner-card-theme { background: #F0FDFB; border: 1.5px solid #99E9DF; border-left: 5px solid var(--kv-turquoise); border-radius: 1.2rem; padding: 1.1rem 1.3rem; }
+        .inner-card-blue { background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border: 1.5px solid #93C5FD; border-left: 5px solid var(--kv-primary-blue); border-radius: 1.2rem; padding: 1.1rem 1.3rem; }
+        .inner-card-emerald { background: linear-gradient(135deg, #E5FFE9 0%, #D1FAE5 100%); border: 1.5px solid #6EE7B7; border-left: 5px solid var(--kv-primary-green); border-radius: 1.2rem; padding: 1.1rem 1.3rem; }
+        .inner-card-amber { background: linear-gradient(135deg, #FFF9F0 0%, #FFEED8 100%); border: 1.5px solid #FFCD89; border-left: 5px solid var(--kv-orange); border-radius: 1.2rem; padding: 1.1rem 1.3rem; }
+
+        .support-card-blue {
+            background: #FFFFFF !important;
+            border: 1.5px solid #CBD5E1 !important;
+            border-radius: 1.25rem !important;
+            padding: 1.1rem 1.4rem !important;
+            box-shadow: 0 4px 14px rgba(0, 41, 87, 0.06) !important;
+            transition: all 0.2s ease;
+        }
+        .support-card-blue:hover {
+            border-color: #0070F4 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 112, 244, 0.12) !important;
+        }
+        .youtube-card-red {
+            background: #FFFFFF !important;
+            border: 1.5px solid #CBD5E1 !important;
+            border-radius: 1.25rem !important;
+            padding: 1.1rem 1.4rem !important;
+            box-shadow: 0 4px 14px rgba(0, 41, 87, 0.06) !important;
+            transition: all 0.2s ease;
+        }
+        .youtube-card-red:hover {
+            border-color: #FF0000 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 0, 0, 0.12) !important;
+        }
+
+        /* PRESENTER HUD & PHỤ ĐỀ CÂN XỨNG 4 HƯỚNG */
+        #presenter-hud {
+            position: absolute; bottom: 0.85rem; left: 50%; transform: translateX(-50%);
+            width: calc(100vw - 4.4rem); max-width: 86.25rem;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 40; opacity: 1; transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        #presenter-hud.hud-hidden { opacity: 0 !important; pointer-events: none; transform: translate(-50%, 20px); }
+
+        #subtitle-box {
+            width: 100%; min-height: 3.1rem; max-height: 5.8rem;
+            background: linear-gradient(135deg, var(--kv-ocean-blue) 0%, var(--kv-navy) 100%);
+            color: #ffffff !important; padding: 0.65rem 2.2rem; border-radius: 1.125rem;
+            font-size: 1.15rem; font-weight: 700; text-align: center !important; line-height: 1.45;
+            border: 1.5px solid rgba(58, 227, 255, 0.35);
+            box-shadow: 0 14px 32px -6px rgba(0, 41, 87, 0.42);
+            text-wrap: balance; white-space: normal;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; user-select: text;
+        }
+        .print-subtitle { display: none; text-align: center !important; user-select: text; }
+
+        /* IN PDF 16:9 NATIVE CHUẨN HOÀN THIỆN (CHỐNG TRÀN TRANG, GRADIENT KIOTVIET, CĂN GIỮA TIÊU ĐỀ) */
+        @media print {
+            @page {
+                size: 1280px 720px;
+                margin: 0mm !important;
+            }
+            * {
+                animation: none !important;
+                transition: none !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                transform: none !important;
+                clip-path: none !important;
+                stroke-dashoffset: 0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                box-sizing: border-box !important;
+            }
+            /* Tỷ lệ đồng dạng tuyệt đối 1:1 với 1920x1080 (1280 / 1920 * 20px = 13.3333px -> giữ đúng 96rem x 54rem) */
+            html {
+                font-size: 13.3333px !important;
+            }
+            html, body {
+                width: 1280px !important;
+                height: 720px !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: visible !important;
+                background: #F8FAFC !important;
+            }
+            #presenter-hud, #progressBar, .tech-grid, .scene-standby, .scene-blank {
+                display: none !important;
+            }
+            #video-stage {
+                position: static !important;
+                width: 1280px !important;
+                height: auto !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .scene.scene-content {
+                position: relative !important;
+                inset: auto !important;
+                width: 1280px !important;
+                height: 720px !important;
+                min-height: 720px !important;
+                max-height: 720px !important;
+                margin: 0 !important;
+                padding: 1rem 2.4rem 5.6rem 2.4rem !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: flex-start !important;
+                page-break-after: always !important;
+                break-after: page !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                overflow: hidden !important;
+                box-sizing: border-box !important;
+            }
+            .scene.scene-content:last-of-type {
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+            }
+            .scene-logo {
+                display: flex !important;
+                position: absolute !important;
+                top: 1.4rem !important;
+                right: 2.4rem !important;
+                z-index: 20 !important;
+            }
+            .scene-logo img {
+                height: 30px !important;
+            }
+            .slide-inner {
+                width: 100% !important;
+                max-width: 1200px !important;
+                height: 100% !important;
+                max-height: calc(720px - 7rem) !important;
+                margin: 0 auto !important;
+                position: static !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: flex-start !important;
+                box-sizing: border-box !important;
+            }
+
+            /* Căn giữa chuẩn cho các Slide Tiêu đề (Bìa Hero, Chapter Bridges) và Slide Cảm ơn */
+            .scene.scene-dark,
+            .scene[data-scene="2"],
+            .scene:last-of-type {
+                justify-content: center !important;
+                align-items: center !important;
+            }
+            .scene.scene-dark .slide-inner,
+            .scene[data-scene="2"] .slide-inner,
+            .scene:last-of-type .slide-inner {
+                justify-content: center !important;
+                align-items: center !important;
+                text-align: center !important;
+                height: 100% !important;
+                margin: auto !important;
+            }
+            .scene[data-scene="2"] .bento-card,
+            .scene.scene-dark .max-w-4xl,
+            .scene:last-of-type .max-w-4xl {
+                margin: auto !important;
+            }
+
+            .slide-header {
+                margin-bottom: 0.45rem !important;
+                flex-shrink: 0 !important;
+            }
+            .slide-header h1 {
+                font-size: 1.3rem !important;
+                line-height: 1.25 !important;
+            }
+
+            /* Giới hạn kích thước stage & card để chống tràn trang khi in */
+            .screenshot-stage {
+                flex: 1 1 auto !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 0.1rem 0 !important;
+                min-height: 0 !important;
+                max-height: 470px !important;
+                overflow: hidden !important;
+            }
+            .screenshot-card {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                max-height: 460px !important;
+                box-shadow: 0 4px 16px rgba(0, 41, 87, 0.08) !important;
+                border: 1px solid #CBD5E1 !important;
+                border-radius: 12px !important;
+                overflow: hidden !important;
+            }
+            .screenshot-card img {
+                max-width: min(92vw, 1160px) !important;
+                max-height: 440px !important;
+                width: auto !important;
+                height: auto !important;
+                object-fit: contain !important;
+                display: block !important;
+            }
+
+            /* Thu gọn nhẹ thẻ Bento / Grid khi in để bảo đảm không đè footer */
+            .bento-card {
+                padding: 0.85rem 1.25rem !important;
+                gap: 0.65rem !important;
+            }
+            .toc-card {
+                padding: 0.65rem 0.85rem !important;
+            }
+            .vs-board {
+                gap: 0.75rem !important;
+            }
+            .inner-card-amber, .inner-card-emerald, .inner-card-blue {
+                padding: 0.75rem 1rem !important;
+            }
+
+            /* Phụ đề in: Chuẩn Gradient Thương hiệu KiotViet 100% như khi trình chiếu */
+            .print-subtitle {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                position: absolute !important;
+                bottom: 1.1rem !important;
+                left: 4% !important;
+                right: 4% !important;
+                width: 92% !important;
+                max-width: 1200px !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                transform: none !important;
+                background: linear-gradient(135deg, #0070F4 0%, #002957 100%) !important;
+                border: 1.5px solid rgba(58, 227, 255, 0.45) !important;
+                box-shadow: 0 8px 24px -4px rgba(0, 41, 87, 0.35) !important;
+                color: #FFFFFF !important;
+                padding: 0.6rem 2rem !important;
+                border-radius: 1.125rem !important;
+                font-size: 0.95rem !important;
+                font-weight: 700 !important;
+                line-height: 1.4 !important;
+                min-height: 3.05rem !important;
+                max-height: none !important;
+                height: auto !important;
+                overflow: visible !important;
+                text-align: center !important;
+                text-wrap: balance !important;
+                z-index: 100 !important;
+            }
+            .scene.scene-dark .print-subtitle {
+                background: linear-gradient(135deg, #0070F4 0%, #001A38 100%) !important;
+                border: 1.5px solid rgba(58, 227, 255, 0.6) !important;
+                box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5) !important;
+            }
+            .print-subtitle:empty {
+                display: none !important;
+            }
+        }
+
+        /* ---- Bổ sung riêng cho bài HĐĐT xe ---- */
+        .hero-split { display: grid; grid-template-columns: 7fr 5fr; gap: 2.5rem; align-items: center; width: 100%; max-width: 84rem; text-align: left; }
+        .hero-emblem { position: relative; width: 17rem; height: 17rem; margin: 0 auto; border-radius: 3rem;
+            background: rgba(255,255,255,0.12); border: 2px solid rgba(255,255,255,0.28); backdrop-filter: blur(12px);
+            display: flex; align-items: center; justify-content: center; box-shadow: 0 24px 54px -12px rgba(0,0,0,0.4); }
+        .hero-sat { position: absolute; width: 3.6rem; height: 3.6rem; border-radius: 1.1rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 10px 22px rgba(0,0,0,0.3); }
+        .flow-node { background: #fff; border: 2px solid #93C5FD; border-radius: 1.35rem; padding: 1rem 1.1rem; box-shadow: var(--shadow);
+            width: 13.2rem; min-height: 9.2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 0.45rem; flex-shrink: 0; }
+        .flow-node .ic { width: 3rem; height: 3rem; border-radius: 1rem; display: flex; align-items: center; justify-content: center; color: #fff !important; font-size: 1.3rem; }
+        .vs-card { border-radius: 1.1rem; padding: 0.95rem 1.25rem; font-weight: 800; font-size: 0.95rem; display: flex; align-items: center; gap: 0.85rem; line-height: 1.35; }
+        .vs-bad { background: var(--error-bg); border: 1.5px solid #FF99A2; }
+        .vs-good { background: var(--success-bg); border: 1.5px solid #6EE7B7; }
+        .v-row-item .kw { font-weight: 900; font-size: 1.02rem; }
+        .v-row-item .ds { font-weight: 600; font-size: 0.9rem; color: var(--navy-muted); }
+        .v-row-item .badge-no { width: 2.4rem; height: 2.4rem; border-radius: 0.8rem; background: var(--theme-primary); color: #fff !important; display: flex; align-items: center; justify-content: center; font-weight: 900; }
+        .pill-st { padding: 0.35rem 0.9rem; border-radius: 999px; font-weight: 800; font-size: 0.78rem; white-space: nowrap; }
+        .step-vert { display: flex; flex-direction: column; gap: 0.55rem; }
+        .step-vert .st { background: #fff; border: 1.5px solid #BFDBFE; border-left: 5px solid var(--kv-primary-blue); border-radius: 1rem; padding: 0.8rem 1.1rem; display: flex; align-items: center; gap: 0.85rem; font-weight: 800; font-size: 0.95rem; box-shadow: 0 4px 14px rgba(0,41,87,0.05); }
+        .step-vert .arr { text-align: center; color: var(--kv-primary-blue); font-size: 1rem; line-height: 1; }
+        .pillar-card { background: var(--gradient-dark); color: #fff !important; border-radius: 1.6rem; padding: 1.6rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 0.7rem; box-shadow: 0 16px 36px -8px rgba(0,41,87,0.4); }
+        .scene.scene-dark .scene-logo { }
+        @media print { .hero-split { grid-template-columns: 7fr 5fr; } }
+        #subtitle-box.is-multiline { padding: 0.48rem 1.5rem; font-size: 0.86rem; line-height: 1.35; text-align: left !important; text-wrap: pretty; }
+        #subtitle-box.is-two-center { padding: 0.52rem 1.8rem; font-size: 0.94rem; line-height: 1.38; text-align: center !important; }
+        .sub-lines-wrap { display: flex; flex-direction: column; gap: 0.18rem; width: fit-content; max-width: 100%; margin: 0 auto; }
+        .sub-line-item { display: flex; align-items: baseline; gap: 0.45rem; color: #F8FAFC !important; font-weight: 600; text-align: left; }
+        .sub-dot { color: #3AE3FF !important; font-weight: 900; font-size: 0.82em; flex-shrink: 0; }
+        .sub-label { color: #7DD3FC !important; font-weight: 800; }
+        .sub-arrow { color: #5BE92A !important; font-weight: 900; padding: 0 0.16rem; }
+        .sub-lines-center { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.18rem; width: 100%; text-align: center; }
+        .sub-center-row { font-weight: 700; color: #fff !important; }
+        @media print {
+            .print-subtitle.is-multiline { padding: 0.48rem 1.5rem !important; font-size: 0.86rem !important; line-height: 1.35 !important; text-align: left !important; text-wrap: pretty !important; }
+            .print-subtitle.is-two-center { padding: 0.52rem 1.8rem !important; font-size: 0.94rem !important; line-height: 1.38 !important; text-align: center !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="progressBar"></div>
+
+<div id="video-stage">
+    <div class="tech-grid"></div>
+    <audio id="custom-audio-player" preload="auto"></audio>
+
+    <!-- SLIDE 0: CẤU HÌNH & THIẾT LẬP BAN ĐẦU -->
+    <section class="scene scene-standby active no-wipe" data-scene="0" data-caption="" data-vo="">
+        <div class="setup-card" onclick="event.stopPropagation()">
+            <div class="setup-header-row">
+                <div class="setup-brand-group">
+                    <div class="setup-brand-icon">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <div>
+                        <div class="setup-title-line">
+                            <h1 class="setup-title-text">Pro HDSD MC – Thiết lập ban đầu</h1>
+                            <span class="setup-theme-badge">THEME RETAIL: KV BLUE &amp; TURQUOISE</span>
+                        </div>
+                        <p class="setup-subtitle-text">Chuẩn KiotViet Brand Guideline (Font Inter • 125% Native) • Tự nhận diện mc.wav</p>
+                    </div>
+                </div>
+
+                <div class="setup-controls-group">
+                    <div class="mode-radio-group">
+                        <label id="label-mode-1" class="mode-radio-label active-mode" onclick="selectAudioMode(false)">
+                            <input type="radio" name="audioMode" id="radio-mode-1" value="silent" checked onchange="selectAudioMode(false)">
+                            <span>1 - Không thuyết minh</span>
+                        </label>
+                        <label id="label-mode-2" class="mode-radio-label" onclick="selectAudioMode(true)">
+                            <input type="radio" name="audioMode" id="radio-mode-2" value="voice" onchange="selectAudioMode(true)">
+                            <span>2 - Thuyết minh</span>
+                        </label>
+                    </div>
+
+                    <button onclick="startPresentation()" class="studio-btn studio-btn-start">
+                        <i class="fa-solid fa-play"></i> Bắt đầu (Vào Slide trắng)
+                    </button>
+                </div>
+            </div>
+
+            <div class="steps-wrapper">
+                <div class="steps-header-title">
+                    <i class="fa-solid fa-list-ol" style="color: var(--kv-primary-blue);"></i> QUY TRÌNH 4 BƯỚC CHUẨN BỊ KỊCH BẢN &amp; GIỌNG ĐỌC AI
+                </div>
+
+                <div class="steps-grid">
+                    <div class="step-box">
+                        <div>
+                            <div class="step-top-bar">
+                                <span class="step-badge-pill" style="background: #EFF6FF; color: var(--kv-ocean-blue);">BƯỚC 1</span>
+                                <i class="fa-solid fa-copy" style="color: var(--kv-primary-blue); font-size: 16px;"></i>
+                            </div>
+                            <h3 class="step-title">Copy toàn bộ phụ đề</h3>
+                            <p class="step-desc">Sao chép kịch bản gốc chuẩn chính tả (không phiên âm, không pause) kèm câu mở đầu:</p>
+                            <div class="step-code-box" style="background: #FFF9F0; border: 1px solid #FFCD89; color: #78350F; font-family: monospace;">
+                                Chuẩn bị ghi hình, lưu ý bạn hãy nghe kỹ lời dẫn và bấm phím mũi tên để chuyển slides, 5 4 3 2 1 &lt;pause&gt;
+                            </div>
+                        </div>
+                        <button onclick="copyAllSubtitlesWithPrefix()" id="btn-copy-sub" class="studio-btn studio-btn-primary">
+                            <i class="fa-solid fa-clipboard-check"></i> Copy toàn bộ phụ đề
+                        </button>
+                    </div>
+
+                    <div class="step-box">
+                        <div>
+                            <div class="step-top-bar">
+                                <span class="step-badge-pill" style="background: #EEF2FF; color: #4338CA;">BƯỚC 2</span>
+                                <i class="fa-solid fa-wand-magic-sparkles" style="color: #4F46E5; font-size: 16px;"></i>
+                            </div>
+                            <h3 class="step-title">Mở Google AI Studio</h3>
+                            <p class="step-desc">Chọn giọng <strong style="color: var(--navy-dark);">Leda</strong> với Prompt tư vấn nhiệt tình:</p>
+                            <div class="step-code-box" style="background: #EEF2FF; border: 1px solid #C7D2FE; color: #1E1B4B;">
+                                "Chuyên viên tư vấn người Hà Nội kể chuyện sôi nổi, nhiệt tình"
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <button onclick="copyLedaPrompt()" id="btn-copy-prompt" class="studio-btn studio-btn-outline">
+                                <i class="fa-solid fa-quote-left"></i> Copy Prompt giọng Leda
+                            </button>
+                            <a href="https://aistudio.google.com/generate-speech?model=gemini-3.8-flash-tts" target="_blank" rel="noopener" class="studio-btn studio-btn-primary">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Mở Google AI Studio
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <div>
+                            <div class="step-top-bar">
+                                <span class="step-badge-pill" style="background: #FFF9F0; color: #92400E;">BƯỚC 3</span>
+                                <i class="fa-solid fa-cloud-arrow-down" style="color: #D97706; font-size: 16px;"></i>
+                            </div>
+                            <h3 class="step-title">Promote &amp; Đổi tên file</h3>
+                            <p class="step-desc">
+                                Đổi tên file tải về thành <strong style="color: var(--navy-dark); font-family: monospace;">mc.wav</strong> và lưu cùng thư mục với file HTML này trên máy tính của bạn.
+                            </p>
+                        </div>
+                        <div class="step-code-box" style="background: #FFF9F0; border: 1px solid #FFCD89; color: #78350F; display: flex; align-items: flex-start; gap: 8px;">
+                            <i class="fa-solid fa-circle-info" style="color: #D97706; margin-top: 2px;"></i>
+                            <span>Hệ thống nạp trực tiếp file <code>mc.wav</code> ngay cả khi mở qua file:/// mà không bị chặn.</span>
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <div>
+                            <div class="step-top-bar">
+                                <span class="step-badge-pill" style="background: #E5FFE9; color: #036A2F;">BƯỚC 4</span>
+                                <i class="fa-solid fa-file-audio" style="color: var(--kv-primary-green); font-size: 16px;"></i>
+                            </div>
+                            <h3 class="step-title">Trạng thái nhận diện</h3>
+                            <input type="file" id="audio-file-input" accept=".mp3,.wav,audio/*" class="hidden" onchange="handleAudioFileSelect(event)">
+                            <div id="audio-dropzone" class="dropzone-area" onclick="document.getElementById('audio-file-input').click()">
+                                <i id="dropzone-icon" class="fa-solid fa-spinner fa-spin" style="color: var(--kv-primary-blue); font-size: 26px; margin-bottom: 6px;"></i>
+                                <div id="audio-status-title" style="font-size: 13.5px; font-weight: 800; color: var(--navy-dark);">Đang dò tìm file mc.wav...</div>
+                                <div id="audio-status-desc" style="font-size: 12px; font-weight: 600; margin-top: 4px; color: var(--kv-ocean-blue);">Chờ một chút hoặc kéo thả file vào đây</div>
+                            </div>
+                        </div>
+                        <div id="audio-loaded-Badge" class="hidden" style="padding: 9px 12px; border-radius: 12px; background: #E5FFE9; border: 1px solid #6EE7B7; font-size: 12.5px; font-weight: 700; color: #036A2F; display: flex; align-items: center; justify-content: space-between;">
+                            <span id="audio-filename" class="truncate"><i class="fa-solid fa-circle-check" style="color: var(--kv-primary-green); margin-right: 6px;"></i> Đã kết nối file mc.wav</span>
+                            <button onclick="clearLoadedAudio(event)" style="color: #E11D48; font-size: 12px; font-weight: 800; margin-left: 8px; background: none; border: none; cursor: pointer;">Gỡ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shortcut-panel">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div style="font-size: 13px; font-weight: 900; color: #78350F; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-keyboard" style="color: #D97706;"></i> BẢNG PHÍM TẮT ĐIỀU KHIỂN NHANH
+                    </div>
+                    <div style="font-size: 13px; font-weight: 700; color: var(--navy-muted);">
+                        Chuyển Slide: <span style="padding: 3px 10px; border-radius: 6px; background: #ffffff; border: 1px solid #CBD5E1; font-weight: 800; color: var(--navy-dark);">Mũi tên Phải / Space</span> (Tiếp) • <span style="padding: 3px 10px; border-radius: 6px; background: #ffffff; border: 1px solid #CBD5E1; font-weight: 800; color: var(--navy-dark);">Mũi tên Trái / Backspace</span> (Lùi)
+                    </div>
+                </div>
+
+                <div class="shortcut-grid">
+                    <div class="shortcut-item" onclick="toggleFullScreen()">
+                        <span class="kbd-light">F</span>
+                        <div>
+                            <div style="font-size: 13.5px; font-weight: 800; color: var(--navy-dark); white-space: nowrap;">Fullscreen</div>
+                            <div style="font-size: 11.5px; font-weight: 600; color: var(--navy-muted); white-space: nowrap;">Toàn màn hình</div>
+                        </div>
+                    </div>
+                    <div class="shortcut-item" onclick="activateModeByKey(false)">
+                        <span class="kbd-light">1</span>
+                        <div>
+                            <div style="font-size: 13.5px; font-weight: 800; color: var(--navy-dark); white-space: nowrap;">Không lời</div>
+                            <div style="font-size: 11.5px; font-weight: 600; color: var(--navy-muted); white-space: nowrap;">Tắt tiếng audio</div>
+                        </div>
+                    </div>
+                    <div class="shortcut-item" onclick="activateModeByKey(true)">
+                        <span class="kbd-light">2</span>
+                        <div>
+                            <div style="font-size: 13.5px; font-weight: 800; color: var(--kv-primary-blue); white-space: nowrap;">Thuyết minh</div>
+                            <div style="font-size: 11.5px; font-weight: 600; color: var(--navy-muted); white-space: nowrap;">Phát mc.wav / TTS</div>
+                        </div>
+                    </div>
+                    <div class="shortcut-item" onclick="togglePauseAudio()">
+                        <span class="kbd-light">3</span>
+                        <div>
+                            <div style="font-size: 13.5px; font-weight: 800; color: #312E81; white-space: nowrap;">Pause / Play</div>
+                            <div style="font-size: 11.5px; font-weight: 600; color: var(--navy-muted); white-space: nowrap;">Tạm dừng audio</div>
+                        </div>
+                    </div>
+                    <div class="shortcut-item" onclick="returnToSettings()">
+                        <span class="kbd-light">0</span>
+                        <div>
+                            <div style="font-size: 13.5px; font-weight: 800; color: var(--navy-dark); white-space: nowrap;">Settings</div>
+                            <div style="font-size: 11.5px; font-weight: 600; color: var(--navy-muted); white-space: nowrap;">Thiết lập ban đầu</div>
+                        </div>
+                    </div>
+                    <div class="shortcut-item" onclick="window.print()">
+                        <span class="kbd-light">P</span>
+                        <div>
+                            <div style="font-size: 13.5px; font-weight: 800; color: var(--navy-dark); white-space: nowrap;">Xuất PDF</div>
+                            <div style="font-size: 11.5px; font-weight: 600; color: var(--navy-muted); white-space: nowrap;">Chuẩn 16:9 Native</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 1: TRANG TRẮNG CHUẨN BỊ -->
+    <section class="scene scene-blank" data-scene="1" data-caption="" data-vo=""></section>
+
+    <section class="scene scene-content scene-dark" data-scene="2" 
+        data-caption="• Chào mừng các bạn đến với hướng dẫn thiết lập hóa đơn điện tử khi bán xe máy, ô tô trên phần mềm KiotViet dành cho ngành Bán buôn, Bán lẻ.&#10;• Bài hướng dẫn giúp bạn phát hành hóa đơn có mã đúng mẫu, đủ số khung, số máy.&#10;• Nhờ đó dữ liệu lệ phí trước bạ được liên thông thuận lợi đến người mua."
+        data-vo="• Chào mừng các bạn đến với hướng dẫn thiết lập hóa đơn điện tử khi bán xe máy, ô tô trên phần mềm KiotViet dành cho ngành Bán buôn, Bán lẻ.&#10;• Bài hướng dẫn giúp bạn phát hành hóa đơn có mã đúng mẫu, đủ số khung, số máy.&#10;• Nhờ đó dữ liệu lệ phí trước bạ được liên thông thuận lợi đến người mua.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="hero-split">
+                <div>
+                    <span class="hero-badge-pill up" style="background: var(--kv-orange); color: var(--kv-navy); margin-bottom: 1rem;"><i class="fa-solid fa-file-invoice-dollar"></i> Hóa đơn điện tử • Ngành Bán buôn, Bán lẻ</span>
+                    <h1 class="display-font text-5xl font-black text-white tracking-tight up" style="--d:.15s; line-height:1.3 !important;">
+                        THIẾT LẬP HÓA ĐƠN ĐIỆN TỬ<br><span style="color: var(--kv-orange);">KHI BÁN XE MÁY, Ô TÔ</span>
+                    </h1>
+                    <p class="text-lg font-semibold text-white/90 mt-4 mb-6 up" style="--d:.3s">Phát hành hóa đơn có mã đúng mẫu, đủ số khung, số máy.</p>
+                    <div class="flex items-center gap-3 flex-wrap">
+                        <span class="hero-badge-pill glass-card pop" style="--d:.45s"><i class="fa-solid fa-file-circle-check" style="color: var(--kv-accent-blue);"></i> Hóa đơn có mã</span>
+                        <span class="hero-badge-pill glass-card pop" style="--d:.55s"><i class="fa-solid fa-barcode" style="color: var(--kv-accent-blue);"></i> Số khung – số máy</span>
+                        <span class="hero-badge-pill glass-card pop" style="--d:.65s"><i class="fa-solid fa-coins" style="color: var(--kv-accent-blue);"></i> Lệ phí trước bạ</span>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="hero-emblem float">
+                        <i class="fa-solid fa-car-side" style="font-size: 6.2rem; color: #fff;"></i>
+                        <div class="hero-sat float" style="--f:.4s; top:-1rem; right:-1rem; background: var(--kv-orange); color: var(--kv-navy);"><i class="fa-solid fa-file-invoice"></i></div>
+                        <div class="hero-sat float" style="--f:.9s; bottom:-1rem; left:-1rem; background: var(--kv-primary-green); color:#fff;"><i class="fa-solid fa-circle-check"></i></div>
+                        <div class="hero-sat float" style="--f:1.3s; bottom:2rem; right:-1.6rem; background: var(--kv-turquoise); color:#fff;"><i class="fa-solid fa-motorcycle"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <section class="scene scene-content" data-scene="3" 
+        data-caption="• Nội dung hướng dẫn gồm 4 phần: chuẩn bị tờ khai và mẫu hóa đơn kinh doanh xe, tắt phát hành hóa đơn điện tử tự động.&#10;• Tiếp theo là chuyển hóa đơn nháp từ màn hình Quản lý, rồi bổ sung thông tin xe, phát hành và ký số."
+        data-vo="• Nội dung hướng dẫn gồm 4 phần: chuẩn bị tờ khai và mẫu hóa đơn kinh doanh xe, tắt phát hành hóa đơn điện tử tự động.&#10;• Tiếp theo là chuyển hóa đơn nháp từ màn hình Quản lý, rồi bổ sung thông tin xe, phát hành và ký số.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header" style="margin-bottom:0.6rem !important;">
+                <span class="section-badge up"><i class="fa-solid fa-map"></i> Lộ trình nội dung</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-list-check"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight">CẤU TRÚC BÀI HƯỚNG DẪN</h1>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="bento-card w-full max-w-[81.25rem] p-6 flex flex-col justify-center gap-7 sm:gap-8 my-auto">
+                    <div class="tl-row" style="grid-template-columns: repeat(4, 1fr);">
+                        <div class="tl-line reveal" style="--d:.15s"></div>
+                        <div class="tl-item pop" style="--d:.2s"><div class="w-12 h-12 rounded-full text-white flex items-center justify-center text-base shadow" style="background: var(--kv-primary-blue);"><i class="fa-solid fa-file-signature"></i></div></div>
+                        <div class="tl-item pop" style="--d:.32s"><div class="w-12 h-12 rounded-full text-white flex items-center justify-center text-base shadow pulse" style="background: var(--kv-ocean-blue);"><i class="fa-solid fa-gear"></i></div></div>
+                        <div class="tl-item pop" style="--d:.44s"><div class="w-12 h-12 rounded-full text-white flex items-center justify-center text-base shadow" style="background: var(--kv-turquoise);"><i class="fa-solid fa-share-from-square"></i></div></div>
+                        <div class="tl-item pop" style="--d:.56s"><div class="w-12 h-12 rounded-full text-white flex items-center justify-center text-base shadow" style="background: var(--kv-primary-green);"><i class="fa-solid fa-circle-check"></i></div></div>
+                    </div>
+                    <div class="grid grid-cols-4 gap-5">
+                        <div class="toc-card up" style="--d:0.25s">
+                            <div class="toc-card-top">
+                                <span class="px-2.5 py-1 rounded-full text-white font-black text-[11px]" style="background: var(--kv-primary-blue);">PHẦN 01</span>
+                                <span class="text-xs font-extrabold" style="color: var(--kv-ocean-blue);">Chuẩn bị</span>
+                            </div>
+                            <h3 class="toc-card-title">Tờ khai &amp; Mẫu hóa đơn</h3>
+                            <p class="toc-card-desc">Tờ khai • Hóa đơn có mã</p>
+                        </div>
+                        <div class="toc-card up" style="--d:0.37s">
+                            <div class="toc-card-top">
+                                <span class="px-2.5 py-1 rounded-full text-white font-black text-[11px]" style="background: var(--kv-ocean-blue);">PHẦN 02</span>
+                                <span class="text-xs font-extrabold" style="color: var(--kv-ocean-blue);">Thiết lập</span>
+                            </div>
+                            <h3 class="toc-card-title">Tắt phát hành tự động</h3>
+                            <p class="toc-card-desc">Thiết lập • App • POS</p>
+                        </div>
+                        <div class="toc-card up" style="--d:0.49s">
+                            <div class="toc-card-top">
+                                <span class="px-2.5 py-1 rounded-full text-white font-black text-[11px]" style="background: var(--kv-turquoise);">PHẦN 03</span>
+                                <span class="text-xs font-extrabold" style="color: var(--kv-ocean-blue);">Quản lý</span>
+                            </div>
+                            <h3 class="toc-card-title">Chuyển hóa đơn nháp</h3>
+                            <p class="toc-card-desc">Quản lý • Hóa đơn</p>
+                        </div>
+                        <div class="toc-card up" style="--d:0.61s">
+                            <div class="toc-card-top">
+                                <span class="px-2.5 py-1 rounded-full text-white font-black text-[11px]" style="background: var(--kv-primary-green);">PHẦN 04</span>
+                                <span class="text-xs font-extrabold" style="color: var(--kv-ocean-blue);">Phát hành</span>
+                            </div>
+                            <h3 class="toc-card-title">Bổ sung thông tin xe</h3>
+                            <p class="toc-card-desc">Hàng hóa đặc trưng • Ký số</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <section class="scene scene-content" data-scene="4" 
+        data-caption="• Khi bán xe máy, ô tô, hóa đơn không phát hành ngay mà đi theo luồng riêng.&#10;• Bạn bán xe trên KiotViet, chuyển thành hóa đơn nháp, bổ sung số khung, số máy, rồi phát hành và ký số để gửi cơ quan thuế.&#10;• Cách làm này giúp hóa đơn đúng mẫu và thông tin xe luôn đầy đủ."
+        data-vo="• Khi bán xe máy, ô tô, hóa đơn không phát hành ngay mà đi theo luồng riêng.&#10;• Bạn bán xe trên KiotViet, chuyển thành hóa đơn nháp, bổ sung số khung, số máy, rồi phát hành và ký số để gửi cơ quan thuế.&#10;• Cách làm này giúp hóa đơn đúng mẫu và thông tin xe luôn đầy đủ.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header" style="margin-bottom:0.6rem !important;">
+                <span class="section-badge up"><i class="fa-solid fa-star"></i> Tổng quan &amp; Luồng xử lý</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-route"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight">LUỒNG PHÁT HÀNH HÓA ĐƠN KHI BÁN XE</h1>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="bento-card w-full max-w-[81.25rem] p-6 flex flex-col justify-between gap-5">
+                    <div class="io-flow">
+                        <div class="flow-node pop" style="--d:0.15s">
+                            <div class="ic" style="background:var(--kv-primary-blue);"><i class="fa-solid fa-cash-register"></i></div>
+                            <div class="text-sm font-black leading-tight">Bán xe trên KiotViet</div>
+                            <span class="text-[11px] font-bold" style="color: var(--navy-muted);">Tắt phát hành tự động</span>
+                        </div>
+                        <div class="track"><i></i><i style="--t:.7s"></i><i style="--t:1.4s"></i></div>
+                        <div class="flow-node pop" style="--d:0.3s">
+                            <div class="ic" style="background:var(--kv-ocean-blue);"><i class="fa-solid fa-file-export"></i></div>
+                            <div class="text-sm font-black leading-tight">Chuyển hóa đơn nháp</div>
+                            <span class="text-[11px] font-bold" style="color: var(--navy-muted);">Chọn mẫu kinh doanh xe</span>
+                        </div>
+                        <div class="track"><i></i><i style="--t:.7s"></i><i style="--t:1.4s"></i></div>
+                        <div class="flow-node pop" style="--d:0.45s">
+                            <div class="ic" style="background:var(--kv-turquoise);"><i class="fa-solid fa-barcode"></i></div>
+                            <div class="text-sm font-black leading-tight">Bổ sung thông tin xe</div>
+                            <span class="text-[11px] font-bold" style="color: var(--navy-muted);">Số khung • Số máy</span>
+                        </div>
+                        <div class="track"><i></i><i style="--t:.7s"></i><i style="--t:1.4s"></i></div>
+                        <div class="flow-node pop" style="--d:0.6s">
+                            <div class="ic" style="background:var(--kv-primary-green);"><i class="fa-solid fa-signature"></i></div>
+                            <div class="text-sm font-black leading-tight">Phát hành &amp; ký số</div>
+                            <span class="text-[11px] font-bold" style="color: var(--navy-muted);">Gửi cơ quan thuế</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 pt-2 border-t border-slate-100">
+                        <div class="inner-card-theme up" style="--d:.8s">
+                            <div class="flex items-center gap-2.5"><i class="fa-solid fa-file-circle-check" style="color: var(--kv-turquoise);"></i>
+                            <h3 class="text-sm font-black">Hóa đơn có mã ➔ đúng mẫu kinh doanh xe</h3></div>
+                        </div>
+                        <div class="inner-card-emerald up" style="--d:.92s">
+                            <div class="flex items-center gap-2.5"><i class="fa-solid fa-link" style="color: var(--kv-primary-green);"></i>
+                            <h3 class="text-sm font-black">Dữ liệu liên thông ➔ lệ phí trước bạ tự động</h3></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <section class="scene scene-content" data-scene="5" 
+        data-caption="• Trước đây hóa đơn từ máy tính tiền không dùng được cho xe, nay bạn dùng hóa đơn có mã theo mẫu kinh doanh xe.&#10;• Trước đây hóa đơn thiếu số khung, số máy, nay đủ trường bắt buộc.&#10;• Người mua không còn tự kê khai lệ phí trước bạ, vì dữ liệu liên thông và thông báo gửi trực tiếp."
+        data-vo="• Trước đây hóa đơn từ máy tính tiền không dùng được cho xe, nay bạn dùng hóa đơn có mã theo mẫu kinh doanh xe.&#10;• Trước đây hóa đơn thiếu số khung, số máy, nay đủ trường bắt buộc.&#10;• Người mua không còn tự kê khai lệ phí trước bạ, vì dữ liệu liên thông và thông báo gửi trực tiếp.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header" style="margin-bottom:0.6rem !important;">
+                <span class="section-badge up"><i class="fa-solid fa-scale-balanced"></i> Lợi ích nổi bật</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-right-left"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight">TRƯỚC VÀ SAU KHI THIẾT LẬP</h1>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="bento-card w-full max-w-[81.25rem] p-6 flex flex-col justify-center gap-4">
+                    <div class="grid grid-cols-2 gap-5 px-1 font-black text-sm">
+                        <div class="text-center" style="color: var(--error-text);">TRƯỚC KHI THIẾT LẬP</div>
+                        <div class="text-center" style="color: var(--success-text);">SAU KHI THIẾT LẬP</div>
+                    </div>
+                    <div class="vs-board up" style="--d:0.15s">
+                        <div class="vs-card vs-bad"><i class="fa-solid fa-circle-xmark" style="color: var(--kv-coral); font-size:1.4rem;"></i><span>Hóa đơn từ máy tính tiền không dùng được cho xe</span></div>
+                        <div class="vs-mid"><i class="fa-solid fa-arrow-right" style="font-size:1rem;"></i></div>
+                        <div class="vs-card vs-good"><i class="fa-solid fa-circle-check" style="color: var(--kv-primary-green); font-size:1.4rem;"></i><span>Hóa đơn có mã theo mẫu kinh doanh xe</span></div>
+                    </div>
+                    <div class="vs-board up" style="--d:0.3s">
+                        <div class="vs-card vs-bad"><i class="fa-solid fa-circle-xmark" style="color: var(--kv-coral); font-size:1.4rem;"></i><span>Hóa đơn thiếu số khung, số máy</span></div>
+                        <div class="vs-mid"><i class="fa-solid fa-arrow-right" style="font-size:1rem;"></i></div>
+                        <div class="vs-card vs-good"><i class="fa-solid fa-circle-check" style="color: var(--kv-primary-green); font-size:1.4rem;"></i><span>Đủ trường bắt buộc, hàng hóa đặc trưng</span></div>
+                    </div>
+                    <div class="vs-board up" style="--d:0.45s">
+                        <div class="vs-card vs-bad"><i class="fa-solid fa-circle-xmark" style="color: var(--kv-coral); font-size:1.4rem;"></i><span>Người mua tự kê khai lệ phí trước bạ</span></div>
+                        <div class="vs-mid"><i class="fa-solid fa-arrow-right" style="font-size:1rem;"></i></div>
+                        <div class="vs-card vs-good"><i class="fa-solid fa-circle-check" style="color: var(--kv-primary-green); font-size:1.4rem;"></i><span>Dữ liệu liên thông, thông báo gửi trực tiếp</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <section class="scene scene-content" data-scene="6" 
+        data-caption="• Theo Nghị định 254 và Quyết định 1233, kinh doanh xe cần nắm 3 quy định bắt buộc, một là dùng hóa đơn có mã với tờ khai được cơ quan thuế chấp nhận.&#10;• Hai, hóa đơn có đủ số khung, số máy.&#10;• Ba, lệ phí trước bạ được liên thông và gửi thẳng đến người mua."
+        data-vo="• Theo Nghị định 254 và Quyết định 1233, kinh doanh xe cần nắm 3 quy định bắt buộc, một là dùng hóa đơn có mã với tờ khai được cơ quan thuế chấp nhận.&#10;• Hai, hóa đơn có đủ số khung, số máy.&#10;• Ba, lệ phí trước bạ được liên thông và gửi thẳng đến người mua.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header" style="margin-bottom:0.6rem !important;">
+                <span class="section-badge up"><i class="fa-solid fa-gavel"></i> Căn cứ &amp; Quy định</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight">3 QUY ĐỊNH BẮT BUỘC KHI KINH DOANH XE</h1>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="bento-card w-full max-w-[81.25rem] p-6 flex flex-col justify-center gap-4">
+                    <div class="v-stack-rows">
+                    <div class="v-row-item up" style="--d:0.15s">
+                        <div class="badge-no">01</div>
+                        <div class="kw flex items-center gap-2"><i class="fa-solid fa-file-circle-check" style="color: var(--kv-primary-blue);"></i> Hóa đơn có mã</div>
+                        <div class="ds">Tờ khai được cơ quan thuế chấp nhận</div>
+                        <span class="pill-st" style="background:#E6F2FF;color:#005AC0;border:1.5px solid #93C5FD;">Bắt buộc</span>
+                    </div>
+                    <div class="v-row-item up" style="--d:0.3s">
+                        <div class="badge-no">02</div>
+                        <div class="kw flex items-center gap-2"><i class="fa-solid fa-barcode" style="color: var(--kv-primary-blue);"></i> Trường bắt buộc</div>
+                        <div class="ds">Số khung, số máy, loại sản phẩm kinh doanh xe</div>
+                        <span class="pill-st" style="background:#CCF4EF;color:#00665A;border:1.5px solid #66DECF;">Đủ thông tin</span>
+                    </div>
+                    <div class="v-row-item up" style="--d:0.45s">
+                        <div class="badge-no">03</div>
+                        <div class="kw flex items-center gap-2"><i class="fa-solid fa-link" style="color: var(--kv-primary-blue);"></i> Liên thông dữ liệu</div>
+                        <div class="ds">Lệ phí trước bạ gửi trực tiếp đến người mua</div>
+                        <span class="pill-st" style="background:#E5FFE9;color:#036A2F;border:1.5px solid #6EE7B7;">Tự động</span>
+                    </div>
+                    </div>
+                    <div class="p-2.5 rounded-xl border text-xs font-bold flex items-center gap-2 up" style="--d:.6s; background:#FFF9F0; border-color:#FFCD89; color:#78350F;">
+                        <i class="fa-solid fa-circle-info" style="color:#D97706;"></i>
+                        <span>Căn cứ: Nghị định 254/2026/NĐ-CP • Quyết định 1233/QĐ-CT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <section class="scene scene-content scene-dark" data-scene="7" 
+        data-caption="• Phần một là chuẩn bị.&#10;• Để được phép phát hành hóa đơn xe, bạn kiểm tra tờ khai hóa đơn điện tử mới nhất đã được cơ quan thuế chấp nhận chưa.&#10;• Sau đó, bạn tạo mẫu Hóa đơn kinh doanh xe trên phần mềm hóa đơn điện tử."
+        data-vo="• Phần một là chuẩn bị.&#10;• Để được phép phát hành hóa đơn xe, bạn kiểm tra tờ khai hóa đơn điện tử mới nhất đã được cơ quan thuế chấp nhận chưa.&#10;• Sau đó, bạn tạo mẫu Hóa đơn kinh doanh xe trên phần mềm hóa đơn điện tử.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner justify-center items-center text-center w-full max-w-[85rem] mx-auto gap-6 my-auto">
+            <div class="w-full max-w-6xl flex flex-col items-center">
+                <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-xl mb-4 float" style="--d:.1s; background: var(--kv-orange); color: var(--kv-navy);"><i class="fa-solid fa-file-signature"></i></div>
+                <span class="section-badge up" style="--d:.18s">PHẦN 01 • CHUẨN BỊ</span>
+                <h1 class="display-font text-5xl font-black text-white tracking-tight mt-3 mb-2 up" style="--d:.26s">TỜ KHAI &amp; <span style="color: var(--kv-orange);">MẪU HÓA ĐƠN</span></h1>
+                <p class="text-base font-semibold text-white/85 max-w-6xl w-full mb-7 up" style="--d:.34s">Kiểm tra tờ khai Hóa đơn có mã, rồi tạo mẫu Hóa đơn kinh doanh xe</p>
+                <div class="grid grid-cols-2 gap-4 w-full max-w-4xl">
+                    <div class="toc-sub-item text-left pop" style="--d:0.45s">
+                        <div class="text-xs font-black mb-1" style="color: var(--kv-orange);">MỤC 1.1</div>
+                        <div class="text-sm font-extrabold text-white">Kiểm tra tờ khai</div>
+                        <p class="text-xs text-white/75 mt-1">Tờ khai mới nhất đã được cơ quan thuế chấp nhận.</p>
+                    </div>
+                    <div class="toc-sub-item text-left pop" style="--d:0.57s">
+                        <div class="text-xs font-black mb-1" style="color: var(--kv-orange);">MỤC 1.2</div>
+                        <div class="text-sm font-extrabold text-white">Tạo mẫu hóa đơn xe</div>
+                        <p class="text-xs text-white/75 mt-1">Khởi tạo mẫu Hóa đơn kinh doanh xe.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <section class="scene scene-content" data-scene="8" 
+        data-caption="• Để chắc chắn được phép phát hành hóa đơn xe, bạn kiểm tra tờ khai hóa đơn điện tử mới nhất đã được cơ quan thuế chấp nhận và có hình thức Hóa đơn có mã hay chưa.&#10;• Nếu chưa, bạn lập tờ khai đăng ký bổ sung."
+        data-vo="• Để chắc chắn được phép phát hành hóa đơn xe, bạn kiểm tra tờ khai hóa đơn điện tử mới nhất đã được cơ quan thuế chấp nhận và có hình thức Hóa đơn có mã hay chưa.&#10;• Nếu chưa, bạn lập tờ khai đăng ký bổ sung.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header" style="margin-bottom:0.6rem !important;">
+                <span class="section-badge up"><i class="fa-solid fa-desktop"></i> Phần 01: Chuẩn bị</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-file-circle-check"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight">KIỂM TRA TỜ KHAI CÓ HÌNH THỨC "HÓA ĐƠN CÓ MÃ"</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card up" style="--d:.1s">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/09/25032206/KDX_250926-1.png" alt="KIỂM TRA TỜ KHAI CÓ HÌNH THỨC &quot;HÓA ĐƠN CÓ MÃ&quot;">
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <section class="scene scene-content" data-scene="9" 
+        data-caption="Khi tờ khai đã được chấp nhận, để có mẫu hóa đơn đúng quy định, bạn tạo mẫu Hóa đơn kinh doanh xe trên phần mềm hóa đơn điện tử."
+        data-vo="Khi tờ khai đã được chấp nhận, để có mẫu hóa đơn đúng quy định, bạn tạo mẫu Hóa đơn kinh doanh xe trên phần mềm hóa đơn điện tử.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header" style="margin-bottom:0.6rem !important;">
+                <span class="section-badge up"><i class="fa-solid fa-desktop"></i> Phần 01: Chuẩn bị</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-file-invoice"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight">TẠO MẪU "HÓA ĐƠN KINH DOANH XE"</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card up" style="--d:.1s">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/09/25032158/KDX_250926-2.png" alt="TẠO MẪU &quot;HÓA ĐƠN KINH DOANH XE&quot;">
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <section class="scene scene-content scene-dark" data-scene="10" 
+        data-caption="• Phần hai là thiết lập trên KiotViet.&#10;• Để hóa đơn xe không bị phát hành sai mẫu, bạn tắt phát hành hóa đơn điện tử tự động, trong Thiết lập hoặc ngay lúc bán xe, và áp dụng tương tự trên ứng dụng và máy POS."
+        data-vo="• Phần hai là thiết lập trên KiotViet.&#10;• Để hóa đơn xe không bị phát hành sai mẫu, bạn tắt phát hành hóa đơn điện tử tự động, trong Thiết lập hoặc ngay lúc bán xe, và áp dụng tương tự trên ứng dụng và máy POS.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner justify-center items-center text-center w-full max-w-[85rem] mx-auto gap-6 my-auto">
+            <div class="w-full max-w-6xl flex flex-col items-center">
+                <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-xl mb-4 float" style="--d:.1s; background: var(--kv-orange); color: var(--kv-navy);"><i class="fa-solid fa-gear"></i></div>
+                <span class="section-badge up" style="--d:.18s">PHẦN 02 • THIẾT LẬP KIOTVIET</span>
+                <h1 class="display-font text-5xl font-black text-white tracking-tight mt-3 mb-2 up" style="--d:.26s">TẮT PHÁT HÀNH <span style="color: var(--kv-orange);">TỰ ĐỘNG</span></h1>
+                <p class="text-base font-semibold text-white/85 max-w-6xl w-full mb-7 up" style="--d:.34s">Bỏ tích phát hành hóa đơn điện tử để hóa đơn xe không bị phát hành sai mẫu</p>
+                <div class="grid grid-cols-2 gap-4 w-full max-w-4xl">
+                    <div class="toc-sub-item text-left pop" style="--d:0.45s">
+                        <div class="text-xs font-black mb-1" style="color: var(--kv-orange);">MỤC 2.1</div>
+                        <div class="text-sm font-extrabold text-white">Trong Thiết lập</div>
+                        <p class="text-xs text-white/75 mt-1">Bỏ tích phát hành ngay trên Màn hình bán hàng.</p>
+                    </div>
+                    <div class="toc-sub-item text-left pop" style="--d:0.57s">
+                        <div class="text-xs font-black mb-1" style="color: var(--kv-orange);">MỤC 2.2</div>
+                        <div class="text-sm font-extrabold text-white">Khi bán xe</div>
+                        <p class="text-xs text-white/75 mt-1">Bỏ tích ngay lúc thanh toán, áp dụng cả app và POS.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <section class="scene scene-content" data-scene="11" 
+        data-caption="Để hóa đơn xe không bị phát hành sai mẫu, bạn vào Thiết lập, chọn Hóa đơn điện tử và bỏ tích Phát hành hóa đơn điện tử ngay trên Màn hình bán hàng."
+        data-vo="Để hóa đơn xe không bị phát hành sai mẫu, bạn vào Thiết lập, chọn Hóa đơn điện tử và bỏ tích Phát hành hóa đơn điện tử ngay trên Màn hình bán hàng.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header" style="margin-bottom:0.6rem !important;">
+                <span class="section-badge up"><i class="fa-solid fa-desktop"></i> Phần 02: Thiết lập</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-sliders"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight">BỎ TÍCH PHÁT HÀNH HĐĐT TRÊN MÀN HÌNH BÁN HÀNG</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card up" style="--d:.1s">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/09/25032150/KDX_250926-3.png" alt="BỎ TÍCH PHÁT HÀNH HĐĐT TRÊN MÀN HÌNH BÁN HÀNG">
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <section class="scene scene-content" data-scene="12" 
+        data-caption="Hoặc ngay lúc bán xe, bạn bỏ tích Phát hành hóa đơn điện tử. Thiết lập tương tự trên ứng dụng KiotViet và máy POS."
+        data-vo="Hoặc ngay lúc bán xe, bạn bỏ tích Phát hành hóa đơn điện tử. Thiết lập tương tự trên ứng dụng KiotViet và máy POS.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header" style="margin-bottom:0.6rem !important;">
+                <span class="section-badge up"><i class="fa-solid fa-desktop"></i> Phần 02: Thiết lập</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-cash-register"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight">BỎ TÍCH PHÁT HÀNH HĐĐT KHI BÁN XE</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card up" style="--d:.1s">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/09/25032143/KDX_250926-4.png" alt="BỎ TÍCH PHÁT HÀNH HĐĐT KHI BÁN XE">
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <section class="scene scene-content scene-dark" data-scene="13" 
+        data-caption="• Phần ba là chuyển hóa đơn nháp.&#10;• Để đưa dữ liệu bán xe sang phần mềm hóa đơn điện tử, bạn vào màn hình Quản lý và chọn hóa đơn bán xe.&#10;• Sau đó bạn chuyển hóa đơn và nhớ chọn đúng mẫu hóa đơn kinh doanh xe."
+        data-vo="• Phần ba là chuyển hóa đơn nháp.&#10;• Để đưa dữ liệu bán xe sang phần mềm hóa đơn điện tử, bạn vào màn hình Quản lý và chọn hóa đơn bán xe.&#10;• Sau đó bạn chuyển hóa đơn và nhớ chọn đúng mẫu hóa đơn kinh doanh xe.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner justify-center items-center text-center w-full max-w-[85rem] mx-auto gap-6 my-auto">
+            <div class="w-full max-w-6xl flex flex-col items-center">
+                <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-xl mb-4 float" style="--d:.1s; background: var(--kv-orange); color: var(--kv-navy);"><i class="fa-solid fa-share-from-square"></i></div>
+                <span class="section-badge up" style="--d:.18s">PHẦN 03 • MÀN HÌNH QUẢN LÝ</span>
+                <h1 class="display-font text-5xl font-black text-white tracking-tight mt-3 mb-2 up" style="--d:.26s">CHUYỂN <span style="color: var(--kv-orange);">HÓA ĐƠN NHÁP</span></h1>
+                <p class="text-base font-semibold text-white/85 max-w-6xl w-full mb-7 up" style="--d:.34s">Đưa hóa đơn bán xe sang phần mềm hóa đơn điện tử dưới dạng hóa đơn nháp</p>
+                <div class="grid grid-cols-2 gap-4 w-full max-w-4xl">
+                    <div class="toc-sub-item text-left pop" style="--d:0.45s">
+                        <div class="text-xs font-black mb-1" style="color: var(--kv-orange);">MỤC 3.1</div>
+                        <div class="text-sm font-extrabold text-white">Chọn hóa đơn bán xe</div>
+                        <p class="text-xs text-white/75 mt-1">Quản lý ➔ Đơn hàng ➔ Hóa đơn.</p>
+                    </div>
+                    <div class="toc-sub-item text-left pop" style="--d:0.57s">
+                        <div class="text-xs font-black mb-1" style="color: var(--kv-orange);">MỤC 3.2</div>
+                        <div class="text-sm font-extrabold text-white">Xác nhận chuyển</div>
+                        <p class="text-xs text-white/75 mt-1">Chọn đúng mẫu hóa đơn kinh doanh xe.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <section class="scene scene-content" data-scene="14" 
+        data-caption="Để đưa hóa đơn bán xe sang phần mềm hóa đơn điện tử, bạn vào Quản lý, chọn Đơn hàng, Hóa đơn, chọn hóa đơn bán xe, nhấn dấu ba chấm và chọn Chuyển hóa đơn điện tử."
+        data-vo="Để đưa hóa đơn bán xe sang phần mềm hóa đơn điện tử, bạn vào Quản lý, chọn Đơn hàng, Hóa đơn, chọn hóa đơn bán xe, nhấn dấu ba chấm và chọn Chuyển hóa đơn điện tử.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header" style="margin-bottom:0.6rem !important;">
+                <span class="section-badge up"><i class="fa-solid fa-desktop"></i> Phần 03: Chuyển hóa đơn nháp</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-file-export"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight">CHỌN HÓA ĐƠN BÁN XE, CHUYỂN HÓA ĐƠN ĐIỆN TỬ</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card up" style="--d:.1s">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/09/25032136/KDX_250926-5.png" alt="CHỌN HÓA ĐƠN BÁN XE, CHUYỂN HÓA ĐƠN ĐIỆN TỬ">
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <section class="scene scene-content" data-scene="15" 
+        data-caption="Khi hộp thoại xác nhận hiển thị, để hóa đơn mang đúng mẫu, bạn chọn mẫu hóa đơn kinh doanh xe đã thiết lập rồi xác nhận chuyển."
+        data-vo="Khi hộp thoại xác nhận hiển thị, để hóa đơn mang đúng mẫu, bạn chọn mẫu hóa đơn kinh doanh xe đã thiết lập rồi xác nhận chuyển.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header" style="margin-bottom:0.6rem !important;">
+                <span class="section-badge up"><i class="fa-solid fa-desktop"></i> Phần 03: Chuyển hóa đơn nháp</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-circle-check"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight">XÁC NHẬN CHUYỂN VÀ CHỌN MẪU KINH DOANH XE</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card up" style="--d:.1s">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/09/25032129/KDX_250926-6.png" alt="XÁC NHẬN CHUYỂN VÀ CHỌN MẪU KINH DOANH XE">
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <section class="scene scene-content scene-dark" data-scene="16" 
+        data-caption="• Phần bốn là bổ sung thông tin xe và phát hành.&#10;• Để hóa đơn đủ trường bắt buộc, bạn chỉnh sửa hóa đơn nháp và đổi sang hàng hóa đặc trưng để nhập thông tin xe.&#10;• Cuối cùng, bạn phát hành và ký số để gửi đến cơ quan thuế."
+        data-vo="• Phần bốn là bổ sung thông tin xe và phát hành.&#10;• Để hóa đơn đủ trường bắt buộc, bạn chỉnh sửa hóa đơn nháp và đổi sang hàng hóa đặc trưng để nhập thông tin xe.&#10;• Cuối cùng, bạn phát hành và ký số để gửi đến cơ quan thuế.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner justify-center items-center text-center w-full max-w-[85rem] mx-auto gap-6 my-auto">
+            <div class="w-full max-w-6xl flex flex-col items-center">
+                <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-xl mb-4 float" style="--d:.1s; background: var(--kv-orange); color: var(--kv-navy);"><i class="fa-solid fa-signature"></i></div>
+                <span class="section-badge up" style="--d:.18s">PHẦN 04 • PHÁT HÀNH</span>
+                <h1 class="display-font text-5xl font-black text-white tracking-tight mt-3 mb-2 up" style="--d:.26s">BỔ SUNG THÔNG TIN XE <span style="color: var(--kv-orange);">&amp; KÝ SỐ</span></h1>
+                <p class="text-base font-semibold text-white/85 max-w-6xl w-full mb-7 up" style="--d:.34s">Nhập số khung, số máy, thông tin người mua rồi phát hành hóa đơn</p>
+                <div class="grid grid-cols-2 gap-4 w-full max-w-4xl">
+                    <div class="toc-sub-item text-left pop" style="--d:0.45s">
+                        <div class="text-xs font-black mb-1" style="color: var(--kv-orange);">MỤC 4.1</div>
+                        <div class="text-sm font-extrabold text-white">Chỉnh sửa hóa đơn nháp</div>
+                        <p class="text-xs text-white/75 mt-1">Đổi sang Hàng hóa đặc trưng, nhập thông tin xe.</p>
+                    </div>
+                    <div class="toc-sub-item text-left pop" style="--d:0.57s">
+                        <div class="text-xs font-black mb-1" style="color: var(--kv-orange);">MỤC 4.2</div>
+                        <div class="text-sm font-extrabold text-white">Phát hành &amp; ký số</div>
+                        <p class="text-xs text-white/75 mt-1">Gửi hóa đơn đến cơ quan thuế.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <section class="scene scene-content" data-scene="17" 
+        data-caption="• Để nhập số khung, số máy và thông tin người mua, bạn mở danh sách hóa đơn nháp trên phần mềm hóa đơn điện tử.&#10;• Sau đó bạn chỉnh sửa từng hóa đơn và đổi Tính chất hàng hóa, dịch vụ của xe sang Hàng hóa đặc trưng."
+        data-vo="• Để nhập số khung, số máy và thông tin người mua, bạn mở danh sách hóa đơn nháp trên phần mềm hóa đơn điện tử.&#10;• Sau đó bạn chỉnh sửa từng hóa đơn và đổi Tính chất hàng hóa, dịch vụ của xe sang Hàng hóa đặc trưng.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header" style="margin-bottom:0.6rem !important;">
+                <span class="section-badge up"><i class="fa-solid fa-desktop"></i> Phần 04: Phát hành</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-pen-to-square"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight">SỬA HÓA ĐƠN NHÁP, ĐỔI SANG "HÀNG HÓA ĐẶC TRƯNG"</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card up" style="--d:.1s">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/09/25032122/KDX_250926-7.png" alt="SỬA HÓA ĐƠN NHÁP, ĐỔI SANG &quot;HÀNG HÓA ĐẶC TRƯNG&quot;">
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <section class="scene scene-content" data-scene="18" 
+        data-caption="Cuối cùng, để hóa đơn có giá trị pháp lý và được gửi đến cơ quan thuế, bạn nhấn Phát hành và ký số."
+        data-vo="Cuối cùng, để hóa đơn có giá trị pháp lý và được gửi đến cơ quan thuế, bạn nhấn Phát hành và ký số.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header" style="margin-bottom:0.6rem !important;">
+                <span class="section-badge up"><i class="fa-solid fa-desktop"></i> Phần 04: Phát hành</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-signature"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight">NHẤN PHÁT HÀNH VÀ KÝ SỐ</h1>
+                </div>
+            </div>
+            <div class="screenshot-stage">
+                <div class="screenshot-card up" style="--d:.1s">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/09/25032115/KDX_250926-8.png" alt="NHẤN PHÁT HÀNH VÀ KÝ SỐ">
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <section class="scene scene-content" data-scene="19" 
+        data-caption="• Lưu ý nếu bạn dùng hóa đơn điện tử của bên thứ ba tích hợp với KiotViet như MISA meInvoice, VNPT hay Viettel, quy trình vẫn tương tự.&#10;• Bạn tạo mẫu hóa đơn xe trên hệ thống nhà cung cấp, chuyển hóa đơn nháp từ KiotViet, sau đó hoàn thiện thông tin xe và phát hành."
+        data-vo="• Lưu ý nếu bạn dùng hóa đơn điện tử của bên thứ ba tích hợp với KiotViet như MISA meInvoice, VNPT hay Viettel, quy trình vẫn tương tự.&#10;• Bạn tạo mẫu hóa đơn xe trên hệ thống nhà cung cấp, chuyển hóa đơn nháp từ KiotViet, sau đó hoàn thiện thông tin xe và phát hành.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header" style="margin-bottom:0.6rem !important;">
+                <span class="section-badge up"><i class="fa-solid fa-triangle-exclamation"></i> Lưu ý quan trọng</span>
+                <div class="header-title-row up" style="--d:.08s">
+                    <div class="header-icon-box"><i class="fa-solid fa-plug"></i></div>
+                    <h1 class="text-2xl font-black tracking-tight">DÙNG HÓA ĐƠN ĐIỆN TỬ CỦA BÊN THỨ BA</h1>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="bento-card w-full max-w-[81.25rem] p-6">
+                    <div class="asymmetric-hub-flow">
+                        <div class="pillar-card pop" style="--d:.15s">
+                            <i class="fa-solid fa-plug-circle-check float" style="font-size:3.4rem; color: var(--kv-orange);"></i>
+                            <div class="text-xl font-black text-white">HĐĐT bên thứ ba</div>
+                            <div class="text-sm font-bold" style="color: var(--kv-accent-blue);">MISA meInvoice • VNPT • Viettel</div>
+                            <div class="text-sm font-semibold text-white/85">Quy trình tương tự</div>
+                        </div>
+                        <div class="step-vert">
+                            <div class="st up" style="--d:.3s"><i class="fa-solid fa-file-circle-plus" style="color: var(--kv-primary-blue);"></i> Tạo mẫu xe trên hệ thống nhà cung cấp</div>
+                            <div class="arr"><i class="fa-solid fa-arrow-down"></i></div>
+                            <div class="st up" style="--d:.45s"><i class="fa-solid fa-file-export" style="color: var(--kv-turquoise);"></i> Chuyển hóa đơn nháp từ KiotViet</div>
+                            <div class="arr"><i class="fa-solid fa-arrow-down"></i></div>
+                            <div class="st up" style="--d:.6s"><i class="fa-solid fa-signature" style="color: var(--kv-primary-green);"></i> Hoàn thiện thông tin xe và phát hành</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <section class="scene scene-content" data-scene="20" data-type="infographic"
+        data-caption="• Tóm lại, để phát hành hóa đơn khi bán xe máy, ô tô, bạn chuẩn bị tờ khai và mẫu hóa đơn, rồi tắt phát hành tự động.&#10;• Sau đó bạn chuyển hóa đơn nháp, bổ sung thông tin xe, phát hành và ký số."
+        data-vo="• Tóm lại, để phát hành hóa đơn khi bán xe máy, ô tô, bạn chuẩn bị tờ khai và mẫu hóa đơn, rồi tắt phát hành tự động.&#10;• Sau đó bạn chuyển hóa đơn nháp, bổ sung thông tin xe, phát hành và ký số.">
+        <div class="slide-inner">
+            <div class="screenshot-stage">
+                <div class="screenshot-card shadow-2xl up" style="--d:.1s; max-height: calc(100vh - 8rem); border: none;">
+                    <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2026/09/25044415/Hoa-Don-Dien-Tu-Xe-1-scaled.jpeg" alt="Infographic hóa đơn điện tử khi bán xe" style="max-height: calc(100vh - 10rem);">
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <section class="scene scene-content scene-dark" data-scene="21"
+        data-caption="Cảm ơn các bạn đã theo dõi! Chúc các bạn kinh doanh hiệu quả cùng KiotViet."
+        data-vo="Cảm ơn các bạn đã theo dõi! Chúc các bạn kinh doanh hiệu quả cùng KiotViet.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg?v=4dc78976" alt="KiotViet Logo"></div>
+        <div class="slide-inner justify-center items-center text-center">
+            <div class="max-w-4xl flex flex-col items-center">
+                <div class="w-20 h-20 rounded-3xl text-4xl text-white flex items-center justify-center shadow-2xl mb-8 sm:mb-9 float" style="--d:.1s; background: linear-gradient(135deg, #0070F4 0%, #00B63E 100%);">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <h1 class="text-5xl font-black mt-1 mb-2 up text-white" style="--d:.22s;">CẢM ƠN CÁC BẠN ĐÃ THEO DÕI!</h1>
+                <p class="text-base font-bold mb-7 up" style="--d:.32s; color: var(--kv-accent-blue);">Chúc các bạn kinh doanh hiệu quả cùng KiotViet</p>
+                <div class="grid grid-cols-2 gap-5 sm:gap-6 w-full max-w-4xl text-left">
+                    <a href="https://kiotviet.vn/ho-tro" target="_blank" rel="noopener" class="support-card-blue p-4 flex items-center gap-4 text-left pop" style="--d:.45s; text-decoration: none;">
+                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0" style="background: #EFF6FF; border: 1px solid #BFDBFE;">
+                            <svg class="w-6 h-6 text-[#0070F4]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        </div>
+                        <div class="min-w-0">
+                            <div class="text-sm font-extrabold text-slate-800 whitespace-nowrap">Trang Hỗ trợ - HDSD KiotViet</div>
+                            <div class="text-xs font-bold text-blue-600 mt-1 whitespace-nowrap">https://kiotviet.vn/ho-tro</div>
+                        </div>
+                    </a>
+                    <a href="https://www.youtube.com/@HDSDPhanmemKiotViet" target="_blank" rel="noopener" class="youtube-card-red p-4 flex items-center gap-4 text-left pop" style="--d:.57s; text-decoration: none;">
+                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0" style="background: #FEF2F2; border: 1px solid #FECACA;">
+                            <svg class="w-7 h-7" viewBox="0 0 28 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M27.414 3.125C27.093 1.906 26.152 0.945 24.958 0.617C22.792 0 14 0 14 0C14 0 5.208 0 3.042 0.617C1.848 0.945 0.907 1.906 0.586 3.125C0 5.336 0 10 0 10C0 10 0 14.664 0.586 16.875C0.907 18.094 1.848 19.055 3.042 19.383C5.208 20 14 20 14 20C14 20 22.792 20 24.958 19.383C26.152 19.055 27.093 18.094 27.414 16.875C28 14.664 28 10 28 10C28 10 28 5.336 27.414 3.125Z" fill="#FF0000"/><path d="M11.2 14.286V5.714L18.667 10L11.2 14.286Z" fill="#FFFFFF"/></svg>
+                        </div>
+                        <div class="min-w-0">
+                            <div class="text-sm font-extrabold text-slate-800 whitespace-nowrap">Kênh YouTube - HDSD KiotViet</div>
+                            <div class="text-xs font-bold text-rose-600 mt-1 whitespace-nowrap">https://www.youtube.com/@HDSDPhanmemKiotViet</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <!-- THANH PHỤ ĐỀ DƯỚI ĐÁY MÀN HÌNH -->
+    <div id="presenter-hud" class="hud-hidden">
+        <div id="subtitle-box"></div>
+    </div>
+</div>
+
+<script>
+    const scenes = Array.from(document.querySelectorAll('.scene'));
+    const subtitleBox = document.getElementById('subtitle-box');
+    const presenterHud = document.getElementById('presenter-hud');
+    const progressBar = document.getElementById('progressBar');
+    const customAudioPlayer = document.getElementById('custom-audio-player');
+    const dropzone = document.getElementById('audio-dropzone');
+    const dropzoneIcon = document.getElementById('dropzone-icon');
+
+    let currentIndex = 0;
+    let voiceEnabled = false;
+    let hasCustomAudio = false;
+    let isAnimating = false;
+    let isUserPaused = false;
+
+
+    function escapeHtmlText(str) { return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+    function formatSubSegment(text) {
+        let safe = escapeHtmlText(text.trim());
+        safe = safe.replace(/➔/g, '<span class="sub-arrow">➔</span>');
+        const colonIdx = safe.indexOf(':');
+        if (colonIdx > 0 && colonIdx <= 72) { return `<strong class="sub-label">${safe.slice(0, colonIdx + 1)}</strong>${safe.slice(colonIdx + 1)}`; }
+        return safe;
+    }
+    function renderFormattedSubtitle(box, rawText) {
+        if (!box) return;
+        const cleaned = (rawText || '').trim();
+        if (!cleaned) { box.classList.remove('is-multiline', 'is-two-center'); box.innerHTML = ''; return; }
+        const lines = cleaned.split(/\n+|\s*\|\|\s*/).map(l => l.trim()).filter(Boolean);
+        if (lines.length >= 2) {
+            const hasBullets = lines.some(l => l.startsWith('•') || l.startsWith('▸') || /^\d+\./.test(l));
+            if (hasBullets) {
+                box.classList.add('is-multiline'); box.classList.remove('is-two-center');
+                const itemsHtml = lines.map(line => `<div class="sub-line-item"><span class="sub-dot">▸</span><span>${formatSubSegment(line.replace(/^[•▸]\s*/, ''))}</span></div>`).join('');
+                box.innerHTML = `<div class="sub-lines-wrap">${itemsHtml}</div>`;
+            } else {
+                box.classList.add('is-two-center'); box.classList.remove('is-multiline');
+                box.innerHTML = `<div class="sub-lines-center">${lines.map(line => `<div class="sub-center-row">${formatSubSegment(line)}</div>`).join('')}</div>`;
+            }
+        } else {
+            box.classList.remove('is-multiline', 'is-two-center');
+            box.innerHTML = `<span>${formatSubSegment(lines[0])}</span>`;
+        }
+    }
+
+    function initPrintSubtitles() {
+        scenes.forEach((scene) => {
+            const printSub = scene.querySelector('.print-subtitle');
+            const cap = (scene.getAttribute('data-caption') || '').trim();
+            if (printSub) {
+                if (cap) {
+                    renderFormattedSubtitle(printSub, cap);
+                    printSub.style.display = '';
+                } else {
+                    printSub.textContent = '';
+                    printSub.style.display = 'none';
+                }
+            }
+        });
+    }
+    window.addEventListener('beforeprint', initPrintSubtitles);
+
+    function selectAudioMode(enableVoice) {
+        voiceEnabled = enableVoice;
+        isUserPaused = false;
+        const radio1 = document.getElementById('radio-mode-1');
+        const radio2 = document.getElementById('radio-mode-2');
+        const label1 = document.getElementById('label-mode-1');
+        const label2 = document.getElementById('label-mode-2');
+
+        if (radio1 && radio2) {
+            radio1.checked = !enableVoice;
+            radio2.checked = enableVoice;
+        }
+        if (label1 && label2) {
+            label1.classList.toggle('active-mode', !enableVoice);
+            label2.classList.toggle('active-mode', enableVoice);
+        }
+    }
+
+    function stopAllAudio() {
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        if (customAudioPlayer && !customAudioPlayer.paused) customAudioPlayer.pause();
+    }
+
+    function togglePauseAudio() {
+        if (!voiceEnabled || currentIndex <= 0) return;
+
+        if (hasCustomAudio && customAudioPlayer.src) {
+            if (customAudioPlayer.paused) {
+                customAudioPlayer.play().catch(() => {});
+                isUserPaused = false;
+            } else {
+                customAudioPlayer.pause();
+                isUserPaused = true;
+            }
+            return;
+        }
+
+        if ('speechSynthesis' in window) {
+            if (window.speechSynthesis.speaking) {
+                if (window.speechSynthesis.paused) {
+                    window.speechSynthesis.resume();
+                    isUserPaused = false;
+                } else {
+                    window.speechSynthesis.pause();
+                    isUserPaused = true;
+                }
+            } else if (isUserPaused) {
+                isUserPaused = false;
+                triggerSlideVoice(currentIndex);
+            }
+        }
+    }
+
+    function triggerSlideVoice(index) {
+        if (!voiceEnabled || index <= 0) {
+            stopAllAudio();
+            return;
+        }
+        if (isUserPaused) return;
+
+        if (hasCustomAudio && customAudioPlayer.src) {
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            if (index === 1) {
+                customAudioPlayer.currentTime = 0;
+                customAudioPlayer.play().catch(() => {});
+            } else if (customAudioPlayer.paused) {
+                customAudioPlayer.play().catch(() => {});
+            }
+            return;
+        }
+
+        if (index >= 2) {
+            const text = scenes[index].getAttribute('data-caption') || scenes[index].getAttribute('data-vo') || '';
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                if (text.trim()) {
+                    const utter = new SpeechSynthesisUtterance(text);
+                    utter.lang = 'vi-VN';
+                    utter.rate = 1.02;
+                    window.speechSynthesis.speak(utter);
+                }
+            }
+        }
+    }
+
+    function activateModeByKey(enableVoice) {
+        selectAudioMode(enableVoice);
+        if (currentIndex === 0) return;
+        if (!enableVoice) stopAllAudio();
+        else triggerSlideVoice(currentIndex);
+    }
+
+    function startPresentation() {
+        isUserPaused = false;
+        goToScene(1);
+    }
+
+    function returnToSettings() {
+        stopAllAudio();
+        isUserPaused = false;
+        if (customAudioPlayer) customAudioPlayer.currentTime = 0;
+        goToScene(0, true);
+    }
+
+    function applyDynamicSubtitle(caption) {
+        if (!caption || !caption.trim()) {
+            presenterHud.classList.add('hud-hidden');
+            subtitleBox.textContent = '';
+            return;
+        }
+        
+        
+        
+        
+        renderFormattedSubtitle(subtitleBox, caption);
+        presenterHud.classList.remove('hud-hidden');
+    }
+
+    function updateChromeVisibility(index) {
+        if (progressBar) {
+            const pct = index <= 1 ? 0 : ((index - 1) / (scenes.length - 2)) * 100;
+            progressBar.style.width = Math.min(100, Math.max(0, pct)) + '%';
+        }
+        if (index <= 1) {
+            presenterHud.classList.add('hud-hidden');
+            subtitleBox.textContent = '';
+        } else {
+            const currentScene = scenes[index];
+            const caption = currentScene.getAttribute('data-caption') || '';
+            applyDynamicSubtitle(caption);
+        }
+    }
+
+    function goToScene(targetIndex, skipWipe = false) {
+        if (targetIndex < 0 || targetIndex >= scenes.length || targetIndex === currentIndex || isAnimating) return;
+
+        const prevScene = scenes[currentIndex];
+        const nextScene = scenes[targetIndex];
+
+        if (skipWipe) {
+            scenes.forEach(s => s.classList.remove('active', 'previous', 'no-wipe'));
+            nextScene.classList.add('active', 'no-wipe');
+            currentIndex = targetIndex;
+            updateChromeVisibility(currentIndex);
+            triggerSlideVoice(currentIndex);
+            return;
+        }
+
+        isAnimating = true;
+        scenes.forEach(s => s.classList.remove('previous', 'no-wipe'));
+
+        prevScene.classList.remove('active');
+        prevScene.classList.add('previous');
+        nextScene.classList.add('active');
+
+        currentIndex = targetIndex;
+        updateChromeVisibility(currentIndex);
+        triggerSlideVoice(currentIndex);
+
+        setTimeout(() => {
+            prevScene.classList.remove('previous');
+            isAnimating = false;
+        }, 640);
+    }
+
+    function copyAllSubtitlesWithPrefix() {
+        const prefix = 'Chuẩn bị ghi hình, lưu ý bạn hãy nghe kỹ lời dẫn và bấm phím mũi tên để chuyển slides, 5 4 3 2 1 <pause>';
+        const lines = [prefix];
+        scenes.forEach((s, idx) => {
+            if (idx >= 2) {
+                const capText = s.getAttribute('data-caption') || s.getAttribute('data-vo') || '';
+                if (capText.trim()) lines.push(capText.trim());
+            }
+        });
+        navigator.clipboard.writeText(lines.join('\n\n'));
+        const btn = document.getElementById('btn-copy-sub');
+        const oldHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Đã copy kịch bản gốc!';
+        setTimeout(() => btn.innerHTML = oldHtml, 2000);
+    }
+
+    function copyLedaPrompt() {
+        const promptText = 'Chuyên viên tư vấn người Hà Nội kể chuyện sôi nổi, nhiệt tình';
+        navigator.clipboard.writeText(promptText);
+        const btn = document.getElementById('btn-copy-prompt');
+        const oldHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check" style="color: #00B63E;"></i> Đã copy Prompt Leda!';
+        setTimeout(() => btn.innerHTML = oldHtml, 2000);
+    }
+
+    function setAudioSuccessUI(fileName, isAuto = false) {
+        hasCustomAudio = true;
+        dropzoneIcon.className = 'fa-solid fa-circle-check';
+        dropzoneIcon.style.color = '#00B63E';
+        dropzoneIcon.style.fontSize = '26px';
+        dropzoneIcon.style.marginBottom = '6px';
+        document.getElementById('audio-status-title').textContent = isAuto ? 'Đã tự nhận diện file mc.wav!' : 'Đã nạp file Audio!';
+        document.getElementById('audio-status-desc').textContent = fileName;
+        const badge = document.getElementById('audio-loaded-Badge');
+        document.getElementById('audio-filename').innerHTML = `<i class="fa-solid fa-circle-check" style="color: #00B63E; margin-right: 6px;"></i> ${fileName} ${isAuto ? '(Tự động)' : ''}`;
+        badge.classList.remove('hidden');
+        selectAudioMode(true);
+    }
+
+    function autoDetectByAudioTag() {
+        customAudioPlayer.preload = "metadata";
+        customAudioPlayer.onloadedmetadata = function() {
+            setAudioSuccessUI('mc.wav', true);
+        };
+        customAudioPlayer.onerror = function() {
+            hasCustomAudio = false;
+            customAudioPlayer.removeAttribute('src');
+            dropzoneIcon.className = 'fa-solid fa-cloud-arrow-up';
+            dropzoneIcon.style.color = 'var(--kv-primary-blue)';
+            dropzoneIcon.style.fontSize = '26px';
+            dropzoneIcon.style.marginBottom = '6px';
+            document.getElementById('audio-status-title').textContent = 'Chưa phát hiện file mc.wav';
+            document.getElementById('audio-status-desc').textContent = 'Đặt file mc.wav cùng thư mục hoặc kéo thả vào đây';
+        };
+        customAudioPlayer.src = 'mc.wav';
+    }
+
+    function loadAudioFile(file) {
+        if (!file) return;
+        const url = URL.createObjectURL(file);
+        customAudioPlayer.src = url;
+        setAudioSuccessUI(file.name, false);
+    }
+
+    function handleAudioFileSelect(event) {
+        const file = event.target.files[0];
+        if (file) loadAudioFile(file);
+    }
+
+    function clearLoadedAudio(event) {
+        event.stopPropagation();
+        stopAllAudio();
+        customAudioPlayer.removeAttribute('src');
+        hasCustomAudio = false;
+        isUserPaused = false;
+        document.getElementById('audio-file-input').value = '';
+        dropzoneIcon.className = 'fa-solid fa-cloud-arrow-up';
+        dropzoneIcon.style.color = 'var(--kv-primary-blue)';
+        dropzoneIcon.style.fontSize = '26px';
+        dropzoneIcon.style.marginBottom = '6px';
+        document.getElementById('audio-status-title').textContent = 'Up file .wav hoặc .mp3 tại đây';
+        document.getElementById('audio-status-desc').textContent = 'Nếu chưa có file, mục 2 sẽ dùng TTS hệ thống';
+        document.getElementById('audio-loaded-Badge').classList.add('hidden');
+        selectAudioMode(false);
+    }
+
+    if (dropzone) {
+        dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
+        dropzone.addEventListener('dragleave', () => { dropzone.classList.remove('dragover'); });
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('dragover');
+            if (e.dataTransfer.files && e.dataTransfer.files.length > 0) loadAudioFile(e.dataTransfer.files[0]);
+        });
+    }
+
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+        else document.exitFullscreen().catch(() => {});
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+        if (e.code === 'Space' || e.code === 'ArrowRight' || e.code === 'PageDown') { e.preventDefault(); goToScene(currentIndex + 1); }
+        else if (e.code === 'Backspace' || e.code === 'ArrowLeft' || e.code === 'PageUp') { e.preventDefault(); goToScene(currentIndex - 1); }
+        else if (e.key === '1') { e.preventDefault(); activateModeByKey(false); }
+        else if (e.key === '2') { e.preventDefault(); activateModeByKey(true); }
+        else if (e.key === '3') { e.preventDefault(); togglePauseAudio(); }
+        else if (e.key === '0' || e.code === 'Home') { e.preventDefault(); returnToSettings(); }
+        else if (e.key === 'f' || e.key === 'F') { e.preventDefault(); toggleFullScreen(); }
+        else if (e.key === 'p' || e.key === 'P') { e.preventDefault(); window.print(); }
+    });
+
+    document.getElementById('video-stage').addEventListener('click', (e) => {
+        if (currentIndex === 0) return;
+        if (e.target.closest('a, button, input, label')) return;
+        const selection = window.getSelection();
+        if (selection && selection.toString().trim().length > 0) return;
+        goToScene(currentIndex + 1);
+    });
+
+    initPrintSubtitles();
+    updateChromeVisibility(0);
+    autoDetectByAudioTag();
+</script>
