@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu Chương trình Đào tạo KiotViet Hotel Channel Manager - KiotViet L&amp;D</title>
+    <link rel="icon" type="image/png" href="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2023/10/31095822/64x64.png" sizes="64x64">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * { box-sizing: border-box; }
+        /* THEME HOTEL: KV GREEN & KV NAVY-BLUE BRAND GUIDELINE */
+        :root {
+            --kv-primary-blue: #0070F4;
+            --kv-accent-blue: #3AE3FF;
+            --kv-primary-green: #00B63E;
+            --kv-accent-green: #5BE92A;
+            --kv-navy: #002957;
+            --kv-dark-blue: #00418C;
+            --kv-ocean-blue: #005AC0;
+            --kv-coral: #FF5564;
+            --kv-coral-light: #FFDDE0;
+            --kv-orange: #FFAB3A;
+            --kv-orange-light: #FFEED8;
+            --kv-turquoise: #00C8AF;
+            --kv-turquoise-light: #CCF4EF;
+
+            /* THEME HOTEL: KV GREEN */
+            --theme-primary: #00B63E;
+            --theme-dark: #008A2E;
+            --theme-accent: #5BE92A;
+            --theme-light: #E5FFE9;
+            --theme-border: #6EE7B7;
+            --theme-rgb: 0, 182, 62;
+
+            --gradient-dark: linear-gradient(135deg, #002957 0%, #00418C 52%, #005AC0 100%);
+            --gradient-kv-blue: linear-gradient(135deg, #0070F4 0%, #3AE3FF 100%);
+            --gradient-kv-green: linear-gradient(135deg, #00B63E 0%, #5BE92A 100%);
+            --shadow: 0 10px 30px -6px rgba(0, 41, 87, 0.12);
+        }
+
+        html { font-size: clamp(10px, min(1.0416vw, 1.8518vh), 20px); }
+
+        html, body {
+            margin: 0; padding: 0; width: 100vw; height: 100vh;
+            overflow: hidden; background: #E6EEF8;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: var(--kv-navy);
+            user-select: text;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, p, span, div, table, td, th, text { user-select: text; font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .balance-text { text-wrap: balance; }
+        .display-font, .scene-dark h1 { font-family: 'Inter', sans-serif; letter-spacing: -0.02em; line-height: 1.24 !important; }
+
+        #progressBar {
+            position: fixed; top: 0; left: 0; height: 4px;
+            background: linear-gradient(90deg, var(--kv-primary-blue), var(--kv-primary-green), var(--kv-orange));
+            transition: width 0.35s ease;
+            z-index: 1000; width: 0%;
+        }
+
+        #video-stage {
+            position: fixed; inset: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at 12% 15%, rgba(0, 112, 244, 0.07) 0%, transparent 45%),
+                        radial-gradient(circle at 88% 85%, rgba(0, 182, 62, 0.07) 0%, transparent 45%),
+                        linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
+            overflow: hidden;
+        }
+
+        .tech-grid {
+            position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(0, 41, 87, 0.04) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 41, 87, 0.04) 1px, transparent 1px);
+            background-size: 38px 38px; pointer-events: none; z-index: 1;
+        }
+
+        @keyframes wipeDownActive { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+        @keyframes wipeUpPrevious { from { clip-path: inset(0 0 0 0); } to { clip-path: inset(100% 0 0 0); } }
+
+        .scene {
+            position: absolute; inset: 0;
+            padding: 1.35rem 2.8rem 7.3rem 2.8rem;
+            display: none !important;
+            flex-direction: column; align-items: center; justify-content: flex-start;
+            background: radial-gradient(circle at 12% 15%, rgba(0, 112, 244, 0.07) 0%, transparent 45%),
+                        radial-gradient(circle at 88% 85%, rgba(0, 182, 62, 0.07) 0%, transparent 45%),
+                        linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
+            z-index: 10;
+        }
+        .scene.scene-dark { background: var(--gradient-dark) !important; color: #ffffff; }
+        .scene.previous { display: flex !important; z-index: 15; animation: wipeUpPrevious 0.55s cubic-bezier(0.65, 0, 0.35, 1) forwards; }
+        .scene.active { display: flex !important; z-index: 20; animation: wipeDownActive 0.55s cubic-bezier(0.65, 0, 0.35, 1) forwards; }
+        .scene.no-wipe { animation: none !important; }
+        .scene-standby { padding: 1.25rem 2rem !important; justify-content: center; background: #E6EEF8 !important; }
+
+        /* Animations */
+        .scene.active .pop { animation: popIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: var(--d, 0s); }
+        .scene.active .up { animation: fadeUp 0.55s ease-out both; animation-delay: var(--d, 0s); }
+        .scene.active .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: drawLine 1.05s ease forwards; animation-delay: var(--d, 0s); }
+        .scene.active .reveal { animation: revealRight 1.1s ease-out both; animation-delay: var(--d, 0s); }
+        .float { animation: floatY 2.4s ease-in-out infinite; animation-delay: var(--f, 0s); will-change: transform; }
+        .pulse { animation: pulseScale 2.4s ease-in-out infinite; }
+
+        @keyframes popIn { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+        @keyframes drawLine { to { stroke-dashoffset: 0; } }
+        @keyframes revealRight { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+        @keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        @keyframes pulseScale { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+        @keyframes travel { from { left: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } to { left: calc(100% - 14px); opacity: 0; } }
+
+        /* Logo & Optical Centering Rules (Golden Master) */
+        .scene-logo { position: absolute; top: 1.8rem; right: 2.6rem; z-index: 30; display: flex; align-items: center; }
+        .scene-logo img { height: 2.1rem; width: auto; }
+        .scene-dark .scene-logo { background: #FFFFFF; padding: 0.35rem 0.9rem; border-radius: 999px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22); }
+        .slide-inner { width: 100%; max-width: 86rem; height: 100%; display: flex; flex-direction: column; justify-content: flex-start; gap: 1.1rem; position: relative; z-index: 5; }
+
+        /* KHÓA CĂN GIỮA QUANG HỌC CHO SLIDE NỀN TỐI (.scene-dark) */
+        .scene.scene-dark .slide-inner {
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 1.75rem !important;
+            height: 100% !important;
+            margin: 0 auto !important;
+        }
+
+        .slide-header { width: 100%; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 0.25rem; padding-right: 12rem; flex-shrink: 0; }
+        .header-title-row { display: flex; align-items: center; gap: 0.85rem; }
+        .header-icon-box {
+            width: 44px; height: 44px; border-radius: 13px;
+            background: linear-gradient(135deg, var(--kv-primary-blue) 0%, var(--theme-primary) 100%);
+            color: #ffffff; display: flex; align-items: center; justify-content: center;
+            font-size: 1.15rem; flex-shrink: 0; box-shadow: 0 6px 14px -3px rgba(0, 112, 244, 0.3);
+        }
+        .section-badge {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.26rem 0.9rem; border-radius: 999px;
+            background: var(--theme-light); border: 1.5px solid var(--theme-border);
+            color: var(--theme-dark); font-weight: 800; font-size: 0.72rem;
+            text-transform: uppercase; letter-spacing: 0.06em;
+        }
+        .scene-dark .section-badge { background: var(--kv-orange); border-color: var(--kv-orange); color: var(--kv-navy); }
+        .text-stage { flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; }
+
+        /* Graphic Components */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1.5px solid rgba(255, 255, 255, 0.24);
+            box-shadow: 0 20px 44px -12px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(12px);
+            border-radius: 1.65rem; color: #ffffff;
+        }
+        .bento-card {
+            background: #ffffff; border: 2px solid #CBD5E1;
+            box-shadow: 0 18px 40px -12px rgba(0, 41, 87, 0.1);
+            border-radius: 1.5rem;
+        }
+        .vs-board { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.4rem; align-items: stretch; width: 100%; }
+        .vs-mid {
+            display: grid; place-items: center; font-weight: 900; font-size: 1.4rem; color: var(--kv-navy);
+            width: 56px; height: 56px; border-radius: 50%;
+            background: var(--kv-orange); border: 3px solid #ffffff;
+            box-shadow: 0 8px 20px rgba(255, 171, 58, 0.35); align-self: center;
+        }
+        .tl-row { position: relative; display: grid; width: 100%; gap: 1.15rem; }
+        .tl-line { position: absolute; left: 8%; right: 8%; top: 32px; height: 5px; border-radius: 3px; background: linear-gradient(90deg, var(--kv-primary-blue), var(--kv-turquoise), var(--kv-primary-green)); z-index: 0; }
+        .tl-item { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+        .io-flow { display: flex; align-items: center; justify-content: center; width: 100%; gap: 0.5rem; }
+        .io-col { display: flex; flex-direction: column; gap: 0.55rem; min-width: 15.5rem; flex-shrink: 0; }
+        .io-chip {
+            background: #ffffff; border: 1.5px solid #93C5FD; border-radius: 0.9rem;
+            padding: 0.58rem 0.95rem; box-shadow: var(--shadow); font-weight: 800; font-size: 0.8rem;
+            display: flex; align-items: center; gap: 0.6rem; color: var(--kv-navy); white-space: nowrap;
+        }
+        .track { position: relative; flex: 1; height: 14px; margin: 0 0.5rem; min-width: 3rem; }
+        .track::before { content: ''; position: absolute; top: 5.5px; left: 0; right: 0; border-top: 3px dashed var(--kv-primary-blue); opacity: 0.6; }
+        .track i {
+            position: absolute; top: 0; width: 14px; height: 14px; border-radius: 50%;
+            background: var(--kv-orange); box-shadow: 0 0 10px var(--kv-orange);
+            animation: travel 2.2s linear infinite; animation-delay: var(--t, 0s);
+        }
+        .brain-box {
+            min-width: 13.5rem; height: 10.5rem; border-radius: 1.75rem;
+            background: var(--gradient-dark); color: #ffffff !important;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 1rem 1.4rem;
+            box-shadow: 0 16px 36px -8px rgba(0, 41, 87, 0.45);
+            border: 2px solid rgba(58, 227, 255, 0.35); flex-shrink: 0;
+        }
+        .out-circle {
+            width: 10.5rem; height: 10.5rem; border-radius: 50%;
+            background: #E5FFE9; border: 4px solid var(--kv-primary-green);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 0.75rem; font-weight: 800; color: #036A2F !important;
+            box-shadow: 0 12px 28px -6px rgba(0, 182, 62, 0.22); flex-shrink: 0;
+        }
+
+        .chg-row {
+            display: grid; grid-template-columns: 38px 1.25fr 1.55fr 1.15fr; gap: 1rem;
+            align-items: center; background: #ffffff; border: 1.5px solid #DBEAFE;
+            border-radius: 16px; padding: 0.7rem 1rem; box-shadow: 0 4px 12px rgba(0, 41, 87, 0.04); font-size: 0.84rem;
+        }
+        .chg-row .no {
+            width: 30px; height: 30px; border-radius: 50%;
+            background: var(--kv-orange); color: var(--kv-navy);
+            display: grid; place-items: center; font-weight: 900;
+        }
+        .chg-row .num {
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 0.76rem; font-weight: 800; color: var(--kv-ocean-blue);
+            background: #EFF6FF; border: 1px solid #93C5FD;
+            padding: 0.38rem 0.65rem; border-radius: 10px; text-align: center;
+        }
+
+        .waffle-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; width: 100%; max-width: 240px; }
+        .waffle-grid i { display: block; aspect-ratio: 1; border-radius: 4px; background: #E2E8F0; animation: popIn 0.35s ease both; animation-delay: var(--d, 0s); }
+        .waffle-grid i.g { background: var(--kv-primary-green); }
+        .waffle-grid i.b { background: var(--kv-primary-blue); }
+
+        .support-card-blue { background: #ffffff; border-radius: 1.15rem; border: 2px solid #93C5FD; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.22); transition: transform 0.2s ease; }
+        .support-card-blue:hover { transform: translateY(-2px); }
+        .youtube-card-red { background: #ffffff; border-radius: 1.15rem; border: 2px solid #FCA5A5; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.22); transition: transform 0.2s ease; }
+        .youtube-card-red:hover { transform: translateY(-2px); }
+
+        /* Setup Slide 0 CSS */
+        .setup-card { width: 100%; max-width: 1320px; background: #ffffff; border-radius: 26px; border: 2px solid #CBD5E1; box-shadow: 0 24px 48px -12px rgba(0, 41, 87, 0.14); padding: 1.35rem 1.75rem; display: flex; flex-direction: column; gap: 1.05rem; }
+        .steps-wrapper { background: #EFF6FF; border: 1.5px solid #93C5FD; border-radius: 20px; padding: 0.95rem 1.1rem; }
+        .step-box { background: #ffffff; border: 1.5px solid #DBEAFE; border-radius: 16px; padding: 0.95rem 1.1rem; display: flex; flex-direction: column; justify-content: space-between; gap: 0.65rem; }
+        .shortcut-panel { background: #FFF9F0; border: 1.5px solid #FFCD89; border-radius: 20px; padding: 0.9rem 1.15rem; display: flex; flex-direction: column; gap: 0.65rem; }
+        .shortcut-item { background: #ffffff; border: 1.5px solid #FFDDB0; border-radius: 14px; padding: 0.6rem 0.8rem; display: flex; align-items: center; gap: 0.65rem; cursor: pointer; }
+        .kbd-light { display: inline-flex; align-items: center; justify-content: center; min-width: 28px; height: 26px; padding: 0 0.5rem; background: var(--kv-orange-light); color: #9A3412; border: 1.5px solid var(--kv-orange); border-radius: 7px; font-size: 0.76rem; font-weight: 900; }
+        .mode-radio-group { display: inline-flex; align-items: center; gap: 0.45rem; background: #F8FAFC; border: 1.5px solid #CBD5E1; padding: 0.3rem; border-radius: 999px; }
+        .mode-radio-label { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.4rem 0.95rem; border-radius: 999px; font-size: 0.78rem; font-weight: 800; color: #334E68; cursor: pointer; }
+        .mode-radio-label.active-mode { background: #ffffff; color: var(--kv-navy); border: 1.5px solid #93C5FD; }
+        .dropzone-area { border: 2px dashed var(--kv-primary-blue); background: #EFF6FF; border-radius: 14px; padding: 0.85rem 0.75rem; text-align: center; cursor: pointer; }
+        .studio-btn { height: 36px; padding: 0 1rem; border-radius: 10px; font-size: 0.76rem; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; cursor: pointer; text-decoration: none; }
+        .studio-btn-primary { background: var(--kv-primary-blue); color: #ffffff; border: 1px solid var(--kv-primary-blue); }
+        .studio-btn-start { height: 42px; padding: 0 1.35rem; border-radius: 999px; background: linear-gradient(135deg, var(--kv-primary-blue), var(--kv-ocean-blue)); color: #ffffff; border: none; font-size: 0.82rem; font-weight: 800; }
+        .studio-btn-outline { background: #ffffff; color: var(--kv-navy); border: 1.5px solid #CBD5E1; }
+
+        /* HUD Subtitle & Slide Nav Pill */
+        #presenter-hud {
+            position: absolute; bottom: 1.05rem; left: 50%; transform: translateX(-50%);
+            width: calc(100vw - 5rem); max-width: 1360px;
+            display: flex; align-items: center; justify-content: center; gap: 0.85rem;
+            z-index: 40; opacity: 1; transition: opacity 0.3s ease;
+        }
+        #presenter-hud.hud-hidden { opacity: 0 !important; pointer-events: none; }
+        #subtitle-box {
+            flex: 1; min-height: 52px; max-height: 5.5rem;
+            background: linear-gradient(135deg, var(--kv-ocean-blue) 0%, var(--kv-navy) 100%);
+            color: #ffffff; padding: 0.7rem 1.8rem; border-radius: 16px;
+            font-size: 1rem; font-weight: 700; text-align: center !important; line-height: 1.42;
+            border: 1.5px solid rgba(58, 227, 255, 0.35);
+            box-shadow: 0 14px 32px -6px rgba(0, 41, 87, 0.4);
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
+        }
+        .slide-nav-pill {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            background: rgba(255, 255, 255, 0.95); border: 1.5px solid #CBD5E1;
+            border-radius: 999px; padding: 0.35rem 0.75rem;
+            box-shadow: 0 8px 20px rgba(0, 41, 87, 0.16); shrink: 0;
+        }
+        .slide-nav-btn {
+            width: 30px; height: 30px; border-radius: 50%;
+            background: #EFF6FF; color: var(--kv-navy); border: 1px solid #BFDBFE;
+            display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+            font-size: 0.75rem; font-weight: 800; transition: all 0.15s ease;
+        }
+        .slide-nav-btn:hover { background: var(--kv-primary-blue); color: #ffffff; }
+        .print-subtitle { display: none; text-align: center !important; }
+
+        @media print {
+            @page { size: 1280px 720px; margin: 0mm !important; }
+            * {
+                animation: none !important; transition: none !important;
+                opacity: 1 !important; visibility: visible !important;
+                transform: none !important; clip-path: none !important;
+                stroke-dashoffset: 0 !important;
+                -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+            }
+            html, body { width: 1280px !important; height: 720px !important; overflow: visible !important; }
+            #presenter-hud, #progressBar, .tech-grid, .scene-standby { display: none !important; }
+            #video-stage { position: static !important; width: 1280px !important; height: auto !important; }
+            .scene.scene-content {
+                position: relative !important; inset: auto !important;
+                width: 1280px !important; height: 720px !important;
+                margin: 0 !important; padding: 1.15rem 2.4rem 6.5rem 2.4rem !important;
+                display: flex !important; page-break-after: always !important; break-after: page !important;
+            }
+            .scene.scene-content:last-of-type { page-break-after: avoid !important; break-after: avoid !important; }
+            .print-subtitle {
+                display: flex !important; align-items: center !important; justify-content: center !important;
+                position: absolute !important; bottom: 0.9rem !important; left: 50% !important; transform: translateX(-50%) !important;
+                width: 92% !important; background: var(--kv-ocean-blue) !important; color: #fff !important;
+                padding: 0.65rem 1.6rem !important; border-radius: 16px !important; font-size: 1rem !important; font-weight: 700 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="progressBar"></div>
+
+<div id="video-stage">
+    <div class="tech-grid"></div>
+    <audio id="custom-audio-player" preload="auto"></audio>
+
+    <!-- SLIDE 0: CẤU HÌNH PRESENTER MC (NHẤN PHÍM 0 ĐỂ MỞ) -->
+    <section class="scene scene-standby no-wipe" data-scene="0" data-caption="" data-vo="">
+        <div class="setup-card" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between gap-4 pb-3 border-b border-slate-200">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-2xl text-white flex items-center justify-center text-xl font-black shadow-lg" style="background: linear-gradient(135deg, var(--kv-primary-green), var(--kv-primary-blue));">
+                        <i class="fa-solid fa-hotel"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2.5">
+                            <h1 class="text-2xl font-black tracking-tight" style="color: var(--kv-navy);">Pro Presenter MC – Thiết lập Trình chiếu</h1>
+                            <span class="px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider" style="background: var(--theme-light); color: var(--theme-dark); border: 1.5px solid var(--theme-border);">
+                                THEME HOTEL: KV GREEN
+                            </span>
+                        </div>
+                        <p class="text-xs font-semibold text-slate-600 mt-0.5">Giới thiệu Chương trình Đào tạo KiotViet Channel Manager cho Phòng DVKH</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="mode-radio-group">
+                        <label id="label-mode-1" class="mode-radio-label active-mode" onclick="selectAudioMode(false)">
+                            <input type="radio" name="audioMode" id="radio-mode-1" value="silent" checked onchange="selectAudioMode(false)">
+                            <span>1 – Không thuyết minh</span>
+                        </label>
+                        <label id="label-mode-2" class="mode-radio-label" onclick="selectAudioMode(true)">
+                            <input type="radio" name="audioMode" id="radio-mode-2" value="voice" onchange="selectAudioMode(true)">
+                            <span>2 – Thuyết minh</span>
+                        </label>
+                    </div>
+                    <button onclick="goToScene(1)" class="studio-btn studio-btn-start">
+                        <i class="fa-solid fa-play"></i> Quay lại Slide 1
+                    </button>
+                </div>
+            </div>
+
+            <div class="steps-wrapper">
+                <div class="text-xs font-black uppercase tracking-wider mb-3 flex items-center gap-2" style="color: var(--kv-ocean-blue);">
+                    <i class="fa-solid fa-list-ol" style="color: var(--kv-primary-blue);"></i> QUY TRÌNH 4 BƯỚC CHUẨN BỊ VOICEOVER (LEDA)
+                </div>
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="step-box">
+                        <div class="space-y-2">
+                            <span class="px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 font-extrabold text-[11px] uppercase inline-block">BƯỚC 1</span>
+                            <h3 class="text-base font-extrabold" style="color: var(--kv-navy);">Copy toàn bộ phụ đề</h3>
+                            <p class="text-xs font-semibold text-slate-600">Bao gồm toàn bộ 12 slide chia sẻ với DVKH.</p>
+                        </div>
+                        <button onclick="copyAllSubtitlesWithPrefix()" id="btn-copy-sub" class="studio-btn studio-btn-primary w-full">
+                            <i class="fa-solid fa-clipboard-check"></i> Copy toàn bộ phụ đề
+                        </button>
+                    </div>
+                    <div class="step-box">
+                        <div class="space-y-2">
+                            <span class="px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 font-extrabold text-[11px] uppercase inline-block">BƯỚC 2</span>
+                            <h3 class="text-base font-extrabold" style="color: var(--kv-navy);">Mở Google AI Studio</h3>
+                            <p class="text-xs font-semibold text-slate-600">Giọng <strong>Leda</strong> • Chuyên viên L&amp;D KiotViet.</p>
+                        </div>
+                        <button onclick="copyLedaPrompt()" id="btn-copy-prompt" class="studio-btn studio-btn-outline w-full">
+                            <i class="fa-solid fa-quote-left"></i> Copy Prompt giọng Leda
+                        </button>
+                    </div>
+                    <div class="step-box">
+                        <div class="space-y-2">
+                            <span class="px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 font-extrabold text-[11px] uppercase inline-block">BƯỚC 3</span>
+                            <h3 class="text-base font-extrabold" style="color: var(--kv-navy);">Lưu file mc.wav</h3>
+                            <p class="text-xs font-semibold text-slate-600">Tự động nhận diện file mc.wav nếu đặt cùng thư mục.</p>
+                        </div>
+                    </div>
+                    <div class="step-box">
+                        <div class="space-y-2">
+                            <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-extrabold text-[11px] uppercase inline-block">BƯỚC 4</span>
+                            <h3 class="text-base font-extrabold" style="color: var(--kv-navy);">Nạp Audio thủ công</h3>
+                            <input type="file" id="audio-file-input" accept=".mp3,.wav,audio/*" class="hidden" onchange="handleAudioFileSelect(event)">
+                            <div id="audio-dropzone" class="dropzone-area" onclick="document.getElementById('audio-file-input').click()">
+                                <i id="audio-status-icon" class="fa-solid fa-cloud-arrow-up text-xl mb-1 text-blue-600"></i>
+                                <div id="audio-status-title" class="text-xs font-extrabold">Chọn / kéo thả Audio</div>
+                                <div id="audio-status-desc" class="text-[10.5px] font-semibold text-blue-700">Mặc định Slide 1 tự mở khi chia sẻ</div>
+                                <div id="audio-loaded-Badge" class="hidden text-[10px] font-bold text-emerald-700 mt-1"><span id="audio-filename"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shortcut-panel">
+                <div class="grid grid-cols-6 gap-2.5 text-xs font-bold">
+                    <div class="shortcut-item" onclick="toggleFullScreen()"><span class="kbd-light">F</span><span>Toàn màn hình</span></div>
+                    <div class="shortcut-item" onclick="activateModeByKey(false)"><span class="kbd-light">1</span><span>Không tiếng</span></div>
+                    <div class="shortcut-item" onclick="activateModeByKey(true)"><span class="kbd-light">2</span><span>Thuyết minh</span></div>
+                    <div class="shortcut-item" onclick="togglePauseResumeAudio()"><span class="kbd-light">3</span><span>Tạm dừng / Phát</span></div>
+                    <div class="shortcut-item" onclick="goToScene(1)"><span class="kbd-light">0</span><span>Về Slide 1</span></div>
+                    <div class="shortcut-item" onclick="window.print()"><span class="kbd-light">P</span><span>Xuất PDF 16:9</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 1: TRANG BÌA HERO SPLIT (.scene-dark) - MỞ ĐẦU TRỰC TIẾP -->
+    <section class="scene scene-content scene-dark active no-wipe" data-scene="1"
+        data-caption="Chào mừng các bạn đến với buổi giới thiệu Chương trình Đào tạo KiotViet Hotel Channel Manager 2026 dành riêng cho đội ngũ Chuyên viên Dịch vụ Khách hàng và Quản lý vận hành."
+        data-vo="Chào mừng các bạn đến với buổi giới thiệu Chương trình Đào tạo KiotViet Hotel Channel Manager 2026 dành riêng cho đội ngũ Chuyên viên Dịch vụ Khách hàng và Quản lý vận hành.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner justify-center items-center">
+            <div class="grid grid-cols-12 gap-8 items-center w-full">
+                <div class="col-span-7 flex flex-col items-start gap-4">
+                    <span class="section-badge pop" style="--d:.1s">
+                        <i class="fa-solid fa-layer-group"></i> KiotViet L&amp;D • Chia sẻ Liên phòng ban DVKH
+                    </span>
+                    <h1 class="display-font text-5xl font-black text-white leading-tight up" style="--d:.2s">
+                        CHƯƠNG TRÌNH ĐÀO TẠO<br>
+                        <span style="color: var(--kv-accent-green);">KIOTVIET CHANNEL MANAGER</span>
+                    </h1>
+                    <p class="text-lg font-medium text-blue-100 leading-relaxed max-w-2xl up" style="--d:.32s">
+                        Trang bị năng lực tác nghiệp thực chiến cho Chuyên viên Dịch vụ Khách hàng mới gia nhập 1 tháng &amp; Hệ thống giám sát chuẩn hóa cho Trưởng nhóm DVKH.
+                    </p>
+                    <div class="flex flex-wrap items-center gap-3 pt-2 up" style="--d:.44s">
+                        <span class="px-4 py-2 rounded-xl bg-white/15 border border-white/25 text-xs font-extrabold text-white"><i class="fa-solid fa-book-open text-emerald-300 mr-1.5"></i> 18 Bài học • 6 Chương</span>
+                        <span class="px-4 py-2 rounded-xl bg-white/15 border border-white/25 text-xs font-extrabold text-white"><i class="fa-solid fa-cubes text-sky-300 mr-1.5"></i> 6 Học phần Chuẩn hóa</span>
+                        <span class="px-4 py-2 rounded-xl bg-white/15 border border-white/25 text-xs font-extrabold text-white"><i class="fa-solid fa-shield-halved text-amber-300 mr-1.5"></i> 8 Cửa Kiểm định Chất lượng</span>
+                    </div>
+                </div>
+
+                <div class="col-span-5 flex items-center justify-center relative">
+                    <div class="glass-card w-[24rem] h-[24rem] flex flex-col items-center justify-center relative pop" style="--d:.25s">
+                        <div class="w-32 h-32 rounded-3xl flex items-center justify-center text-6xl shadow-2xl float" style="background: linear-gradient(135deg, var(--kv-primary-green), var(--kv-primary-blue)); color: #ffffff;">
+                            <i class="fa-solid fa-arrows-rotate"></i>
+                        </div>
+                        <div class="mt-5 text-center px-4">
+                            <div class="text-xs font-bold uppercase tracking-widest text-emerald-300">Single Source of Truth</div>
+                            <div class="text-xl font-black text-white mt-1">PMS ⇄ Channel Manager ⇄ OTAs</div>
+                        </div>
+                        <div class="absolute -top-5 -left-5 w-14 h-14 rounded-2xl bg-[#0070F4] border-2 border-white/50 flex items-center justify-center text-white text-xl shadow-lg float" style="--f:.3s"><i class="fa-solid fa-hotel"></i></div>
+                        <div class="absolute -bottom-5 -right-5 w-14 h-14 rounded-2xl bg-[#FFAB3A] border-2 border-white/50 flex items-center justify-center text-[#002957] text-xl shadow-lg float" style="--f:.7s"><i class="fa-solid fa-headset"></i></div>
+                        <div class="absolute top-6 -right-6 w-12 h-12 rounded-2xl bg-[#00B63E] border-2 border-white/50 flex items-center justify-center text-white text-lg shadow-lg float" style="--f:1.1s"><i class="fa-solid fa-check-double"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 2: BỐI CẢNH & GIÁ TRỊ CHUYỂN ĐỔI (.vs-board) -->
+    <section class="scene scene-content" data-scene="2"
+        data-caption="• Bối cảnh cũ: Tài liệu hướng dẫn rời rạc từ 2022 khiến nhân sự mới mất phương hướng khi khách gặp lỗi đồng bộ. &#10;• Giải pháp chuẩn hóa 2026: 18 bài học thực chiến kèm Checklist tiếp thu, Dashboard CS Lead và kiểm định 8 cửa."
+        data-vo="Trước đây, tài liệu hướng dẫn rời rạc khiến Chuyên viên Dịch vụ Khách hàng mới gia nhập 1 tháng dễ lúng túng trước các ca lỗi đồng bộ phức tạp. Với bộ chương trình KiotViet Channel Manager chuẩn hóa 2026, chúng ta chuyển đổi hoàn toàn sang 18 bài học thực chiến tích hợp Checklist tự đánh giá và Dashboard giám sát cho Trưởng nhóm DVKH.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge pop" style="--d:.05s"><i class="fa-solid fa-bolt"></i> Lý do &amp; Giá trị Chuyển đổi</span>
+                <div class="header-title-row up" style="--d:.12s">
+                    <div class="header-icon-box"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <h2 class="text-3xl font-black text-[#002957]">Tại sao Phòng DVKH cần Chương trình Chuẩn hóa Mới?</h2>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="vs-board">
+                    <div class="bento-card p-6 border-rose-300 bg-rose-50/40 flex flex-col justify-between gap-4 up" style="--d:.2s">
+                        <div class="flex items-center gap-3 pb-3 border-b border-rose-200">
+                            <div class="w-10 h-10 rounded-xl bg-rose-600 text-white flex items-center justify-center text-lg"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                            <div>
+                                <div class="text-xs font-extrabold text-rose-700 uppercase">Hiện trạng Trước Chuẩn hóa</div>
+                                <h3 class="text-lg font-black text-[#002957]">Khó tiếp thu • Khó đo lường</h3>
+                            </div>
+                        </div>
+                        <ul class="space-y-3 text-sm font-semibold text-slate-700">
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-circle-xmark text-rose-500 mt-1"></i><span>Tài liệu cũ (2022) lẫn đường dẫn giao diện cũ <code class="text-rose-700">Bán Online ➔ Kênh OTAs</code>.</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-circle-xmark text-rose-500 mt-1"></i><span>Nhân sự mới chưa có Checklist tự đánh dấu hiểu bài hay hỏi lại CS Lead.</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-circle-xmark text-rose-500 mt-1"></i><span>CS Lead thiếu công cụ nhìn nhanh điểm nghẽn theo từng buổi đào tạo.</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-circle-xmark text-rose-500 mt-1"></i><span>Chưa thống nhất ngưỡng gói Lite (tối đa 4 kênh OTA) và quy tắc khóa kép.</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="vs-mid pop" style="--d:.3s">VS</div>
+
+                    <div class="bento-card p-6 border-emerald-400 bg-emerald-50/40 flex flex-col justify-between gap-4 up" style="--d:.4s">
+                        <div class="flex items-center gap-3 pb-3 border-b border-emerald-200">
+                            <div class="w-10 h-10 rounded-xl bg-[#00B63E] text-white flex items-center justify-center text-lg"><i class="fa-solid fa-circle-check"></i></div>
+                            <div>
+                                <div class="text-xs font-extrabold text-emerald-700 uppercase">Chương trình Chuẩn hóa 2026</div>
+                                <h3 class="text-lg font-black text-[#002957]">Thực chiến • Đo lường 100%</h3>
+                            </div>
+                        </div>
+                        <ul class="space-y-3 text-sm font-semibold text-slate-700">
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-circle-check text-[#00B63E] mt-1"></i><span>Chuẩn hóa 100% đường dẫn mới <code class="text-emerald-800">[Kênh bán và OTA ⌵] ➔ [OTAs]</code> &amp; 4 gói dịch vụ.</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-circle-check text-[#00B63E] mt-1"></i><span>Tích hợp <strong>Checklist 4 bước + 🟢/🟡/🔴</strong> tự động đồng bộ Web &amp; Quiz.</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-circle-check text-[#00B63E] mt-1"></i><span><strong>CS Lead Dashboard</strong> kèm Rubric 10 giây/bài và 12 câu Oral Check.</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-circle-check text-[#00B63E] mt-1"></i><span>Sẵn sàng xử lý Overbooking trong 60 giây và chuyển tiếp P1/P2/P3 đúng SLA.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 3: CHÂN DUNG NGƯỜI HỌC & NGƯỠNG ĐẦU RA (TIMELINE .tl-row) -->
+    <section class="scene scene-content" data-scene="3"
+        data-caption="• Đầu vào: Chuyên viên DVKH mới gia nhập 1 tháng đã vững Hotel cơ bản. &#10;• Đầu ra 4 ngưỡng bắt buộc: Học 18/18 Web đạt 100%, Quiz >= 80%, Thực hành PASS 18/18 và Oral Check >= 10/12 câu."
+        data-vo="Chương trình được may đo cho Chuyên viên Dịch vụ Khách hàng mới gia nhập 1 tháng đã hoàn thành khóa Hotel cơ bản. Để được cấp quyền nhận cuộc gọi độc lập, học viên cần vượt qua 4 ngưỡng đầu ra: hoàn thành 18 bài Web tương tác, đạt Quiz từ 80 phần trăm trở lên, đạt thực hành chụp ảnh màn hình và trả lời đạt từ 10 trên 12 câu vấn đáp với CS Lead.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge pop" style="--d:.05s"><i class="fa-solid fa-user-graduate"></i> Đối tượng &amp; Chuẩn Đầu ra</span>
+                <div class="header-title-row up" style="--d:.12s">
+                    <div class="header-icon-box"><i class="fa-solid fa-bullseye"></i></div>
+                    <h2 class="text-3xl font-black text-[#002957]">Lộ trình Từ CV DVKH Mới 1 Tháng Đến Tác Nghiệp Độc Lập</h2>
+                </div>
+            </div>
+            <div class="text-stage flex-col gap-6">
+                <div class="bento-card w-full p-5 bg-blue-50/70 border-blue-200 flex items-center justify-between gap-6 up" style="--d:.18s">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-[#0070F4] text-white flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-id-badge"></i></div>
+                        <div>
+                            <div class="text-xs font-extrabold uppercase text-[#0070F4]">Điều kiện Đầu vào (Pre-requisite)</div>
+                            <div class="text-base font-extrabold text-[#002957]">Chuyên viên DVKH gia nhập $\ge 1$ tháng • Đã nắm vững KiotViet Hotel cơ bản</div>
+                        </div>
+                    </div>
+                    <div class="text-xs font-bold text-slate-600 bg-white px-4 py-2 rounded-xl border border-slate-200">
+                        Thành thạo Sơ đồ phòng • Thiết lập Bảng giá • Nhận/Trả phòng &amp; Hóa đơn
+                    </div>
+                </div>
+
+                <div class="tl-row grid-cols-4 pt-2">
+                    <div class="tl-line reveal" style="--d:.25s"></div>
+                    <div class="tl-item bento-card p-5 gap-3 pop" style="--d:.3s">
+                        <div class="w-14 h-14 rounded-2xl bg-[#0070F4] text-white flex items-center justify-center text-2xl font-black shadow-md">01</div>
+                        <h3 class="text-base font-black text-[#002957]">Web Tương tác (B)</h3>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed">Hoàn thành <strong>18/18 bài</strong> đủ tương tác thực chất: lật Flashcard, chạy Mô phỏng &amp; giải đúng 100% Roleplay.</p>
+                        <span class="px-3 py-1 rounded-lg bg-sky-100 text-sky-800 text-xs font-extrabold">Bắt buộc 100%</span>
+                    </div>
+                    <div class="tl-item bento-card p-5 gap-3 pop" style="--d:.42s">
+                        <div class="w-14 h-14 rounded-2xl bg-[#FFAB3A] text-[#002957] flex items-center justify-center text-2xl font-black shadow-md">02</div>
+                        <h3 class="text-base font-black text-[#002957]">Trắc nghiệm LMS (C)</h3>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed">Xáo trộn vị trí A/B/C công bằng trên <strong>54 câu hỏi</strong> (3 câu/bài). Lưu điểm trực tiếp từng bài.</p>
+                        <span class="px-3 py-1 rounded-lg bg-amber-100 text-amber-800 text-xs font-extrabold">Đạt $\ge$ 80% / bài</span>
+                    </div>
+                    <div class="tl-item bento-card p-5 gap-3 pop" style="--d:.54s">
+                        <div class="w-14 h-14 rounded-2xl bg-[#00C8AF] text-white flex items-center justify-center text-2xl font-black shadow-md">03</div>
+                        <h3 class="text-base font-black text-[#002957]">Thực hành Word (D)</h3>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed">100% thao tác &amp; chụp ảnh màn hình theo <strong>54 nhiệm vụ thực tế</strong>. CS Lead chấm bằng Rubric 10s.</p>
+                        <span class="px-3 py-1 rounded-lg bg-teal-100 text-teal-800 text-xs font-extrabold">PASS $\ge$ 16/18 bài</span>
+                    </div>
+                    <div class="tl-item bento-card p-5 gap-3 pop" style="--d:.66s">
+                        <div class="w-14 h-14 rounded-2xl bg-[#00B63E] text-white flex items-center justify-center text-2xl font-black shadow-md">04</div>
+                        <h3 class="text-base font-black text-[#002957]">Oral Check CS Lead</h3>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed">Vấn đáp phản xạ nhanh trong <strong>5 phút</strong> qua 12 tình huống Hotline phổ biến trước khi mở line.</p>
+                        <span class="px-3 py-1 rounded-lg bg-emerald-100 text-emerald-800 text-xs font-extrabold">Đạt $\ge$ 10/12 câu</span>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 4: TOÀN CẢNH 6 CHƯƠNG - 18 BÀI HỌC -->
+    <section class="scene scene-content" data-scene="4"
+        data-caption="• Phần nền tảng (Chương 1–2): Kiến trúc dữ liệu 2 chiều, kiểm tra thanh toán hợp đồng và 4 gói dịch vụ. &#10;• Phần triển khai & vận hành (Chương 3–6): Kích hoạt ID/Key, kết nối 4 sàn lớn, xử lý lỗi đồng bộ và Overbooking 60 giây."
+        data-vo="Nội dung 18 bài được chia đều thành 6 buổi học tương ứng 6 chương: từ bản chất luồng dữ liệu, quy trình nhận bàn giao mã kết nối, kích hoạt thu hộ, kết nối từng sàn Agoda, Booking, Airbnb đến vận hành hàng ngày và xử lý khủng hoảng bán trùng phòng trong 60 giây.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge pop" style="--d:.05s"><i class="fa-solid fa-sitemap"></i> Cấu trúc Học thuật 6 Chương</span>
+                <div class="header-title-row up" style="--d:.12s">
+                    <div class="header-icon-box"><i class="fa-solid fa-list-ol"></i></div>
+                    <h2 class="text-3xl font-black text-[#002957]">Bản đồ 18 Bài học Xuyên suốt Vòng đời Triển khai &amp; Hỗ trợ</h2>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="grid grid-cols-3 gap-4 w-full">
+                    <div class="bento-card p-4 border-blue-300 flex flex-col gap-2 up" style="--d:.15s">
+                        <div class="flex items-center justify-between"><span class="px-2.5 py-0.5 rounded-lg bg-[#0070F4] text-white text-xs font-extrabold">CHƯƠNG 1 • BÀI 1.1–1.3</span><i class="fa-solid fa-network-wired text-[#0070F4]"></i></div>
+                        <h3 class="text-base font-black text-[#002957]">Nền tảng &amp; Thẩm định</h3>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed">Bản chất Single Source of Truth, luồng đẩy tồn vs kéo đơn, nhóm kéo đơn cũ (Agoda/Booking/Expedia) &amp; tắt Free Sale trước khi đấu.</p>
+                    </div>
+                    <div class="bento-card p-4 border-blue-300 flex flex-col gap-2 up" style="--d:.23s">
+                        <div class="flex items-center justify-between"><span class="px-2.5 py-0.5 rounded-lg bg-[#0070F4] text-white text-xs font-extrabold">CHƯƠNG 2 • BÀI 2.1–2.3</span><i class="fa-solid fa-ticket text-[#0070F4]"></i></div>
+                        <h3 class="text-base font-black text-[#002957]">Ticket, 4 Gói &amp; Bàn giao</h3>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed">Đọc Ticket [Hỗ trợ Hotellink], phân biệt 4 gói (Lite tối đa 4 kênh), kiểm tra mã ID/Key từ Support Leader DNG &amp; bàn giao Username chuẩn.</p>
+                    </div>
+                    <div class="bento-card p-4 border-teal-300 flex flex-col gap-2 up" style="--d:.31s">
+                        <div class="flex items-center justify-between"><span class="px-2.5 py-0.5 rounded-lg bg-[#00C8AF] text-white text-xs font-extrabold">CHƯƠNG 3 • BÀI 3.1–3.3</span><i class="fa-solid fa-sliders text-[#00C8AF]"></i></div>
+                        <h3 class="text-base font-black text-[#002957]">Thiết lập OTAs &amp; Thu hộ</h3>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed">Kích hoạt tại [Kênh bán và OTA ⌵] ➔ [OTAs], tạo Rate Plan, bấm nút [Đồng bộ] Bước 2, điền 100% ô giá &amp; bật 2 công tắc thu hộ/hủy phòng.</p>
+                    </div>
+                    <div class="bento-card p-4 border-emerald-300 flex flex-col gap-2 up" style="--d:.39s">
+                        <div class="flex items-center justify-between"><span class="px-2.5 py-0.5 rounded-lg bg-[#00B63E] text-white text-xs font-extrabold">CHƯƠNG 4 • BÀI 4.1–4.3</span><i class="fa-solid fa-plug-circle-check text-[#00B63E]"></i></div>
+                        <h3 class="text-base font-black text-[#002957]">Kết nối Đa sàn OTAs</h3>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed">Agoda &amp; Linked Rate Plan, Booking.com 3/7 PCI-DSS, Airbnb bắt buộc tiền tệ VND &amp; Mũi tên Xanh, nguyên lý Mô hình 3 (Traveloka, Trip.com).</p>
+                    </div>
+                    <div class="bento-card p-4 border-amber-300 flex flex-col gap-2 up" style="--d:.47s">
+                        <div class="flex items-center justify-between"><span class="px-2.5 py-0.5 rounded-lg bg-[#FFAB3A] text-[#002957] text-xs font-extrabold">CHƯƠNG 5 • BÀI 5.1–5.3</span><i class="fa-solid fa-calendar-check text-[#D97706]"></i></div>
+                        <h3 class="text-base font-black text-[#002957]">Vận hành Đơn &amp; Bảng Giá</h3>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed">Nhận đơn [Đã đồng bộ], xử lý tab [Đồng bộ lỗi] (cấm bấm Xóa đặt phòng!), nhận diện Giá riêng viền vàng Override &amp; khóa kép Stop Sell.</p>
+                    </div>
+                    <div class="bento-card p-4 border-rose-300 flex flex-col gap-2 up" style="--d:.55s">
+                        <div class="flex items-center justify-between"><span class="px-2.5 py-0.5 rounded-lg bg-rose-600 text-white text-xs font-extrabold">CHƯƠNG 6 • BÀI 6.1–6.3</span><i class="fa-solid fa-fire-extinguisher text-rose-600"></i></div>
+                        <h3 class="text-base font-black text-[#002957]">Sự cố &amp; Escalate SLA</h3>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed">Khóa khủng hoảng Overbooking 60 giây + Auto Close = 1, kiểm tra Genius/Rate Push Log khi lệch giá &amp; chuẩn 8 thông tin P1/P2/P3.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 5: KIẾN TRÚC 6 HỌC PHẦN KHÉP KÍN (.io-flow) -->
+    <section class="scene scene-content" data-scene="5"
+        data-caption="• Từ 1 Giáo án gốc (Docs): Đóng gói đồng bộ thành 5 học phần A–B–C–D–E cho từng bài. &#10;• Tất cả hội tụ vào 1 Cổng Học tập Duy nhất có Checklist cá nhân và kết nối trực tiếp tới CS Lead."
+        data-vo="Điểm mạnh lớn nhất của chương trình là kiến trúc 6 học phần khép kín cho mỗi bài học: từ Giáo án chuẩn hóa, Video bài giảng, Web học liệu tương tác, Đề thi trắc nghiệm, Phiếu thực hành chụp ảnh màn hình đến Cẩm nang tra cứu 2 trang PDF khi trực cuộc gọi.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge pop" style="--d:.05s"><i class="fa-solid fa-cubes"></i> Hệ sinh thái Học liệu 6 Trong 1</span>
+                <div class="header-title-row up" style="--d:.12s">
+                    <div class="header-icon-box"><i class="fa-solid fa-arrows-to-dot"></i></div>
+                    <h2 class="text-3xl font-black text-[#002957]">108 Học liệu Chuẩn hóa (18 Bài &times; 6 Học phần) Đồng bộ Tuyệt đối</h2>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="io-flow">
+                    <div class="io-col">
+                        <div class="io-chip up" style="--d:.12s"><i class="fa-solid fa-file-word text-blue-600"></i><span>0. Giáo án Chuẩn hóa (18 Docs)</span></div>
+                        <div class="io-chip up" style="--d:.2s"><i class="fa-solid fa-circle-play text-rose-600"></i><span>A. Video Minh họa MP4 (18 Video)</span></div>
+                        <div class="io-chip up" style="--d:.28s"><i class="fa-solid fa-laptop-code text-sky-600"></i><span>B. Web Tương tác HTML (18 App)</span></div>
+                        <div class="io-chip up" style="--d:.36s"><i class="fa-solid fa-list-check text-amber-600"></i><span>C. Ngân hàng Trắc nghiệm (54 Câu)</span></div>
+                        <div class="io-chip up" style="--d:.44s"><i class="fa-solid fa-camera text-teal-600"></i><span>D. Thực hành Screenshot (18 Word)</span></div>
+                        <div class="io-chip up" style="--d:.52s"><i class="fa-solid fa-file-pdf text-emerald-600"></i><span>E. Cẩm nang Trực Hotline (18 PDF)</span></div>
+                    </div>
+
+                    <div class="track"><i></i><i style="--t:.7s"></i><i style="--t:1.4s"></i></div>
+
+                    <div class="brain-box pulse pop" style="--d:.3s">
+                        <i class="fa-solid fa-graduation-cap text-3xl text-[#3AE3FF] mb-2"></i>
+                        <span class="text-base font-black">CỔNG HỌC TẬP</span>
+                        <span class="text-xs font-semibold text-blue-200 mt-1">18/18 Link Hợp nhất</span>
+                        <span class="text-[11px] font-bold text-amber-300 mt-1">+ Checklist Tiếp thu</span>
+                    </div>
+
+                    <div class="track"><i style="--t:.3s"></i><i style="--t:1s"></i><i style="--t:1.7s"></i></div>
+
+                    <div class="out-circle pop" style="--d:.48s">
+                        <i class="fa-solid fa-headset text-3xl mb-1.5"></i>
+                        <div class="text-base font-black">CS TÁC NGHIỆP</div>
+                        <span class="text-xs font-bold mt-1">Tra cứu 3–5 giây</span>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 6: TRẢI NGHIỆM CHUYÊN VIÊN DVKH MỚI (WEB B & CHECKLIST) -->
+    <section class="scene scene-content" data-scene="6"
+        data-caption="• Tự học thực chất: Hệ thống chỉ ghi nhận 100% khi lật đủ 6 thẻ Flashcard, chạy Mô phỏng và trả lời đúng toàn bộ Roleplay. &#10;• Checklist cá nhân: Tự đánh dấu 🟢/🟡/🔴, ghi thắc mắc và xuất JSON gửi CS Lead chỉ với 1 cú nhấp chuột."
+        data-vo="Dành cho Chuyên viên Dịch vụ Khách hàng mới, mỗi bài Web học liệu không cho phép lướt qua để lấy thành tích ảo. Người học phải lật đủ thẻ 3D, chạy mô phỏng đồng bộ và xử lý đúng 100 phần trăm tình huống đối thoại với khách. Kết quả tự động đồng bộ về Checklist cá nhân để nhân sự đánh dấu mức độ hiểu xanh, vàng hay đỏ và xuất báo cáo gửi Trưởng nhóm.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge pop" style="--d:.05s"><i class="fa-solid fa-user-check"></i> Trải nghiệm Học viên DVKH</span>
+                <div class="header-title-row up" style="--d:.12s">
+                    <div class="header-icon-box"><i class="fa-solid fa-clipboard-check"></i></div>
+                    <h2 class="text-3xl font-black text-[#002957]">Tự học Thực chất &amp; Checklist Theo dõi Tiến độ Cá nhân</h2>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="grid grid-cols-3 gap-5 w-full">
+                    <div class="bento-card p-6 border-sky-300 flex flex-col gap-3 up" style="--d:.18s">
+                        <div class="w-12 h-12 rounded-2xl bg-sky-500 text-white flex items-center justify-center text-xl"><i class="fa-solid fa-brain"></i></div>
+                        <h3 class="text-lg font-black text-[#002957]">Khóa Tiến độ Thực chất</h3>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed">Bắt buộc tương tác đủ 5 chặng trên Web (Tổng quan, 6 Flashcards 3D, Mô phỏng đồng bộ, Roleplay khách hàng, Tóm tắt). Trạng thái lưu tự động qua <code class="text-sky-700">localStorage</code> và có nút nhảy bài Kế tiếp.</p>
+                    </div>
+                    <div class="bento-card p-6 border-emerald-300 flex flex-col gap-3 up" style="--d:.3s">
+                        <div class="w-12 h-12 rounded-2xl bg-[#00B63E] text-white flex items-center justify-center text-xl"><i class="fa-solid fa-check-to-slot"></i></div>
+                        <h3 class="text-lg font-black text-[#002957]">Checklist 4 Mục + 🟢/🟡/🔴</h3>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed">Ngay trên Cổng Học tập, học viên tick 4 bước (Video, Web, Quiz, Thực hành), đánh dấu mức độ tự tin: <strong>🟢 Vững • 🟡 Cần ôn • 🔴 Hỏi Lead</strong> và gõ thẳng câu hỏi vướng mắc ở bài đó.</p>
+                    </div>
+                    <div class="bento-card p-6 border-amber-300 flex flex-col gap-3 up" style="--d:.42s">
+                        <div class="w-12 h-12 rounded-2xl bg-[#FFAB3A] text-[#002957] flex items-center justify-center text-xl"><i class="fa-solid fa-bolt"></i></div>
+                        <h3 class="text-lg font-black text-[#002957]">Phiếu Thực hành &amp; Cẩm nang 3s</h3>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed">18 phiếu Word 100% Screenshot-Only (có ghi chú dùng Mô phỏng khi chưa có tài khoản sàn thật) kèm 18 tờ Cẩm nang 2 trang A4 in để ngay bàn làm việc khi trực Hotline.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 7: 4 ĐIỂM CHUẨN HÓA NGHIỆP VỤ TRỌNG YẾU (.chg-row) -->
+    <section class="scene scene-content" data-scene="7"
+        data-caption="• Quy tắc 1: Đường dẫn mới [Kênh bán và OTA ⌵] ➔ [Channel Manager] ➔ [OTAs]. • Quy tắc 2: Gói Lite tối đa 4 kênh OTA. &#10;• Quy tắc 3: Username = Tên gian hàng &amp; Support Leader ĐN cấp mã. • Quy tắc 4: Khóa kép &amp; Auto Close = 1."
+        data-vo="Chương trình đồng bộ triệt để 4 quy chuẩn nghiệp vụ mới nhất để tránh 100 phần trăm sai sót khi hỗ trợ khách hàng: sử dụng đường dẫn giao diện mới, nắm đúng giới hạn 4 kênh của gói Lite, quy định Support Leader Đà Nẵng cấp Hotel ID và Key kèm Username là tên gian hàng, và nguyên tắc khóa kép khi chặn phòng.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge pop" style="--d:.05s"><i class="fa-solid fa-gavel"></i> Quy chuẩn Nghiệp vụ Thống nhất</span>
+                <div class="header-title-row up" style="--d:.12s">
+                    <div class="header-icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h2 class="text-3xl font-black text-[#002957]">4 Điểm Chuẩn hóa Toàn Đội (Khắc phục Lỗi Tài liệu Cũ)</h2>
+                </div>
+            </div>
+            <div class="text-stage flex-col gap-3.5">
+                <div class="chg-row w-full up" style="--d:.18s">
+                    <div class="no">1</div>
+                    <div class="font-extrabold text-[#002957]">Đường dẫn Giao diện Mới</div>
+                    <div class="font-semibold text-slate-600">Loại bỏ hoàn toàn đường dẫn cũ gây nhầm lẫn cho nhân sự mới.</div>
+                    <div class="num">[Kênh bán &amp; OTA ⌵] ➔ [OTAs]</div>
+                </div>
+                <div class="chg-row w-full up" style="--d:.28s">
+                    <div class="no">2</div>
+                    <div class="font-extrabold text-[#002957]">Giới hạn 4 Gói Hotel Link</div>
+                    <div class="font-semibold text-slate-600">Thống nhất tư vấn chính xác quyền lợi nâng gói &amp; đổi kênh miễn phí.</div>
+                    <div class="num">Gói Lite = Tối đa 4 kênh</div>
+                </div>
+                <div class="chg-row w-full up" style="--d:.38s">
+                    <div class="no">3</div>
+                    <div class="font-extrabold text-[#002957]">Thẩm quyền Cấp ID &amp; Username</div>
+                    <div class="font-semibold text-slate-600">Support Leader ĐN tạo mã Partner; DVKH bàn giao email chuẩn 3 phần.</div>
+                    <div class="num">Username = Tên gian hàng</div>
+                </div>
+                <div class="chg-row w-full up" style="--d:.48s">
+                    <div class="no">4</div>
+                    <div class="font-extrabold text-[#002957]">Khóa Phòng Kép &amp; Chống Trùng</div>
+                    <div class="font-semibold text-slate-600">Chặn cả Linked Rate Plan &amp; tự đóng khi còn 1 phòng; cấm xóa đơn tab Lỗi.</div>
+                    <div class="num">Allotment=0 + StopSell + AC=1</div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 8: CÔNG CỤ CHO CS LEAD (DASHBOARD & BRIEFING 15 PHÚT) -->
+    <section class="scene scene-content" data-scene="8"
+        data-caption="• CS Lead Dashboard: Nhập báo cáo JSON hoặc đọc trình duyệt để thấy tỷ lệ hoàn thành 6 buổi học. &#10;• Cảnh báo Điểm đỏ 🔴 và gợi ý 3 ý chốt nhanh trong 15 phút đầu ca trước khi trực Hotline."
+        data-vo="Đối với Trưởng nhóm DVKH, bộ tài liệu bổ sung hoàn chỉnh CS Lead Command Center. Quản lý theo dõi được tỷ lệ hoàn thành Web và Quiz theo từng buổi học, nhìn rõ các bài đang có nhiều cảnh báo đỏ và sử dụng ngay kịch bản 3 điểm cần chốt trong 15 phút đầu ca để kèm đúng người, đúng chỗ.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge pop" style="--d:.05s"><i class="fa-solid fa-gauge-high"></i> Dành cho Trưởng nhóm DVKH (CS Lead)</span>
+                <div class="header-title-row up" style="--d:.12s">
+                    <div class="header-icon-box"><i class="fa-solid fa-chart-line"></i></div>
+                    <h2 class="text-3xl font-black text-[#002957]">CS Lead Dashboard: Kiểm soát Điểm Nghẽn Theo Từng Buổi Học</h2>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="grid grid-cols-12 gap-5 w-full items-stretch">
+                    <div class="col-span-5 bento-card p-6 bg-[#002957] text-white flex flex-col justify-between gap-4 up" style="--d:.2s; border-color: #0070F4;">
+                        <div>
+                            <span class="px-2.5 py-1 rounded-lg bg-[#0070F4] text-white text-[11px] font-black uppercase">Live Tracking + JSON Import</span>
+                            <h3 class="text-2xl font-black mt-3">4 Chỉ số Giám sát Tức thời</h3>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3 text-xs">
+                            <div class="p-3 rounded-xl bg-white/10 border border-white/20"><div class="text-2xl font-black text-[#3AE3FF]">18/18</div><div class="font-bold text-blue-100 mt-0.5">Tỷ lệ xong Web</div></div>
+                            <div class="p-3 rounded-xl bg-white/10 border border-white/20"><div class="text-2xl font-black text-[#5BE92A]">&ge;80%</div><div class="font-bold text-blue-100 mt-0.5">Tỷ lệ đạt Quiz</div></div>
+                            <div class="p-3 rounded-xl bg-white/10 border border-white/20"><div class="text-2xl font-black text-[#FFAB3A]">6 Buổi</div><div class="font-bold text-blue-100 mt-0.5">Briefing 15 phút</div></div>
+                            <div class="p-3 rounded-xl bg-white/10 border border-white/20"><div class="text-2xl font-black text-rose-400">🔴 Alert</div><div class="font-bold text-blue-100 mt-0.5">Câu hỏi tồn đọng</div></div>
+                        </div>
+                        <div class="text-xs font-semibold text-blue-200">Hỗ trợ xuất báo cáo CSV toàn đội theo chi nhánh HN / HCM / DNG.</div>
+                    </div>
+
+                    <div class="col-span-7 bento-card p-6 flex flex-col justify-between gap-4 up" style="--d:.32s">
+                        <h3 class="text-lg font-black text-[#002957] border-b border-slate-200 pb-2.5">Quy trình Vận hành Đầu ca dành cho CS Lead</h3>
+                        <div class="space-y-3 text-xs font-semibold text-slate-700">
+                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-[#0070F4] text-white font-black flex items-center justify-center shrink-0">1</span>
+                                <div><strong class="text-[#002957]">Thu thập dữ liệu nhanh:</strong> Học viên bấm nút Xuất JSON trên Cổng Học tập gửi qua chat nhóm, CS Lead Import 1 lần xem cả Team (hoặc đọc trực tiếp trên máy kèm 15 hồ sơ Pilot minh họa).</div>
+                            </div>
+                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-[#00B63E] text-white font-black flex items-center justify-center shrink-0">2</span>
+                                <div><strong class="text-[#002957]">Chốt nhanh 15 phút đầu ca:</strong> Dashboard chỉ rõ bài nào có nhiều nhãn 🔴 (ví dụ Bài 4.1 Linked Rate Plan hay Bài 5.2 Tab Lỗi đồng bộ) kèm sẵn 3 ý chốt chuẩn hóa.</div>
+                            </div>
+                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-[#FFAB3A] text-[#002957] font-black flex items-center justify-center shrink-0">3</span>
+                                <div><strong class="text-[#002957]">Ma trận Đạt chuẩn / Cần kèm:</strong> Phân loại tự động nhân sự Sẵn sàng nhận ca vs Cần Mentor 1-1 trước khi cấp line Hotline.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 9: NGHIỆM THU 10 GIÂY/BÀI & ORAL CHECK 12 CÂU -->
+    <section class="scene scene-content" data-scene="9"
+        data-caption="• Rubric 10 giây/bài: Mỗi bài thực hành Module D có đúng 3 dấu hiệu nhận diện bắt buộc trên ảnh chụp màn hình và lỗi sai cần tránh. &#10;• Oral Check 5 phút: 12 câu vấn đáp tình huống thực chiến kèm đáp án chuẩn để chốt nghiệm thu."
+        data-vo="CS Lead không phải tốn hàng giờ đọc từng phiếu bài tập dài dòng. Với bộ Rubric chấm nhanh 10 giây mỗi bài trên Dashboard và 12 câu hỏi vấn đáp 5 phút cuối khóa, Trưởng nhóm chỉ cần đối chiếu đủ 3 dấu hiệu trên ảnh chụp màn hình để cấp chứng nhận hoàn thành.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge pop" style="--d:.05s"><i class="fa-solid fa-stamp"></i> Chuẩn hóa Nghiệm thu Thực hành</span>
+                <div class="header-title-row up" style="--d:.12s">
+                    <div class="header-icon-box"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                    <h2 class="text-3xl font-black text-[#002957]">Rubric Chấm Nhanh 10 Giây/Bài &amp; Sát hạch Vấn đáp 12 Câu</h2>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="grid grid-cols-2 gap-6 w-full">
+                    <div class="bento-card p-6 border-blue-300 flex flex-col gap-3 up" style="--d:.2s">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-lg bg-blue-100 text-[#002957] text-xs font-extrabold">BỘ TIÊU CHÍ MODULE D (1.1D – 6.3D)</span>
+                            <span class="text-xs font-black text-[#0070F4]">10 giây / bài</span>
+                        </div>
+                        <h3 class="text-xl font-black text-[#002957]">3 Dấu hiệu Bắt buộc Trên Ảnh Chụp</h3>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed">Mỗi bài được cấu trúc thành 3 ô tick nhanh ngay trên giao diện chấm điểm của CS Lead (ví dụ Bài 5.3D: Lịch Xanh lá + Ô viền Vàng Override + Khóa kép Allotment=0 &amp; Stop Sell=Yes).</p>
+                        <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs font-bold text-amber-900">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-600 mr-1.5"></i> Cảnh báo ngay các lỗi chí mạng: bấm nhầm [Xóa đặt phòng] hay để tiền tệ USD trên Airbnb.
+                        </div>
+                    </div>
+
+                    <div class="bento-card p-6 border-emerald-300 flex flex-col gap-3 up" style="--d:.32s">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-lg bg-emerald-100 text-emerald-800 text-xs font-extrabold">ORAL CHECK CUỐI KHÓA</span>
+                            <span class="text-xs font-black text-[#00B63E]">5 phút • Đạt $\ge$ 10/12</span>
+                        </div>
+                        <h3 class="text-xl font-black text-[#002957]">12 Tình huống Hotline Xác suất Cao</h3>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed">Kiểm tra phản xạ tư vấn trực tiếp qua điện thoại: Kéo đơn cũ Agoda vs Airbnb, Khai báo phòng Dorm 11 vs 16, Bảo mật thẻ 3/7 PCI-DSS Booking, Genius giảm giá ngầm và Đủ 8 thông tin chuyển ca P1.</p>
+                        <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-900">
+                            <i class="fa-solid fa-print text-emerald-600 mr-1.5"></i> Hỗ trợ lưu điểm từng học viên và In Biên bản Nghiệm thu 1 nhấp chuột.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 10: HỆ THỐNG AUDIT 8 CỬA KHÓA CHẶT CHẤT LƯỢNG (WAFFLE) -->
+    <section class="scene scene-content" data-scene="10"
+        data-caption="• Quy trình Kiểm định Tự động 8 Cửa: Từ kiểm tra đủ 108 tệp 18x6, cú pháp JavaScript, cân bằng độ dài 54 câu Quiz &amp; 49 Roleplay cho tới tính đúng đắn nghiệp vụ mới nhất. &#10;• Chỉ xuất bản lên hệ thống sau khi đạt Pass 8/8 cửa."
+        data-vo="Để đảm bảo không còn lỗi kỹ thuật hay sai lệch kiến thức khi bàn giao cho Phòng Dịch vụ Khách hàng, bộ học liệu được bảo vệ bởi Bộ tiêu chuẩn Nghiệm thu 8 cửa chạy tự động. Từ cấu trúc PDF 2 trang, cú pháp mã nguồn Web, độ công bằng của 54 câu trắc nghiệm và 49 tình huống đối thoại cho tới tính chính xác của giao diện đều phải đạt 100 phần trăm trước khi xuất bản.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge pop" style="--d:.05s"><i class="fa-solid fa-microscope"></i> Quản trị Chất lượng L&amp;D</span>
+                <div class="header-title-row up" style="--d:.12s">
+                    <div class="header-icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h2 class="text-3xl font-black text-[#002957]">Quy trình Audit &amp; Nghiệm thu Tự động 8 Cửa (8-Gate QA)</h2>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="grid grid-cols-12 gap-6 w-full items-center">
+                    <div class="col-span-4 bento-card p-6 flex flex-col items-center text-center gap-4 up" style="--d:.18s">
+                        <div class="waffle-grid" data-good="54" data-bad="46" data-total="100"></div>
+                        <div>
+                            <div class="text-3xl font-black text-[#002957]">8 / 8 Cửa</div>
+                            <div class="text-xs font-extrabold text-[#00B63E] uppercase mt-1">Pass Tự động Trước Xuất bản</div>
+                            <p class="text-[11px] font-semibold text-slate-500 mt-1">Xanh: 54 Câu Quiz &bull; Dương: 49 Tình huống Roleplay đã cân bằng độ dài</p>
+                        </div>
+                    </div>
+
+                    <div class="col-span-8 grid grid-cols-2 gap-3 text-xs">
+                        <div class="bento-card p-3.5 up" style="--d:.22s"><strong class="text-[#002957]">Cửa 1 • Đầy đủ 108 tệp:</strong> Đủ 18 bài &times; 6 học phần (Docs, MP4, HTML, XLSX, Word, PDF).</div>
+                        <div class="bento-card p-3.5 up" style="--d:.28s"><strong class="text-[#002957]">Cửa 2 • Chuẩn PDF 2 trang:</strong> Đúng 2 trang A4, font Arial, cấm chữ "Academy" &amp; viết tắt sai.</div>
+                        <div class="bento-card p-3.5 up" style="--d:.34s"><strong class="text-[#002957]">Cửa 3 • Sạch lỗi Web B:</strong> Pass Node JS syntax, xóa bug tiến độ ảo, gắn điều hướng liên bài.</div>
+                        <div class="bento-card p-3.5 up" style="--d:.40s"><strong class="text-[#002957]">Cửa 4 • Chống đoán mẹo:</strong> Độ dài đáp án đúng cân bằng 1.0x &amp; bật xáo trộn A/B/C.</div>
+                        <div class="bento-card p-3.5 up" style="--d:.46s"><strong class="text-[#002957]">Cửa 5 • Word Screenshot-Only:</strong> 18 phiếu Word đủ 5 bảng, 3 nhiệm vụ, không tự luận.</div>
+                        <div class="bento-card p-3.5 up" style="--d:.52s"><strong class="text-[#002957]">Cửa 6 • Đúng Nghiệp vụ 2026:</strong> Gói Lite 4 kênh, đường dẫn mới, không lỗi kiến thức cũ.</div>
+                        <div class="bento-card p-3.5 up" style="--d:.58s"><strong class="text-[#002957]">Cửa 7 • Đồng bộ Liên kết:</strong> 18/18 link sống 100% trên Google Sheet, Excel &amp; Cổng Học tập.</div>
+                        <div class="bento-card p-3.5 up" style="--d:.64s"><strong class="text-[#002957]">Cửa 8 • Sạch Kho lưu trữ:</strong> Dọn sạch file nháp, kiểm tra Dashboard &amp; Slide đạt chuẩn.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 11: LỘ TRÌNH PHỐI HỢP TRIỂN KHAI L&D x DVKH -->
+    <section class="scene scene-content" data-scene="11"
+        data-caption="• Tuần 1: L&amp;D bàn giao Cổng Học tập &amp; tập huấn CS Lead 30 phút. &#10;• Tuần 2–3: Triển khai đào tạo 6 buổi kết hợp Rubric 10s &amp; Oral Check 12 câu. &#10;• Tuần 4: Nghiệm thu CSAT thực tế và tối ưu học liệu định kỳ."
+        data-vo="Về kế hoạch phối hợp triển khai giữa L&amp;D và Phòng Dịch vụ Khách hàng: Tuần 1 tập huấn CS Lead và chạy Pilot nhóm đầu tiên. Tuần 2 đến Tuần 3 học viên tự học 6 buổi, nộp phiếu chụp màn hình và sát hạch Oral Check để cấp quyền trực Hotline. Tuần 4 tổng kết chỉ số CSAT thực tế và bảo trì định kỳ hàng tháng.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner">
+            <div class="slide-header">
+                <span class="section-badge pop" style="--d:.05s"><i class="fa-solid fa-calendar-days"></i> Kế hoạch Hành động Liên phòng ban</span>
+                <div class="header-title-row up" style="--d:.12s">
+                    <div class="header-icon-box"><i class="fa-solid fa-rocket"></i></div>
+                    <h2 class="text-3xl font-black text-[#002957]">Đề xuất Lộ trình Triển khai 4 Tuần Cùng Phòng DVKH</h2>
+                </div>
+            </div>
+            <div class="text-stage">
+                <div class="grid grid-cols-4 gap-4 w-full">
+                    <div class="bento-card p-5 border-blue-300 flex flex-col gap-3 up" style="--d:.18s">
+                        <span class="px-3 py-1 rounded-full bg-blue-100 text-[#0070F4] text-xs font-black w-fit">TUẦN 1 • KHỞI ĐỘNG</span>
+                        <h3 class="text-lg font-black text-[#002957]">Tập huấn CS Lead &amp; Kickoff</h3>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed">L&amp;D bàn giao 3 cổng trực tuyến (Học tập, Quiz, CS Lead Dashboard). Mở tài khoản Sandbox `kvhoteltraining` cho nhóm học viên mới.</p>
+                    </div>
+                    <div class="bento-card p-5 border-sky-300 flex flex-col gap-3 up" style="--d:.28s">
+                        <span class="px-3 py-1 rounded-full bg-sky-100 text-sky-700 text-xs font-black w-fit">TUẦN 2 • ĐÀO TẠO</span>
+                        <h3 class="text-lg font-black text-[#002957]">Tự học 6 Buổi &amp; Briefing</h3>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed">Học viên học Video/Web, vượt Quiz từng bài, đánh dấu Checklist 🟢/🟡/🔴. CS Lead chốt 15 phút đầu ca các điểm hay vướng.</p>
+                    </div>
+                    <div class="bento-card p-5 border-emerald-300 flex flex-col gap-3 up" style="--d:.38s">
+                        <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-black w-fit">TUẦN 3 • NGHIỆM THU</span>
+                        <h3 class="text-lg font-black text-[#002957]">Chấm Rubric &amp; Oral Check</h3>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed">CS Lead chấm nhanh ảnh chụp thực hành 10s/bài, sát hạch vấn đáp 5 phút 12 câu và cấp quyền trực ca Hotline độc lập.</p>
+                    </div>
+                    <div class="bento-card p-5 border-amber-300 flex flex-col gap-3 up" style="--d:.48s">
+                        <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-black w-fit">TUẦN 4 • TỐI ƯU</span>
+                        <h3 class="text-lg font-black text-[#002957]">Đo lường CSAT &amp; Cập nhật</h3>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed">Đối chiếu tỷ lệ giải quyết ca ngay lần đầu (FCR) &amp; thời gian xử lý Overbooking. Chạy lại Audit 8 cửa mỗi khi giao diện sàn thay đổi.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="print-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 12: SLIDE KẾT THÚC CHUẨN GOLDEN MASTER (.scene-dark) -->
+    <section class="scene scene-content scene-dark" data-scene="12"
+        data-caption="Cảm ơn Quý Anh/Chị Lãnh đạo và Đội ngũ DVKH đã lắng nghe! Kính mời truy cập Cổng Học tập và CS Lead Dashboard để cùng khởi động chương trình KiotViet Hotel Channel Manager."
+        data-vo="Cảm ơn các bạn và đội ngũ Dịch vụ Khách hàng đã theo dõi phần trình bày! Chúng ta hãy cùng truy cập Cổng Học tập và CS Lead Dashboard ngay hôm nay để triển khai hiệu quả chương trình đào tạo KiotViet Channel Manager.">
+        <div class="scene-logo"><img src="https://cdn-kvweb-website.kiotviet.vn/images/v2/giai-phap/logos/kiotviet-logo-horizontal.svg" alt="KiotViet Logo"></div>
+        <div class="slide-inner justify-center items-center text-center">
+            <div class="w-full max-w-5xl flex flex-col items-center">
+                <div class="w-20 h-20 rounded-full flex items-center justify-center text-4xl shadow-2xl mb-6 float" style="background: linear-gradient(135deg, var(--kv-primary-green), var(--theme-dark)); color: #ffffff;">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <h1 class="display-font text-5xl font-black text-white tracking-tight mt-1 mb-3 up" style="--d:.15s">
+                    CẢM ƠN CÁC BẠN ĐÃ THEO DÕI!
+                </h1>
+
+                <p class="text-base font-semibold text-slate-200 mb-6 max-w-3xl up" style="--d:.25s; text-wrap: balance;">
+                    Sẵn sàng đồng hành cùng Phòng Dịch vụ Khách hàng nâng chuẩn chất lượng hỗ trợ<br>và vận hành KiotViet Hotel Channel Manager hiệu quả.
+                </p>
+
+                <div class="flex flex-wrap items-center justify-center gap-3 mb-7 up" style="--d:.3s">
+                    <a href="https://kiotvietlnd.github.io/elearning/chuyen-de/channel-manager/ke-hoach-khoa-hoc.html" target="_blank" rel="noopener" class="px-5 py-2.5 rounded-xl bg-[#0070F4] hover:bg-blue-500 text-white text-xs font-extrabold shadow-lg transition-colors" style="text-decoration:none;">
+                        <i class="fa-solid fa-graduation-cap mr-1.5"></i> Mở Cổng Học tập &amp; Checklist
+                    </a>
+                    <a href="https://kiotvietlnd.github.io/elearning/chuyen-de/channel-manager/cs-lead-dashboard.html" target="_blank" rel="noopener" class="px-5 py-2.5 rounded-xl bg-[#00B63E] hover:bg-emerald-500 text-white text-xs font-extrabold shadow-lg transition-colors" style="text-decoration:none;">
+                        <i class="fa-solid fa-gauge-high mr-1.5"></i> Mở CS Lead Dashboard
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-2 gap-5 sm:gap-6 w-full max-w-4xl text-left">
+                    <a href="https://kiotviet.vn/ho-tro" target="_blank" rel="noopener" class="support-card-blue p-4 flex items-center gap-3.5 up" style="--d:.35s; text-decoration: none;">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl flex-shrink-0" style="background: #EFF6FF; color: var(--kv-primary-blue);">
+                            <i class="fa-solid fa-circle-question"></i>
+                        </div>
+                        <div class="min-w-0">
+                            <div class="text-sm font-extrabold text-slate-800 whitespace-nowrap">Trang Hỗ trợ - HDSD KiotViet</div>
+                            <div class="text-xs font-bold text-blue-600 mt-1 whitespace-nowrap">https://kiotviet.vn/ho-tro</div>
+                        </div>
+                    </a>
+
+                    <a href="https://www.youtube.com/@HDSDPhanmemKiotViet" target="_blank" rel="noopener" class="youtube-card-red p-4 flex items-center gap-3.5 up" style="--d:.45s; text-decoration: none;">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background: #FEF2F2;">
+                            <svg width="28" height="20" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M27.42 3.08C27.1 1.88 26.15 0.93 24.95 0.61C22.78 0 14 0 14 0C14 0 5.22 0 3.05 0.61C1.85 0.93 0.9 1.88 0.58 3.08C0 5.28 0 9.87 0 9.87C0 9.87 0 14.46 0.58 16.66C0.9 17.86 1.85 18.81 3.05 19.13C5.22 19.74 14 19.74 14 19.74C14 19.74 22.78 19.74 24.95 19.13C26.15 18.81 27.1 17.86 27.42 16.66C28 14.46 28 9.87 28 9.87C28 9.87 28 5.28 27.42 3.08Z" fill="#FF0000"/>
+                                <path d="M11.2 14.1L18.48 9.87L11.2 5.64V14.1Z" fill="white"/>
+                            </svg>
+                        </div>
+                        <div class="min-w-0">
+                            <div class="text-sm font-extrabold text-slate-800 whitespace-nowrap">Kênh YouTube - HDSD KiotViet</div>
+                            <div class="text-xs font-bold text-rose-600 mt-1 whitespace-nowrap">https://www.youtube.com/@HDSDPhanmemKiotViet</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="print-subtitle"></div>
+    </section>
+
+    <div id="presenter-hud">
+        <div id="subtitle-box"></div>
+        <div class="slide-nav-pill" onclick="event.stopPropagation()">
+            <button type="button" class="slide-nav-btn" onclick="goToScene(currentIndex - 1)" title="Slide trước (Mũi tên trái)"><i class="fa-solid fa-chevron-left"></i></button>
+            <span id="slideCounterLabel" class="text-xs font-extrabold text-[#002957] px-1.5 whitespace-nowrap">1 / 12</span>
+            <button type="button" class="slide-nav-btn" onclick="goToScene(currentIndex + 1)" title="Slide sau (Mũi tên phải / Space)"><i class="fa-solid fa-chevron-right"></i></button>
+            <button type="button" class="slide-nav-btn" onclick="goToScene(0, true)" title="Cài đặt (Phím 0)"><i class="fa-solid fa-sliders"></i></button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const scenes = Array.from(document.querySelectorAll('.scene'));
+    const subtitleBox = document.getElementById('subtitle-box');
+    const presenterHud = document.getElementById('presenter-hud');
+    const progressBar = document.getElementById('progressBar');
+    const counterLabel = document.getElementById('slideCounterLabel');
+    const customAudioPlayer = document.getElementById('custom-audio-player');
+    const dropzone = document.getElementById('audio-dropzone');
+
+    // Khởi đầu trực tiếp ở Slide 1 (Hero) khi chia sẻ link cho phòng ban DVKH
+    let currentIndex = 1;
+    let voiceEnabled = false;
+    let hasCustomAudio = false;
+    let isAnimating = false;
+
+    function initPrintSubtitles() {
+        scenes.forEach((scene) => {
+            const printSub = scene.querySelector('.print-subtitle');
+            const cap = scene.getAttribute('data-caption') || '';
+            if (printSub) printSub.textContent = cap.replace(/\n/g, ' • ');
+        });
+    }
+
+    function initWaffleGrids() {
+        document.querySelectorAll('.waffle-grid').forEach((w) => {
+            const good = +(w.dataset.good || 0);
+            const bad = +(w.dataset.bad || 0);
+            const total = +(w.dataset.total || 100);
+            let html = '';
+            for (let i = 0; i < total; i++) {
+                const c = i < good ? 'g' : (i < good + bad ? 'b' : '');
+                html += `<i class="${c}" style="--d:${(i * 0.006).toFixed(3)}s"></i>`;
+            }
+            w.innerHTML = html;
+        });
+    }
+
+    function selectAudioMode(enableVoice) {
+        voiceEnabled = enableVoice;
+        const radio1 = document.getElementById('radio-mode-1');
+        const radio2 = document.getElementById('radio-mode-2');
+        const label1 = document.getElementById('label-mode-1');
+        const label2 = document.getElementById('label-mode-2');
+        if (radio1 && radio2) {
+            radio1.checked = !enableVoice;
+            radio2.checked = enableVoice;
+        }
+        if (label1 && label2) {
+            label1.classList.toggle('active-mode', !enableVoice);
+            label2.classList.toggle('active-mode', enableVoice);
+        }
+    }
+
+    function stopAllAudio() {
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        if (customAudioPlayer && !customAudioPlayer.paused) customAudioPlayer.pause();
+    }
+
+    function togglePauseResumeAudio() {
+        if (hasCustomAudio && customAudioPlayer.src) {
+            if (customAudioPlayer.paused) customAudioPlayer.play().catch(() => {});
+            else customAudioPlayer.pause();
+            return;
+        }
+        if ('speechSynthesis' in window) {
+            if (window.speechSynthesis.speaking) {
+                if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+                else window.speechSynthesis.pause();
+            } else if (voiceEnabled && currentIndex >= 1) {
+                triggerSlideVoice(currentIndex);
+            }
+        }
+    }
+
+    function triggerSlideVoice(index) {
+        if (!voiceEnabled || index <= 0) {
+            stopAllAudio();
+            return;
+        }
+        if (hasCustomAudio && customAudioPlayer.src) {
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            if (customAudioPlayer.paused) customAudioPlayer.play().catch(() => {});
+            return;
+        }
+        const text = scenes[index].getAttribute('data-vo') || scenes[index].getAttribute('data-caption') || '';
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            if (text.trim()) {
+                const utter = new SpeechSynthesisUtterance(text);
+                utter.lang = 'vi-VN';
+                utter.rate = 1.02;
+                window.speechSynthesis.speak(utter);
+            }
+        }
+    }
+
+    function activateModeByKey(enableVoice) {
+        selectAudioMode(enableVoice);
+        if (currentIndex === 0) return;
+        if (!enableVoice) stopAllAudio();
+        else triggerSlideVoice(currentIndex);
+    }
+
+    function escapeSubHtml(str) {
+        return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function renderFormattedSubtitle(box, rawText) {
+        const lines = String(rawText || '').split(/\n+/).map(s => s.trim()).filter(Boolean);
+        if (lines.length <= 1) {
+            box.textContent = rawText;
+            return;
+        }
+        box.innerHTML = `<div class="flex flex-col items-start text-left gap-0.5 w-full">${lines.map(l => {
+            const safe = escapeSubHtml(l).replace(/^(•\s*[^:]+:)/, '<span style="color:#7DD3FC;font-weight:900;">$1</span>').replace(/➔/g, '<span style="color:#5BE92A;">➔</span>');
+            return `<div class="text-[0.88rem] leading-snug">${safe}</div>`;
+        }).join('')}</div>`;
+    }
+
+    function updateChromeVisibility(index) {
+        const totalSlides = scenes.length - 1;
+        if (progressBar) {
+            const pct = index <= 0 ? 0 : (index / totalSlides) * 100;
+            progressBar.style.width = Math.min(100, Math.max(0, pct)) + '%';
+        }
+        if (counterLabel) {
+            counterLabel.textContent = index <= 0 ? 'Setup' : `${index} / ${totalSlides}`;
+        }
+        if (index <= 0) {
+            presenterHud.classList.add('hud-hidden');
+            subtitleBox.textContent = '';
+        } else {
+            const caption = scenes[index].getAttribute('data-caption') || '';
+            if (!caption.trim()) {
+                presenterHud.classList.add('hud-hidden');
+                subtitleBox.textContent = '';
+            } else {
+                renderFormattedSubtitle(subtitleBox, caption);
+                presenterHud.classList.remove('hud-hidden');
+            }
+        }
+    }
+
+    function goToScene(targetIndex, skipWipe = false) {
+        if (targetIndex < 0 || targetIndex >= scenes.length || targetIndex === currentIndex || isAnimating) return;
+        const prevScene = scenes[currentIndex];
+        const nextScene = scenes[targetIndex];
+
+        if (skipWipe) {
+            scenes.forEach(s => s.classList.remove('active', 'previous', 'no-wipe'));
+            nextScene.classList.add('active', 'no-wipe');
+            currentIndex = targetIndex;
+            updateChromeVisibility(currentIndex);
+            triggerSlideVoice(currentIndex);
+            return;
+        }
+
+        isAnimating = true;
+        scenes.forEach(s => s.classList.remove('previous', 'no-wipe'));
+        prevScene.classList.remove('active');
+        prevScene.classList.add('previous');
+        nextScene.classList.add('active');
+
+        currentIndex = targetIndex;
+        updateChromeVisibility(currentIndex);
+        triggerSlideVoice(currentIndex);
+
+        setTimeout(() => {
+            prevScene.classList.remove('previous');
+            isAnimating = false;
+        }, 580);
+    }
+
+    function copyAllSubtitlesWithPrefix() {
+        const prefix = 'Chuẩn bị ghi hình, lưu ý bạn hãy nghe kỹ lời dẫn và bấm phím mũi tên để chuyển slides, 5 4 3 2 1 <pause>';
+        const lines = [prefix];
+        scenes.forEach((s, idx) => {
+            if (idx >= 1) {
+                const capText = s.getAttribute('data-vo') || s.getAttribute('data-caption') || '';
+                if (capText.trim()) lines.push(capText.trim());
+            }
+        });
+        navigator.clipboard.writeText(lines.join('\n\n'));
+        const btn = document.getElementById('btn-copy-sub');
+        const oldHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Đã copy toàn bộ!';
+        setTimeout(() => btn.innerHTML = oldHtml, 2000);
+    }
+
+    function copyLedaPrompt() {
+        const promptText = 'Chuyên viên tư vấn người Hà Nội kể chuyện sôi nổi, nhiệt tình';
+        navigator.clipboard.writeText(promptText);
+        const btn = document.getElementById('btn-copy-prompt');
+        const oldHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check text-emerald-600"></i> Đã copy Prompt!';
+        setTimeout(() => btn.innerHTML = oldHtml, 2000);
+    }
+
+    function loadAudioFile(file) {
+        if (!file) return;
+        customAudioPlayer.src = URL.createObjectURL(file);
+        hasCustomAudio = true;
+        document.getElementById('audio-status-title').textContent = 'Đã nạp file Audio!';
+        document.getElementById('audio-status-desc').textContent = file.name;
+        document.getElementById('audio-filename').textContent = file.name;
+        document.getElementById('audio-loaded-Badge').classList.remove('hidden');
+        selectAudioMode(true);
+    }
+
+    function handleAudioFileSelect(event) {
+        const file = event.target.files[0];
+        if (file) loadAudioFile(file);
+    }
+
+    function checkAutoDetectAudio() {
+        customAudioPlayer.onloadedmetadata = () => {
+            hasCustomAudio = true;
+            document.getElementById('audio-status-title').textContent = 'Đã nạp mc.wav cùng folder';
+            document.getElementById('audio-filename').textContent = 'mc.wav';
+            document.getElementById('audio-loaded-Badge').classList.remove('hidden');
+            selectAudioMode(true);
+        };
+        customAudioPlayer.onerror = () => {
+            customAudioPlayer.removeAttribute('src');
+            hasCustomAudio = false;
+        };
+        customAudioPlayer.src = 'mc.wav';
+    }
+
+    if (dropzone) {
+        dropzone.addEventListener('dragover', (e) => { e.preventDefault(); });
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            if (e.dataTransfer.files && e.dataTransfer.files.length > 0) loadAudioFile(e.dataTransfer.files[0]);
+        });
+    }
+
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+        else document.exitFullscreen().catch(() => {});
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+        if (e.code === 'Space' || e.code === 'ArrowRight' || e.code === 'PageDown') { e.preventDefault(); goToScene(currentIndex + 1); }
+        else if (e.code === 'Backspace' || e.code === 'ArrowLeft' || e.code === 'PageUp') { e.preventDefault(); goToScene(currentIndex - 1); }
+        else if (e.key === '1') { e.preventDefault(); activateModeByKey(false); }
+        else if (e.key === '2') { e.preventDefault(); activateModeByKey(true); }
+        else if (e.key === '3') { e.preventDefault(); togglePauseResumeAudio(); }
+        else if (e.key === '0' || e.code === 'Home') { e.preventDefault(); goToScene(currentIndex === 0 ? 1 : 0, true); }
+        else if (e.key === 'f' || e.key === 'F') { e.preventDefault(); toggleFullScreen(); }
+        else if (e.key === 'p' || e.key === 'P') { e.preventDefault(); window.print(); }
+    });
+
+    document.getElementById('video-stage').addEventListener('click', (e) => {
+        if (currentIndex === 0) return;
+        if (e.target.closest('a, button, input, label, .slide-nav-pill')) return;
+        const selection = window.getSelection();
+        if (selection && selection.toString().trim().length > 0) return;
+        goToScene(currentIndex + 1);
+    });
+
+    initPrintSubtitles();
+    initWaffleGrids();
+    updateChromeVisibility(1);
+    checkAutoDetectAudio();
+</script>
+</body>
+</html>
